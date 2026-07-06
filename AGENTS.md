@@ -89,6 +89,7 @@ Use npm unless the user explicitly changes package managers.
 make bootstrap          # npm install
 make check              # typecheck + lint + unit tests + npm audit
 make captions-sample    # regenerate sample captions from render-plan scenes
+make qa-sample          # generate sample QA report from existing output
 make test-unit          # npm test
 make test-integration   # render sample MP4
 make validate-sample    # validate sample brief/storyboard/render-plan
@@ -110,6 +111,7 @@ npm run episode:captions -- --episode sample
 npm run episode:script -- --episode sample
 npm run episode:storyboard -- --episode sample
 npm run episode:render-plan -- --episode sample
+npm run episode:qa -- --episode sample --render-frames
 npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
 npm run validate:sample

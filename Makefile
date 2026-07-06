@@ -1,4 +1,4 @@
-.PHONY: bootstrap captions-sample check test-unit test-integration render-sample validate-sample voice-sample verify-harness
+.PHONY: bootstrap captions-sample check qa-sample test-unit test-integration render-sample validate-sample voice-sample verify-harness
 
 bootstrap:
 	npm install
@@ -21,6 +21,9 @@ render-sample:
 
 captions-sample:
 	npm run episode:captions -- --episode sample
+
+qa-sample:
+	npm run episode:qa -- --episode sample
 
 voice-sample:
 	npm run episode:voice -- --episode sample --provider silent

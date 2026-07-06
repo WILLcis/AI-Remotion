@@ -7,6 +7,7 @@ out/
 .env.local
 .env.*.local
 episodes/*/out/
+episodes/*/qa-report.md
 episodes/*/audio/*.mp3
 episodes/*/audio/*.wav
 

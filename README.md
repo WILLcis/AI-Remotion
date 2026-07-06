@@ -56,12 +56,13 @@ npm run episode:captions -- --episode sample
 npm run episode:script -- --episode sample
 npm run episode:storyboard -- --episode sample
 npm run episode:render-plan -- --episode sample
+npm run episode:qa -- --episode sample --render-frames
 npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
 npm run episode:voice -- --episode sample --provider macos-say
 ```
 
-These commands rewrite episode artifacts. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata.
+These commands rewrite episode artifacts. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
 
 ## Project Structure
 
