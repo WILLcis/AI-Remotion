@@ -32,6 +32,7 @@
     }
   },
   "audio": {
+    "duration_seconds": null,
     "voiceover_path": null
   },
   "captions": {
@@ -60,7 +61,7 @@
       {
         "start_frame": 360,
         "end_frame": 450,
-        "text": "这样每一期都能复用风格，而不是重新摆一遍版。"
+        "text": "每一期都能复用风格，而不是重新摆一遍版。"
       },
       {
         "start_frame": 450,
@@ -122,7 +123,11 @@
         "eyebrow": "Visual Evidence",
         "primary": "截图 / 概念卡 / 流程图",
         "secondary": "模板把素材放进稳定画框，观众更容易跟上讲解。",
-        "assets": ["产品截图", "数据卡片", "流程箭头"]
+        "assets": [
+          "产品截图",
+          "数据卡片",
+          "流程箭头"
+        ]
       }
     },
     {
@@ -135,7 +140,12 @@
       "start_frame": 270,
       "duration_frames": 90,
       "visual": {
-        "bullets": ["脚本草稿", "分镜规划", "字幕节奏", "修改建议"]
+        "bullets": [
+          "脚本草稿",
+          "分镜规划",
+          "字幕节奏",
+          "修改建议"
+        ]
       }
     },
     {
@@ -149,9 +159,17 @@
       "duration_frames": 90,
       "visual": {
         "left_label": "一次性",
-        "left_points": ["靠手动摆放", "难复刻", "修改成本高"],
+        "left_points": [
+          "靠手动摆放",
+          "难复刻",
+          "修改成本高"
+        ],
         "right_label": "模板化",
-        "right_points": ["结构稳定", "风格统一", "适合批量迭代"]
+        "right_points": [
+          "结构稳定",
+          "风格统一",
+          "适合批量迭代"
+        ]
       }
     },
     {

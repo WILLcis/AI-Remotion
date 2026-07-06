@@ -88,12 +88,16 @@ Use npm unless the user explicitly changes package managers.
 ```bash
 make bootstrap          # npm install
 make check              # typecheck + lint + unit tests + npm audit
+make captions-sample    # regenerate sample captions from render-plan scenes
 make test-unit          # npm test
 make test-integration   # render sample MP4
 make validate-sample    # validate sample brief/storyboard/render-plan
+make voice-sample       # generate sample silent voiceover and update render plan
 make render-sample      # render sample MP4
 make verify-harness     # harness sanity checks
 ```
+
+Caption and voice commands write episode artifacts; do not run them as passive checks unless that is the intended change.
 
 Direct npm commands:
 
@@ -102,6 +106,8 @@ npm install
 npm run dev
 npm run typecheck
 npm run lint
+npm run episode:captions -- --episode sample
+npm run episode:voice -- --episode sample --provider silent
 npm run validate:sample
 npm test
 npm run render:sample

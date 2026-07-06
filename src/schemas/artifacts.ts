@@ -156,6 +156,7 @@ export const renderPlanSchema = z
       .strict(),
     audio: z
       .object({
+        duration_seconds: positiveNumber.nullable(),
         voiceover_path: z.string().min(1).nullable(),
       })
       .strict(),

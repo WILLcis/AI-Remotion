@@ -39,6 +39,8 @@ episodes/sample/out/final.mp4
 
 ## Useful Commands
 
+Checks and rendering:
+
 ```bash
 npm run typecheck
 npm run lint
@@ -46,6 +48,16 @@ npm run validate:sample
 npm test
 npm run render:sample
 ```
+
+Episode artifact utilities:
+
+```bash
+npm run episode:captions -- --episode sample
+npm run episode:voice -- --episode sample --provider silent
+npm run episode:voice -- --episode sample --provider macos-say
+```
+
+`episode:captions` rewrites `captions.srt` and structured caption props. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata.
 
 ## Project Structure
 
