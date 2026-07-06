@@ -89,7 +89,9 @@ Use npm unless the user explicitly changes package managers.
 make bootstrap          # npm install
 make check              # typecheck + lint + unit tests + npm audit
 make captions-sample    # regenerate sample captions from render-plan scenes
+make new-sample         # create a sample-draft episode skeleton
 make qa-sample          # generate sample QA report from existing output
+make render-episode-sample # render sample via the generic episode renderer
 make test-unit          # npm test
 make test-integration   # render sample MP4
 make validate-sample    # validate sample brief/storyboard/render-plan
@@ -108,6 +110,8 @@ npm run dev
 npm run typecheck
 npm run lint
 npm run episode:captions -- --episode sample
+npm run episode:new -- --id remotion-intro --topic "普通人如何理解 Remotion"
+npm run episode:render -- --episode sample
 npm run episode:script -- --episode sample
 npm run episode:storyboard -- --episode sample
 npm run episode:render-plan -- --episode sample

@@ -1,6 +1,6 @@
 {
   "name": "ai-remotion",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Local-first AI + Remotion agent for image-and-text explainer videos.",
   "repository": {
@@ -17,7 +17,9 @@
     "test": "vitest run",
     "test:unit": "vitest run",
     "episode:captions": "tsx src/cli/generateCaptions.ts",
+    "episode:new": "tsx src/cli/createEpisode.ts",
     "episode:qa": "tsx src/cli/generateQaReport.ts",
+    "episode:render": "tsx src/cli/renderEpisode.ts",
     "episode:render-plan": "tsx src/cli/generateRenderPlan.ts",
     "episode:route": "tsx src/cli/routeRevision.ts",
     "episode:script": "tsx src/cli/generateScript.ts",

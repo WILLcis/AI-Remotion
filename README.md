@@ -52,17 +52,32 @@ npm run render:sample
 Episode artifact utilities:
 
 ```bash
+npm run episode:new -- --id remotion-intro --topic "普通人如何理解 Remotion"
 npm run episode:captions -- --episode sample
 npm run episode:script -- --episode sample
 npm run episode:storyboard -- --episode sample
 npm run episode:render-plan -- --episode sample
+npm run episode:render -- --episode sample
 npm run episode:qa -- --episode sample --render-frames
 npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
 npm run episode:voice -- --episode sample --provider macos-say
 ```
 
-These commands rewrite episode artifacts. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
+These commands rewrite episode artifacts. `episode:new` creates a new episode folder with a schema-valid `brief.yaml`. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:render` writes `episodes/<id>/out/final.mp4` by default. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
+
+## New Episode Flow
+
+```bash
+npm run episode:new -- --id remotion-intro --topic "普通人如何理解 Remotion"
+npm run episode:script -- --episode remotion-intro
+npm run episode:storyboard -- --episode remotion-intro
+npm run episode:render-plan -- --episode remotion-intro
+npm run episode:captions -- --episode remotion-intro
+npm run episode:voice -- --episode remotion-intro --provider silent
+npm run episode:render -- --episode remotion-intro
+npm run episode:qa -- --episode remotion-intro --render-frames
+```
 
 ## Project Structure
 
