@@ -1,0 +1,41 @@
+{
+  "name": "ai-remotion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first AI + Remotion agent for image-and-text explainer videos.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WILLcis/AI-Remotion.git"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "remotion studio src/remotion/index.ts",
+    "build": "remotion bundle src/remotion/index.ts",
+    "check": "npm run typecheck && npm run lint && npm test && npm audit --audit-level=low",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "verify:harness": "bash tools/verify.sh",
+    "render:sample": "remotion render src/remotion/index.ts ExplainerVideo episodes/sample/out/final.mp4 --props=episodes/sample/render-plan.json"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "dependencies": {
+    "@remotion/cli": "4.0.485",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.485"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.485",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.39.4",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  }
+}

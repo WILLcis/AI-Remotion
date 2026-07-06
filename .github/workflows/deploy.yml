@@ -1,0 +1,24 @@
+# =============================================================================
+# Deploy (local-first placeholder)
+# -----------------------------------------------------------------------------
+# AI-Remotion is currently a local-first Remotion project with no hosted runtime.
+# The six-phase deployment harness is intentionally parked behind manual trigger
+# until cloud/render infrastructure and rollback scripts exist.
+# =============================================================================
+name: Deploy (local-first placeholder)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  deployment-not-configured:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain status
+        run: |
+          echo "AI-Remotion has no hosted deployment target yet."
+          echo "Use npm run render:sample for the current integration gate."
+          echo "Replace this workflow when cloud rendering/deployment is in scope."

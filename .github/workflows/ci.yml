@@ -1,0 +1,144 @@
+# =============================================================================
+# CI 门禁 (Verify CI)
+# -----------------------------------------------------------------------------
+# Active gate for AI-Remotion:
+#   npm ci -> typecheck -> lint -> unit tests -> npm audit -> env parity
+#   -> sample Remotion render
+#
+# docs-only changes keep the harness fast path and skip heavy validation.
+# =============================================================================
+name: CI (Verify)
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  merge_group:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      docs: ${{ steps.filter.outputs.docs }}
+      non_docs: ${{ steps.filter.outputs.non_docs }}
+      node: ${{ steps.filter.outputs.node }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docs:
+              - '*.md'
+              - '*.mdx'
+              - '**/*.md'
+              - '**/*.mdx'
+              - '.github/**/*.md'
+              - 'docs/**'
+              - 'prompts/**'
+              - 'state/**/*.md'
+            non_docs:
+              - '**'
+              - '!*.md'
+              - '!*.mdx'
+              - '!**/*.md'
+              - '!**/*.mdx'
+              - '!.github/**/*.md'
+              - '!docs/**'
+              - '!prompts/**'
+              - '!state/**/*.md'
+            node:
+              - 'src/**'
+              - 'tests/**'
+              - 'episodes/sample/**'
+              - 'flags/**'
+              - 'scripts/**'
+              - 'config/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'tsconfig.json'
+              - 'eslint.config.mjs'
+              - 'remotion.config.ts'
+              - 'Makefile'
+              - '.github/workflows/ci.yml'
+
+  node-quality:
+    needs: changes
+    if: needs.changes.outputs.node == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm test
+      - name: Dependency audit
+        run: npm audit --audit-level=low
+
+  env-parity:
+    needs: changes
+    if: needs.changes.outputs.non_docs == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check env parity
+        run: python3 scripts/check_env_parity.py config/.env.dev.example config/.env.prod.example
+
+  sample-render:
+    needs: [changes, node-quality]
+    if: always() && needs.changes.outputs.node == 'true' && needs.node-quality.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Render sample episode
+        run: npm run render:sample
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sample-video
+          path: episodes/sample/out/final.mp4
+          if-no-files-found: error
+
+  ci-gate:
+    needs: [changes, node-quality, env-parity, sample-render]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify all required jobs passed
+        run: |
+          results='${{ join(needs.*.result, ' ') }}'
+          echo "Upstream results: $results"
+          if [ "${{ needs.changes.outputs.non_docs }}" != "true" ]; then
+            echo "docs-only change detected; skipping heavy CI by policy."
+            echo "✅ CI gate green."
+            exit 0
+          fi
+          for r in $results; do
+            if [ "$r" = "failure" ] || [ "$r" = "cancelled" ]; then
+              echo "::error::CI gate failed — a required job did not pass."
+              exit 1
+            fi
+          done
+          echo "✅ CI gate green."

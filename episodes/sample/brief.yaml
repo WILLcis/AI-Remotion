@@ -1,0 +1,13 @@
+topic: "普通人如何理解 Remotion"
+audience: "想用 AI 做短视频但不会写代码的创作者"
+platform: "抖音"
+duration_seconds: 18
+aspect_ratio: "9:16"
+tone: "轻松、清楚、不装专家"
+voice: "亲切自然的中文女声"
+visual_style: "深色背景、信息卡片、轻量动效"
+must_include:
+  - "Remotion 是用 React 生成视频的框架"
+  - "AI-Remotion 使用结构化文件驱动 Remotion 渲染"
+must_avoid:
+  - "不要说 Remotion 是无代码剪辑软件"
