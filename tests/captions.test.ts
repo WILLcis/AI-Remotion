@@ -38,6 +38,25 @@ describe("caption generation", () => {
     expect(wrapped.split("\n").every((line) => line.length > 2)).toBe(true);
   });
 
+  it("does not split ASCII words or leave punctuation at the start of a line", () => {
+    const wrappedWithComma = wrapCaptionText(
+      "AI-Remotion 从 brief 开始，把想法变成可审脚本。",
+      22,
+    );
+    const wrappedWithAsciiWords = wrapCaptionText(
+      "短期产品形态先保持 CLI 和 Agent-first，让流程稳定下来。",
+      22,
+    );
+    const wrappedWithCanonical = wrapCaptionText(
+      "这条样片，就是 AI-Remotion 的第一条 canonical demo。",
+      22,
+    );
+
+    expect(wrappedWithComma).not.toContain("\n，");
+    expect(wrappedWithAsciiWords).not.toContain("Agent-\nfirst");
+    expect(wrappedWithCanonical).not.toContain("ca\nnonical");
+  });
+
   it("exports captions as SRT", () => {
     const { renderPlan } = loadEpisodeArtifacts(sampleEpisodeDir);
     const srt = renderSrt(captionsFromRenderPlan(renderPlan), renderPlan.video.fps);

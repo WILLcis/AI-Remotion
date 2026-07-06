@@ -1,6 +1,6 @@
 {
   "name": "ai-remotion",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "description": "Local-first AI + Remotion agent for image-and-text explainer videos.",
   "repository": {
@@ -10,6 +10,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "remotion studio src/remotion/index.ts",
+    "demo:canonical": "npm run episode:batch -- --episodes sample --steps validate,render,qa --qa-render-frames",
     "build": "remotion bundle src/remotion/index.ts",
     "check": "npm run typecheck && npm run lint && npm run validate:sample && npm test && npm audit --audit-level=low",
     "config:check": "tsx src/cli/checkConfig.ts",

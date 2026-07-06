@@ -38,6 +38,9 @@ Four failure modes are BLOCK-level:
 
 ## Current Product Contract
 
+- Short-term product shape is CLI/Agent-first. Do not add a browser UI unless the user explicitly reopens that decision.
+- MVP rendering is local Remotion rendering. Do not add cloud rendering, hosted queues, or object storage unless explicitly requested.
+- `episodes/sample` is the canonical public demo: `普通人如何理解 Remotion，以及 AI-Remotion 如何生成图文讲解视频`.
 - Keep the creator in control at review gates.
 - Treat Markdown scripts and structured JSON plans as user-owned artifacts.
 - Remotion templates are the source of truth for final layout and animation.
@@ -87,6 +90,7 @@ Use npm unless the user explicitly changes package managers.
 
 ```bash
 make bootstrap          # npm install
+make canonical-demo     # validate, render, and QA the canonical local demo
 make batch-sample       # preview sample validate + QA batch workflow
 make check              # typecheck + lint + unit tests + npm audit
 make config-check       # print LLM/TTS runtime config without secrets
@@ -110,6 +114,7 @@ Direct npm commands:
 npm install
 npm run dev
 npm run config:check
+npm run demo:canonical
 npm run typecheck
 npm run lint
 npm run episode:batch -- --episodes sample --steps validate,qa --dry-run

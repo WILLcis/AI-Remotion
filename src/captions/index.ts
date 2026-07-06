@@ -93,12 +93,49 @@ const splitBySemanticPunctuation = (text: string): string[] => {
 
 const hardWrap = (text: string, maxLineLength: number): string[] => {
   const lines: string[] = [];
+  let remaining = text.trim();
 
-  for (let index = 0; index < text.length; index += maxLineLength) {
-    lines.push(text.slice(index, index + maxLineLength));
+  while (remaining.length > maxLineLength) {
+    const breakIndex = findReadableBreakIndex(remaining, maxLineLength);
+    lines.push(remaining.slice(0, breakIndex).trimEnd());
+    remaining = remaining.slice(breakIndex).trimStart();
+  }
+
+  if (remaining.length > 0) {
+    lines.push(remaining);
   }
 
   return lines;
+};
+
+const findReadableBreakIndex = (
+  text: string,
+  maxLineLength: number,
+): number => {
+  const searchWindow = text.slice(0, maxLineLength + 1);
+  const minimumUsefulBreak = Math.max(4, Math.floor(maxLineLength * 0.45));
+
+  let whitespaceBreak = -1;
+  for (const match of searchWindow.matchAll(/\s+/g)) {
+    const index = match.index ?? -1;
+    if (index >= minimumUsefulBreak && index < maxLineLength) {
+      whitespaceBreak = index;
+    }
+  }
+
+  if (whitespaceBreak > 0) {
+    return whitespaceBreak;
+  }
+
+  let punctuationBreak = -1;
+  for (const match of searchWindow.matchAll(/[，。；、：！？,.;:!?]/g)) {
+    const index = match.index ?? -1;
+    if (index >= minimumUsefulBreak && index < maxLineLength) {
+      punctuationBreak = index + 1;
+    }
+  }
+
+  return punctuationBreak > 0 ? punctuationBreak : maxLineLength;
 };
 
 const pad = (value: number, length: number): string => {

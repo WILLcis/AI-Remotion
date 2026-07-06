@@ -82,6 +82,16 @@ The MVP will not:
 6. Provider-agnostic AI.
    LLM, TTS, image generation, and transcription providers should be replaceable.
 
+## Resolved Product Direction
+
+As of 2026-07-07:
+
+- Product shape: continue CLI/Agent-first in the short term. A small browser UI is deferred until the artifact workflow, revision routing, provider configuration, and render QA are stable.
+- Rendering: continue local Remotion rendering for the MVP. Cloud rendering, hosted queues, and object storage are deferred until local rendering is reliable.
+- Canonical demo: `episodes/sample` is the public demo with the topic `普通人如何理解 Remotion，以及 AI-Remotion 如何生成图文讲解视频`.
+
+See `docs/decisions/ADR-001-cli-first-local-rendering-canonical-demo.md`.
+
 ## MVP Workflow
 
 ### 1. Project Setup
@@ -400,10 +410,10 @@ Acceptance:
 - Runtime: Node.js 20+
 - Language: TypeScript
 - Renderer: Remotion
-- UI foundation: React components rendered by Remotion
+- UI foundation: React components rendered by Remotion. No browser product UI in the short-term MVP.
 - Validation: Zod or equivalent schema validation
 - Captions: generated `.srt` plus structured caption props
-- Audio: Edge TTS for MVP, provider adapter interface for others
+- Audio: silent placeholder plus provider adapter interface. First real external TTS provider is still TBD.
 - Media inspection: FFmpeg / ffprobe
 - Package manager: npm by default unless the scaffold chooses otherwise
 
@@ -607,11 +617,13 @@ For sample videos:
 - Fail loudly on missing assets.
 - Preserve user-edited script and brief files.
 - Prefer local deterministic rendering for MVP.
+- Keep the default public demo in `episodes/sample` aligned across brief, script, storyboard, render plan, captions, render output, and QA report.
 
 ### Ask First
 
 - Adding paid API providers.
 - Adding cloud rendering.
+- Adding a browser UI.
 - Adding online asset scraping.
 - Adding auto-publishing.
 - Changing the default package manager.
@@ -738,8 +750,6 @@ Mitigation:
 2. Which TTS provider should be the first real implementation: Edge TTS, Doubao, ElevenLabs, Azure, or local model?
 3. Should the Agent use Markdown scripts as the user-editable source of truth, or should it use structured YAML/JSON only?
 4. Should generated images be in scope for MVP, or should MVP only use text, icons, simple shapes, and user-provided images?
-5. Should the project include a small browser UI later, or remain CLI/agent-first?
-6. What is the first real sample topic we want to use for the canonical demo video?
 
 ## Next Step After RPD Approval
 

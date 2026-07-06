@@ -10,6 +10,20 @@ brief -> script -> storyboard -> render-plan -> voiceover -> captions -> Remotio
 
 The project is aimed at knowledge explainers, product explainers, software tutorials, light news analysis, listicles, and educational short videos.
 
+## Current Product Direction
+
+AI-Remotion is CLI/Agent-first for the near term. The browser UI comes later, after the artifact workflow and revision loop are stable.
+
+Rendering is local Remotion rendering for the MVP. Cloud rendering, hosted queues, and object storage are intentionally out of scope until the local pipeline is reliable.
+
+The canonical public demo lives in `episodes/sample`:
+
+```text
+普通人如何理解 Remotion，以及 AI-Remotion 如何生成图文讲解视频
+```
+
+See `docs/decisions/ADR-001-cli-first-local-rendering-canonical-demo.md` for the decision record.
+
 ## Requirements
 
 - Node.js 20+
@@ -26,16 +40,22 @@ npm run dev
 
 Open Remotion Studio and choose the `ExplainerVideo` composition.
 
-## Render The Sample
+## Render The Canonical Demo
 
 ```bash
 npm run render:sample
 ```
 
-The sample MP4 is written to:
+The canonical demo MP4 is written to:
 
 ```text
 episodes/sample/out/final.mp4
+```
+
+To run the full local demo path, including validation, render, QA report, and QA stills:
+
+```bash
+npm run demo:canonical
 ```
 
 ## Useful Commands
@@ -44,6 +64,7 @@ Checks and rendering:
 
 ```bash
 npm run config:check
+npm run demo:canonical
 npm run typecheck
 npm run lint
 npm run validate:sample

@@ -1,13 +1,19 @@
-topic: "普通人如何理解 Remotion"
-audience: "想用 AI 做短视频但不会写代码的创作者"
+topic: "普通人如何理解 Remotion，以及 AI-Remotion 如何生成图文讲解视频"
+audience: "想用 AI 做图文讲解视频的创作者和开发者"
 platform: "抖音"
 duration_seconds: 24
 aspect_ratio: "9:16"
 tone: "轻松、清楚、不装专家"
 voice: "亲切自然的中文女声"
 visual_style: "深色背景、信息卡片、轻量动效"
+source_notes:
+  - "Canonical demo: explain Remotion and AI-Remotion itself"
+  - "Product decisions: CLI/Agent-first, local Remotion render, no cloud render in MVP"
 must_include:
   - "Remotion 是用 React 生成视频的框架"
   - "AI-Remotion 使用结构化文件驱动 Remotion 渲染"
+  - "当前产品形态是 CLI/Agent-first"
+  - "MVP 使用本地 Remotion 渲染"
 must_avoid:
   - "不要说 Remotion 是无代码剪辑软件"
+  - "不要承诺云渲染、自动发布或真实 TTS 已默认启用"
