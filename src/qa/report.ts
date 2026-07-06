@@ -1,6 +1,7 @@
+import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { loadEpisodeArtifacts } from "../schemas";
+import { loadEpisodeArtifacts, type RenderPlan } from "../schemas";
 
 export type QaStatus = "pass" | "warn" | "fail";
 
@@ -24,13 +25,31 @@ export type QaReport = {
   };
 };
 
+export type MediaProbeResult =
+  | {
+      durationSeconds: number | null;
+      hasAudio: boolean | null;
+      height: number | null;
+      ok: true;
+      width: number | null;
+    }
+  | {
+      ok: false;
+      reason: string;
+      unavailable?: boolean;
+    };
+
+export type MediaProbe = (outputFile: string) => MediaProbeResult;
+
 export type GenerateQaReportOptions = {
   episodeDir: string;
+  mediaProbe?: MediaProbe;
   outputFile?: string;
 };
 
 export const generateQaReport = ({
   episodeDir,
+  mediaProbe = probeMediaFile,
   outputFile = path.join(episodeDir, "out", "final.mp4"),
 }: GenerateQaReportOptions): QaReport => {
   const artifacts = loadEpisodeArtifacts(episodeDir);
@@ -38,6 +57,11 @@ export const generateQaReport = ({
     artifacts.renderPlan.video.duration_frames / artifacts.renderPlan.video.fps;
   const checks: QaCheck[] = [
     checkVideoFile(outputFile),
+    checkMediaProbe({
+      outputFile,
+      probe: mediaProbe,
+      renderPlan: artifacts.renderPlan,
+    }),
     {
       details: `Render plan duration is ${frameDurationSeconds.toFixed(
         3,
@@ -65,7 +89,7 @@ export const generateQaReport = ({
     episodeDir,
     generatedAt: new Date().toISOString(),
     knownLimitations: [
-      "Playable media probing uses file existence/size unless ffprobe integration is added.",
+      "Media probing depends on local ffprobe; when unavailable QA falls back to file-size checks.",
       "Frame blank detection uses rendered still file-size heuristics, not full pixel analysis.",
       "Caption overflow detection uses text-length heuristics; visual overlap still needs human review.",
     ],
@@ -120,10 +144,61 @@ const checkVideoFile = (outputFile: string): QaCheck => {
 
   const size = statSync(outputFile).size;
   return {
-    details: `Found output file (${formatBytes(size)}). Container playability is listed as a known limitation until ffprobe is wired in.`,
+    details: `Found output file (${formatBytes(size)}).`,
     id: "video-file",
     status: size > 0 ? "pass" : "fail",
     title: "Video File Exists",
+  };
+};
+
+const checkMediaProbe = ({
+  outputFile,
+  probe,
+  renderPlan,
+}: {
+  outputFile: string;
+  probe: MediaProbe;
+  renderPlan: RenderPlan;
+}): QaCheck => {
+  if (!existsSync(outputFile)) {
+    return {
+      details: `Missing output file: ${outputFile}`,
+      id: "media-probe",
+      status: "fail",
+      title: "Media Container Probe",
+    };
+  }
+
+  const result = probe(outputFile);
+  if (!result.ok) {
+    return {
+      details: result.reason,
+      id: "media-probe",
+      status: result.unavailable ? "warn" : "fail",
+      title: "Media Container Probe",
+    };
+  }
+
+  const expectedDurationSeconds =
+    renderPlan.video.duration_frames / renderPlan.video.fps;
+  const durationMatches =
+    result.durationSeconds === null ||
+    Math.abs(result.durationSeconds - expectedDurationSeconds) <= 1;
+  const resolutionMatches =
+    result.width === null ||
+    result.height === null ||
+    (result.width === renderPlan.video.width && result.height === renderPlan.video.height);
+  const status = durationMatches && resolutionMatches ? "pass" : "fail";
+
+  return {
+    details: [
+      `Duration: ${formatOptionalSeconds(result.durationSeconds)}`,
+      `Resolution: ${formatResolution(result.width, result.height)}`,
+      `Audio stream: ${formatOptionalBoolean(result.hasAudio)}`,
+    ].join("\n"),
+    id: "media-probe",
+    status,
+    title: "Media Container Probe",
   };
 };
 
@@ -284,6 +359,103 @@ const formatBytes = (bytes: number): string => {
   }
 
   return `${(bytes / 1024).toFixed(1)} KB`;
+};
+
+export const probeMediaFile = (outputFile: string): MediaProbeResult => {
+  let raw: string;
+
+  try {
+    raw = execFileSync(
+      "ffprobe",
+      [
+        "-v",
+        "error",
+        "-print_format",
+        "json",
+        "-show_format",
+        "-show_streams",
+        outputFile,
+      ],
+      { encoding: "utf8" },
+    );
+  } catch (error) {
+    const code =
+      typeof error === "object" && error !== null && "code" in error
+        ? String(error.code)
+        : "";
+
+    return {
+      ok: false,
+      reason:
+        code === "ENOENT"
+          ? "ffprobe is not installed or not available on PATH."
+          : `ffprobe failed for ${outputFile}.`,
+      unavailable: code === "ENOENT",
+    };
+  }
+
+  let data: {
+    format?: { duration?: string };
+    streams?: Array<{
+      codec_type?: string;
+      duration?: string;
+      height?: number;
+      width?: number;
+    }>;
+  };
+
+  try {
+    data = JSON.parse(raw) as typeof data;
+  } catch {
+    return {
+      ok: false,
+      reason: "ffprobe returned invalid JSON.",
+    };
+  }
+  const streams = data.streams ?? [];
+  const videoStream = streams.find((stream) => stream.codec_type === "video");
+
+  if (!videoStream) {
+    return {
+      ok: false,
+      reason: "ffprobe did not find a video stream.",
+    };
+  }
+
+  return {
+    durationSeconds: parseOptionalNumber(
+      data.format?.duration ?? videoStream.duration,
+    ),
+    hasAudio: streams.some((stream) => stream.codec_type === "audio"),
+    height: videoStream.height ?? null,
+    ok: true,
+    width: videoStream.width ?? null,
+  };
+};
+
+const parseOptionalNumber = (value: string | undefined): number | null => {
+  if (!value) {
+    return null;
+  }
+
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+};
+
+const formatOptionalSeconds = (value: number | null): string => {
+  return value === null ? "unknown" : `${value.toFixed(3)}s`;
+};
+
+const formatResolution = (width: number | null, height: number | null): string => {
+  return width === null || height === null ? "unknown" : `${width}x${height}`;
+};
+
+const formatOptionalBoolean = (value: boolean | null): string => {
+  if (value === null) {
+    return "unknown";
+  }
+
+  return value ? "yes" : "no";
 };
 
 const isFileLikeAsset = (asset: string): boolean => {

@@ -15,6 +15,7 @@ The project is aimed at knowledge explainers, product explainers, software tutor
 - Node.js 20+
 - npm
 - FFmpeg support through Remotion for MP4 rendering
+- Optional: `ffprobe` on `PATH` for richer QA media duration/resolution/audio checks
 
 ## Getting Started
 
@@ -65,7 +66,7 @@ npm run episode:voice -- --episode sample --provider silent
 npm run episode:voice -- --episode sample --provider macos-say
 ```
 
-These commands rewrite episode artifacts. `episode:batch -- --dry-run` previews a multi-episode workflow without changing files. `episode:new` creates a new episode folder with a schema-valid `brief.yaml`. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:render` writes `episodes/<id>/out/final.mp4` by default. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
+These commands rewrite episode artifacts. `episode:batch -- --dry-run` previews a multi-episode workflow without changing files. `episode:new` creates a new episode folder with a schema-valid `brief.yaml`. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:render` writes `episodes/<id>/out/final.mp4` by default. `episode:qa` uses `ffprobe` when available and falls back to file-size checks when it is not installed. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
 
 ## New Episode Flow
 

@@ -1,6 +1,6 @@
 {
   "name": "ai-remotion",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "description": "Local-first AI + Remotion agent for image-and-text explainer videos.",
   "repository": {
