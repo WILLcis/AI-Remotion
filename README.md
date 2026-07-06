@@ -53,11 +53,15 @@ Episode artifact utilities:
 
 ```bash
 npm run episode:captions -- --episode sample
+npm run episode:script -- --episode sample
+npm run episode:storyboard -- --episode sample
+npm run episode:render-plan -- --episode sample
+npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
 npm run episode:voice -- --episode sample --provider macos-say
 ```
 
-`episode:captions` rewrites `captions.srt` and structured caption props. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata.
+These commands rewrite episode artifacts. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata.
 
 ## Project Structure
 

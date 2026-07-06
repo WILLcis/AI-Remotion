@@ -107,6 +107,10 @@ npm run dev
 npm run typecheck
 npm run lint
 npm run episode:captions -- --episode sample
+npm run episode:script -- --episode sample
+npm run episode:storyboard -- --episode sample
+npm run episode:render-plan -- --episode sample
+npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
 npm run validate:sample
 npm test
