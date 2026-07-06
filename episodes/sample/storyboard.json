@@ -24,6 +24,16 @@
     {
       "id": "scene-03",
       "duration_seconds": 3,
+      "narration": "图文讲解可以把截图、概念卡和流程图放进同一套版式。",
+      "caption": "图文讲解可以把截图、概念卡和流程图放进同一套版式。",
+      "visual_type": "image_card",
+      "visual_direction": "用图像卡片展示截图、概念卡和流程图如何被纳入统一版式。",
+      "assets": ["产品截图", "数据卡片", "流程箭头"],
+      "animation": "素材卡片轻微放大进入，资产标签依次出现。"
+    },
+    {
+      "id": "scene-04",
+      "duration_seconds": 3,
       "narration": "AI 负责脚本、分镜和节奏，模板负责稳定输出。",
       "caption": "AI 负责脚本、分镜和节奏，模板负责稳定输出。",
       "visual_type": "list",
@@ -32,7 +42,7 @@
       "animation": "列表整体进入。"
     },
     {
-      "id": "scene-04",
+      "id": "scene-05",
       "duration_seconds": 3,
       "narration": "这样每一期都能复用风格，而不是重新摆一遍版。",
       "caption": "每一期都能复用风格，而不是重新摆一遍版。",
@@ -42,7 +52,7 @@
       "animation": "左右两列同时淡入。"
     },
     {
-      "id": "scene-05",
+      "id": "scene-06",
       "duration_seconds": 3,
       "narration": "先审脚本，再渲染，质量会比直接生成视频更可控。",
       "caption": "先审脚本，再渲染，质量会比直接生成视频更可控。",
@@ -52,7 +62,17 @@
       "animation": "时间线从上到下进入。"
     },
     {
-      "id": "scene-06",
+      "id": "scene-07",
+      "duration_seconds": 3,
+      "narration": "好模板不是装饰，而是把质量控制前移。",
+      "caption": "好模板不是装饰，而是把质量控制前移。",
+      "visual_type": "quote",
+      "visual_direction": "引用卡强调先审内容再渲染画面的生产原则。",
+      "assets": [],
+      "animation": "引用线展开，文字淡入。"
+    },
+    {
+      "id": "scene-08",
       "duration_seconds": 3,
       "narration": "这就是 AI-Remotion 的第一条生产线。",
       "caption": "这就是 AI-Remotion 的第一条生产线。",

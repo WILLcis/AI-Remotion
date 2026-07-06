@@ -5,7 +5,7 @@
     "subtitle": "用 React 把讲解视频做成可复用模板",
     "platform": "douyin",
     "language": "zh",
-    "duration_seconds": 18,
+    "duration_seconds": 24,
     "aspect_ratio": "9:16"
   },
   "theme": {
@@ -23,7 +23,7 @@
     "fps": 30,
     "width": 1080,
     "height": 1920,
-    "duration_frames": 540,
+    "duration_frames": 720,
     "safe_area": {
       "top": 120,
       "right": 72,
@@ -50,21 +50,31 @@
       {
         "start_frame": 180,
         "end_frame": 270,
-        "text": "AI 负责脚本、分镜和节奏，模板负责稳定输出。"
+        "text": "图文讲解可以把截图、概念卡和流程图放进同一套版式。"
       },
       {
         "start_frame": 270,
         "end_frame": 360,
-        "text": "这样每一期都能复用风格，而不是重新摆一遍版。"
+        "text": "AI 负责脚本、分镜和节奏，模板负责稳定输出。"
       },
       {
         "start_frame": 360,
         "end_frame": 450,
-        "text": "先审脚本，再渲染，质量会比直接生成视频更可控。"
+        "text": "这样每一期都能复用风格，而不是重新摆一遍版。"
       },
       {
         "start_frame": 450,
         "end_frame": 540,
+        "text": "先审脚本，再渲染，质量会比直接生成视频更可控。"
+      },
+      {
+        "start_frame": 540,
+        "end_frame": 630,
+        "text": "好模板不是装饰，而是把质量控制前移。"
+      },
+      {
+        "start_frame": 630,
+        "end_frame": 720,
         "text": "这就是 AI-Remotion 的第一条生产线。"
       }
     ]
@@ -101,25 +111,41 @@
     },
     {
       "id": "scene-03",
+      "type": "image_card",
+      "title": "图文讲解要有证据感",
+      "narration": "图文讲解可以把截图、概念卡和流程图放进同一套版式。",
+      "caption": "图文讲解可以把截图、概念卡和流程图放进同一套版式。",
+      "duration_seconds": 3,
+      "start_frame": 180,
+      "duration_frames": 90,
+      "visual": {
+        "eyebrow": "Visual Evidence",
+        "primary": "截图 / 概念卡 / 流程图",
+        "secondary": "模板把素材放进稳定画框，观众更容易跟上讲解。",
+        "assets": ["产品截图", "数据卡片", "流程箭头"]
+      }
+    },
+    {
+      "id": "scene-04",
       "type": "list",
       "title": "AI 适合做什么",
       "narration": "AI 负责脚本、分镜和节奏，模板负责稳定输出。",
       "caption": "AI 负责脚本、分镜和节奏，模板负责稳定输出。",
       "duration_seconds": 3,
-      "start_frame": 180,
+      "start_frame": 270,
       "duration_frames": 90,
       "visual": {
         "bullets": ["脚本草稿", "分镜规划", "字幕节奏", "修改建议"]
       }
     },
     {
-      "id": "scene-04",
+      "id": "scene-05",
       "type": "comparison",
       "title": "一次性视频 vs 可复用模板",
       "narration": "这样每一期都能复用风格，而不是重新摆一遍版。",
       "caption": "每一期都能复用风格，而不是重新摆一遍版。",
       "duration_seconds": 3,
-      "start_frame": 270,
+      "start_frame": 360,
       "duration_frames": 90,
       "visual": {
         "left_label": "一次性",
@@ -129,13 +155,13 @@
       }
     },
     {
-      "id": "scene-05",
+      "id": "scene-06",
       "type": "timeline",
       "title": "为什么先审脚本",
       "narration": "先审脚本，再渲染，质量会比直接生成视频更可控。",
       "caption": "先审脚本，再渲染，质量会比直接生成视频更可控。",
       "duration_seconds": 3,
-      "start_frame": 360,
+      "start_frame": 450,
       "duration_frames": 90,
       "visual": {
         "timeline_items": [
@@ -155,17 +181,31 @@
       }
     },
     {
-      "id": "scene-06",
+      "id": "scene-07",
+      "type": "quote",
+      "title": "模板的价值",
+      "narration": "好模板不是装饰，而是把质量控制前移。",
+      "caption": "好模板不是装饰，而是把质量控制前移。",
+      "duration_seconds": 3,
+      "start_frame": 540,
+      "duration_frames": 90,
+      "visual": {
+        "quote": "先让内容可审，再让画面可渲染。",
+        "attribution": "AI-Remotion production rule"
+      }
+    },
+    {
+      "id": "scene-08",
       "type": "cta",
       "title": "AI-Remotion",
       "narration": "这就是 AI-Remotion 的第一条生产线。",
       "caption": "这就是 AI-Remotion 的第一条生产线。",
       "duration_seconds": 3,
-      "start_frame": 450,
+      "start_frame": 630,
       "duration_frames": 90,
       "visual": {
         "primary": "reviewable script -> deterministic render",
-        "secondary": "下一步：数据契约和验证命令"
+        "secondary": "下一步：音频与字幕"
       }
     }
   ]

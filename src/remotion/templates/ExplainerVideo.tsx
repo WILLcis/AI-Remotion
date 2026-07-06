@@ -32,8 +32,16 @@ const themeStyle = (theme: ThemeTokens): ThemeStyle => ({
 });
 
 export const ExplainerVideo: React.FC<RenderPlan> = (plan) => {
+  const orientationClass =
+    plan.metadata.aspect_ratio === "16:9"
+      ? "explainer-landscape"
+      : "explainer-vertical";
+
   return (
-    <AbsoluteFill className="explainer" style={themeStyle(plan.theme)}>
+    <AbsoluteFill
+      className={`explainer ${orientationClass}`}
+      style={themeStyle(plan.theme)}
+    >
       <BackgroundGrid />
       <Series>
         {plan.scenes.map((scene, index) => (
@@ -134,6 +142,24 @@ const SceneVisual: React.FC<{ scene: RenderScene }> = ({ scene }) => {
         <section className="visual-key">
           <span className="small-label">structured artifact</span>
           <strong>{scene.visual.primary}</strong>
+          <p>{scene.visual.secondary}</p>
+        </section>
+      );
+
+    case "image_card":
+      return (
+        <section className="visual-image-card">
+          <div className="image-card-frame">
+            <div className="image-card-window">
+              <span>{scene.visual.eyebrow ?? "Visual"}</span>
+              <strong>{scene.visual.primary}</strong>
+            </div>
+            <div className="image-card-assets">
+              {scene.visual.assets?.map((asset) => (
+                <p key={asset}>{asset}</p>
+              ))}
+            </div>
+          </div>
           <p>{scene.visual.secondary}</p>
         </section>
       );

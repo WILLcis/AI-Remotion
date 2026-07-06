@@ -111,6 +111,7 @@ h1 {
 
 .visual-title,
 .visual-key,
+.visual-image-card,
 .visual-list,
 .visual-comparison,
 .visual-timeline,
@@ -166,6 +167,75 @@ h1 {
   font-size: 54px;
   letter-spacing: 0;
   line-height: 1.16;
+}
+
+.visual-image-card {
+  display: grid;
+  gap: 30px;
+}
+
+.image-card-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+}
+
+.image-card-window {
+  background:
+    linear-gradient(135deg, rgba(68, 215, 182, 0.22), transparent 48%),
+    linear-gradient(160deg, rgba(244, 180, 75, 0.22), transparent 58%),
+    var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  min-height: 310px;
+  padding: 34px;
+  place-content: end start;
+}
+
+.image-card-window span {
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.image-card-window strong {
+  color: var(--text);
+  font-size: 52px;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.image-card-assets {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.image-card-assets p {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+  min-height: 58px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.visual-image-card > p {
+  color: var(--text-muted);
+  font-size: 32px;
+  line-height: 1.38;
+  margin: 0;
 }
 
 .visual-list {
@@ -292,4 +362,61 @@ h1 {
   gap: 34px;
   justify-content: center;
   padding: 54px;
+}
+
+.explainer-landscape .scene {
+  padding: 72px 96px 126px;
+}
+
+.explainer-landscape .background-accent-top {
+  top: 82px;
+}
+
+.explainer-landscape .background-accent-bottom {
+  bottom: 104px;
+}
+
+.explainer-landscape .scene-header {
+  font-size: 22px;
+}
+
+.explainer-landscape .scene-body {
+  align-items: center;
+  gap: 64px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  grid-template-rows: none;
+  padding-top: 78px;
+}
+
+.explainer-landscape .scene-copy {
+  max-width: 760px;
+}
+
+.explainer-landscape h1 {
+  font-size: 70px;
+}
+
+.explainer-landscape .narration {
+  font-size: 31px;
+  max-width: 720px;
+}
+
+.explainer-landscape .caption {
+  font-size: 32px;
+  padding: 18px 26px;
+}
+
+.explainer-landscape .visual-title p,
+.explainer-landscape .visual-cta p {
+  font-size: 62px;
+}
+
+.explainer-landscape .visual-key strong,
+.explainer-landscape .image-card-window strong {
+  font-size: 44px;
+}
+
+.explainer-landscape .list-row p,
+.explainer-landscape .timeline-step p {
+  font-size: 34px;
 }

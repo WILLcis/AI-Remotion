@@ -18,13 +18,21 @@ Duration: 3s
 
 ## Segment 3
 
+Spoken: 图文讲解可以把截图、概念卡和流程图放进同一套版式。
+
+Visual: 用图像卡片展示截图、概念卡和流程图如何进入统一模板。
+
+Duration: 3s
+
+## Segment 4
+
 Spoken: AI 负责脚本、分镜和节奏，模板负责稳定输出。
 
 Visual: 列表说明 AI 适合生成的中间产物。
 
 Duration: 3s
 
-## Segment 4
+## Segment 5
 
 Spoken: 这样每一期都能复用风格，而不是重新摆一遍版。
 
@@ -32,7 +40,7 @@ Visual: 左右对比一次性视频和模板化生产。
 
 Duration: 3s
 
-## Segment 5
+## Segment 6
 
 Spoken: 先审脚本，再渲染，质量会比直接生成视频更可控。
 
@@ -40,7 +48,15 @@ Visual: 三步时间线：确认表达、生成分镜、渲染视频。
 
 Duration: 3s
 
-## Segment 6
+## Segment 7
+
+Spoken: 好模板不是装饰，而是把质量控制前移。
+
+Visual: 引用卡展示 "先让内容可审，再让画面可渲染。"
+
+Duration: 3s
+
+## Segment 8
 
 Spoken: 这就是 AI-Remotion 的第一条生产线。
 

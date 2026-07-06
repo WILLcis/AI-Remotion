@@ -15,8 +15,8 @@ describe("episode artifact validation", () => {
     const artifacts = loadEpisodeArtifacts(sampleEpisodeDir);
 
     expect(artifacts.brief.topic).toBe("普通人如何理解 Remotion");
-    expect(artifacts.storyboard.scenes).toHaveLength(6);
-    expect(artifacts.renderPlan.video.duration_frames).toBe(540);
+    expect(artifacts.storyboard.scenes).toHaveLength(8);
+    expect(artifacts.renderPlan.video.duration_frames).toBe(720);
   });
 
   it("validates the sample episode artifact set", () => {
