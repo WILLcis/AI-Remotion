@@ -61,6 +61,7 @@ describe("QA report", () => {
 
     try {
       cpSync(sampleEpisodeDir, tempDir, { recursive: true });
+      mkdirSync(path.join(tempDir, "out"), { recursive: true });
       writeFileSync(path.join(tempDir, "out", "final.mp4"), Buffer.alloc(4096, 1));
 
       const report = generateQaReport({
