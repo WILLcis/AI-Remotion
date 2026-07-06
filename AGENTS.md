@@ -90,6 +90,7 @@ make bootstrap          # npm install
 make check              # typecheck + lint + unit tests + npm audit
 make test-unit          # npm test
 make test-integration   # render sample MP4
+make validate-sample    # validate sample brief/storyboard/render-plan
 make render-sample      # render sample MP4
 make verify-harness     # harness sanity checks
 ```
@@ -101,6 +102,7 @@ npm install
 npm run dev
 npm run typecheck
 npm run lint
+npm run validate:sample
 npm test
 npm run render:sample
 npm audit --audit-level=low

@@ -42,6 +42,7 @@ episodes/sample/out/final.mp4
 ```bash
 npm run typecheck
 npm run lint
+npm run validate:sample
 npm test
 npm run render:sample
 ```

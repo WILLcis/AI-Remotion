@@ -85,6 +85,8 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
+      - name: Validate sample episode
+        run: npm run validate:sample
       - name: Unit tests
         run: npm test
       - name: Dependency audit
