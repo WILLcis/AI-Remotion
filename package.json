@@ -1,6 +1,6 @@
 {
   "name": "ai-remotion",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "description": "Local-first AI + Remotion agent for image-and-text explainer videos.",
   "repository": {
@@ -16,6 +16,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:unit": "vitest run",
+    "episode:batch": "tsx src/cli/runBatch.ts",
     "episode:captions": "tsx src/cli/generateCaptions.ts",
     "episode:new": "tsx src/cli/createEpisode.ts",
     "episode:qa": "tsx src/cli/generateQaReport.ts",

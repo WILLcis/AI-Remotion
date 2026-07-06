@@ -87,6 +87,7 @@ Use npm unless the user explicitly changes package managers.
 
 ```bash
 make bootstrap          # npm install
+make batch-sample       # preview sample validate + QA batch workflow
 make check              # typecheck + lint + unit tests + npm audit
 make captions-sample    # regenerate sample captions from render-plan scenes
 make new-sample         # create a sample-draft episode skeleton
@@ -109,6 +110,7 @@ npm install
 npm run dev
 npm run typecheck
 npm run lint
+npm run episode:batch -- --episodes sample --steps validate,qa --dry-run
 npm run episode:captions -- --episode sample
 npm run episode:new -- --id remotion-intro --topic "普通人如何理解 Remotion"
 npm run episode:render -- --episode sample

@@ -52,6 +52,7 @@ npm run render:sample
 Episode artifact utilities:
 
 ```bash
+npm run episode:batch -- --episodes sample --steps validate,qa --dry-run
 npm run episode:new -- --id remotion-intro --topic "普通人如何理解 Remotion"
 npm run episode:captions -- --episode sample
 npm run episode:script -- --episode sample
@@ -64,7 +65,7 @@ npm run episode:voice -- --episode sample --provider silent
 npm run episode:voice -- --episode sample --provider macos-say
 ```
 
-These commands rewrite episode artifacts. `episode:new` creates a new episode folder with a schema-valid `brief.yaml`. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:render` writes `episodes/<id>/out/final.mp4` by default. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
+These commands rewrite episode artifacts. `episode:batch -- --dry-run` previews a multi-episode workflow without changing files. `episode:new` creates a new episode folder with a schema-valid `brief.yaml`. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:render` writes `episodes/<id>/out/final.mp4` by default. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
 
 ## New Episode Flow
 
@@ -77,6 +78,13 @@ npm run episode:captions -- --episode remotion-intro
 npm run episode:voice -- --episode remotion-intro --provider silent
 npm run episode:render -- --episode remotion-intro
 npm run episode:qa -- --episode remotion-intro --render-frames
+```
+
+Batch runs can target explicit episodes or every folder under `episodes/` that contains `brief.yaml`:
+
+```bash
+npm run episode:batch -- --episodes sample --steps validate,render,qa --qa-render-frames
+npm run episode:batch -- --all --steps validate --dry-run
 ```
 
 ## Project Structure

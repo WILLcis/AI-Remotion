@@ -1,7 +1,10 @@
-.PHONY: bootstrap captions-sample check new-sample qa-sample render-episode-sample test-unit test-integration render-sample validate-sample voice-sample verify-harness
+.PHONY: batch-sample bootstrap captions-sample check new-sample qa-sample render-episode-sample test-unit test-integration render-sample validate-sample voice-sample verify-harness
 
 bootstrap:
 	npm install
+
+batch-sample:
+	npm run episode:batch -- --episodes sample --steps validate,qa --dry-run
 
 check:
 	npm run typecheck
