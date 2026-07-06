@@ -1,4 +1,4 @@
-.PHONY: batch-sample bootstrap captions-sample check new-sample qa-sample render-episode-sample test-unit test-integration render-sample validate-sample voice-sample verify-harness
+.PHONY: batch-sample bootstrap captions-sample check config-check new-sample qa-sample render-episode-sample test-unit test-integration render-sample validate-sample voice-sample verify-harness
 
 bootstrap:
 	npm install
@@ -12,6 +12,9 @@ check:
 	npm run validate:sample
 	npm test
 	npm audit --audit-level=low
+
+config-check:
+	npm run config:check
 
 test-unit:
 	npm test

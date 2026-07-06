@@ -4,13 +4,15 @@ import {
   generateVoiceover,
   type VoiceoverProvider,
 } from "../audio/voiceover";
+import { resolveConfiguredVoiceoverProvider } from "../audio/voiceoverConfig";
+import { loadRuntimeConfig } from "../config/runtimeConfig";
 import { parseRenderPlanFile } from "../schemas";
 
 type CliOptions = {
   dir?: string;
   episode?: string;
   help: boolean;
-  provider: VoiceoverProvider;
+  provider?: VoiceoverProvider;
   voice?: string;
 };
 
@@ -25,6 +27,11 @@ const main = async (): Promise<void> => {
   const episodeDir = resolveEpisodeDir(options);
   const renderPlanPath = path.join(episodeDir, "render-plan.json");
   const renderPlan = parseRenderPlanFile(renderPlanPath);
+  const runtimeConfig = loadRuntimeConfig();
+  const provider = resolveConfiguredVoiceoverProvider(
+    options.provider,
+    runtimeConfig.tts.provider,
+  );
   const outputPath = path.join(episodeDir, "audio", "voiceover.wav");
   const text = renderPlan.scenes.map((scene) => scene.narration).join("\n\n");
   const plannedDurationSeconds =
@@ -32,9 +39,9 @@ const main = async (): Promise<void> => {
   const result = await generateVoiceover({
     durationSeconds: plannedDurationSeconds,
     outputPath,
-    provider: options.provider,
+    provider,
     text,
-    voice: options.voice,
+    voice: options.voice ?? runtimeConfig.tts.voice,
   });
   const updatedRenderPlan = {
     ...renderPlan,
@@ -57,7 +64,6 @@ const main = async (): Promise<void> => {
 const parseArgs = (argv: string[]): CliOptions => {
   const options: CliOptions = {
     help: false,
-    provider: "silent",
   };
 
   for (let index = 0; index < argv.length; index += 1) {

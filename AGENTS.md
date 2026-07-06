@@ -89,6 +89,7 @@ Use npm unless the user explicitly changes package managers.
 make bootstrap          # npm install
 make batch-sample       # preview sample validate + QA batch workflow
 make check              # typecheck + lint + unit tests + npm audit
+make config-check       # print LLM/TTS runtime config without secrets
 make captions-sample    # regenerate sample captions from render-plan scenes
 make new-sample         # create a sample-draft episode skeleton
 make qa-sample          # generate sample QA report from existing output
@@ -108,6 +109,7 @@ Direct npm commands:
 ```bash
 npm install
 npm run dev
+npm run config:check
 npm run typecheck
 npm run lint
 npm run episode:batch -- --episodes sample --steps validate,qa --dry-run
@@ -160,6 +162,7 @@ Do not regenerate unrelated episode files during revisions.
 
 - Never hardcode secrets.
 - Use `.env` for provider keys and commit only placeholder templates.
+- Prefer `AI_REMOTION_*` runtime env keys for video pipeline providers.
 - Do not scrape or embed unlicensed media.
 - Do not clone a real person's voice without explicit rights.
 - Do not auto-publish videos.

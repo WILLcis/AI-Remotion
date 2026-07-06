@@ -43,6 +43,7 @@ episodes/sample/out/final.mp4
 Checks and rendering:
 
 ```bash
+npm run config:check
 npm run typecheck
 npm run lint
 npm run validate:sample
@@ -67,6 +68,26 @@ npm run episode:voice -- --episode sample --provider macos-say
 ```
 
 These commands rewrite episode artifacts. `episode:batch -- --dry-run` previews a multi-episode workflow without changing files. `episode:new` creates a new episode folder with a schema-valid `brief.yaml`. `episode:voice` writes `episodes/<id>/audio/voiceover.wav` and updates render-plan audio metadata. `episode:render` writes `episodes/<id>/out/final.mp4` by default. `episode:qa` uses `ffprobe` when available and falls back to file-size checks when it is not installed. `episode:qa -- --render-frames` writes QA stills under `episodes/<id>/out/qa-frames/`.
+
+## LLM And TTS Config
+
+Provider configuration is optional. With no local env configured, AI-Remotion uses deterministic script generation and silent TTS so the pipeline stays local and reproducible.
+
+```bash
+cp config/.env.dev.example .env.local
+AI_REMOTION_ENV_FILE=.env.local npm run config:check
+```
+
+The runtime keys are namespaced with `AI_REMOTION_`:
+
+```text
+AI_REMOTION_LLM_PROVIDER=deterministic
+AI_REMOTION_LLM_PROVIDER=openai-compatible
+AI_REMOTION_TTS_PROVIDER=silent
+AI_REMOTION_TTS_PROVIDER=macos-say
+```
+
+External LLM/TTS providers are configuration-ready but not called by default. `openai-compatible` currently falls back to deterministic generation unless `AI_REMOTION_LLM_FALLBACK_TO_DETERMINISTIC=false`, in which case the CLI fails clearly until the adapter is implemented. External TTS providers such as `edge-tts`, `doubao`, `azure`, and `elevenlabs` are recognized as pending and will not run silently.
 
 ## New Episode Flow
 

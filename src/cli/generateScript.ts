@@ -1,6 +1,8 @@
 import { writeFileSync } from "node:fs";
 import path from "node:path";
+import { resolveScriptGenerationMode } from "../agent/providers/llm";
 import { generateScriptFromBrief } from "../agent/workflows";
+import { loadRuntimeConfig } from "../config/runtimeConfig";
 import { parseBriefFile } from "../schemas";
 
 type CliOptions = {
@@ -18,12 +20,14 @@ const main = (): void => {
   }
 
   const episodeDir = resolveEpisodeDir(options);
+  const scriptMode = resolveScriptGenerationMode(loadRuntimeConfig().llm);
   const brief = parseBriefFile(path.join(episodeDir, "brief.yaml"));
   const scriptPath = path.join(episodeDir, "script.md");
 
   writeFileSync(scriptPath, `${generateScriptFromBrief(brief)}\n`);
 
   console.log(`Generated script: ${path.relative(process.cwd(), scriptPath)}`);
+  console.log(`- llm: ${scriptMode.provider} (${scriptMode.reason})`);
 };
 
 const parseArgs = (argv: string[]): CliOptions => {

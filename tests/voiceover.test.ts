@@ -3,6 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { generateVoiceover } from "../src/audio/voiceover";
+import { resolveConfiguredVoiceoverProvider } from "../src/audio/voiceoverConfig";
 import { readWavDurationSeconds } from "../src/audio/wav";
 
 describe("voiceover providers", () => {
@@ -24,5 +25,15 @@ describe("voiceover providers", () => {
     } finally {
       rmSync(tempDir, { force: true, recursive: true });
     }
+  });
+
+  it("uses configured implemented providers and rejects pending external providers", () => {
+    expect(resolveConfiguredVoiceoverProvider(undefined, "silent")).toBe("silent");
+    expect(resolveConfiguredVoiceoverProvider("macos-say", "silent")).toBe(
+      "macos-say",
+    );
+    expect(() => resolveConfiguredVoiceoverProvider(undefined, "doubao")).toThrow(
+      /not implemented yet/,
+    );
   });
 });
