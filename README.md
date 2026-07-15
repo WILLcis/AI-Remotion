@@ -24,6 +24,8 @@ The canonical public demo lives in `episodes/sample`:
 
 See `docs/decisions/ADR-001-cli-first-local-rendering-canonical-demo.md` for the decision record.
 
+For a Chinese step-by-step operator guide, see `docs/USER_MANUAL.md`.
+
 ## Requirements
 
 - Node.js 20+
