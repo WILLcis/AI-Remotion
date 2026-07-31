@@ -32,6 +32,7 @@ export const FLAGS = {
   LONGCAT_AVATAR: 'longcat_avatar',
   HEYGEN_AVATAR: 'heygen_avatar',
   HEYGEN_HYPERFRAMES: 'heygen_hyperframes',
+  VIDEO_AGENT_PLATFORM: 'video_agent_platform',
 } as const;
 
 export type FlagKey = (typeof FLAGS)[keyof typeof FLAGS];
@@ -51,6 +52,7 @@ const FLAG_DEFAULTS: Record<FlagKey, boolean> = {
   [FLAGS.LONGCAT_AVATAR]: false,
   [FLAGS.HEYGEN_AVATAR]: false,
   [FLAGS.HEYGEN_HYPERFRAMES]: false,
+  [FLAGS.VIDEO_AGENT_PLATFORM]: false,
 };
 
 // ============================================================================
