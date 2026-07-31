@@ -1,8 +1,10 @@
 import { execFile } from "node:child_process";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import { promisify } from "node:util";
 import { generateQaReport, writeQaReport } from "../qa/report";
+import { getQaFrameTargets } from "../qa/frameTargets";
+import { stageAvatarClipsForRender } from "../render/episodeRender";
 import { parseRenderPlanFile } from "../schemas";
 
 const execFileAsync = promisify(execFile);
@@ -41,30 +43,34 @@ const renderQaFrames = async (episodeDir: string): Promise<void> => {
   const renderPlanPath = path.join(episodeDir, "render-plan.json");
   const renderPlan = parseRenderPlanFile(renderPlanPath);
   const frameDir = path.join(episodeDir, "out", "qa-frames");
-  const frames = [
-    { frame: 0, name: "first.png" },
-    {
-      frame: Math.floor(renderPlan.video.duration_frames / 2),
-      name: "middle.png",
-    },
-    {
-      frame: Math.max(0, renderPlan.video.duration_frames - 1),
-      name: "final.png",
-    },
-  ];
+  const frames = getQaFrameTargets({
+    durationFrames: renderPlan.video.duration_frames,
+    scenes: renderPlan.scenes,
+  });
+  const stagedAvatarPaths = stageAvatarClipsForRender({
+    clips: renderPlan.avatar?.clips ?? [],
+    episodeDir,
+    episodeId: renderPlan.episode_id,
+  });
 
   mkdirSync(frameDir, { recursive: true });
 
-  for (const frame of frames) {
-    await execFileAsync("npx", [
-      "remotion",
-      "still",
-      "src/remotion/index.ts",
-      "ExplainerVideo",
-      path.join(frameDir, frame.name),
-      `--props=${renderPlanPath}`,
-      `--frame=${frame.frame}`,
-    ]);
+  try {
+    for (const frame of frames) {
+      await execFileAsync("npx", [
+        "remotion",
+        "still",
+        "src/remotion/index.ts",
+        "ExplainerVideo",
+        path.join(frameDir, frame.name),
+        `--props=${renderPlanPath}`,
+        `--frame=${frame.frame}`,
+      ]);
+    }
+  } finally {
+    for (const stagedAvatarPath of stagedAvatarPaths) {
+      rmSync(stagedAvatarPath, { force: true });
+    }
   }
 };
 

@@ -80,6 +80,12 @@ export const generateQaReport = ({
     checkCaptions(episodeDir, artifacts.renderPlan.captions.items),
     checkVoiceover(episodeDir, artifacts.renderPlan.audio),
     checkAssets(episodeDir, artifacts.renderPlan.scenes),
+    checkAvatar({
+      episodeDir,
+      renderPlan: artifacts.renderPlan,
+      rights: artifacts.rights,
+      probe: mediaProbe,
+    }),
     checkManualVerification(episodeDir),
   ];
   const summary = summarizeChecks(checks);
@@ -92,10 +98,206 @@ export const generateQaReport = ({
       "Media probing depends on local ffprobe; when unavailable QA falls back to file-size checks.",
       "Frame blank detection uses rendered still file-size heuristics, not full pixel analysis.",
       "Caption overflow detection uses text-length heuristics; visual overlap still needs human review.",
+      "Talking-avatar QA cannot judge lip-sync, gesture quality, facial expression, full-body visibility, or cross-scene identity consistency; these require human sign-off.",
     ],
     outputFile,
     summary,
   };
+};
+
+const checkAvatar = ({
+  episodeDir,
+  probe,
+  renderPlan,
+  rights,
+}: {
+  episodeDir: string;
+  probe: MediaProbe;
+  renderPlan: RenderPlan;
+  rights: ReturnType<typeof loadEpisodeArtifacts>["rights"];
+}): QaCheck => {
+  const avatar = renderPlan.avatar;
+  if (!avatar?.enabled) {
+    return {
+      details: "No talking avatar is required by the render plan.",
+      id: "talking-avatar",
+      status: "pass",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  if (!rights) {
+    return {
+      details: "Talking avatar is enabled but rights.yaml is missing.",
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  if (
+    avatar.provider !== "seedance" &&
+    avatar.provider !== "latentsync" &&
+    avatar.provider !== "infinitetalk" &&
+    avatar.provider !== "longcat" &&
+    avatar.provider !== "heygen"
+  ) {
+    return {
+      details: `${avatar.clips.length} avatar clips exist with an explicit rights.yaml. Manually verify identity consistency and lip-sync.`,
+      id: "talking-avatar",
+      status: "warn",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  if (
+    avatar.provider === "seedance" &&
+    (!rights.cloud_processing ||
+      rights.cloud_processing.provider !== "volcengine-ark" ||
+      !rights.cloud_processing.data_processing_consent)
+  ) {
+    return {
+      details: "Seedance presenter requires explicit Volcengine Ark cloud processing consent.",
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+  if (
+    avatar.provider === "heygen" &&
+    (!rights.cloud_processing ||
+      rights.cloud_processing.provider !== "heygen" ||
+      !rights.cloud_processing.data_processing_consent)
+  ) {
+    return {
+      details: "HeyGen requires explicit HeyGen cloud processing consent.",
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  if (avatar.audio_policy !== "remotion_mux") {
+    return {
+      details: `${avatar.provider} clips must use remotion_mux so CosyVoice remains the only final audio track.`,
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  if (
+    (avatar.provider === "seedance" ||
+      avatar.provider === "infinitetalk" ||
+      avatar.provider === "longcat" ||
+      avatar.provider === "heygen") &&
+    (!avatar.manifest_path ||
+      !existsSync(path.join(episodeDir, avatar.manifest_path)))
+  ) {
+    return {
+      details: `${avatar.provider} requires an existing avatar manifest.`,
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  const missingClips = avatar.clips.filter(
+    (clip) => !existsSync(path.join(episodeDir, clip.path)),
+  );
+  if (missingClips.length > 0) {
+    return {
+      details: `Missing talking avatar clips: ${missingClips.map((clip) => clip.path).join(", ")}`,
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  if (
+    avatar.provider === "seedance" ||
+    avatar.provider === "infinitetalk" ||
+    avatar.provider === "longcat" ||
+    avatar.provider === "heygen"
+  ) {
+    const manifest = readAvatarManifest(
+      path.join(episodeDir, avatar.manifest_path!),
+    );
+    const missingManifestScenes = avatar.clips
+      .map((clip) => clip.scene_id)
+      .filter((sceneId) => !manifest.has(sceneId));
+    if (missingManifestScenes.length > 0) {
+      return {
+        details: `${avatar.provider} manifest is missing scenes: ${missingManifestScenes.join(", ")}`,
+        id: "talking-avatar",
+        status: "fail",
+        title: "Talking Avatar Assets And Consent",
+      };
+    }
+  }
+
+  const invalidClips = avatar.clips.flatMap((clip) => {
+    const result = probe(path.join(episodeDir, clip.path));
+    if (!result.ok) {
+      return result.unavailable ? [] : [`${clip.scene_id}: ${result.reason}`];
+    }
+    const scene = renderPlan.scenes.find((candidate) => candidate.id === clip.scene_id);
+    const durationTolerance = 1 / renderPlan.video.fps + 0.01;
+    const durationMatches =
+      !scene ||
+      result.durationSeconds === null ||
+      Math.abs(result.durationSeconds - scene.duration_seconds) <= durationTolerance;
+    const isVertical =
+      result.width === null ||
+      result.height === null ||
+      result.height > result.width;
+    const isSilent = result.hasAudio !== true;
+    return durationMatches && isVertical && isSilent
+      ? []
+      : [
+          `${clip.scene_id}: expected silent 9:16 clip within one frame of the scene duration`,
+        ];
+  });
+  if (invalidClips.length > 0) {
+    return {
+      details: invalidClips.join("\n"),
+      id: "talking-avatar",
+      status: "fail",
+      title: "Talking Avatar Assets And Consent",
+    };
+  }
+
+  return {
+    details:
+      avatar.provider === "seedance"
+        ? `${avatar.clips.length} Seedance clips and manifest records exist. Manually sign off on full-body visibility, gesture quality, facial expression, lip-sync, and identity consistency.`
+        : avatar.provider === "infinitetalk"
+          ? `${avatar.clips.length} InfiniteTalk clips and manifest records exist. Manually sign off on Chinese lip-sync, facial expression, light head motion, and identity consistency.`
+          : avatar.provider === "longcat"
+            ? `${avatar.clips.length} LongCat clips and manifest records exist. Manually sign off on Chinese lip-sync, motion continuity, identity consistency, and thermal stability at the configured GPU power limit.`
+            : avatar.provider === "heygen"
+              ? `${avatar.clips.length} HeyGen Image Avatar clips and manifest records exist. Manually sign off on lip-sync, facial expression, gesture quality, and identity consistency.`
+          : `${avatar.clips.length} LatentSync clips exist. Manually sign off on Chinese lip-sync and the expected static-source expression limitation.`,
+    id: "talking-avatar",
+    status: "warn",
+    title: "Talking Avatar Assets And Consent",
+  };
+};
+
+const readAvatarManifest = (manifestPath: string): Set<string> => {
+  try {
+    const parsed = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      clips?: Array<{ scene_id?: unknown }>;
+      scenes?: Array<{ scene_id?: unknown }>;
+    };
+    return new Set(
+      [...(parsed.clips ?? []), ...(parsed.scenes ?? [])]
+        .map((clip) => clip.scene_id)
+        .filter((sceneId): sceneId is string => typeof sceneId === "string"),
+    );
+  } catch {
+    return new Set();
+  }
 };
 
 export const writeQaReport = (report: QaReport): string => {

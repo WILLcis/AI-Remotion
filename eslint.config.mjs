@@ -6,7 +6,9 @@ export default [
     ignores: [
       "node_modules/**",
       "dist/**",
+      ".transcription-venv/**",
       "episodes/**/out/**",
+      "videos/**",
       ".agents/**",
       ".codex/**",
       "flags/**",

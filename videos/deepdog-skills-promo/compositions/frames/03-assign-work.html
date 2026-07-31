@@ -1,0 +1,323 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      color: #05070b;
+    }
+
+    [class~="03-assign-work-ground"] {
+      position: absolute;
+      inset: 0;
+      background: #f5f6f8;
+    }
+
+    [class~="03-assign-work-grid"] {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(5, 7, 11, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5, 7, 11, 0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.58), transparent 82%);
+    }
+
+    [class~="03-assign-work-kicker"] {
+      position: absolute;
+      top: 44px;
+      left: 80px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    [class~="03-assign-work-spike"] {
+      color: #19c785;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    [class~="03-assign-work-stage"] {
+      position: absolute;
+      top: 98px;
+      left: 510px;
+      width: 1330px;
+      height: 710px;
+      overflow: hidden;
+      border: 1px solid rgba(5, 7, 11, 0.2);
+      border-radius: 12px;
+      background: #dedbf2;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+    }
+
+    [class~="03-assign-work-stage"] img,
+    [class~="03-assign-work-task"] img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    [class~="03-assign-work-stage-chrome"],
+    [class~="03-assign-work-task-chrome"] {
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(5, 7, 11, 0.12);
+      background: rgba(245, 246, 248, 0.92);
+      color: rgba(5, 7, 11, 0.62);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    [class~="03-assign-work-task"] {
+      position: absolute;
+      z-index: 5;
+      left: 80px;
+      top: 510px;
+      width: 610px;
+      height: 330px;
+      overflow: hidden;
+      border: 1px solid rgba(5, 7, 11, 0.2);
+      border-radius: 12px;
+      background: #f5f6f8;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+      transform-origin: 18% 82%;
+    }
+
+    [class~="03-assign-work-focus"] {
+      position: absolute;
+      z-index: 4;
+      top: 252px;
+      right: 104px;
+      width: 230px;
+      height: 58px;
+      border: 1px solid #19c785;
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 1px rgba(245, 246, 248, 0.76);
+      opacity: 0;
+    }
+
+    [class~="03-assign-work-cursor"] {
+      position: absolute;
+      z-index: 12;
+      top: 348px;
+      left: 1420px;
+      width: 28px;
+      height: 36px;
+      filter: drop-shadow(0 2px 2px rgba(5, 7, 11, 0.2));
+    }
+
+    [class~="03-assign-work-cursor"]::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 28px solid #05070b;
+      border-right: 18px solid transparent;
+    }
+
+    [class~="03-assign-work-cursor"]::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 0;
+      height: 0;
+      border-top: 20px solid #f5f6f8;
+      border-right: 12px solid transparent;
+    }
+
+    [class~="03-assign-work-ripple"] {
+      position: absolute;
+      z-index: 11;
+      left: 1428px;
+      top: 360px;
+      width: 26px;
+      height: 26px;
+      border: 1px solid #19c785;
+      border-radius: 9999px;
+      opacity: 0;
+    }
+
+    [class~="03-assign-work-statuses"] {
+      position: absolute;
+      z-index: 9;
+      top: 190px;
+      right: 104px;
+      display: grid;
+      gap: 12px;
+      width: 256px;
+    }
+
+    [class~="03-assign-work-status"] {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 52px;
+      padding: 0 18px;
+      border: 1px solid rgba(5, 7, 11, 0.16);
+      border-radius: 8px;
+      background: rgba(245, 246, 248, 0.96);
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      opacity: 0;
+    }
+
+    [class~="03-assign-work-check"] {
+      display: grid;
+      width: 25px;
+      height: 25px;
+      place-items: center;
+      border-radius: 9999px;
+      background: #19c785;
+      color: #f5f6f8;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    [class~="03-assign-work-new-row"] {
+      position: absolute;
+      z-index: 8;
+      left: 720px;
+      top: 652px;
+      width: 920px;
+      height: 76px;
+      display: grid;
+      grid-template-columns: 58px 1fr 170px;
+      align-items: center;
+      padding: 0 22px;
+      border: 1px solid rgba(5, 7, 11, 0.18);
+      border-left: 4px solid #19c785;
+      border-radius: 8px;
+      background: #f5f6f8;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08);
+      opacity: 0;
+    }
+
+    [class~="03-assign-work-new-mark"] {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1;
+      color: rgba(5, 7, 11, 0.56);
+    }
+
+    [class~="03-assign-work-new-title"] {
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.005em;
+    }
+
+    [class~="03-assign-work-new-state"] {
+      justify-self: end;
+      padding: 10px 14px;
+      border: 1px solid rgba(5, 7, 11, 0.14);
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div id="root" data-composition-id="03-assign-work" data-width="1920" data-height="1080" data-duration="7.7">
+    <div class="clip 03-assign-work-ground" data-start="0" data-duration="7.7" data-track-index="0"></div>
+    <div class="clip 03-assign-work-grid" data-start="0" data-duration="7.7" data-track-index="1"></div>
+
+    <div class="clip 03-assign-work-kicker" data-start="0" data-duration="7.7" data-track-index="2">
+      <span class="03-assign-work-spike">✱</span>
+      <span>Assign work</span>
+    </div>
+
+    <div id="03-assign-work-stage" class="clip 03-assign-work-stage" data-start="0" data-duration="7.7" data-track-index="3">
+      <div class="03-assign-work-stage-chrome">Issues / active</div>
+      <img src="assets/issues-board.png" alt="" />
+      <div id="03-assign-work-focus" class="03-assign-work-focus"></div>
+    </div>
+
+    <div id="03-assign-work-task" class="clip 03-assign-work-task" data-start="0" data-duration="7.7" data-track-index="4">
+      <div class="03-assign-work-task-chrome">Create task</div>
+      <img src="assets/create-task.png" alt="" />
+    </div>
+
+    <div class="clip 03-assign-work-statuses" data-start="0" data-duration="7.7" data-track-index="5">
+      <div id="03-assign-work-status-1" class="03-assign-work-status"><span class="03-assign-work-check">✓</span><span>Claim</span></div>
+      <div id="03-assign-work-status-2" class="03-assign-work-status"><span class="03-assign-work-check">✓</span><span>Execute</span></div>
+      <div id="03-assign-work-status-3" class="03-assign-work-status"><span class="03-assign-work-check">✓</span><span>Comment</span></div>
+    </div>
+
+    <div id="03-assign-work-new-row" class="clip 03-assign-work-new-row" data-start="0" data-duration="7.7" data-track-index="6">
+      <span class="03-assign-work-new-mark">NEW</span>
+      <span class="03-assign-work-new-title">Agent-created issue</span>
+      <span class="03-assign-work-new-state">Ready</span>
+    </div>
+
+    <div id="03-assign-work-ripple" class="clip 03-assign-work-ripple" data-start="0" data-duration="7.7" data-track-index="7"></div>
+    <div id="03-assign-work-cursor" class="clip 03-assign-work-cursor" data-start="0" data-duration="7.7" data-track-index="8"></div>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+      var stage = document.getElementById("03-assign-work-stage");
+      var task = document.getElementById("03-assign-work-task");
+      var cursor = document.getElementById("03-assign-work-cursor");
+      var focus = document.getElementById("03-assign-work-focus");
+      var ripple = document.getElementById("03-assign-work-ripple");
+      var status1 = document.getElementById("03-assign-work-status-1");
+      var status2 = document.getElementById("03-assign-work-status-2");
+      var status3 = document.getElementById("03-assign-work-status-3");
+      var statuses = document.querySelector('[class~="03-assign-work-statuses"]');
+      var newRow = document.getElementById("03-assign-work-new-row");
+
+      tl.fromTo(stage, { x: 1480 }, { x: 0, duration: 0.5, ease: "power4.out" }, 0);
+      tl.fromTo(task, { x: -700 }, { x: 0, duration: 0.48, ease: "power4.out" }, 0.12);
+      tl.fromTo(cursor, { x: 250, y: -100 }, { x: 0, y: 0, duration: 0.78, ease: "power3.inOut" }, 0.72);
+      tl.set(focus, { opacity: 1 }, 1.42);
+      tl.fromTo(focus, { scale: 0.92 }, { scale: 1, duration: 0.28, ease: "power3.out" }, 1.42);
+
+      tl.fromTo(ripple, { opacity: 0.8, scale: 0.25 }, { opacity: 0, scale: 2.6, duration: 0.42, ease: "power2.out" }, 2.18);
+      tl.fromTo(task, { x: 0, y: 0, scale: 1 }, { x: 210, y: -300, scale: 1.46, duration: 0.68, ease: "power3.inOut" }, 2.22);
+      tl.fromTo(cursor, { x: 0, y: 0 }, { x: -170, y: 145, duration: 0.56, ease: "power3.inOut" }, 2.34);
+
+      tl.set(status1, { opacity: 1 }, 3.02);
+      tl.fromTo(status1, { y: 42 }, { y: 0, duration: 0.17, ease: "power4.out" }, 3.02);
+      tl.set(status2, { opacity: 1 }, 3.58);
+      tl.fromTo(status2, { y: 46 }, { y: 0, duration: 0.15, ease: "power4.out" }, 3.58);
+      tl.set(status3, { opacity: 1 }, 4.16);
+      tl.fromTo(status3, { y: 40 }, { y: 0, duration: 0.13, ease: "power4.out" }, 4.16);
+
+      tl.set(task, { opacity: 0 }, 5);
+      tl.set(statuses, { opacity: 0 }, 5);
+      tl.set(focus, { opacity: 0 }, 5);
+      tl.fromTo(stage, { scale: 0.985 }, { scale: 1, duration: 0.26, ease: "power3.out" }, 5);
+      tl.set(newRow, { opacity: 1, y: 78 }, 5.18);
+      tl.to(newRow, { y: 0, duration: 0.19, ease: "power4.out" }, 5.18);
+      tl.fromTo(cursor, { x: -170, y: 145 }, { x: 50, y: 310, duration: 0.52, ease: "power3.inOut" }, 5.28);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-assign-work"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,68 @@
+1
+00:00:00,000 --> 00:00:09,000
+AI-Remotion:
+Transform product
+introductions into
+reviewable and
+renderable video
+scripts with graphics.
+Start with a sentence
+that captures the key
+point.
+
+2
+00:00:09,000 --> 00:00:16,933
+This episode focuses
+on: AI-Remotion:
+Transform product
+introductions into
+reviewable and
+renderable video
+scripts with graphics.
+
+3
+00:00:16,933 --> 00:00:21,200
+Use screenshots,
+ concept cards,
+or flowcharts to give
+the audience a visual
+anchor.
+
+4
+00:00:21,200 --> 00:00:25,833
+Break down complex
+content into three to
+four easy-to-follow
+steps.
+
+5
+00:00:25,833 --> 00:00:31,100
+Compare manual
+production and
+structured production,
+emphasizing why
+templating is
+worthwhile.
+
+6
+00:00:31,100 --> 00:00:35,333
+Connect brief, script,
+ storyboard,
+and render-plan into
+a single pipeline.
+
+7
+00:00:35,333 --> 00:00:39,467
+First make the
+content reviewable,
+then make the visuals
+renderable.
+
+8
+00:00:39,467 --> 00:00:45,167
+Finally,
+ output a reusable,
+ checkable,
+and renderable video
+script with graphics
+for this episode.

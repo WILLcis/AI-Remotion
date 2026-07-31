@@ -9,6 +9,8 @@ export const llmProviderSchema = z.enum([
 export const ttsProviderSchema = z.enum([
   "silent",
   "macos-say",
+  "cosyvoice",
+  "cosyvoice-clone",
   "edge-tts",
   "doubao",
   "azure",
@@ -39,7 +41,40 @@ export type TtsRuntimeConfig = {
   voice?: string;
 };
 
+export const avatarProviderSchema = z.enum([
+  "none",
+  "musetalk",
+  "seedance",
+  "latentsync",
+  "infinitetalk",
+  "longcat",
+  "heygen",
+]);
+
+export type AvatarProvider = z.infer<typeof avatarProviderSchema>;
+
+export type AvatarRuntimeConfig = {
+  arkApiKey?: string;
+  arkBaseUrl: string;
+  arkModel?: string;
+  baseUrl?: string;
+  heygenApiKey?: string;
+  heygenBaseUrl: string;
+  heygenPollIntervalMs: number;
+  provider: AvatarProvider;
+  requestTimeoutMs: number;
+  seedanceAvatarAssetId?: string;
+  tosAccessKeyId?: string;
+  tosAccessKeySecret?: string;
+  tosBucket?: string;
+  tosEndpoint?: string;
+  tosPrefix: string;
+  tosRegion?: string;
+  tosSessionToken?: string;
+};
+
 export type RuntimeConfig = {
+  avatar: AvatarRuntimeConfig;
   llm: LlmRuntimeConfig;
   tts: TtsRuntimeConfig;
 };
@@ -49,7 +84,13 @@ export type RuntimeConfigIssue = {
     | "LLM_API_KEY_MISSING"
     | "LLM_BASE_URL_MISSING"
     | "LLM_MODEL_MISSING"
-    | "TTS_PROVIDER_PENDING";
+    | "TTS_BASE_URL_MISSING"
+    | "TTS_PROVIDER_PENDING"
+    | "AVATAR_BASE_URL_MISSING"
+    | "AVATAR_ARK_API_KEY_MISSING"
+    | "AVATAR_ARK_MODEL_MISSING"
+    | "AVATAR_HEYGEN_API_KEY_MISSING"
+    | "AVATAR_TOS_CONFIG_MISSING";
   message: string;
   severity: "info" | "warn" | "error";
 };
@@ -67,6 +108,40 @@ export const loadRuntimeConfig = ({
   };
 
   return {
+    avatar: {
+      arkApiKey: emptyToUndefined(mergedEnv.AI_REMOTION_ARK_API_KEY),
+      arkBaseUrl:
+        emptyToUndefined(mergedEnv.AI_REMOTION_ARK_BASE_URL) ??
+        "https://ark.cn-beijing.volces.com/api/v3",
+      arkModel: emptyToUndefined(mergedEnv.AI_REMOTION_ARK_MODEL),
+      baseUrl: emptyToUndefined(mergedEnv.AI_REMOTION_AVATAR_BASE_URL),
+      heygenApiKey: emptyToUndefined(mergedEnv.HEYGEN_API_KEY),
+      heygenBaseUrl:
+        emptyToUndefined(mergedEnv.AI_REMOTION_HEYGEN_BASE_URL) ??
+        "https://api.heygen.com",
+      heygenPollIntervalMs: parsePositiveInteger(
+        mergedEnv.AI_REMOTION_HEYGEN_POLL_INTERVAL_MS,
+        5_000,
+      ),
+      provider: parseAvatarProvider(mergedEnv.AI_REMOTION_AVATAR_PROVIDER),
+      requestTimeoutMs: parsePositiveInteger(
+        mergedEnv.AI_REMOTION_AVATAR_TIMEOUT_MS,
+        300_000,
+      ),
+      seedanceAvatarAssetId: emptyToUndefined(
+        mergedEnv.AI_REMOTION_SEEDANCE_AVATAR_ASSET_ID,
+      ),
+      tosAccessKeyId: emptyToUndefined(mergedEnv.AI_REMOTION_TOS_ACCESS_KEY_ID),
+      tosAccessKeySecret: emptyToUndefined(
+        mergedEnv.AI_REMOTION_TOS_ACCESS_KEY_SECRET,
+      ),
+      tosBucket: emptyToUndefined(mergedEnv.AI_REMOTION_TOS_BUCKET),
+      tosEndpoint: emptyToUndefined(mergedEnv.AI_REMOTION_TOS_ENDPOINT),
+      tosPrefix:
+        emptyToUndefined(mergedEnv.AI_REMOTION_TOS_PREFIX) ?? "ai-remotion",
+      tosRegion: emptyToUndefined(mergedEnv.AI_REMOTION_TOS_REGION),
+      tosSessionToken: emptyToUndefined(mergedEnv.AI_REMOTION_TOS_SESSION_TOKEN),
+    },
     llm: {
       apiKey: emptyToUndefined(mergedEnv.AI_REMOTION_LLM_API_KEY),
       baseUrl: emptyToUndefined(mergedEnv.AI_REMOTION_LLM_BASE_URL),
@@ -114,6 +189,13 @@ export const getConfigSummary = (config: RuntimeConfig): string => {
     `TTS voice: ${config.tts.voice ?? "not configured"}`,
     `TTS API key: ${config.tts.apiKey ? "configured" : "not configured"}`,
     `TTS implementation: ${isImplementedTtsProvider(config.tts.provider) ? "ready" : "pending"}`,
+    `Avatar provider: ${config.avatar.provider}`,
+    `Avatar base URL: ${config.avatar.baseUrl ?? "not configured"}`,
+    `Ark API key: ${config.avatar.arkApiKey ? "configured" : "not configured"}`,
+    `Ark model: ${config.avatar.arkModel ?? "not configured"}`,
+    `HeyGen API key: ${config.avatar.heygenApiKey ? "configured" : "not configured"}`,
+    `HeyGen base URL: ${config.avatar.heygenBaseUrl}`,
+    `TOS bucket: ${config.avatar.tosBucket ?? "not configured"}`,
   ].join("\n");
 };
 
@@ -159,6 +241,75 @@ export const getRuntimeConfigIssues = (
     });
   }
 
+  if (
+    (config.tts.provider === "cosyvoice" ||
+      config.tts.provider === "cosyvoice-clone") &&
+    !config.tts.baseUrl
+  ) {
+    issues.push({
+      code: "TTS_BASE_URL_MISSING",
+      message:
+        "AI_REMOTION_TTS_BASE_URL is required before using a CosyVoice provider.",
+      severity: "warn",
+    });
+  }
+
+  if (
+    (config.avatar.provider === "musetalk" ||
+      config.avatar.provider === "latentsync" ||
+      config.avatar.provider === "infinitetalk" ||
+      config.avatar.provider === "longcat") &&
+    !config.avatar.baseUrl
+  ) {
+    issues.push({
+      code: "AVATAR_BASE_URL_MISSING",
+      message:
+        `AI_REMOTION_AVATAR_BASE_URL is required before using the ${config.avatar.provider} provider.`,
+      severity: "warn",
+    });
+  }
+
+  if (config.avatar.provider === "seedance") {
+    if (!config.avatar.arkApiKey) {
+      issues.push({
+        code: "AVATAR_ARK_API_KEY_MISSING",
+        message: "AI_REMOTION_ARK_API_KEY is required for Seedance.",
+        severity: "warn",
+      });
+    }
+
+    if (!config.avatar.arkModel) {
+      issues.push({
+        code: "AVATAR_ARK_MODEL_MISSING",
+        message: "AI_REMOTION_ARK_MODEL is required for Seedance.",
+        severity: "warn",
+      });
+    }
+
+    if (
+      !config.avatar.tosAccessKeyId ||
+      !config.avatar.tosAccessKeySecret ||
+      !config.avatar.tosBucket ||
+      !config.avatar.tosEndpoint ||
+      !config.avatar.tosRegion
+    ) {
+      issues.push({
+        code: "AVATAR_TOS_CONFIG_MISSING",
+        message:
+          "AI_REMOTION_TOS_ACCESS_KEY_ID, AI_REMOTION_TOS_ACCESS_KEY_SECRET, AI_REMOTION_TOS_BUCKET, AI_REMOTION_TOS_ENDPOINT, and AI_REMOTION_TOS_REGION are required for Seedance.",
+        severity: "warn",
+      });
+    }
+  }
+
+  if (config.avatar.provider === "heygen" && !config.avatar.heygenApiKey) {
+    issues.push({
+      code: "AVATAR_HEYGEN_API_KEY_MISSING",
+      message: "HEYGEN_API_KEY is required for HeyGen.",
+      severity: "warn",
+    });
+  }
+
   return issues;
 };
 
@@ -186,7 +337,12 @@ export const parseEnvText = (source: string): RuntimeEnv => {
 };
 
 export const isImplementedTtsProvider = (provider: TtsProvider): boolean => {
-  return provider === "silent" || provider === "macos-say";
+  return (
+    provider === "silent" ||
+    provider === "macos-say" ||
+    provider === "cosyvoice" ||
+    provider === "cosyvoice-clone"
+  );
 };
 
 const loadEnvFile = (envFile: string | undefined): RuntimeEnv => {
@@ -207,6 +363,10 @@ const parseLlmProvider = (value: string | undefined): LlmProvider => {
 
 const parseTtsProvider = (value: string | undefined): TtsProvider => {
   return ttsProviderSchema.parse(emptyToUndefined(value) ?? "silent");
+};
+
+const parseAvatarProvider = (value: string | undefined): AvatarProvider => {
+  return avatarProviderSchema.parse(emptyToUndefined(value) ?? "none");
 };
 
 const parseBoolean = (value: string | undefined, defaultValue: boolean): boolean => {

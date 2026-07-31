@@ -9,6 +9,8 @@ import {
   getEpisodeRenderCommand,
   resolveEpisodeOutputPath,
 } from "../src/render/episodeRender";
+import { getEpisodeVoiceoverStaticPath } from "../src/remotion/episodeAudio";
+import { getEpisodeAssetStaticPath } from "../src/remotion/episodeAssets";
 import { briefSchema, type RenderPlan } from "../src/schemas";
 
 describe("episode lifecycle", () => {
@@ -85,6 +87,7 @@ describe("episode lifecycle", () => {
       "ExplainerVideo",
       path.join(episodeDir, "out", "final.mp4"),
       `--props=${path.join(episodeDir, "render-plan.json")}`,
+      "--timeout=120000",
     ]);
   });
 
@@ -113,5 +116,23 @@ describe("episode lifecycle", () => {
         scenes: renderPlan.scenes,
       }),
     ).toEqual(["assets/missing.png"]);
+  });
+
+  it("maps episode voiceover paths into the staged Remotion public directory", () => {
+    expect(
+      getEpisodeVoiceoverStaticPath({
+        episodeId: "product-demo",
+        voiceoverPath: "audio/voiceover.wav",
+      }),
+    ).toBe("__ai-remotion/product-demo/audio/voiceover.wav");
+  });
+
+  it("maps avatar clip paths into the staged Remotion public directory", () => {
+    expect(
+      getEpisodeAssetStaticPath({
+        assetPath: "assets/avatar/scene-01.mp4",
+        episodeId: "product-demo",
+      }),
+    ).toBe("__ai-remotion/product-demo/assets/avatar/scene-01.mp4");
   });
 });

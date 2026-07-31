@@ -1,10 +1,11 @@
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   loadEpisodeArtifacts,
   parseBriefFile,
+  parseRightsFile,
   validateEpisodeArtifacts,
 } from "../src/schemas/episodeArtifacts";
 
@@ -61,6 +62,71 @@ describe("episode artifact validation", () => {
 
     try {
       expect(() => parseBriefFile(invalidBrief)).toThrow(/topic/);
+    } finally {
+      rmSync(tempDir, { force: true, recursive: true });
+    }
+  });
+
+  it("accepts only explicit self-consent in rights files", () => {
+    const tempDir = mkdtempSync(path.join(tmpdir(), "ai-remotion-rights-"));
+    const rightsPath = path.join(tempDir, "rights.yaml");
+
+    try {
+      writeFileSync(
+        rightsPath,
+        [
+          "voice:",
+          "  subject: self",
+          "  consent_confirmed: true",
+          "  permitted_use: product_explainer",
+          "  reference_audio: audio/reference.wav",
+          "  reference_transcript: exact transcript",
+          "portrait:",
+          "  subject: self",
+          "  consent_confirmed: true",
+          "  permitted_use: product_explainer",
+          "  source: assets/avatar.jpg",
+        ].join("\n"),
+      );
+
+      expect(parseRightsFile(rightsPath).voice.subject).toBe("self");
+      writeFileSync(rightsPath, readFileSync(rightsPath, "utf8").replace("true", "false"));
+      expect(() => parseRightsFile(rightsPath)).toThrow(/true/);
+    } finally {
+      rmSync(tempDir, { force: true, recursive: true });
+    }
+  });
+
+  it("accepts explicit Ark cloud processing consent for a full-body presenter", () => {
+    const tempDir = mkdtempSync(path.join(tmpdir(), "ai-remotion-cloud-rights-"));
+    const rightsPath = path.join(tempDir, "rights.yaml");
+
+    try {
+      writeFileSync(
+        rightsPath,
+        [
+          "voice:",
+          "  subject: self",
+          "  consent_confirmed: true",
+          "  permitted_use: product_explainer",
+          "  reference_audio: audio/reference.wav",
+          "  reference_transcript: exact transcript",
+          "portrait:",
+          "  subject: self",
+          "  consent_confirmed: true",
+          "  permitted_use: product_explainer",
+          "  source: assets/avatar.jpg",
+          "cloud_processing:",
+          "  provider: volcengine-ark",
+          "  data_processing_consent: true",
+          "  likeness_scope: full_body",
+          "  tos_region: cn-beijing",
+        ].join("\n"),
+      );
+
+      expect(parseRightsFile(rightsPath).cloud_processing?.likeness_scope).toBe(
+        "full_body",
+      );
     } finally {
       rmSync(tempDir, { force: true, recursive: true });
     }

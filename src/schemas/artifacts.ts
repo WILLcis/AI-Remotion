@@ -6,7 +6,7 @@ const positiveInt = z.number().int().positive();
 const positiveNumber = z.number().positive();
 
 export const aspectRatioSchema = z.enum(["9:16", "16:9"]);
-export const languageSchema = z.enum(["zh", "en"]);
+export const languageSchema = z.enum(["zh", "en", "ja", "ko", "yue"]);
 
 export const sceneTypeSchema = z.enum([
   "title",
@@ -17,7 +17,49 @@ export const sceneTypeSchema = z.enum([
   "comparison",
   "quote",
   "cta",
+  "talking_avatar",
 ]);
+
+export const rightsSchema = z
+  .object({
+    voice: z
+      .object({
+        consent_confirmed: z.literal(true),
+        permitted_use: nonEmptyString,
+        reference_audio: nonEmptyString,
+        reference_transcript: nonEmptyString,
+        subject: z.literal("self"),
+      })
+      .strict(),
+    portrait: z
+      .object({
+        consent_confirmed: z.literal(true),
+        permitted_use: nonEmptyString,
+        source: nonEmptyString,
+        subject: z.literal("self"),
+      })
+      .strict(),
+    cloud_processing: z
+      .union([
+        z
+          .object({
+            data_processing_consent: z.literal(true),
+            likeness_scope: z.enum(["full_body", "head_only"]),
+            provider: z.literal("volcengine-ark"),
+            tos_region: nonEmptyString,
+          })
+          .strict(),
+        z
+          .object({
+            data_processing_consent: z.literal(true),
+            likeness_scope: z.enum(["full_body", "head_only"]),
+            provider: z.literal("heygen"),
+          })
+          .strict(),
+      ])
+      .optional(),
+  })
+  .strict();
 
 export const briefSchema = z
   .object({
@@ -157,9 +199,41 @@ export const renderPlanSchema = z
     audio: z
       .object({
         duration_seconds: positiveNumber.nullable(),
+        provider: nonEmptyString.optional(),
+        segments_path: nonEmptyString.optional(),
         voiceover_path: z.string().min(1).nullable(),
       })
       .strict(),
+    avatar: z
+      .object({
+        enabled: z.boolean(),
+        audio_policy: z.enum(["remotion_mux", "clip_embedded"]).optional(),
+        framing: z.enum(["full_body", "head_only"]).optional(),
+        layout: z.enum(["full", "pip"]).default("pip"),
+        manifest_path: nonEmptyString.optional(),
+        photo_path: nonEmptyString.optional(),
+        provider: z
+          .enum([
+            "musetalk",
+            "seedance",
+            "latentsync",
+            "infinitetalk",
+            "longcat",
+            "heygen",
+          ])
+          .optional(),
+        clips: z
+          .array(
+            z
+              .object({
+                path: nonEmptyString,
+                scene_id: nonEmptyString,
+              })
+              .strict(),
+          )
+          .default([]),
+      })
+      .optional(),
     captions: z
       .object({
         enabled: z.boolean(),
@@ -228,6 +302,7 @@ export const renderPlanSchema = z
   });
 
 export type Brief = z.infer<typeof briefSchema>;
+export type EpisodeRights = z.infer<typeof rightsSchema>;
 export type Storyboard = z.infer<typeof storyboardSchema>;
 export type StoryboardScene = z.infer<typeof storyboardSceneSchema>;
 export type RenderPlan = z.infer<typeof renderPlanSchema>;

@@ -1,0 +1,355 @@
+<template>
+  <section id="root" data-composition-id="08-hire-first-agent" data-width="1920" data-height="1080" data-duration="10.5">
+    <div
+      id="08-hire-first-agent-ground"
+      class="clip"
+      data-start="0"
+      data-duration="10.5"
+      data-track-index="0"
+    >
+      <div class="08-hire-first-agent-field"></div>
+      <div class="08-hire-first-agent-index">08 / action</div>
+    </div>
+
+    <div
+      id="08-hire-first-agent-shot"
+      class="clip"
+      data-start="0"
+      data-duration="10.5"
+      data-track-index="1"
+    >
+      <div id="08-hire-first-agent-assembly">
+        <span class="08-hire-first-agent-fragment" id="08-hire-first-agent-assign">ASSIGN</span>
+        <span class="08-hire-first-agent-fragment" id="08-hire-first-agent-observe">OBSERVE</span>
+        <span class="08-hire-first-agent-fragment" id="08-hire-first-agent-compound">COMPOUND</span>
+        <span class="08-hire-first-agent-fragment" id="08-hire-first-agent-control">CONTROL</span>
+      </div>
+
+      <div id="08-hire-first-agent-rule"></div>
+
+      <div id="08-hire-first-agent-lockup">
+        <div class="08-hire-first-agent-brand-row">
+          <span id="08-hire-first-agent-wordmark">deepdog</span>
+          <span id="08-hire-first-agent-spike" aria-hidden="true">✱</span>
+        </div>
+
+        <div id="08-hire-first-agent-cta" aria-label="Hire your first AI employee">
+          <span>Hire</span>
+          <span>your</span>
+          <span>first</span>
+          <span>AI</span>
+          <span>employee</span>
+        </div>
+
+        <div id="08-hire-first-agent-receipt">
+          <span>Open source</span>
+          <i aria-hidden="true"></i>
+          <span>Runs on your machines</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #05070b;
+      font-family: inherit;
+    }
+
+    [id="08-hire-first-agent-ground"],
+    [id="08-hire-first-agent-shot"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    [id="08-hire-first-agent-ground"] {
+      background: #f5f6f8;
+    }
+
+    [class~="08-hire-first-agent-field"] {
+      position: absolute;
+      left: 4.2cqw;
+      right: 4.2cqw;
+      top: 5.8cqh;
+      height: 76.8cqh;
+      border: 1px solid rgba(5, 7, 11, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+    }
+
+    [class~="08-hire-first-agent-index"] {
+      position: absolute;
+      top: 8.6cqh;
+      right: 6.2cqw;
+      font: inherit;
+      font-size: 1.35cqw;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.48;
+    }
+
+    [id="08-hire-first-agent-assembly"] {
+      position: absolute;
+      inset: 0;
+      perspective: 1200px;
+    }
+
+    [class~="08-hire-first-agent-fragment"] {
+      position: absolute;
+      top: 35.4cqh;
+      left: 50%;
+      width: 14cqw;
+      margin-left: -7cqw;
+      text-align: center;
+      font: inherit;
+      font-size: 1.55cqw;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      color: #05070b;
+    }
+
+    [id="08-hire-first-agent-rule"] {
+      position: absolute;
+      top: 38.4cqh;
+      left: 50%;
+      width: 64cqw;
+      height: 1px;
+      margin-left: -32cqw;
+      background: rgba(5, 7, 11, 0.28);
+      transform-origin: center;
+    }
+
+    [id="08-hire-first-agent-lockup"] {
+      position: absolute;
+      inset: 0;
+    }
+
+    [class~="08-hire-first-agent-brand-row"] {
+      position: absolute;
+      top: 20.5cqh;
+      left: 50%;
+      width: 72cqw;
+      margin-left: -36cqw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.4cqw;
+    }
+
+    [id="08-hire-first-agent-wordmark"] {
+      font: inherit;
+      font-size: 9.9cqw;
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.028em;
+      text-transform: lowercase;
+    }
+
+    [id="08-hire-first-agent-spike"] {
+      display: inline-block;
+      color: #19c785;
+      font: inherit;
+      font-size: 4.6cqw;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    [id="08-hire-first-agent-cta"] {
+      position: absolute;
+      top: 52.2cqh;
+      left: 50%;
+      width: 70cqw;
+      margin-left: -35cqw;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 0.62ch;
+      row-gap: 0.15em;
+      text-align: center;
+      font: inherit;
+      font-size: 4.6cqw;
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.018em;
+    }
+
+    [id="08-hire-first-agent-cta"] span {
+      display: inline-block;
+    }
+
+    [id="08-hire-first-agent-receipt"] {
+      position: absolute;
+      top: 74.8cqh;
+      left: 50%;
+      width: 64cqw;
+      margin-left: -32cqw;
+      padding-top: 2.2cqh;
+      border-top: 1px solid rgba(5, 7, 11, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.3cqw;
+      font: inherit;
+      font-size: 1.35cqw;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      opacity: 0.64;
+    }
+
+    [id="08-hire-first-agent-receipt"] i {
+      width: 4px;
+      height: 4px;
+      border-radius: 9999px;
+      background: currentColor;
+      opacity: 0.48;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const frameId = "08-hire-first-agent";
+      const get = (name) => document.getElementById(`${frameId}-${name}`);
+      const tl = gsap.timeline({ paused: true });
+      const fragments = [
+        {
+          target: get("assign"),
+          from: { x: -760, y: -190, scale: 1.48, rotation: -3 },
+        },
+        {
+          target: get("observe"),
+          from: { x: 750, y: -160, scale: 0.7, rotation: 2 },
+        },
+        {
+          target: get("compound"),
+          from: { x: -720, y: 225, scale: 0.76, rotation: 3 },
+        },
+        {
+          target: get("control"),
+          from: { x: 720, y: 205, scale: 1.42, rotation: -2 },
+        },
+      ];
+
+      fragments.forEach((fragment, index) => {
+        tl.fromTo(
+          fragment.target,
+          {
+            ...fragment.from,
+            opacity: 0.18,
+            filter: "blur(10px)",
+          },
+          {
+            x: (index - 1.5) * 215,
+            y: 0,
+            scale: 1,
+            rotation: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 1.42,
+            ease: "expo.out",
+          },
+          index * 0.14,
+        );
+      });
+
+      tl.fromTo(
+        get("rule"),
+        { scaleX: 0.02, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.42, ease: "power3.out" },
+        1.86,
+      );
+      tl.to(
+        document.querySelectorAll('[class~="08-hire-first-agent-fragment"]'),
+        {
+          x: 0,
+          y: 30,
+          scaleX: 0.02,
+          scaleY: 0.12,
+          opacity: 0,
+          filter: "blur(8px)",
+          duration: 0.34,
+          ease: "power4.in",
+          stagger: 0.025,
+        },
+        1.94,
+      );
+
+      tl.fromTo(
+        get("wordmark"),
+        { scale: 1.25, opacity: 0.15, filter: "blur(10px)" },
+        {
+          scale: 1,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.62,
+          ease: "expo.out",
+        },
+        2.4,
+      );
+      tl.to(
+        get("rule"),
+        { scaleX: 0.34, y: 250, opacity: 0.42, duration: 0.62, ease: "expo.out" },
+        2.4,
+      );
+      tl.fromTo(
+        get("spike"),
+        { scale: 0.92, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.44, ease: "power3.out" },
+        2.72,
+      );
+
+      tl.fromTo(
+        get("cta").querySelectorAll("span"),
+        { x: 230, opacity: 0.35 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.3,
+          ease: "power4.out",
+          stagger: 0.22,
+        },
+        3.18,
+      );
+
+      tl.fromTo(
+        get("receipt"),
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 0.64, duration: 0.72, ease: "power3.out" },
+        5.18,
+      );
+      tl.fromTo(
+        get("receipt").querySelector("i"),
+        { scale: 0.4, opacity: 0 },
+        { scale: 1, opacity: 0.48, duration: 0.42, ease: "power2.out" },
+        6.08,
+      );
+
+      tl.to(
+        get("shot"),
+        { opacity: 0, duration: 0.8, ease: "power2.inOut" },
+        9.7,
+      );
+      tl.to(
+        get("ground"),
+        { opacity: 0, duration: 0.8, ease: "power2.inOut" },
+        9.7,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[frameId] = tl;
+    })();
+  </script>
+</template>

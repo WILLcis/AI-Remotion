@@ -1,0 +1,264 @@
+<template>
+  <div id="root" data-composition-id="07-trust-by-design" data-width="1920" data-height="1080" data-duration="6.9">
+    <div
+      class="clip 07-trust-by-design-ground"
+      data-start="0"
+      data-duration="6.9"
+      data-track-index="0"
+    >
+      <div class="07-trust-by-design-paper-grid" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+
+      <header class="07-trust-by-design-kicker" id="07-trust-by-design-kicker">
+        <span class="07-trust-by-design-spike">✱</span>
+        <span>TRUST BY DESIGN</span>
+      </header>
+
+      <section class="07-trust-by-design-opening" id="07-trust-by-design-opening">
+        <h1 id="07-trust-by-design-open-source">Open source</h1>
+        <span class="07-trust-by-design-index">01 / OPEN SOURCE</span>
+      </section>
+
+      <section class="07-trust-by-design-environments" id="07-trust-by-design-environments">
+        <article class="07-trust-by-design-region" id="07-trust-by-design-machine">
+          <span class="07-trust-by-design-region-index">02 / LOCAL</span>
+          <h2>Your machine</h2>
+        </article>
+        <div class="07-trust-by-design-rule" id="07-trust-by-design-rule" aria-hidden="true"></div>
+        <article class="07-trust-by-design-region" id="07-trust-by-design-cloud">
+          <span class="07-trust-by-design-region-index">03 / PRIVATE CLOUD</span>
+          <h2>Your cloud</h2>
+        </article>
+      </section>
+
+      <section class="07-trust-by-design-final" id="07-trust-by-design-final">
+        <span class="07-trust-by-design-final-index">04 / CODE PATH</span>
+        <p>Never routed through<br><em>deepdog servers</em></p>
+      </section>
+    </div>
+  </div>
+
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #05070b;
+    }
+
+    [class~="07-trust-by-design-ground"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #f5f6f8;
+    }
+
+    [class~="07-trust-by-design-paper-grid"] {
+      position: absolute;
+      inset: 0 4.2cqw auto;
+      height: 83cqh;
+      border-left: 1px solid rgba(5, 7, 11, 0.08);
+      border-right: 1px solid rgba(5, 7, 11, 0.08);
+      pointer-events: none;
+    }
+
+    [class~="07-trust-by-design-paper-grid"] span {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(5, 7, 11, 0.055);
+    }
+
+    [class~="07-trust-by-design-paper-grid"] span:nth-child(1) { left: 20%; }
+    [class~="07-trust-by-design-paper-grid"] span:nth-child(2) { left: 40%; }
+    [class~="07-trust-by-design-paper-grid"] span:nth-child(3) { left: 60%; }
+    [class~="07-trust-by-design-paper-grid"] span:nth-child(4) { left: 80%; }
+
+    [class~="07-trust-by-design-kicker"] {
+      position: absolute;
+      top: 9.5cqh;
+      left: 4.2cqw;
+      display: flex;
+      align-items: center;
+      gap: 0.75cqw;
+      font-size: 1.46cqw;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      line-height: 1;
+    }
+
+    [class~="07-trust-by-design-spike"] {
+      color: #19c785;
+      font-size: 1.75cqw;
+      letter-spacing: 0;
+    }
+
+    [class~="07-trust-by-design-opening"] {
+      position: absolute;
+      top: 19cqh;
+      left: 4.2cqw;
+      right: 4.2cqw;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 3.2cqh;
+      border-bottom: 1px solid rgba(5, 7, 11, 0.12);
+    }
+
+    [class~="07-trust-by-design-opening"] h1 {
+      margin: 0;
+      font-size: 9.9cqw;
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.028em;
+    }
+
+    [class~="07-trust-by-design-index"],
+    [class~="07-trust-by-design-region-index"],
+    [class~="07-trust-by-design-final-index"] {
+      font-size: 1.35cqw;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    [class~="07-trust-by-design-environments"] {
+      position: absolute;
+      top: 50.5cqh;
+      left: 4.2cqw;
+      right: 4.2cqw;
+      height: 25cqh;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      column-gap: 3.4cqw;
+    }
+
+    [class~="07-trust-by-design-region"] {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      padding: 2.6cqh 2.1cqw;
+      border: 1px solid rgba(5, 7, 11, 0.12);
+      border-radius: 12px;
+      background: #dedbf2;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+    }
+
+    [class~="07-trust-by-design-region"] h2 {
+      margin: 0;
+      font-size: 4.6cqw;
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.018em;
+    }
+
+    [class~="07-trust-by-design-rule"] {
+      width: 1px;
+      height: 100%;
+      background: rgba(5, 7, 11, 0.2);
+      transform-origin: 50% 0%;
+    }
+
+    [class~="07-trust-by-design-final"] {
+      position: absolute;
+      top: 19cqh;
+      left: 4.2cqw;
+      right: 4.2cqw;
+      height: 55cqh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4.2cqh 4.2cqw;
+      box-sizing: border-box;
+      border: 1px solid rgba(5, 7, 11, 0.12);
+      border-radius: 12px;
+      background: #f5f6f8;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+    }
+
+    [class~="07-trust-by-design-final"] p {
+      margin: 0;
+      max-width: 78cqw;
+      font-size: 7.3cqw;
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.022em;
+    }
+
+    [class~="07-trust-by-design-final"] em {
+      font-style: italic;
+      font-weight: 400;
+    }
+  </style>
+
+  <script>
+    (() => {
+      const frame = document.querySelector('[data-composition-id="07-trust-by-design"]');
+      const pick = (selector) => frame.querySelector(selector);
+      const tl = gsap.timeline({ paused: true });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["07-trust-by-design"] = tl;
+
+      tl.fromTo(
+        pick('[id="07-trust-by-design-kicker"]'),
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.36, ease: "power2.out" },
+        0
+      );
+      tl.fromTo(
+        pick('[id="07-trust-by-design-open-source"]'),
+        { opacity: 0, y: 34, filter: "blur(12px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.72, ease: "power2.out" },
+        0.28
+      );
+      tl.fromTo(
+        pick('[class~="07-trust-by-design-index"]'),
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" },
+        1.12
+      );
+
+      tl.fromTo(
+        pick('[id="07-trust-by-design-machine"]'),
+        { opacity: 0, y: 26, filter: "blur(8px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.62, ease: "power2.out" },
+        1.8
+      );
+      tl.fromTo(
+        pick('[id="07-trust-by-design-rule"]'),
+        { opacity: 0, scaleY: 0 },
+        { opacity: 1, scaleY: 1, duration: 0.58, ease: "power2.inOut" },
+        2.55
+      );
+      tl.fromTo(
+        pick('[id="07-trust-by-design-cloud"]'),
+        { opacity: 0, y: 26, filter: "blur(8px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.62, ease: "power2.out" },
+        3.22
+      );
+
+      tl.to(
+        [
+          pick('[id="07-trust-by-design-opening"]'),
+          pick('[id="07-trust-by-design-environments"]')
+        ],
+        { opacity: 0.14, duration: 0.36, ease: "power1.out" },
+        4.48
+      );
+      tl.fromTo(
+        pick('[id="07-trust-by-design-final"]'),
+        { opacity: 0, y: 24, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.48, ease: "power2.out" },
+        4.6
+      );
+    })();
+  </script>
+</template>

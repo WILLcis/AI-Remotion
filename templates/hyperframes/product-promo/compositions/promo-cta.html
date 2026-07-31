@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; color: #f7f8fb; font-family: Inter, sans-serif; }
+        .fill { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #2e2757 0, rgba(46, 39, 87, 0) 38%), #05070d; }
+        .orb { position: absolute; left: 50%; top: 46%; width: 620px; height: 620px; transform: translate(-50%, -50%); border: 1px solid rgba(124, 92, 255, 0.42); border-radius: 50%; box-shadow: 0 0 120px rgba(124, 92, 255, 0.2); }
+        .orb::before, .orb::after { content: ""; position: absolute; border: 1px solid rgba(72, 219, 199, 0.3); border-radius: 50%; }
+        .orb::before { inset: 72px; }
+        .orb::after { inset: 160px; background: rgba(124, 92, 255, 0.1); box-shadow: 0 0 70px rgba(124, 92, 255, 0.34); }
+        .lockup { position: absolute; left: 0; right: 0; top: 305px; z-index: 2; text-align: center; }
+        .lockup small { color: #a9b2c3; font-family: monospace; font-size: 20px; letter-spacing: 0.2em; }
+        .lockup h2 { margin: 22px 0 0; font-size: 118px; line-height: 0.96; letter-spacing: -0.065em; }
+        .button { display: inline-block; margin-top: 42px; padding: 18px 30px; border-radius: 12px; background: #f7f8fb; color: #090c13; font-size: 22px; font-weight: 800; }
+      </style>
+      <div id="root" data-composition-id="promo-cta" data-width="1920" data-height="1080" data-duration="3.4">
+        <div class="fill"></div>
+        <div class="orb"></div>
+        <div class="lockup">
+          <small>LOCAL-FIRST · CREATOR-CONTROLLED</small>
+          <h2>AI-Remotion</h2>
+          <span class="button">Start your next episode</span>
+        </div>
+        <script>
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(".orb", { scale: 0.55, rotation: -40, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.78, ease: "power3.out" }, 0.05)
+            .fromTo(".lockup", { y: 55, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "power3.out" }, 0.28)
+            .fromTo(".button", { scale: 0.82 }, { scale: 1, duration: 0.38, ease: "back.out(1.8)" }, 0.82);
+          window.__timelines["promo-cta"] = tl;
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

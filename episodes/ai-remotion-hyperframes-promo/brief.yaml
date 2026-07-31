@@ -1,0 +1,17 @@
+topic: AI-Remotion 产品宣传片
+audience: 希望快速制作知识讲解和产品演示视频的创作者
+platform: square-social
+duration_seconds: 60
+aspect_ratio: "1:1"
+tone: 克制、鲜明、科技感
+voice: 首版以动效字幕介绍产品
+visual_style: 深色背景、颗粒渐变、夸张中文标题、原创演示界面
+source_notes:
+  - 参考视频仅提取方形构图、强文字层级、抽象渐变和卡片切换原则
+must_include:
+  - brief 到 QA 的完整工作流
+  - 本地 Remotion 渲染
+  - 演示界面标签
+must_avoid:
+  - 复用参考视频的品牌、文案、UI 或图像
+  - 将演示界面描述为已发布浏览器产品

@@ -304,7 +304,12 @@ const parseScriptSegments = (script: string): ScriptSegment[] => {
 };
 
 const extractField = (block: string, field: string): string => {
-  const match = block.match(new RegExp(`^${field}:\\s*(.+)$`, "im"));
+  const match = block.match(
+    new RegExp(
+      `^\\s*(?:[-*+]\\s*)?(?:\\*\\*)?${field}(?::\\*\\*|\\*\\*[:：]|[:：])\\s*(.+)$`,
+      "im",
+    ),
+  );
   return match?.[1]?.trim() ?? "";
 };
 
@@ -325,6 +330,7 @@ const animationForSceneType = (sceneType: SceneType): string => {
     key_point: "Key card fades in.",
     list: "Rows enter as a group.",
     quote: "Quote rule expands, text fades in.",
+    talking_avatar: "Avatar clip fades in with a gentle scale.",
     timeline: "Timeline steps enter from top to bottom.",
     title: "Title rises softly with signal line expansion.",
   };
@@ -397,6 +403,13 @@ const visualForScene = (
     case "cta":
       return {
         primary: "reviewable script -> deterministic render",
+        secondary: scene.visual_direction,
+      };
+
+    case "talking_avatar":
+      return {
+        eyebrow: "Talking avatar",
+        primary: scene.caption,
         secondary: scene.visual_direction,
       };
   }

@@ -1,0 +1,222 @@
+<template id="captions-template" data-composition-id="captions" data-width="1920" data-height="1080">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+
+<style data-brand-tokens>
+      @font-face { font-family: 'Inter'; src: url('assets/fonts/Inter_400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      :root {
+      --ink: #05070B;
+      --cream: #F5F6F8;
+      --tile: #DEDBF2;
+      --tile-strong: #7567C8;
+      --coral: #19C785;
+      --navy: #151817;
+      --navy-soft: #1B1F1D;
+      --navy-elev: #202523;
+      --cap-ink: #05070B;
+      --cap-canvas: #F5F6F8;
+      --cap-accent: #19C785;
+      --cap-accent-2: #7567C8;
+      --font-display: "Inter", system-ui, serif;
+      --font-body: "Inter", system-ui, sans-serif;
+      --cap-band-top: 900px;
+      --cap-band-height: 180px;
+      }
+    </style>
+
+<style>
+  #captions-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .caption-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+  }
+  /* the keep-out band, from captionBand(H) — frame content stays above it */
+  .caption-stage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--cap-band-top, 900px);
+    height: var(--cap-band-height, 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .caption-group {
+    /* every group is absolutely stacked over the SAME band — exactly one shown at a
+       time via opacity. Must be absolute: in-flow groups would lay out side-by-side. */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  /* THE lifted cream card — warm cream fill, 1px hairline ink border, one soft warm
+     shadow (code-editorial's only elevation language), 12px radius, no tilt */
+  .caption-pill {
+    max-width: 78%;
+    padding: 22px 44px 26px;
+    background: var(--cap-canvas, #faf9f5);
+    border: 1px solid color-mix(in srgb, var(--cap-ink, #141413) 12%, transparent);
+    border-radius: 12px;
+    box-shadow:
+      0 1px 3px color-mix(in srgb, var(--cap-ink, #141413) 8%, transparent),
+      0 4px 16px color-mix(in srgb, var(--cap-ink, #141413) 4%, transparent);
+  }
+  .caption-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.12em 0.3em;
+    font-family: "Inter", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(40px, 4.4vw, 56px);
+    line-height: 1.24;
+    letter-spacing: -0.02em;
+  }
+
+  /* upcoming — faint warm ink, no underline */
+  .caption-word {
+    display: inline-block;
+    padding: 0 0.02em 0.06em;
+    color: color-mix(in srgb, var(--cap-ink, #141413) 40%, var(--cap-canvas, #faf9f5));
+    border-bottom: 3px solid transparent;
+  }
+  /* current word — full ink under the coral voltage underline (the brand's signature
+     inline-link gesture; border-bottom = underline without layout shift) */
+  .caption-word.is-active {
+    color: var(--cap-ink, #141413);
+    border-bottom: 3px solid var(--cap-accent, #cc785c);
+  }
+  /* already spoken — solid warm ink, underline cleared */
+  .caption-word.is-spoken {
+    color: var(--cap-ink, #141413);
+    border-bottom: 3px solid transparent;
+  }
+
+  /* optional per-word accents (dormant until a word-classer tags them) */
+  /* brand / key term — the expressive EB Garamond italic */
+  .caption-word.cap-brand {
+    font-style: italic;
+    color: var(--cap-ink, #141413);
+  }
+  .caption-word.cap-brand.is-active {
+    border-bottom: 3px solid var(--cap-accent, #cc785c);
+  }
+  /* numerals / data — slightly recessed warm ink */
+  .caption-word.cap-num {
+    color: color-mix(in srgb, var(--cap-ink, #141413) 72%, var(--cap-canvas, #faf9f5));
+  }
+  /* emphasis — a persistent coral voltage underline */
+  .caption-word.cap-cta {
+    border-bottom: 3px solid var(--cap-accent-2, #b5654a);
+    color: var(--cap-ink, #141413);
+  }
+
+  @media (max-aspect-ratio: 9/16) {
+    .caption-pill {
+      max-width: 92%;
+    }
+    .caption-line {
+      font-size: clamp(34px, 5.4vw, 46px);
+    }
+  }
+</style>
+
+<div
+  id="captions-root"
+  data-composition-id="captions"
+  data-timeline-locked
+  data-start="0"
+  data-duration="60"
+  data-fps="30"
+  data-width="1920"
+  data-height="1080"
+>
+  <div class="caption-layer" aria-hidden="true">
+    <div id="caption-stage" class="caption-stage"></div>
+  </div>
+</div>
+
+<script>
+  // captions.mjs injects the engine's scene-aware groups + real duration here.
+  var GROUPS = [{"id":"caption-group-0","frame":1,"start":0.199,"end":2.059,"text":"编码智能体已经很聪明了。","words":[{"id":"caption-word-0-0","text":"编码智能体已经很聪明了。","start":0.199,"end":1.939}]},{"id":"caption-group-1","frame":1,"start":2.44,"end":3.919,"text":"可是，没人管它们。","words":[{"id":"caption-word-1-0","text":"可是，没人管它们。","start":2.44,"end":3.799}]},{"id":"caption-group-2","frame":2,"start":4.44,"end":7.179,"text":"deepdog，把编码智能体变成真正的队友。","words":[{"id":"caption-word-2-0","text":"deepdog，把编码智能体变成真正的队友。","start":4.44,"end":7.059}]},{"id":"caption-group-3","frame":2,"start":7.699,"end":10.08,"text":"你接下来要招的十个人，都不是人。","words":[{"id":"caption-word-3-0","text":"你接下来要招的十个人，都不是人。","start":7.699,"end":9.96}]},{"id":"caption-group-4","frame":3,"start":10.439,"end":14.139,"text":"在同一个议题看板里，给智能体派单，就像派给同事。","words":[{"id":"caption-word-4-0","text":"在同一个议题看板里，给智能体派单，就像派给同事。","start":10.439,"end":14.019}]},{"id":"caption-group-5","frame":3,"start":14.519,"end":17.38,"text":"它会认领、执行、评论，也会主动建单。","words":[{"id":"caption-word-5-0","text":"它会认领、执行、评论，也会主动建单。","start":14.519,"end":17.26}]},{"id":"caption-group-6","frame":4,"start":17.639,"end":25.159,"text":"完整的任务生命周期，加上实时进度流，让每一次工具调用、文件改动和状态变化都清晰可见。","words":[{"id":"caption-word-6-0","text":"完整的任务生命周期，加上实时进度流，让每一次工具调用、文件改动和状态变化都清晰可见。","start":17.639,"end":25.039}]},{"id":"caption-group-7","frame":4,"start":25.459,"end":26.599,"text":"没有静默失败。","words":[{"id":"caption-word-7-0","text":"没有静默失败。","start":25.459,"end":26.479}]},{"id":"caption-group-8","frame":5,"start":26.899,"end":29.38,"text":"每个解法，都能沉淀为团队技能。","words":[{"id":"caption-word-8-0","text":"每个解法，都能沉淀为团队技能。","start":26.899,"end":29.26}]},{"id":"caption-group-9","frame":5,"start":29.5,"end":31.659,"text":"第一天，你教会一个智能体部署。","words":[{"id":"caption-word-9-0","text":"第一天，你教会一个智能体部署。","start":29.5,"end":31.539}]},{"id":"caption-group-10","frame":5,"start":31.92,"end":36.159,"text":"第三十天，整个团队都会部署、写测试、做代码审查。","words":[{"id":"caption-word-10-0","text":"第三十天，整个团队都会部署、写测试、做代码审查。","start":31.92,"end":36.039}]},{"id":"caption-group-11","frame":6,"start":36.439,"end":43.04,"text":"一块面板，管理本地机器和云端算力、混合小队，以及你自己的会话上下文。","words":[{"id":"caption-word-11-0","text":"一块面板，管理本地机器和云端算力、混合小队，以及你自己的会话上下文。","start":36.439,"end":42.979}]},{"id":"caption-group-12","frame":7,"start":43.04,"end":44.899,"text":"deepdog 完全开源。","words":[{"id":"caption-word-12-0","text":"deepdog 完全开源。","start":43.04,"end":44.779}]},{"id":"caption-group-13","frame":7,"start":44.96,"end":49.419,"text":"执行发生在你自己的机器或自有云，代码不经过 deepdog 服务器。","words":[{"id":"caption-word-13-0","text":"执行发生在你自己的机器或自有云，代码不经过 deepdog 服务器。","start":44.96,"end":49.299}]},{"id":"caption-group-14","frame":8,"start":49.659,"end":51.879,"text":"现在，雇佣你的第一位 AI 员工。","words":[{"id":"caption-word-14-0","text":"现在，雇佣你的第一位 AI 员工。","start":49.659,"end":51.759}]}];
+  var DURATION = 60;
+
+  (function () {
+    var stage = document.getElementById("caption-stage");
+
+    // build DOM: one .caption-group per group, .caption-word per word
+    GROUPS.forEach(function (group, g) {
+      var groupEl = document.createElement("div");
+      groupEl.className = "caption-group";
+      groupEl.id = "caption-group-" + g;
+      var pill = document.createElement("div");
+      pill.className = "caption-pill";
+      var line = document.createElement("div");
+      line.className = "caption-line";
+      (group.words || []).forEach(function (w, i) {
+        var span = document.createElement("span");
+        span.className = "caption-word";
+        span.id = "caption-word-" + g + "-" + i;
+        span.textContent = String(w.text);
+        line.appendChild(span);
+      });
+      pill.appendChild(line);
+      groupEl.appendChild(pill);
+      stage.appendChild(groupEl);
+    });
+
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    GROUPS.forEach(function (group, g) {
+      var groupEl = document.getElementById("caption-group-" + g);
+      var words = group.words || [];
+      var next = GROUPS[g + 1];
+      var isLast = g === GROUPS.length - 1;
+      var start = Math.max(0, Number(group.start));
+      var end = isLast ? DURATION : Math.min(Number(next.start), Number(group.end) + 0.3);
+      if (end <= start) end = start + 0.01;
+
+      // group on/off — exactly one group visible at a time
+      tl.set(groupEl, { opacity: 1 }, start);
+      tl.set(groupEl, { opacity: 0 }, end);
+
+      // 3-state karaoke via className SETS — seek-safe (gsap.set applies on the
+      // engine's frame-by-frame seek; .call callbacks would NOT fire).
+      words.forEach(function (w, i) {
+        var el = document.getElementById("caption-word-" + g + "-" + i);
+        var at = Math.max(start, Number(w.start));
+        tl.set(el, { className: "caption-word" }, start); // upcoming (also resets on reverse-seek)
+        tl.set(el, { className: "caption-word is-active" }, at); // current
+        tl.fromTo(el, { scale: 0.98 }, { scale: 1, duration: 0.16, ease: "power1.out" }, at);
+        if (i + 1 < words.length) {
+          var nextAt = Math.max(start, Number(words[i + 1].start));
+          tl.set(el, { className: "caption-word is-spoken" }, nextAt); // demote when next activates
+        }
+      });
+      if (words.length) {
+        var lastEl = document.getElementById("caption-word-" + g + "-" + (words.length - 1));
+        var lastSpoken = Math.min(end, Number(words[words.length - 1].end) + 0.1);
+        tl.set(lastEl, { className: "caption-word is-spoken" }, lastSpoken);
+      }
+    });
+
+    // full-span anchor so the sub-comp timeline spans the whole video
+    tl.to({}, { duration: DURATION }, 0);
+    window.__timelines["captions"] = tl;
+  })();
+</script>
+
+<style>
+  .caption-line { line-height: 1.1 !important; }
+</style>
+</template>

@@ -1,0 +1,488 @@
+<template>
+  <div id="root" data-composition-id="05-skills-compound" data-width="1920" data-height="1080" data-duration="10">
+    <div
+      id="05-skills-compound-ground"
+      class="clip"
+      data-start="0"
+      data-duration="10"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="05-skills-compound-stage"
+      class="clip"
+      data-start="0"
+      data-duration="10"
+      data-track-index="1"
+    >
+      <div id="05-skills-compound-kicker">
+        <span id="05-skills-compound-spike">✱</span>
+        <span>TEAM SKILL</span>
+      </div>
+
+      <div id="05-skills-compound-day-stack">
+        <div id="05-skills-compound-day1">DAY 1</div>
+        <div id="05-skills-compound-day30">DAY 30</div>
+      </div>
+
+      <div id="05-skills-compound-knowledge-frame" class="05-skills-compound-shot">
+        <img src="assets/knowledge.png" alt="" />
+        <div class="05-skills-compound-shot-label">KNOWLEDGE</div>
+      </div>
+
+      <div id="05-skills-compound-agents-frame" class="05-skills-compound-shot">
+        <img src="assets/agents.png" alt="" />
+        <div class="05-skills-compound-shot-label">AGENTS</div>
+      </div>
+
+      <svg
+        id="05-skills-compound-network"
+        viewBox="0 0 1920 896"
+        aria-hidden="true"
+      >
+        <path id="05-skills-compound-line-a" d="M 912 450 C 1080 450, 1110 285, 1312 285" />
+        <path id="05-skills-compound-line-b" d="M 912 450 C 1080 450, 1110 450, 1312 450" />
+        <path id="05-skills-compound-line-c" d="M 912 450 C 1080 450, 1110 615, 1312 615" />
+      </svg>
+
+      <div id="05-skills-compound-deploy-source" class="05-skills-compound-skill-card">
+        <span class="05-skills-compound-card-index">01</span>
+        <strong>DEPLOY</strong>
+        <span class="05-skills-compound-card-status">READY</span>
+      </div>
+
+      <div id="05-skills-compound-agent-cluster">
+        <div
+          id="05-skills-compound-agent-a"
+          class="05-skills-compound-agent-node"
+          data-target-x="405"
+          data-target-y="-165"
+        >
+          <span>AGENT 01</span>
+          <b>DEPLOY</b>
+        </div>
+        <div
+          id="05-skills-compound-agent-b"
+          class="05-skills-compound-agent-node"
+          data-target-x="405"
+          data-target-y="0"
+        >
+          <span>AGENT 02</span>
+          <b>DEPLOY</b>
+        </div>
+        <div
+          id="05-skills-compound-agent-c"
+          class="05-skills-compound-agent-node"
+          data-target-x="405"
+          data-target-y="165"
+        >
+          <span>AGENT 03</span>
+          <b>DEPLOY</b>
+        </div>
+      </div>
+
+      <div id="05-skills-compound-final-grid">
+        <div id="05-skills-compound-final-deploy" class="05-skills-compound-final-card">
+          <span>01</span>
+          <strong>DEPLOY</strong>
+          <i>TEAM SKILL</i>
+        </div>
+        <div id="05-skills-compound-final-test" class="05-skills-compound-final-card">
+          <span>02</span>
+          <strong>TEST</strong>
+          <i>TEAM SKILL</i>
+        </div>
+        <div id="05-skills-compound-final-review" class="05-skills-compound-final-card">
+          <span>03</span>
+          <strong>CODE REVIEW</strong>
+          <i>TEAM SKILL</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      color: #05070b;
+    }
+
+    [id="05-skills-compound-ground"] {
+      position: absolute;
+      inset: 0;
+      background: #f5f6f8;
+    }
+
+    [id="05-skills-compound-stage"] {
+      position: absolute;
+      inset: 0 0 184px 0;
+      overflow: hidden;
+    }
+
+    [id="05-skills-compound-kicker"] {
+      position: absolute;
+      top: 66px;
+      left: 80px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      line-height: 1;
+    }
+
+    [id="05-skills-compound-spike"] {
+      color: #19c785;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    [id="05-skills-compound-day-stack"] {
+      position: absolute;
+      top: 52px;
+      right: 80px;
+      width: 330px;
+      height: 72px;
+      text-align: right;
+    }
+
+    [id="05-skills-compound-day1"],
+    [id="05-skills-compound-day30"] {
+      position: absolute;
+      inset: 0;
+      font-size: 56px;
+      font-weight: 500;
+      letter-spacing: -0.022em;
+      line-height: 72px;
+    }
+
+    [id="05-skills-compound-day30"] {
+      opacity: 0;
+    }
+
+    [class~="05-skills-compound-shot"] {
+      position: absolute;
+      overflow: hidden;
+      border: 1px solid rgba(5, 7, 11, 0.14);
+      border-radius: 12px;
+      background: #f5f6f8;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+    }
+
+    [class~="05-skills-compound-shot"] img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    [class~="05-skills-compound-shot-label"] {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(5, 7, 11, 0.12);
+      border-radius: 6px;
+      background: rgba(245, 246, 248, 0.94);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+
+    [id="05-skills-compound-knowledge-frame"] {
+      top: 158px;
+      left: 80px;
+      width: 1020px;
+      height: 650px;
+    }
+
+    [id="05-skills-compound-agents-frame"] {
+      top: 158px;
+      left: 854px;
+      width: 986px;
+      height: 650px;
+      opacity: 0;
+    }
+
+    [id="05-skills-compound-network"] {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 896px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    [id="05-skills-compound-network"] path {
+      fill: none;
+      stroke: #7567c8;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 8 10;
+      opacity: 0;
+    }
+
+    [class~="05-skills-compound-skill-card"] {
+      position: absolute;
+      width: 280px;
+      height: 154px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 14px 18px;
+      align-items: center;
+      border: 1px solid rgba(5, 7, 11, 0.2);
+      border-radius: 12px;
+      background: #dedbf2;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+      box-sizing: border-box;
+    }
+
+    [id="05-skills-compound-deploy-source"] {
+      top: 362px;
+      left: 772px;
+    }
+
+    [class~="05-skills-compound-card-index"] {
+      font-size: 20px;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="05-skills-compound-skill-card"] strong {
+      font-size: 42px;
+      font-weight: 500;
+      letter-spacing: -0.018em;
+    }
+
+    [class~="05-skills-compound-card-status"] {
+      grid-column: 1 / -1;
+      padding-top: 12px;
+      border-top: 1px solid rgba(5, 7, 11, 0.12);
+      font-size: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    [id="05-skills-compound-agent-cluster"] {
+      position: absolute;
+      inset: 0;
+    }
+
+    [class~="05-skills-compound-agent-node"] {
+      position: absolute;
+      top: 450px;
+      left: 912px;
+      width: 302px;
+      height: 112px;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(5, 7, 11, 0.2);
+      border-radius: 8px;
+      background: #f5f6f8;
+      box-sizing: border-box;
+      opacity: 0;
+      will-change: transform;
+    }
+
+    [class~="05-skills-compound-agent-node"] span {
+      font-size: 18px;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="05-skills-compound-agent-node"] b {
+      padding: 10px 12px;
+      border-radius: 6px;
+      background: #dedbf2;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    [id="05-skills-compound-final-grid"] {
+      position: absolute;
+      left: 80px;
+      top: 220px;
+      width: 1760px;
+      height: 476px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      pointer-events: none;
+    }
+
+    [class~="05-skills-compound-final-card"] {
+      position: relative;
+      height: 476px;
+      padding: 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(5, 7, 11, 0.18);
+      border-radius: 12px;
+      background: #dedbf2;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+      box-sizing: border-box;
+      opacity: 0;
+    }
+
+    [class~="05-skills-compound-final-card"] span {
+      font-size: 24px;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="05-skills-compound-final-card"] strong {
+      max-width: 480px;
+      font-size: 74px;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+      line-height: 1;
+    }
+
+    [class~="05-skills-compound-final-card"] i {
+      padding-top: 22px;
+      border-top: 1px solid rgba(5, 7, 11, 0.12);
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+    }
+  </style>
+
+  <script>
+    (() => {
+      const frameId = "05-skills-compound";
+      const tl = gsap.timeline({ paused: true });
+      const nodes = Array.from(
+        document.querySelectorAll('[class~="05-skills-compound-agent-node"]')
+      );
+
+      tl.fromTo(
+        '[id="05-skills-compound-knowledge-frame"]',
+        { x: -90, opacity: 0, scale: 0.97 },
+        { x: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" },
+        0
+      );
+      tl.fromTo(
+        '[id="05-skills-compound-kicker"]',
+        { y: -18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.38, ease: "power3.out" },
+        0.08
+      );
+      tl.fromTo(
+        '[id="05-skills-compound-day1"]',
+        { y: -16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.38, ease: "power3.out" },
+        0.18
+      );
+      tl.fromTo(
+        '[id="05-skills-compound-deploy-source"]',
+        { x: -205, y: 22, scale: 0.36, opacity: 0 },
+        { x: 0, y: 0, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" },
+        0.85
+      );
+
+      tl.fromTo(
+        '[id="05-skills-compound-agents-frame"]',
+        { x: 230, opacity: 0, scale: 0.98 },
+        { x: 0, opacity: 0.42, scale: 1, duration: 0.7, ease: "power4.out" },
+        2.5
+      );
+      tl.to(
+        '[id="05-skills-compound-knowledge-frame"]',
+        { x: -90, opacity: 0.48, duration: 0.34, ease: "power4.in" },
+        2.5
+      );
+      tl.to(
+        '[id="05-skills-compound-deploy-source"]',
+        { x: -66, scale: 0.86, duration: 0.34, ease: "power4.in" },
+        2.5
+      );
+
+      ["a", "b", "c"].forEach((suffix, index) => {
+        tl.to(
+          `[id="05-skills-compound-line-${suffix}"]`,
+          { opacity: 0.58, duration: 0.16, ease: "none" },
+          3.1 + index * 0.48
+        );
+      });
+
+      nodes.forEach((node, index) => {
+        tl.fromTo(
+          node,
+          {
+            xPercent: -50,
+            yPercent: -50,
+            x: 0,
+            y: 0,
+            scale: 0.6,
+            opacity: 0
+          },
+          {
+            x: Number(node.dataset.targetX),
+            y: Number(node.dataset.targetY),
+            scale: 1,
+            opacity: 1,
+            duration: 1.12,
+            ease: "power3.out"
+          },
+          3.18 + index * 0.52
+        );
+      });
+
+      tl.to(
+        '[id="05-skills-compound-day1"]',
+        { scale: 0.8, filter: "blur(10px)", duration: 0.2, ease: "power3.in" },
+        6.3
+      );
+      tl.to(
+        '[id="05-skills-compound-day1"]',
+        { opacity: 0.15, duration: 0.2, ease: "none" },
+        6.3
+      );
+      tl.set('[id="05-skills-compound-day1"]', { opacity: 0 }, 6.5);
+      tl.set(
+        '[id="05-skills-compound-day30"]',
+        { opacity: 0.15, scale: 1.25, filter: "blur(10px)" },
+        6.5
+      );
+      tl.to(
+        '[id="05-skills-compound-day30"]',
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" },
+        6.5
+      );
+
+      tl.to(
+        [
+          '[id="05-skills-compound-knowledge-frame"]',
+          '[id="05-skills-compound-agents-frame"]',
+          '[id="05-skills-compound-deploy-source"]',
+          '[id="05-skills-compound-agent-cluster"]',
+          '[id="05-skills-compound-network"]'
+        ],
+        { opacity: 0.08, duration: 0.3, ease: "power4.in" },
+        6.3
+      );
+
+      const arrivals = [
+        ['[id="05-skills-compound-final-deploy"]', 6.62, 80, 0.18],
+        ['[id="05-skills-compound-final-test"]', 6.83, 48, 0.15],
+        ['[id="05-skills-compound-final-review"]', 6.96, 40, 0.13]
+      ];
+
+      arrivals.forEach(([selector, start, offset, duration]) => {
+        tl.set(selector, { opacity: 1, y: offset }, start);
+        tl.to(selector, { y: 0, duration, ease: "power4.out" }, start);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[frameId] = tl;
+    })();
+  </script>
+</template>

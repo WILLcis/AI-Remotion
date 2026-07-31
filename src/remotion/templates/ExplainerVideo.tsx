@@ -1,12 +1,17 @@
 import type { CSSProperties } from "react";
 import {
   AbsoluteFill,
+  Audio,
   interpolate,
+  OffthreadVideo,
   Series,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { getEpisodeVoiceoverStaticPath } from "../episodeAudio";
+import { getEpisodeAssetStaticPath } from "../episodeAssets";
 import type { RenderPlan, RenderScene, ThemeTokens } from "../types";
 
 type ThemeStyle = CSSProperties & {
@@ -43,6 +48,16 @@ export const ExplainerVideo: React.FC<RenderPlan> = (plan) => {
       style={themeStyle(plan.theme)}
     >
       <BackgroundGrid />
+      {plan.audio.voiceover_path ? (
+        <Audio
+          src={staticFile(
+            getEpisodeVoiceoverStaticPath({
+              episodeId: plan.episode_id,
+              voiceoverPath: plan.audio.voiceover_path,
+            }),
+          )}
+        />
+      ) : null}
       <Series>
         {plan.scenes.map((scene, index) => (
           <Series.Sequence
@@ -75,6 +90,10 @@ type SceneFrameProps = {
 const SceneFrame: React.FC<SceneFrameProps> = ({ index, plan, scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const isFullAvatar =
+    plan.avatar?.enabled === true &&
+    plan.avatar.layout === "full" &&
+    plan.avatar.clips.some((clip) => clip.scene_id === scene.id);
   const enter = spring({
     frame,
     fps,
@@ -90,26 +109,30 @@ const SceneFrame: React.FC<SceneFrameProps> = ({ index, plan, scene }) => {
 
   return (
     <AbsoluteFill className="scene">
-      <header className="scene-header">
+      {isFullAvatar ? <AvatarOverlay plan={plan} scene={scene} /> : null}
+      <header className="scene-header" style={{ position: "relative", zIndex: 1 }}>
         <span className="scene-index">{String(index + 1).padStart(2, "0")}</span>
         <span>{plan.metadata.title}</span>
       </header>
-      <main
-        className={`scene-body scene-${scene.type}`}
-        style={{
-          opacity: fade,
-          transform: `translateY(${(1 - enter) * 36}px)`,
-        }}
-      >
-        <div className="scene-copy">
-          {scene.visual.eyebrow ? (
-            <p className="eyebrow">{scene.visual.eyebrow}</p>
-          ) : null}
-          <h1>{scene.title}</h1>
-          <p className="narration">{scene.narration}</p>
-        </div>
-        <SceneVisual scene={scene} />
-      </main>
+      {!isFullAvatar ? (
+        <main
+          className={`scene-body scene-${scene.type}`}
+          style={{
+            opacity: fade,
+            transform: `translateY(${(1 - enter) * 36}px)`,
+          }}
+        >
+          <div className="scene-copy">
+            {scene.visual.eyebrow ? (
+              <p className="eyebrow">{scene.visual.eyebrow}</p>
+            ) : null}
+            <h1>{scene.title}</h1>
+            <p className="narration">{scene.narration}</p>
+          </div>
+          <SceneVisual scene={scene} />
+          <AvatarOverlay plan={plan} scene={scene} />
+        </main>
+      ) : null}
       {plan.captions.enabled ? (
         <footer
           className="caption"
@@ -117,6 +140,7 @@ const SceneFrame: React.FC<SceneFrameProps> = ({ index, plan, scene }) => {
             left: plan.video.safe_area.left,
             right: plan.video.safe_area.right,
             bottom: plan.video.safe_area.bottom,
+            zIndex: 1,
           }}
         >
           {scene.caption}
@@ -218,7 +242,54 @@ const SceneVisual: React.FC<{ scene: RenderScene }> = ({ scene }) => {
           <span>{scene.visual.secondary}</span>
         </section>
       );
+
+    case "talking_avatar":
+      return (
+        <section className="visual-key">
+          <span className="small-label">talking avatar</span>
+          <strong>{scene.visual.primary ?? scene.title}</strong>
+          <p>{scene.visual.secondary}</p>
+        </section>
+      );
   }
+};
+
+const AvatarOverlay: React.FC<{ plan: RenderPlan; scene: RenderScene }> = ({
+  plan,
+  scene,
+}) => {
+  const clip = plan.avatar?.clips.find((item) => item.scene_id === scene.id);
+  if (!plan.avatar?.enabled || !clip) {
+    return null;
+  }
+
+  const isFull = plan.avatar.layout === "full";
+  return (
+    <div
+      style={{
+        border: "1px solid var(--border)",
+        borderRadius: isFull ? 0 : 28,
+        bottom: isFull ? 0 : 170,
+        height: isFull ? "100%" : "52%",
+        overflow: "hidden",
+        position: "absolute",
+        right: isFull ? 0 : 36,
+        width: isFull ? "100%" : "42%",
+        zIndex: isFull ? 0 : undefined,
+      }}
+    >
+      <OffthreadVideo
+        muted
+        src={staticFile(
+          getEpisodeAssetStaticPath({
+            assetPath: clip.path,
+            episodeId: plan.episode_id,
+          }),
+        )}
+        style={{ height: "100%", objectFit: "cover", width: "100%" }}
+      />
+    </div>
+  );
 };
 
 type ComparisonColumnProps = {

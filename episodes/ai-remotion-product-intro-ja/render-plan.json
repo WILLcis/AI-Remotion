@@ -1,0 +1,230 @@
+{
+  "episode_id": "ai-remotion-product-intro-ja",
+  "metadata": {
+    "title": "AI-Remotion：レビュー可能でレンダリング可能な図解動画",
+    "subtitle": "需要快速理解主题的中文短视频观众",
+    "platform": "抖音",
+    "language": "ja",
+    "duration_seconds": 44.166666666666664,
+    "aspect_ratio": "9:16"
+  },
+  "theme": {
+    "id": "dark-explainer-v1",
+    "background": "#0c1117",
+    "surface": "#151d26",
+    "surfaceMuted": "#202a34",
+    "text": "#f4f7fb",
+    "textMuted": "#a9b6c7",
+    "accent": "#44d7b6",
+    "accentStrong": "#f4b44b",
+    "border": "rgba(255, 255, 255, 0.14)"
+  },
+  "video": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "duration_frames": 1325,
+    "safe_area": {
+      "top": 120,
+      "right": 72,
+      "bottom": 180,
+      "left": 72
+    }
+  },
+  "audio": {
+    "duration_seconds": 44.17596371882086,
+    "voiceover_path": "audio/voiceover.wav"
+  },
+  "captions": {
+    "enabled": true,
+    "items": [
+      {
+        "start_frame": 0,
+        "end_frame": 235,
+        "text": "AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。まずは核心を一言で。"
+      },
+      {
+        "start_frame": 235,
+        "end_frame": 465,
+        "text": "今回の内容は：AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。"
+      },
+      {
+        "start_frame": 465,
+        "end_frame": 637,
+        "text": "スクリーンショット、概念カード、フローチャートを使って視聴者にビジュアルアンカーを提供。"
+      },
+      {
+        "start_frame": 637,
+        "end_frame": 752,
+        "text": "複雑な内容を3～4の追いやすいステップに分解。"
+      },
+      {
+        "start_frame": 752,
+        "end_frame": 892,
+        "text": "手動制作と構造化制作を比較し、テンプレート化の価値を強調。"
+      },
+      {
+        "start_frame": 892,
+        "end_frame": 1031,
+        "text": "brief、script、storyboard、render-planを一つのパイプラインに繋ぐ。"
+      },
+      {
+        "start_frame": 1031,
+        "end_frame": 1156,
+        "text": "まずコンテンツをレビュー可能にし、次に映像をレンダリング可能にする。"
+      },
+      {
+        "start_frame": 1156,
+        "end_frame": 1325,
+        "text": "最後に、再利用可能でチェック可能、レンダリング可能なイラスト付き解説ビデオを出力。"
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "title": "タイトルカード、テーマを素早く理解したい中国語ショートビデオ視聴者向け",
+      "narration": "AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。まずは核心を一言で。",
+      "caption": "AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。まずは核心を一言で。",
+      "duration_seconds": 7.836734693877551,
+      "start_frame": 0,
+      "duration_frames": 235,
+      "visual": {
+        "eyebrow": "AI-Remotion Draft",
+        "primary": "AI-Remotion：レビュー可能でレンダリング可能な図解動画",
+        "secondary": "タイトルカード、テーマを素早く理解したい中国語ショートビデオ視聴者向け。スタイル：暗い背景、情報カード、軽い動き。"
+      }
+    },
+    {
+      "id": "scene-02",
+      "type": "key_point",
+      "title": "単一の重点カードを使用して、今回必ず分かりやすく説明する概念を提示",
+      "narration": "今回の内容は：AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。",
+      "caption": "今回の内容は：AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。",
+      "duration_seconds": 7.6741950113378685,
+      "start_frame": 235,
+      "duration_frames": 230,
+      "visual": {
+        "primary": "今回の内容は：AI-Remotion：製品紹介をレビュー可能でレンダリング可能なイラスト付き解説ビデオに変換。",
+        "secondary": "単一の重点カードを使用して、今回必ず分かりやすく説明する概念を提示。"
+      }
+    },
+    {
+      "id": "scene-03",
+      "type": "image_card",
+      "title": "スクリーンショット、概念カード、フロー矢印を載せた画像カードを表示",
+      "narration": "スクリーンショット、概念カード、フローチャートを使って視聴者にビジュアルアンカーを提供。",
+      "caption": "スクリーンショット、概念カード、フローチャートを使って視聴者にビジュアルアンカーを提供。",
+      "duration_seconds": 5.735328798185941,
+      "start_frame": 465,
+      "duration_frames": 172,
+      "visual": {
+        "eyebrow": "Visual Evidence",
+        "primary": "图文证据",
+        "secondary": "スクリーンショット、概念カード、フロー矢印を載せた画像カードを表示。",
+        "assets": [
+          "截图",
+          "概念卡",
+          "流程图"
+        ]
+      }
+    },
+    {
+      "id": "scene-04",
+      "type": "list",
+      "title": "リストカードで、スクリプト、ストーリーボード、レンダリング、レビューを順に表示",
+      "narration": "複雑な内容を3～4の追いやすいステップに分解。",
+      "caption": "複雑な内容を3～4の追いやすいステップに分解。",
+      "duration_seconds": 3.81968253968254,
+      "start_frame": 637,
+      "duration_frames": 115,
+      "visual": {
+        "bullets": [
+          "脚本",
+          "分镜",
+          "渲染",
+          "复查"
+        ]
+      }
+    },
+    {
+      "id": "scene-05",
+      "type": "comparison",
+      "title": "左右比較：手動制作 vs 構造化制作",
+      "narration": "手動制作と構造化制作を比較し、テンプレート化の価値を強調。",
+      "caption": "手動制作と構造化制作を比較し、テンプレート化の価値を強調。",
+      "duration_seconds": 4.6788208616780045,
+      "start_frame": 752,
+      "duration_frames": 140,
+      "visual": {
+        "left_label": "手动制作",
+        "left_points": [
+          "重复摆放",
+          "难以复用",
+          "修改成本高"
+        ],
+        "right_label": "结构化生产",
+        "right_points": [
+          "文件驱动",
+          "模板复用",
+          "可检查"
+        ]
+      }
+    },
+    {
+      "id": "scene-06",
+      "type": "timeline",
+      "title": "briefからrender-planまでの順序を示すタイムライン",
+      "narration": "brief、script、storyboard、render-planを一つのパイプラインに繋ぐ。",
+      "caption": "brief、script、storyboard、render-planを一つのパイプラインに繋ぐ。",
+      "duration_seconds": 4.632380952380952,
+      "start_frame": 892,
+      "duration_frames": 139,
+      "visual": {
+        "timeline_items": [
+          {
+            "label": "1",
+            "text": "Brief"
+          },
+          {
+            "label": "2",
+            "text": "Script"
+          },
+          {
+            "label": "3",
+            "text": "Render"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-07",
+      "type": "quote",
+      "title": "引用カードで「レビュー可能、再現可能、反復可能」を強調",
+      "narration": "まずコンテンツをレビュー可能にし、次に映像をレンダリング可能にする。",
+      "caption": "まずコンテンツをレビュー可能にし、次に映像をレンダリング可能にする。",
+      "duration_seconds": 4.179591836734694,
+      "start_frame": 1031,
+      "duration_frames": 125,
+      "visual": {
+        "quote": "まずコンテンツをレビュー可能にし、次に映像をレンダリング可能にする。",
+        "attribution": "AI-Remotion workflow"
+      }
+    },
+    {
+      "id": "scene-08",
+      "type": "cta",
+      "title": "締めくくりのCTA",
+      "narration": "最後に、再利用可能でチェック可能、レンダリング可能なイラスト付き解説ビデオを出力。",
+      "caption": "最後に、再利用可能でチェック可能、レンダリング可能なイラスト付き解説ビデオを出力。",
+      "duration_seconds": 5.61922902494331,
+      "start_frame": 1156,
+      "duration_frames": 169,
+      "visual": {
+        "primary": "reviewable script -> deterministic render",
+        "secondary": "締めくくりのCTA。次のステップとして、ボイスオーバー、キャプション、QAを生成。"
+      }
+    }
+  ]
+}

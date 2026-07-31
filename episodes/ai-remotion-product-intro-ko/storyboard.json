@@ -1,0 +1,86 @@
+{
+  "duration_notes": "Generated from reviewable script scene durations.",
+  "episode_id": "ai-remotion-product-intro-ko",
+  "scenes": [
+    {
+      "animation": "Title rises softly with signal line expansion.",
+      "assets": [],
+      "caption": "AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환합니다. 먼저 핵심을 한 문장으로 짚어보세요.",
+      "duration_seconds": 7.5,
+      "id": "scene-01",
+      "narration": "AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환합니다. 먼저 핵심을 한 문장으로 짚어보세요.",
+      "visual_direction": "타이틀 카드, 주제를 빠르게 이해해야 하는 중국어 숏폼 비디오 시청자 대상. 스타일: 어두운 배경, 정보 카드, 가벼운 애니메이션.",
+      "visual_type": "title"
+    },
+    {
+      "animation": "Key card fades in.",
+      "assets": [],
+      "caption": "이번 콘텐츠는 다음을 중심으로 합니다: AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환.",
+      "duration_seconds": 7.5,
+      "id": "scene-02",
+      "narration": "이번 콘텐츠는 다음을 중심으로 합니다: AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환.",
+      "visual_direction": "단일 핵심 카드로 이번 회차에서 반드시 설명해야 할 개념을 제시.",
+      "visual_type": "key_point"
+    },
+    {
+      "animation": "Image card lifts in with asset labels.",
+      "assets": [],
+      "caption": "스크린샷, 개념 카드, 또는 순서도를 사용하여 시청자에게 시각적 앵커를 제공합니다.",
+      "duration_seconds": 7.5,
+      "id": "scene-03",
+      "narration": "스크린샷, 개념 카드, 또는 순서도를 사용하여 시청자에게 시각적 앵커를 제공합니다.",
+      "visual_direction": "스크린샷, 개념 카드, 흐름 화살표를 담은 이미지 카드를 표시.",
+      "visual_type": "image_card"
+    },
+    {
+      "animation": "Rows enter as a group.",
+      "assets": [],
+      "caption": "복잡한 내용을 3~4개의 따라하기 쉬운 단계로 분해합니다.",
+      "duration_seconds": 7.5,
+      "id": "scene-04",
+      "narration": "복잡한 내용을 3~4개의 따라하기 쉬운 단계로 분해합니다.",
+      "visual_direction": "목록 카드로 스크립트, 스토리보드, 렌더링, 검토를 순서대로 표시.",
+      "visual_type": "list"
+    },
+    {
+      "animation": "Columns fade in together.",
+      "assets": [],
+      "caption": "수동 제작과 구조화 제작을 비교하여 템플릿화의 가치를 강조합니다.",
+      "duration_seconds": 7.5,
+      "id": "scene-05",
+      "narration": "수동 제작과 구조화 제작을 비교하여 템플릿화의 가치를 강조합니다.",
+      "visual_direction": "좌우 비교: 수동 제작 vs 구조화 제작.",
+      "visual_type": "comparison"
+    },
+    {
+      "animation": "Timeline steps enter from top to bottom.",
+      "assets": [],
+      "caption": "brief, script, storyboard, render-plan을 하나의 파이프라인으로 연결합니다.",
+      "duration_seconds": 7.5,
+      "id": "scene-06",
+      "narration": "brief, script, storyboard, render-plan을 하나의 파이프라인으로 연결합니다.",
+      "visual_direction": "brief부터 render-plan까지의 순서를 보여주는 타임라인.",
+      "visual_type": "timeline"
+    },
+    {
+      "animation": "Quote rule expands, text fades in.",
+      "assets": [],
+      "caption": "먼저 콘텐츠를 검토 가능하게 만들고, 그다음에 영상을 렌더링 가능하게 만듭니다.",
+      "duration_seconds": 7.5,
+      "id": "scene-07",
+      "narration": "먼저 콘텐츠를 검토 가능하게 만들고, 그다음에 영상을 렌더링 가능하게 만듭니다.",
+      "visual_direction": "인용 카드로 '검토 가능, 재현 가능, 반복 가능'을 강조.",
+      "visual_type": "quote"
+    },
+    {
+      "animation": "CTA card fades in.",
+      "assets": [],
+      "caption": "마지막으로 재사용 가능하고, 확인 가능하며, 렌더링 가능한 그림 설명 비디오를 출력합니다.",
+      "duration_seconds": 7.5,
+      "id": "scene-08",
+      "narration": "마지막으로 재사용 가능하고, 확인 가능하며, 렌더링 가능한 그림 설명 비디오를 출력합니다.",
+      "visual_direction": "마무리 CTA로, 다음 단계인 보이스오버, 자막, QA 생성을 안내.",
+      "visual_type": "cta"
+    }
+  ]
+}

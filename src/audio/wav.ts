@@ -7,6 +7,34 @@ export type WriteSilentWavOptions = {
   sampleRate?: number;
 };
 
+export type PcmS16leToWavOptions = {
+  channels?: number;
+  sampleRate: number;
+};
+
+export const pcmS16leToWav = (
+  pcm: Buffer,
+  { channels = 1, sampleRate }: PcmS16leToWavOptions,
+): Buffer => {
+  if (pcm.length === 0) {
+    throw new Error("CosyVoice returned empty PCM audio.");
+  }
+
+  if (pcm.length % 2 !== 0) {
+    throw new Error("CosyVoice PCM audio must contain whole 16-bit PCM samples.");
+  }
+
+  if (channels <= 0 || sampleRate <= 0) {
+    throw new Error("WAV channel count and sample rate must be greater than 0.");
+  }
+
+  return createPcmWavBuffer({
+    channels,
+    pcm,
+    sampleRate,
+  });
+};
+
 export const writeSilentWav = ({
   durationSeconds,
   outputPath,
@@ -19,27 +47,44 @@ export const writeSilentWav = ({
   mkdirSync(path.dirname(outputPath), { recursive: true });
 
   const channels = 1;
-  const bitsPerSample = 16;
-  const bytesPerSample = bitsPerSample / 8;
+  const bytesPerSample = 2;
   const sampleCount = Math.max(1, Math.round(durationSeconds * sampleRate));
-  const dataSize = sampleCount * channels * bytesPerSample;
-  const buffer = Buffer.alloc(44 + dataSize);
+  const pcm = Buffer.alloc(sampleCount * channels * bytesPerSample);
+  writeFileSync(outputPath, createPcmWavBuffer({ channels, pcm, sampleRate }));
+};
 
-  buffer.write("RIFF", 0, "ascii");
-  buffer.writeUInt32LE(36 + dataSize, 4);
-  buffer.write("WAVE", 8, "ascii");
-  buffer.write("fmt ", 12, "ascii");
-  buffer.writeUInt32LE(16, 16);
-  buffer.writeUInt16LE(1, 20);
-  buffer.writeUInt16LE(channels, 22);
-  buffer.writeUInt32LE(sampleRate, 24);
-  buffer.writeUInt32LE(sampleRate * channels * bytesPerSample, 28);
-  buffer.writeUInt16LE(channels * bytesPerSample, 32);
-  buffer.writeUInt16LE(bitsPerSample, 34);
-  buffer.write("data", 36, "ascii");
-  buffer.writeUInt32LE(dataSize, 40);
+export const concatPcmS16leWavs = ({
+  inputPaths,
+  outputPath,
+}: {
+  inputPaths: string[];
+  outputPath: string;
+}): void => {
+  if (inputPaths.length === 0) {
+    throw new Error("At least one WAV segment is required.");
+  }
 
-  writeFileSync(outputPath, buffer);
+  const segments = inputPaths.map(readPcmS16leWav);
+  const reference = segments[0];
+  if (
+    segments.some(
+      (segment) =>
+        segment.channels !== reference.channels ||
+        segment.sampleRate !== reference.sampleRate,
+    )
+  ) {
+    throw new Error("WAV segments must share sample rate and channel count.");
+  }
+
+  mkdirSync(path.dirname(outputPath), { recursive: true });
+  writeFileSync(
+    outputPath,
+    createPcmWavBuffer({
+      channels: reference.channels,
+      pcm: Buffer.concat(segments.map((segment) => segment.pcm)),
+      sampleRate: reference.sampleRate,
+    }),
+  );
 };
 
 export const readWavDurationSeconds = (filePath: string): number => {
@@ -85,4 +130,68 @@ export const readWavDurationSeconds = (filePath: string): number => {
   }
 
   return dataSize / (sampleRate * channels * (bitsPerSample / 8));
+};
+
+const readPcmS16leWav = (
+  filePath: string,
+): { channels: number; pcm: Buffer; sampleRate: number } => {
+  const buffer = readFileSync(filePath);
+  if (
+    buffer.length < 44 ||
+    buffer.toString("ascii", 0, 4) !== "RIFF" ||
+    buffer.toString("ascii", 8, 12) !== "WAVE" ||
+    buffer.toString("ascii", 12, 16) !== "fmt " ||
+    buffer.toString("ascii", 36, 40) !== "data"
+  ) {
+    throw new Error(`Expected a PCM WAV file: ${filePath}`);
+  }
+
+  const audioFormat = buffer.readUInt16LE(20);
+  const channels = buffer.readUInt16LE(22);
+  const sampleRate = buffer.readUInt32LE(24);
+  const bitsPerSample = buffer.readUInt16LE(34);
+  const dataSize = buffer.readUInt32LE(40);
+  const pcm = buffer.subarray(44);
+
+  if (
+    audioFormat !== 1 ||
+    bitsPerSample !== 16 ||
+    dataSize !== pcm.length ||
+    pcm.length === 0
+  ) {
+    throw new Error(`Expected non-empty signed 16-bit PCM WAV: ${filePath}`);
+  }
+
+  return { channels, pcm, sampleRate };
+};
+
+const createPcmWavBuffer = ({
+  channels,
+  pcm,
+  sampleRate,
+}: {
+  channels: number;
+  pcm: Buffer;
+  sampleRate: number;
+}): Buffer => {
+  const bitsPerSample = 16;
+  const bytesPerSample = bitsPerSample / 8;
+  const buffer = Buffer.alloc(44 + pcm.length);
+
+  buffer.write("RIFF", 0, "ascii");
+  buffer.writeUInt32LE(36 + pcm.length, 4);
+  buffer.write("WAVE", 8, "ascii");
+  buffer.write("fmt ", 12, "ascii");
+  buffer.writeUInt32LE(16, 16);
+  buffer.writeUInt16LE(1, 20);
+  buffer.writeUInt16LE(channels, 22);
+  buffer.writeUInt32LE(sampleRate, 24);
+  buffer.writeUInt32LE(sampleRate * channels * bytesPerSample, 28);
+  buffer.writeUInt16LE(channels * bytesPerSample, 32);
+  buffer.writeUInt16LE(bitsPerSample, 34);
+  buffer.write("data", 36, "ascii");
+  buffer.writeUInt32LE(pcm.length, 40);
+  pcm.copy(buffer, 44);
+
+  return buffer;
 };

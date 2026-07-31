@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; color: #f7f8fb; font-family: Inter, sans-serif; }
+        .fill { position: absolute; inset: 0; background: radial-gradient(circle at 78% 24%, #34265f 0, rgba(52, 38, 95, 0) 34%), #070a12; }
+        .grid { position: absolute; inset: 0; opacity: 0.3; background-image: linear-gradient(rgba(146, 159, 190, 0.14) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(90deg, rgba(146, 159, 190, 0.14) 1px, rgba(0, 0, 0, 0) 1px); background-size: 72px 72px; }
+        .copy { position: absolute; left: 130px; top: 190px; width: 900px; }
+        .eyebrow { color: #9ea9bf; font-family: monospace; font-size: 22px; letter-spacing: 0.2em; }
+        h1 { margin: 26px 0 0; font-size: 108px; line-height: 1.12; letter-spacing: -0.06em; }
+        h1 span { display: block; }
+        .queue { position: absolute; right: 120px; top: 160px; width: 560px; display: grid; gap: 20px; }
+        .job { padding: 25px 28px; border: 1px solid #313a50; border-radius: 16px; background: rgba(13, 18, 31, 0.94); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35); font-family: monospace; font-size: 22px; }
+        .job span { float: right; color: #f0b45d; }
+      </style>
+      <div id="root" data-composition-id="promo-problem" data-width="1920" data-height="1080" data-duration="4.2">
+        <div class="fill"></div>
+        <div class="grid" data-layout-allow-overflow></div>
+        <div class="copy">
+          <div class="eyebrow">MANUAL PIPELINE / FRAGMENTED</div>
+          <h1><span>创意很多。</span><span>流程太碎。</span></h1>
+        </div>
+        <div class="queue">
+          <div class="job">01 / SCRIPT <span>WAITING</span></div>
+          <div class="job">02 / VOICE <span>WAITING</span></div>
+          <div class="job">03 / VISUALS <span>WAITING</span></div>
+          <div class="job">04 / CAPTIONS <span>WAITING</span></div>
+        </div>
+        <script>
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(".copy", { x: -70, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 0.12)
+            .fromTo(".job", { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.42, stagger: 0.16, ease: "power3.out" }, 0.28)
+            .to(".grid", { x: 72, y: 36, duration: 4.2, ease: "none" }, 0);
+          window.__timelines["promo-problem"] = tl;
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

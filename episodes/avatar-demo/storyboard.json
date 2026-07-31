@@ -1,0 +1,86 @@
+{
+  "duration_notes": "Generated from reviewable script scene durations.",
+  "episode_id": "avatar-demo",
+  "scenes": [
+    {
+      "animation": "Title rises softly with signal line expansion.",
+      "assets": [],
+      "caption": "你是否想过，让一个“数字分身”替你出镜，而且还能用你自己的声音说话？",
+      "duration_seconds": 8,
+      "id": "scene-01",
+      "narration": "你是否想过，让一个“数字分身”替你出镜，而且还能用你自己的声音说话？",
+      "visual_direction": "深色背景中央，出现一个半透明的数字人轮廓，旁边漂浮着“你的声音？你的形象？”文字卡片，轻量缩放动效。",
+      "visual_type": "title"
+    },
+    {
+      "animation": "Key card fades in.",
+      "assets": [],
+      "caption": "AI-Remotion，就是帮你实现这个想法的工具。你只需要提供一小段你的真实声音录音。",
+      "duration_seconds": 10,
+      "id": "scene-02",
+      "narration": "AI-Remotion，就是帮你实现这个想法的工具。你只需要提供一小段你的真实声音录音。",
+      "visual_direction": "画面切换到手机录音界面（示意），一个“录制”按钮被按下，波形图跳动。然后弹出卡片：“只需30秒语音样本”。",
+      "visual_type": "key_point"
+    },
+    {
+      "animation": "Image card lifts in with asset labels.",
+      "assets": [],
+      "caption": "系统会学习你声音的特点—音色、语调、说话节奏，生成一个高度接近你本人的AI声音模型。",
+      "duration_seconds": 10,
+      "id": "scene-03",
+      "narration": "系统会学习你声音的特点—音色、语调、说话节奏，生成一个高度接近你本人的AI声音模型。",
+      "visual_direction": "深色背景上，波形图转化为流动的粒子，汇聚成一个耳机图标，旁边文字：“声音模型生成中”。进度条快速走完，显示“完成”。",
+      "visual_type": "image_card"
+    },
+    {
+      "animation": "Rows enter as a group.",
+      "assets": [],
+      "caption": "同时，你可以选择或创建自己的数字人形象。上传照片或简单设置，就能得到一个长相、表情都像你的虚拟角色。",
+      "duration_seconds": 12,
+      "id": "scene-04",
+      "narration": "同时，你可以选择或创建自己的数字人形象。上传照片或简单设置，就能得到一个长相、表情都像你的虚拟角色。",
+      "visual_direction": "左侧出现“上传照片”区域，右侧数字人形象逐渐从模糊变清晰，头发、眼睛、嘴唇微微动效。卡片：“数字人形象 支持自定义”。",
+      "visual_type": "list"
+    },
+    {
+      "animation": "Columns fade in together.",
+      "assets": [],
+      "caption": "之后，你输入文字，AI-Remotion就会让这个数字人用你的声音说出来。口型、表情都会自动同步。",
+      "duration_seconds": 10,
+      "id": "scene-05",
+      "narration": "之后，你输入文字，AI-Remotion就会让这个数字人用你的声音说出来。口型、表情都会自动同步。",
+      "visual_direction": "屏幕中央数字人开始说话，下方滚动文字输入框，显示“请输入你想说的内容”。口型与语音同步，嘴角微动，眼神自然。轻量动效提示“自动唇形同步”。",
+      "visual_type": "comparison"
+    },
+    {
+      "animation": "Timeline steps enter from top to bottom.",
+      "assets": [],
+      "caption": "它适合用在知识分享、产品介绍、个人IP创作等场景，让你即使不亲自出镜，也能保持真实感和个人风格。",
+      "duration_seconds": 10,
+      "id": "scene-06",
+      "narration": "它适合用在知识分享、产品介绍、个人IP创作等场景，让你即使不亲自出镜，也能保持真实感和个人风格。",
+      "visual_direction": "深色背景上，三个小卡片依次弹出：“知识分享”、“产品介绍”、“个人IP”，每个卡片上有一个小人图标。最后合并成一个带有播放按钮的视频预览框。",
+      "visual_type": "timeline"
+    },
+    {
+      "animation": "Quote rule expands, text fades in.",
+      "assets": [],
+      "caption": "当然请注意，AI生成的声音和形象目前还不能完全替代真人，但它正在快速接近。适合作为辅助工具，而不是替代真实交流。",
+      "duration_seconds": 10,
+      "id": "scene-07",
+      "narration": "当然请注意，AI生成的声音和形象目前还不能完全替代真人，但它正在快速接近。适合作为辅助工具，而不是替代真实交流。",
+      "visual_direction": "画面出现一个天平图标，左侧“AI辅助”，右侧“真人表达”，天平微微倾向左侧但保持平衡。下方文字：“工具，而非替代品”。",
+      "visual_type": "quote"
+    },
+    {
+      "animation": "CTA card fades in.",
+      "assets": [],
+      "caption": "想试试？在评论区留言“数字人”，我们会把体验方式发给你。关注我们，了解更多AI创作技巧。",
+      "duration_seconds": 10,
+      "id": "scene-08",
+      "narration": "想试试？在评论区留言“数字人”，我们会把体验方式发给你。关注我们，了解更多AI创作技巧。",
+      "visual_direction": "底部出现“评论区见”动画，手指点击“数字人”三个字。右上角出现“关注”按钮脉冲动效。全程深色背景。",
+      "visual_type": "cta"
+    }
+  ]
+}

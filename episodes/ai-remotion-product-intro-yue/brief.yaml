@@ -1,0 +1,12 @@
+aspect_ratio: 9:16
+audience: 需要快速理解主题的中文短视频观众
+duration_seconds: 60
+must_avoid:
+  - 不要把 AI 生成内容描述为已经人工核实的事实
+must_include: []
+platform: 抖音
+source_notes: []
+tone: 清楚、自然、不过度夸张
+topic: AI-Remotion：可審可渲染嘅圖文講解影片
+visual_style: 深色背景、信息卡片、轻量动效
+voice: 亲切自然的中文旁白

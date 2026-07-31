@@ -108,9 +108,12 @@ AI_REMOTION_LLM_PROVIDER=deterministic
 AI_REMOTION_LLM_PROVIDER=openai-compatible
 AI_REMOTION_TTS_PROVIDER=silent
 AI_REMOTION_TTS_PROVIDER=macos-say
+AI_REMOTION_TTS_PROVIDER=cosyvoice
 ```
 
-External LLM/TTS providers are configuration-ready but not called by default. `openai-compatible` currently falls back to deterministic generation unless `AI_REMOTION_LLM_FALLBACK_TO_DETERMINISTIC=false`, in which case the CLI fails clearly until the adapter is implemented. External TTS providers such as `edge-tts`, `doubao`, `azure`, and `elevenlabs` are recognized as pending and will not run silently.
+External providers are opt-in. To use DeepSeek through its OpenAI-compatible Chat Completions API, set `AI_REMOTION_LLM_PROVIDER=openai-compatible`, `AI_REMOTION_LLM_BASE_URL=https://api.deepseek.com`, an API key, and an explicit model. When `AI_REMOTION_LLM_FALLBACK_TO_DETERMINISTIC=true`, missing configuration, timeouts, and invalid responses fall back to the local deterministic script generator.
+
+CosyVoice runs as a separately managed local FastAPI service. Set `AI_REMOTION_TTS_PROVIDER=cosyvoice`, `AI_REMOTION_TTS_BASE_URL` to its local server, and `AI_REMOTION_TTS_VOICE` to a CosyVoice speaker ID; the `/inference_sft` endpoint must return a WAV file. CosyVoice failures fail loudly and do not substitute silent audio. FunASR is reserved for a future transcription and caption-alignment stage, not TTS. `edge-tts`, `doubao`, `azure`, and `elevenlabs` remain pending and will not run silently.
 
 ## New Episode Flow
 

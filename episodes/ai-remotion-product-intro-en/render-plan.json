@@ -1,0 +1,230 @@
+{
+  "episode_id": "ai-remotion-product-intro-en",
+  "metadata": {
+    "title": "AI-Remotion: Reviewable and Renderable Explainer Videos",
+    "subtitle": "需要快速理解主题的中文短视频观众",
+    "platform": "抖音",
+    "language": "en",
+    "duration_seconds": 45.166666666666664,
+    "aspect_ratio": "9:16"
+  },
+  "theme": {
+    "id": "dark-explainer-v1",
+    "background": "#0c1117",
+    "surface": "#151d26",
+    "surfaceMuted": "#202a34",
+    "text": "#f4f7fb",
+    "textMuted": "#a9b6c7",
+    "accent": "#44d7b6",
+    "accentStrong": "#f4b44b",
+    "border": "rgba(255, 255, 255, 0.14)"
+  },
+  "video": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "duration_frames": 1355,
+    "safe_area": {
+      "top": 120,
+      "right": 72,
+      "bottom": 180,
+      "left": 72
+    }
+  },
+  "audio": {
+    "duration_seconds": 45.15120181405896,
+    "voiceover_path": "audio/voiceover.wav"
+  },
+  "captions": {
+    "enabled": true,
+    "items": [
+      {
+        "start_frame": 0,
+        "end_frame": 270,
+        "text": "AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics. Start with a sentence that captures the key point."
+      },
+      {
+        "start_frame": 270,
+        "end_frame": 508,
+        "text": "This episode focuses on: AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics."
+      },
+      {
+        "start_frame": 508,
+        "end_frame": 636,
+        "text": "Use screenshots, concept cards, or flowcharts to give the audience a visual anchor."
+      },
+      {
+        "start_frame": 636,
+        "end_frame": 775,
+        "text": "Break down complex content into three to four easy-to-follow steps."
+      },
+      {
+        "start_frame": 775,
+        "end_frame": 933,
+        "text": "Compare manual production and structured production, emphasizing why templating is worthwhile."
+      },
+      {
+        "start_frame": 933,
+        "end_frame": 1060,
+        "text": "Connect brief, script, storyboard, and render-plan into a single pipeline."
+      },
+      {
+        "start_frame": 1060,
+        "end_frame": 1184,
+        "text": "First make the content reviewable, then make the visuals renderable."
+      },
+      {
+        "start_frame": 1184,
+        "end_frame": 1355,
+        "text": "Finally, output a reusable, checkable, and renderable video script with graphics for this episode."
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "title": "Title card",
+      "narration": "AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics. Start with a sentence that captures the key point.",
+      "caption": "AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics. Start with a sentence that captures the key point.",
+      "duration_seconds": 9.009342403628118,
+      "start_frame": 0,
+      "duration_frames": 270,
+      "visual": {
+        "eyebrow": "AI-Remotion Draft",
+        "primary": "AI-Remotion: Reviewable and Renderable Explainer Videos",
+        "secondary": "Title card, aimed at Chinese short video audience who need to quickly understand the topic. Style: dark background, info cards, light animations."
+      }
+    },
+    {
+      "id": "scene-02",
+      "type": "key_point",
+      "title": "Use a single key point card to present the concept that must be clearly explained in this episode",
+      "narration": "This episode focuses on: AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics.",
+      "caption": "This episode focuses on: AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics.",
+      "duration_seconds": 7.929614512471655,
+      "start_frame": 270,
+      "duration_frames": 238,
+      "visual": {
+        "primary": "This episode focuses on: AI-Remotion: Transform product introductions into reviewable and renderable video scripts with graphics.",
+        "secondary": "Use a single key point card to present the concept that must be clearly explained in this episode."
+      }
+    },
+    {
+      "id": "scene-03",
+      "type": "image_card",
+      "title": "Display an image card carrying screenshots",
+      "narration": "Use screenshots, concept cards, or flowcharts to give the audience a visual anchor.",
+      "caption": "Use screenshots, concept cards, or flowcharts to give the audience a visual anchor.",
+      "duration_seconds": 4.249251700680272,
+      "start_frame": 508,
+      "duration_frames": 128,
+      "visual": {
+        "eyebrow": "Visual Evidence",
+        "primary": "图文证据",
+        "secondary": "Display an image card carrying screenshots, concept cards, and flow arrows.",
+        "assets": [
+          "截图",
+          "概念卡",
+          "流程图"
+        ]
+      }
+    },
+    {
+      "id": "scene-04",
+      "type": "list",
+      "title": "List card showing script",
+      "narration": "Break down complex content into three to four easy-to-follow steps.",
+      "caption": "Break down complex content into three to four easy-to-follow steps.",
+      "duration_seconds": 4.632380952380952,
+      "start_frame": 636,
+      "duration_frames": 139,
+      "visual": {
+        "bullets": [
+          "脚本",
+          "分镜",
+          "渲染",
+          "复查"
+        ]
+      }
+    },
+    {
+      "id": "scene-05",
+      "type": "comparison",
+      "title": "Left-right comparison: manual production vs structured production",
+      "narration": "Compare manual production and structured production, emphasizing why templating is worthwhile.",
+      "caption": "Compare manual production and structured production, emphasizing why templating is worthwhile.",
+      "duration_seconds": 5.259319727891157,
+      "start_frame": 775,
+      "duration_frames": 158,
+      "visual": {
+        "left_label": "手动制作",
+        "left_points": [
+          "重复摆放",
+          "难以复用",
+          "修改成本高"
+        ],
+        "right_label": "结构化生产",
+        "right_points": [
+          "文件驱动",
+          "模板复用",
+          "可检查"
+        ]
+      }
+    },
+    {
+      "id": "scene-06",
+      "type": "timeline",
+      "title": "Timeline showing the sequence from brief to render-plan",
+      "narration": "Connect brief, script, storyboard, and render-plan into a single pipeline.",
+      "caption": "Connect brief, script, storyboard, and render-plan into a single pipeline.",
+      "duration_seconds": 4.249251700680272,
+      "start_frame": 933,
+      "duration_frames": 127,
+      "visual": {
+        "timeline_items": [
+          {
+            "label": "1",
+            "text": "Brief"
+          },
+          {
+            "label": "2",
+            "text": "Script"
+          },
+          {
+            "label": "3",
+            "text": "Render"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-07",
+      "type": "quote",
+      "title": "Quote card emphasizing reviewable",
+      "narration": "First make the content reviewable, then make the visuals renderable.",
+      "caption": "First make the content reviewable, then make the visuals renderable.",
+      "duration_seconds": 4.133151927437642,
+      "start_frame": 1060,
+      "duration_frames": 124,
+      "visual": {
+        "quote": "First make the content reviewable, then make the visuals renderable.",
+        "attribution": "AI-Remotion workflow"
+      }
+    },
+    {
+      "id": "scene-08",
+      "type": "cta",
+      "title": "Closing CTA",
+      "narration": "Finally, output a reusable, checkable, and renderable video script with graphics for this episode.",
+      "caption": "Finally, output a reusable, checkable, and renderable video script with graphics for this episode.",
+      "duration_seconds": 5.688888888888889,
+      "start_frame": 1184,
+      "duration_frames": 171,
+      "visual": {
+        "primary": "reviewable script -> deterministic render",
+        "secondary": "Closing CTA, prompting next steps for voiceover, captions, and QA."
+      }
+    }
+  ]
+}

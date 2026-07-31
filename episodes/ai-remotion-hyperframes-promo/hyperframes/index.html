@@ -1,0 +1,70 @@
+<!doctype html>
+<html
+  lang="zh-CN"
+  data-composition-id="ai-remotion-product-promo"
+  data-composition-duration="60"
+  data-width="1080"
+  data-height="1080"
+  data-composition-variables='[{"id":"productName","label":"Product name","type":"string","default":"AI-Remotion"}]'
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI-Remotion Product Promo</title>
+    <style>
+      :root { --ink:#080b10; --paper:#eef4ee; --mint:#5df2a5; --cyan:#5ad9ff; --violet:#a88bff; }
+      * { box-sizing:border-box; } body { margin:0; background:var(--ink); color:var(--paper); font-family:sans-serif; overflow:hidden; }
+      .stage { width:1080px; height:1080px; position:relative; overflow:hidden; background:#070b10; }
+      .orb { position:absolute; width:760px; height:420px; border-radius:48% 52% 44% 56%; filter:blur(.2px); opacity:.72; background:linear-gradient(135deg,#8c79ff,#2ee6ad 48%,#123a68); transform:rotate(-28deg); }
+      .orb.one { top:-180px; left:-200px; } .orb.two { right:-300px; bottom:-150px; background:linear-gradient(135deg,#00b9ff,#7cff96 50%,#7449df); }
+      .grain { position:absolute; inset:0; opacity:.16; background-image:radial-gradient(#fff 0.7px,transparent .8px); background-size:7px 7px; mix-blend-mode:soft-light; }
+      .grid { position:absolute; inset:-20%; opacity:.2; background:linear-gradient(#7fffc833 1px,transparent 1px),linear-gradient(90deg,#7fffc833 1px,transparent 1px); background-size:70px 70px; transform:perspective(800px) rotateX(64deg); }
+      .scan { position:absolute; left:0; right:0; height:3px; background:#b7ffe2; box-shadow:0 0 30px #5df2a5; opacity:0; }
+      .scene { position:absolute; inset:0; display:grid; place-items:center; padding:88px; opacity:0; }
+      .eyebrow { color:var(--mint); font-size:25px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+      h1 { margin:22px 0 0; font-size:114px; line-height:.95; letter-spacing:-.075em; max-width:880px; }
+      p { font-size:31px; line-height:1.35; color:#c7d2d1; max-width:760px; }
+      .center { text-align:center; }.left { align-content:center; justify-items:start; }
+      .mockup { width:900px; border:1px solid #ffffff44; border-radius:32px; overflow:hidden; background:#e8eeec; color:#142029; box-shadow:0 40px 100px #0009; }
+      .mockbar { height:58px; display:flex; gap:9px; align-items:center; padding:0 22px; background:#d9e4df; }.dot { width:12px; height:12px; border-radius:50%; background:#87a79c; }
+      .mockbody { padding:35px; display:grid; grid-template-columns:180px 1fr; min-height:410px; }.nav { color:#6a7c76; font-size:18px; line-height:2.35; }.panel { border:2px solid #59dca7; border-radius:22px; padding:28px; }.prompt { border-radius:16px; padding:20px; background:#fff; font-size:24px; }.chip { display:inline-block; margin:16px 10px 0 0; padding:10px 15px; border-radius:999px; color:#1d5543; background:#c8f5df; font-size:16px; font-weight:700; }
+      .terminal { width:820px; padding:38px; border:1px solid #77ffb255; border-radius:26px; background:#091812dd; box-shadow:0 35px 80px #000b; font-family:monospace; font-size:27px; line-height:1.8; }.ok { color:var(--mint); }.muted { color:#9fb2ac; }
+      .timeline { display:flex; gap:10px; width:850px; margin-top:38px; }.timeline span { height:18px; border-radius:20px; background:var(--mint); flex:1; }.timeline span:nth-child(2n) { background:var(--cyan); }.timeline span:nth-child(3n) { background:var(--violet); }
+      .wave-panel { width:820px; margin-top:28px; padding:22px 28px; border:1px solid #43dfff77; border-radius:24px; background:#071927d9; box-shadow:0 0 55px #0ac5ff22; }.wave-head { display:flex; justify-content:space-between; color:#78e8ff; font-size:17px; letter-spacing:.14em; }.wave-panel svg { width:100%; height:138px; margin:8px 0; overflow:visible; }.wave { fill:none; stroke:#54dfff; stroke-width:5; stroke-linecap:round; filter:drop-shadow(0 0 8px #2acfff); }.wave.alt { stroke:#57ffad; stroke-width:2; opacity:.7; }.metrics { display:flex; gap:12px; }.metric { flex:1; padding:12px; border:1px solid #5ddfff44; border-radius:12px; color:#ccf8ff; font-size:15px; }.metric b { display:block; color:#fff; font-size:23px; }
+      .card-row { display:flex; gap:18px; }.flow-card { width:190px; height:250px; padding:22px; border:1px solid #8dffcc77; border-radius:24px; background:#10211ccc; color:#eafff3; box-shadow:0 18px 50px #0008; }.flow-card strong { display:block; margin-top:66px; font-size:28px; }.disclaimer { position:absolute; bottom:34px; right:48px; color:#a7b8b3; font-size:15px; letter-spacing:.08em; opacity:0; }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="orb one"></div><div class="orb two"></div><div class="grid"></div><div class="scan"></div><div class="grain"></div>
+      <section class="scene s1 left"><div><div class="eyebrow">LOCAL-FIRST VIDEO PIPELINE</div><h1><span>把想法</span><br><span>变成成片。</span></h1><p>AI-Remotion 让创作从一句 brief 开始。</p></div></section>
+      <section class="scene s2 center"><div><div class="eyebrow">FROM CHAOS TO FLOW</div><div class="card-row"><div class="flow-card">01<strong>Brief</strong></div><div class="flow-card">02<strong>Script</strong></div><div class="flow-card">03<strong>Render</strong></div><div class="flow-card">04<strong>QA</strong></div></div><h1>让创作<br>形成闭环。</h1></div></section>
+      <section class="scene s3 center"><div class="mockup"><div class="mockbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="mockbody"><aside class="nav">Brief<br>Script<br>Storyboard<br>Render plan<br>Voice<br>QA</aside><article class="panel"><div class="eyebrow">演示界面</div><h2>今天要讲什么？</h2><div class="prompt">普通人如何用 AI-Remotion 制作讲解视频？</div><span class="chip">生成脚本</span><span class="chip">拆分场景</span><span class="chip">本地渲染</span></article></div></div></section>
+      <section class="scene s4 center"><div><div class="terminal"><span class="muted">$</span> npm run episode:script<br><span class="ok">✓</span> script.md 已生成<br><span class="muted">$</span> npm run episode:voice<br><span class="ok">✓</span> audio/segments.json 就绪<br><span class="muted">$</span> npm run episode:render</div><div class="wave-panel"><div class="wave-head"><span>VOICE SIGNAL / LIVE</span><span>01:16:09</span></div><svg viewBox="0 0 760 138" aria-label="原创动态声纹"><path class="wave" d="M0 70 C45 12 80 128 128 70 S210 8 258 70 S340 132 388 70 S470 5 518 70 S600 128 648 70 S710 22 760 70"/><path class="wave alt" d="M0 70 C62 110 92 22 152 70 S245 118 306 70 S400 20 462 70 S558 115 620 70 S708 25 760 70"/></svg><div class="metrics"><div class="metric">音色<b>清晰</b></div><div class="metric">节奏<b>同步</b></div><div class="metric">字幕<b>已对齐</b></div></div></div><div class="timeline"><span></span><span></span><span></span><span></span><span></span><span></span></div></div></section>
+      <section class="scene s5 left"><div><div class="eyebrow">REVIEW BEFORE EXPORT</div><h1>每一份脚本<br>每一个镜头<br>都可审阅。</h1><p>结构化文件、可复现渲染、本地优先。</p></div></section>
+      <section class="scene s6 center"><div><div class="eyebrow">AI-REMOTION</div><h1>从 brief<br>到发布前 QA。</h1><p>现在，开始你的下一支视频。</p></div></section><div class="disclaimer">概念动效演示 · 功能以本地 CLI 工作流为准</div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script>
+      const $ = (selector) => document.querySelector(selector);
+      const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+      const promoTimeline = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const scenes = $$(".scene");
+      const show = (scene, at) => promoTimeline.set(scene, { opacity: 1 }, at).fromTo(scene, { scale: .94 }, { scale: 1, duration: .8 }, at);
+      const hide = (scene, at) => promoTimeline.to(scene, { opacity: 0, scale: 1.06, duration: .6, ease: "power2.in" }, at);
+      promoTimeline
+        .fromTo(".orb.one", { x:-180, y:-120, rotation:-45 }, { x:160, y:90, rotation:-8, duration:60, ease:"none" }, 0)
+        .fromTo(".orb.two", { x:180, y:120, rotation:18 }, { x:-170, y:-100, rotation:-18, duration:60, ease:"none" }, 0)
+        .to(".grid", { y:-150, rotation:1, duration:60, ease:"none" }, 0)
+        .to(".scan", { opacity:.9, y:1080, duration:2.2, ease:"none" }, 1)
+        .to(".scan", { opacity:0, duration:.2 }, 3.2);
+      show(scenes[0], 0); promoTimeline.from(".s1 .eyebrow", { y:45, opacity:0, duration:.6 }, .4).from(".s1 h1 span", { y:130, opacity:0, stagger:.22, duration:.8 }, .7).from(".s1 p", { y:24, opacity:0, duration:.5 }, 1.6); hide(scenes[0], 9);
+      show(scenes[1], 8.4); promoTimeline.from(".flow-card", { y:260, rotation:(i)=>i%2?10:-10, opacity:0, stagger:.18, duration:.7 }, 8.8).to(".flow-card", { y:(i)=>i%2?20:-20, rotation:0, stagger:.1, duration:.5 }, 11).from(".s2 h1", { scale:.65, opacity:0, duration:.7 }, 13); hide(scenes[1], 19);
+      show(scenes[2], 18.4); promoTimeline.from(".mockup", { y:400, rotation:-5, opacity:0, duration:.8 }, 18.7).from(".mockbar .dot", { scale:0, stagger:.12, duration:.3 }, 19.4).from(".nav", { x:-80, opacity:0, duration:.5 }, 20).from(".panel", { scale:.85, opacity:0, duration:.6 }, 20.2).from(".chip", { y:35, opacity:0, stagger:.12, duration:.35 }, 21.2); hide(scenes[2], 31);
+      show(scenes[3], 30.4); promoTimeline.from(".terminal", { scale:.8, opacity:0, duration:.6 }, 30.7).from(".terminal br", { opacity:0, stagger:.2, duration:.01 }, 31).from(".wave-panel", { y:90, opacity:0, duration:.6 }, 33).from(".wave", { strokeDasharray:1200, strokeDashoffset:1200, duration:1.4, stagger:.15 }, 33.3).to(".wave", { scaleY:1.22, transformOrigin:"center", yoyo:true, repeat:4, duration:.32 }, 35).from(".metric", { y:24, opacity:0, stagger:.12, duration:.3 }, 35.2).from(".timeline span", { scaleX:0, transformOrigin:"left", stagger:.12, duration:.4 }, 36); hide(scenes[3], 42);
+      show(scenes[4], 41.4); promoTimeline.from(".s5 h1", { x:-180, opacity:0, stagger:.1, duration:.7 }, 41.8).from(".s5 p", { y:35, opacity:0, duration:.5 }, 43); hide(scenes[4], 51);
+      show(scenes[5], 50.4); promoTimeline.from(".s6 .eyebrow", { scale:2.4, opacity:0, duration:.5 }, 50.8).from(".s6 h1", { y:130, opacity:0, duration:.8 }, 51.3).from(".s6 p", { y:30, opacity:0, duration:.5 }, 52).to(".disclaimer", { opacity:1, duration:.5 }, 56).set({}, {}, 60);
+      window.__timelines = { "ai-remotion-product-promo": promoTimeline };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "duration_notes": "Generated from reviewable script scene durations.",
+  "episode_id": "provider-smoke",
+  "scenes": [
+    {
+      "animation": "Title rises softly with signal line expansion.",
+      "assets": [],
+      "caption": "想快速做出带图文讲解的短视频？试试用 DeepSeek 搭配 CosyVoice，两步搞定，全程不用露脸。",
+      "duration_seconds": 8,
+      "id": "scene-01",
+      "narration": "想快速做出带图文讲解的短视频？试试用 DeepSeek 搭配 CosyVoice，两步搞定，全程不用露脸。",
+      "visual_direction": "深色背景上出现标题文字“AI 生成图文讲解视频”，然后两个 App 图标（DeepSeek + CosyVoice）渐显，周围有微光动效。",
+      "visual_type": "title"
+    },
+    {
+      "animation": "Key card fades in.",
+      "assets": [],
+      "caption": "第一步，用 DeepSeek 生成脚本和图文大纲。只需要告诉它你讲什么，它就能帮你组织好段落、配图建议和旁白文案。",
+      "duration_seconds": 10,
+      "id": "scene-02",
+      "narration": "第一步，用 DeepSeek 生成脚本和图文大纲。只需要告诉它你讲什么，它就能帮你组织好段落、配图建议和旁白文案。",
+      "visual_direction": "展示一个手机屏幕界面（模拟 DeepSeek 对话），输入框显示“介绍恐龙化石”，下方渐渐出现分段大纲文本。信息卡片弹出“脚本+配图建议”。",
+      "visual_type": "key_point"
+    },
+    {
+      "animation": "Image card lifts in with asset labels.",
+      "assets": [],
+      "caption": "第二步，把文案复制到 CosyVoice，选择声音，它就能生成自然的中文朗读音频，还能控制语速和停顿。",
+      "duration_seconds": 10,
+      "id": "scene-03",
+      "narration": "第二步，把文案复制到 CosyVoice，选择声音，它就能生成自然的中文朗读音频，还能控制语速和停顿。",
+      "visual_direction": "手机屏幕切换到 CosyVoice 界面，粘贴文案，选择“亲切自然”声音，播放按钮亮起，波形动画出现。旁边小字标签“语速/停顿可调”。",
+      "visual_type": "image_card"
+    },
+    {
+      "animation": "Rows enter as a group.",
+      "assets": [],
+      "caption": "音频导出后，用剪映或其他工具把图文素材对上音频时间轴。DeepSeek 给的配图建议可以直接搜索或生成。",
+      "duration_seconds": 10,
+      "id": "scene-04",
+      "narration": "音频导出后，用剪映或其他工具把图文素材对上音频时间轴。DeepSeek 给的配图建议可以直接搜索或生成。",
+      "visual_direction": "视频编辑器时间轴界面，音频波形在上方，下方插入图片缩略图。图片依次与音频对齐，有简单的“对位”动效。",
+      "visual_type": "list"
+    },
+    {
+      "animation": "Columns fade in together.",
+      "assets": [],
+      "caption": "注意：生成的脚本和图文建议是由 AI 辅助产生，不是经过人工核实的事实。发布前建议自己检查一遍关键信息，确保准确。",
+      "duration_seconds": 8,
+      "id": "scene-05",
+      "narration": "注意：生成的脚本和图文建议是由 AI 辅助产生，不是经过人工核实的事实。发布前建议自己检查一遍关键信息，确保准确。",
+      "visual_direction": "深色背景上出现警告标语“AI 辅助生成，建议人工核实”，旁边一个放大镜图标扫过文字。卡片色调偏橙黄。",
+      "visual_type": "comparison"
+    },
+    {
+      "animation": "Timeline steps enter from top to bottom.",
+      "assets": [],
+      "caption": "这样，一个带旁白讲解的图文视频就做好了。从创意到出片，全流程只用两个工具，适合不想露脸又想快速产出的内容创作者。",
+      "duration_seconds": 8,
+      "id": "scene-06",
+      "narration": "这样，一个带旁白讲解的图文视频就做好了。从创意到出片，全流程只用两个工具，适合不想露脸又想快速产出的内容创作者。",
+      "visual_direction": "展示最终成品预览：竖版视频，图片配合配音依次切换，底边有字幕。结尾出现“你学会了吗？”字样，配合点赞/关注图标。",
+      "visual_type": "timeline"
+    },
+    {
+      "animation": "Quote rule expands, text fades in.",
+      "assets": [],
+      "caption": "如果还想了解更多实用技巧，点赞关注，我们下期继续聊 AI 创作工具。",
+      "duration_seconds": 6,
+      "id": "scene-07",
+      "narration": "如果还想了解更多实用技巧，点赞关注，我们下期继续聊 AI 创作工具。",
+      "visual_direction": "深色背景上显示“点赞+关注”按钮动画，字幕“下期继续”。整体淡出。",
+      "visual_type": "quote"
+    }
+  ]
+}

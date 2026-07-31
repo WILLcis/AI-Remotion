@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; color: #f7f8fb; font-family: Inter, sans-serif; }
+        .fill { position: absolute; inset: 0; background: radial-gradient(circle at 18% 82%, #103d42 0, rgba(16, 61, 66, 0) 36%), #080c14; }
+        .header { position: absolute; left: 118px; top: 92px; }
+        .header small { color: #52dac7; font-family: monospace; font-size: 20px; letter-spacing: 0.18em; }
+        .header h2 { margin: 16px 0 0; font-size: 70px; letter-spacing: -0.045em; }
+        .pipeline { position: absolute; left: 118px; right: 118px; top: 340px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+        .step { position: relative; min-height: 260px; padding: 30px; border: 1px solid #35445a; border-radius: 20px; background: rgba(11, 17, 28, 0.94); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34); }
+        .step::after { content: ""; position: absolute; left: 30px; right: 30px; bottom: 28px; height: 4px; border-radius: 3px; background: #273144; }
+        .step strong { display: block; color: #9ba7ba; font-family: monospace; font-size: 18px; letter-spacing: 0.12em; }
+        .step b { display: block; margin-top: 72px; font-size: 32px; }
+        .step i { position: absolute; left: 30px; right: 30px; bottom: 28px; z-index: 2; height: 4px; transform: scaleX(0); transform-origin: left center; border-radius: 3px; background: linear-gradient(90deg, #7f67ff, #48dbc7); }
+      </style>
+      <div id="root" data-composition-id="promo-feature" data-width="1920" data-height="1080" data-duration="5.2">
+        <div class="fill"></div>
+        <header class="header">
+          <small>ONE REVIEWABLE PRODUCTION LINE</small>
+          <h2>每一步都结构化，每一版都可复现。</h2>
+        </header>
+        <div class="pipeline">
+          <article class="step"><strong>01 / BRIEF</strong><b>明确目标</b><i></i></article>
+          <article class="step"><strong>02 / SCRIPT</strong><b>生成脚本</b><i></i></article>
+          <article class="step"><strong>03 / VOICE</strong><b>克隆配音</b><i></i></article>
+          <article class="step"><strong>04 / VIDEO</strong><b>组合画面</b><i></i></article>
+          <article class="step"><strong>05 / QA</strong><b>检查交付</b><i></i></article>
+        </div>
+        <script>
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(".header", { y: 48, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.12)
+            .fromTo(".step", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, stagger: 0.12, ease: "power3.out" }, 0.38)
+            .to(".step i", { scaleX: 1, duration: 0.52, stagger: 0.38, ease: "power2.out" }, 1.2);
+          window.__timelines["promo-feature"] = tl;
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

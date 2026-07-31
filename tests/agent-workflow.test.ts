@@ -45,6 +45,27 @@ describe("agent workflow", () => {
     });
   });
 
+  it("parses Markdown list formatting commonly returned by an LLM", () => {
+    const storyboard = generateStoryboardFromScript({
+      episodeId: "workflow-test",
+      script: [
+        "# 演示",
+        "",
+        "## Segment 1",
+        "- **Spoken:** 这是旁白。",
+        "- **Visual:** 这是画面说明。",
+        "- **Duration:** 8秒",
+      ].join("\n"),
+    });
+
+    expect(storyboard.scenes[0]).toMatchObject({
+      caption: "这是旁白。",
+      duration_seconds: 8,
+      narration: "这是旁白。",
+      visual_direction: "这是画面说明。",
+    });
+  });
+
   it("converts storyboard into a schema-valid render plan", () => {
     const storyboard = generateStoryboardFromScript({
       episodeId: "workflow-test",

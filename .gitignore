@@ -1,6 +1,7 @@
 node_modules/
 dist/
 out/
+.transcription-venv/
 *.log
 .DS_Store
 .env
@@ -10,6 +11,23 @@ episodes/*/out/
 episodes/*/qa-report.md
 episodes/*/audio/*.mp3
 episodes/*/audio/*.wav
+episodes/*/audio/segments/
+episodes/*/audio/segments.json
+episodes/*/assets/avatar/
+episodes/*/assets/avatar-source.*
+episodes/*/assets/avatar-reference.*
+episodes/*/rights.yaml
+episodes/**/*.mp4
+episodes/**/*.mov
+episodes/**/*.webm
+episodes/*/reference-analysis/
+episodes/res/video/
+public/**/*.mp4
+videos/*/audio/*.mp3
+videos/*/audio/*.wav
+videos/*/.hyperframes/frame-packets/
+videos/*/renders/
+videos/*/snapshots/
 
 state/tasks/*.tmp.*
 state/_local/

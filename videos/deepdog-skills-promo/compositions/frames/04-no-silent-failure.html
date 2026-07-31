@@ -1,0 +1,383 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      color: #05070b;
+      font-family: inherit;
+    }
+
+    [id="04-no-silent-failure-ground"],
+    [id="04-no-silent-failure-lifecycle"],
+    [id="04-no-silent-failure-evidence"],
+    [id="04-no-silent-failure-receipt"] {
+      position: absolute;
+      inset: 0;
+    }
+
+    [id="04-no-silent-failure-ground"] {
+      z-index: 0;
+      background: #151817;
+    }
+
+    [id="04-no-silent-failure-ground"] img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.34;
+      filter: saturate(0.72) contrast(0.92);
+    }
+
+    [id="04-no-silent-failure-ground"]::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(21, 24, 23, 0.34);
+    }
+
+    [id="04-no-silent-failure-lifecycle"] {
+      z-index: 2;
+      height: 196px;
+      padding: 52px 80px 0;
+      box-sizing: border-box;
+    }
+
+    [class~="04-no-silent-failure-kicker"] {
+      color: #f5f6f8;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    [class~="04-no-silent-failure-spike"] {
+      color: #19c785;
+      margin-right: 12px;
+    }
+
+    [class~="04-no-silent-failure-rule"] {
+      position: absolute;
+      left: 80px;
+      right: 80px;
+      top: 127px;
+      height: 1px;
+      background: rgba(245, 246, 248, 0.18);
+    }
+
+    [id="04-no-silent-failure-progress"] {
+      position: absolute;
+      left: 80px;
+      top: 127px;
+      width: 0;
+      height: 1px;
+      background: #19c785;
+    }
+
+    [class~="04-no-silent-failure-state"] {
+      position: absolute;
+      top: 103px;
+      width: 240px;
+      color: rgba(245, 246, 248, 0.48);
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+
+    [class~="04-no-silent-failure-state"]::before {
+      content: "";
+      display: block;
+      width: 13px;
+      height: 13px;
+      margin: 18px auto 14px;
+      border: 1px solid rgba(245, 246, 248, 0.36);
+      border-radius: 9999px;
+      background: #151817;
+    }
+
+    [id="04-no-silent-failure-state-enqueue"] { left: 140px; }
+    [id="04-no-silent-failure-state-claim"] { left: 600px; }
+    [id="04-no-silent-failure-state-start"] { left: 1060px; }
+    [id="04-no-silent-failure-state-complete"] { left: 1520px; }
+
+    [class~="04-no-silent-failure-state"][class~="is-current"] {
+      color: #f5f6f8;
+    }
+
+    [class~="04-no-silent-failure-state"][class~="is-current"]::before {
+      border-color: #19c785;
+      background: #19c785;
+    }
+
+    [id="04-no-silent-failure-evidence"] {
+      z-index: 3;
+      top: 214px;
+      height: 638px;
+      padding: 0 80px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+      opacity: 0;
+    }
+
+    [class~="04-no-silent-failure-panel"] {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(245, 246, 248, 0.14);
+      border-radius: 12px;
+      background: #151817;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+    }
+
+    [class~="04-no-silent-failure-panel-bar"] {
+      height: 58px;
+      padding: 0 24px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(245, 246, 248, 0.14);
+      background: #202523;
+      color: #f5f6f8;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    [class~="04-no-silent-failure-panel-index"] {
+      color: rgba(245, 246, 248, 0.56);
+      font-size: 20px;
+      letter-spacing: 0.12em;
+    }
+
+    [class~="04-no-silent-failure-panel"] img {
+      display: block;
+      width: 100%;
+      height: calc(100% - 58px);
+      object-fit: cover;
+      object-position: top;
+      opacity: 0.9;
+    }
+
+    [id="04-no-silent-failure-stream"] {
+      position: absolute;
+      left: 52%;
+      right: 22px;
+      bottom: 24px;
+      display: grid;
+      gap: 10px;
+    }
+
+    [class~="04-no-silent-failure-event"] {
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 16px;
+      border: 1px solid rgba(245, 246, 248, 0.14);
+      border-radius: 6px;
+      background: rgba(21, 24, 23, 0.92);
+      color: #f5f6f8;
+      font-size: 21px;
+      letter-spacing: 0.02em;
+      opacity: 0;
+    }
+
+    [class~="04-no-silent-failure-event"]::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-right: 14px;
+      border-radius: 9999px;
+      background: rgba(245, 246, 248, 0.46);
+    }
+
+    [id="04-no-silent-failure-receipt"] {
+      z-index: 5;
+      top: 210px;
+      left: 420px;
+      right: 420px;
+      bottom: 226px;
+      padding: 44px 50px;
+      box-sizing: border-box;
+      border: 1px solid rgba(5, 7, 11, 0.12);
+      border-radius: 12px;
+      background: #f5f6f8;
+      box-shadow: 0 1px 3px rgba(5, 7, 11, 0.08), 0 4px 16px rgba(5, 7, 11, 0.04);
+      opacity: 0;
+    }
+
+    [class~="04-no-silent-failure-receipt-head"] {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(5, 7, 11, 0.12);
+    }
+
+    [class~="04-no-silent-failure-receipt-kicker"] {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    [class~="04-no-silent-failure-receipt-title"] {
+      margin-top: 14px;
+      font-size: 58px;
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.018em;
+    }
+
+    [class~="04-no-silent-failure-receipt-id"] {
+      color: rgba(5, 7, 11, 0.54);
+      font-size: 22px;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="04-no-silent-failure-checks"] {
+      display: grid;
+      gap: 0;
+      margin-top: 24px;
+    }
+
+    [class~="04-no-silent-failure-check"] {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(5, 7, 11, 0.12);
+      font-size: 27px;
+      font-weight: 500;
+    }
+
+    [class~="04-no-silent-failure-check-mark"] {
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    [id="04-no-silent-failure-stamp"] {
+      position: absolute;
+      right: 50px;
+      bottom: 42px;
+      padding: 18px 24px;
+      border: 2px solid #19c785;
+      border-radius: 8px;
+      color: #05070b;
+      font-size: 29px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      opacity: 0;
+    }
+  </style>
+
+  <div id="root" data-composition-id="04-no-silent-failure" data-width="1920" data-height="1080" data-duration="9.7">
+    <div id="04-no-silent-failure-ground" class="clip" data-start="0" data-duration="9.7" data-track-index="0">
+      <img src="assets/control-tower.png" alt="">
+    </div>
+
+    <section id="04-no-silent-failure-lifecycle" class="clip" data-start="0" data-duration="9.7" data-track-index="1">
+      <div class="04-no-silent-failure-kicker"><span class="04-no-silent-failure-spike">✱</span>Task lifecycle</div>
+      <div class="04-no-silent-failure-rule"></div>
+      <div id="04-no-silent-failure-progress"></div>
+      <div id="04-no-silent-failure-state-enqueue" class="04-no-silent-failure-state">enqueue</div>
+      <div id="04-no-silent-failure-state-claim" class="04-no-silent-failure-state">claim</div>
+      <div id="04-no-silent-failure-state-start" class="04-no-silent-failure-state">start</div>
+      <div id="04-no-silent-failure-state-complete" class="04-no-silent-failure-state">complete</div>
+    </section>
+
+    <section id="04-no-silent-failure-evidence" class="clip" data-start="0" data-duration="9.7" data-track-index="2">
+      <div id="04-no-silent-failure-verification" class="04-no-silent-failure-panel">
+        <div class="04-no-silent-failure-panel-bar">
+          <span>Verification queue</span>
+          <span class="04-no-silent-failure-panel-index">FILES + STATE</span>
+        </div>
+        <img src="assets/verification.png" alt="">
+      </div>
+      <div id="04-no-silent-failure-time-state" class="04-no-silent-failure-panel">
+        <div class="04-no-silent-failure-panel-bar">
+          <span>Event stream</span>
+          <span class="04-no-silent-failure-panel-index">LIVE</span>
+        </div>
+        <img src="assets/time-state.png" alt="">
+        <div id="04-no-silent-failure-stream">
+          <div id="04-no-silent-failure-event-tool" class="04-no-silent-failure-event">tool call</div>
+          <div id="04-no-silent-failure-event-file" class="04-no-silent-failure-event">file change</div>
+          <div id="04-no-silent-failure-event-state" class="04-no-silent-failure-event">state change</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="04-no-silent-failure-receipt" class="clip" data-start="0" data-duration="9.7" data-track-index="3">
+      <div class="04-no-silent-failure-receipt-head">
+        <div>
+          <div class="04-no-silent-failure-receipt-kicker">Lifecycle receipt</div>
+          <div class="04-no-silent-failure-receipt-title">Every step accounted for</div>
+        </div>
+        <div class="04-no-silent-failure-receipt-id">COMPLETE</div>
+      </div>
+      <div class="04-no-silent-failure-checks">
+        <div class="04-no-silent-failure-check"><span>Tool calls</span><span class="04-no-silent-failure-check-mark">visible</span></div>
+        <div class="04-no-silent-failure-check"><span>File changes</span><span class="04-no-silent-failure-check-mark">visible</span></div>
+        <div class="04-no-silent-failure-check"><span>State changes</span><span class="04-no-silent-failure-check-mark">visible</span></div>
+      </div>
+      <div id="04-no-silent-failure-stamp">NO SILENT FAILURE</div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["04-no-silent-failure"] = tl;
+
+      var states = [
+        '[id="04-no-silent-failure-state-enqueue"]',
+        '[id="04-no-silent-failure-state-claim"]',
+        '[id="04-no-silent-failure-state-start"]',
+        '[id="04-no-silent-failure-state-complete"]'
+      ];
+
+      tl.fromTo('[id="04-no-silent-failure-ground"] img', { scale: 1.035 }, { scale: 1, duration: 9.3, ease: "none" }, 0);
+      tl.fromTo('[id="04-no-silent-failure-lifecycle"]', { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.08);
+
+      states.forEach(function (selector, index) {
+        var at = 0.38 + index * 0.55;
+        tl.set(states, { className: "04-no-silent-failure-state" }, at);
+        tl.set(selector, { className: "04-no-silent-failure-state is-current" }, at);
+        tl.fromTo(selector, { scale: 0.94 }, { scale: 1, duration: 0.22, ease: "power3.out" }, at);
+        tl.to('[id="04-no-silent-failure-progress"]', { width: (25 + index * 25) + "%", duration: 0.42, ease: "power2.out" }, at);
+      });
+
+      tl.set('[id="04-no-silent-failure-state-complete"]', { className: "04-no-silent-failure-state is-current" }, 2.18);
+      tl.fromTo('[id="04-no-silent-failure-evidence"]', { opacity: 0, y: 42 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2.4);
+      tl.fromTo('[id="04-no-silent-failure-verification"]', { x: -54, opacity: 0 }, { x: 0, opacity: 1, duration: 0.48, ease: "power3.out" }, 2.48);
+      tl.fromTo('[id="04-no-silent-failure-time-state"]', { x: 54, opacity: 0 }, { x: 0, opacity: 1, duration: 0.48, ease: "power3.out" }, 2.62);
+
+      var waterfall = [
+        { selector: '[id="04-no-silent-failure-event-tool"]', start: 4.44, y: 76, duration: 0.19 },
+        { selector: '[id="04-no-silent-failure-event-file"]', start: 4.60, y: 50, duration: 0.15 },
+        { selector: '[id="04-no-silent-failure-event-state"]', start: 4.72, y: 42, duration: 0.13 }
+      ];
+
+      waterfall.forEach(function (entry) {
+        tl.set(entry.selector, { opacity: 1, y: entry.y }, entry.start);
+        tl.to(entry.selector, { y: 0, duration: entry.duration, ease: "power4.out" }, entry.start);
+      });
+
+      tl.to('[id="04-no-silent-failure-lifecycle"]', { opacity: 0.22, duration: 0.34, ease: "power2.out" }, 6.7);
+      tl.to('[id="04-no-silent-failure-evidence"]', { opacity: 0.18, duration: 0.34, ease: "power2.out" }, 6.7);
+      tl.fromTo('[id="04-no-silent-failure-receipt"]', { opacity: 0, y: 54, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" }, 6.72);
+      tl.set('[id="04-no-silent-failure-stamp"]', { opacity: 1 }, 7.72);
+      tl.fromTo('[id="04-no-silent-failure-stamp"]', { scale: 1.18 }, { scale: 1, duration: 0.26, ease: "power4.out" }, 7.72);
+    })();
+  </script>
+</template>

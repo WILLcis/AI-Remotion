@@ -1,0 +1,17 @@
+{
+  "clips": [
+    {
+      "audio_asset_id": "be574302c4e44f01ba8cbba57f453930",
+      "audio_hash": "8d55803042fc2bbede48038bb78f14eaa1013ac4909b875f9998a58ddbd76b17",
+      "duration_seconds": 54.187,
+      "generated_at": "2026-07-29T04:31:26.360Z",
+      "image_asset_id": "db59ff1cde0d4f2a889573b7075d7b93",
+      "output_path": "episodes/avatar-human3-reference/assets/avatar.mp4",
+      "scene_id": "reference-audio",
+      "video_id": "58e64c293bd34c7f90ba6731944db2a7"
+    }
+  ],
+  "episode_id": "avatar-human3-reference",
+  "provider": "heygen",
+  "version": 1
+}

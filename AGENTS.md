@@ -36,6 +36,14 @@ Four failure modes are BLOCK-level:
 - Optimistic Path: happy-path-only logic.
 - Runaway Refactor: a local fix spreads across unrelated modules.
 
+## BIOS And Project Onboarding
+
+- Project-specific onboarding status, quality matrix, protected state, and BIOS fallback rules live in `docs/AI_FIRST_PROJECT_PROFILE.md`.
+- The current parent work item is `YES-549`; do not invent child issue keys or claim BIOS updates without evidence.
+- Before non-trivial work, clarify scope, reuse/create a traceable BIOS issue, then investigate and implement on a conventionally named branch.
+- If BIOS is unavailable, record the intended issue payload and exact blocker in the delivery summary; never write tokens, guessed endpoints, or workspace identifiers to the repository.
+- At handoff, report the actual commands and evidence, remaining risks, rollback boundary, and BIOS status separately.
+
 ## Current Product Contract
 
 - Short-term product shape is CLI/Agent-first. Do not add a browser UI unless the user explicitly reopens that decision.

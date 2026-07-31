@@ -1,0 +1,8 @@
+{"id":"image_001","type":"image","path":"assets/agents.png","source":"existing","description":"agents","width":3456,"height":2168,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_002","type":"image","path":"assets/control-tower.png","source":"existing","description":"control tower","width":2560,"height":1600,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_003","type":"image","path":"assets/create-task.png","source":"existing","description":"create task","width":2560,"height":1600,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_004","type":"image","path":"assets/issues-board.png","source":"existing","description":"issues board","width":3456,"height":2168,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_005","type":"image","path":"assets/knowledge.png","source":"existing","description":"knowledge","width":3456,"height":2168,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_006","type":"image","path":"assets/runtimes.png","source":"existing","description":"runtimes","width":3456,"height":2168,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_007","type":"image","path":"assets/time-state.png","source":"existing","description":"time state","width":3456,"height":2168,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_008","type":"image","path":"assets/verification.png","source":"existing","description":"verification","width":3456,"height":2168,"provenance":{"provider":"local","adopted":true}}

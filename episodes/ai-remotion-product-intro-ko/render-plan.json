@@ -1,0 +1,230 @@
+{
+  "episode_id": "ai-remotion-product-intro-ko",
+  "metadata": {
+    "title": "AI-Remotion: 검토 가능하고 렌더링 가능한 설명 비디오",
+    "subtitle": "需要快速理解主题的中文短视频观众",
+    "platform": "抖音",
+    "language": "ko",
+    "duration_seconds": 55.06666666666667,
+    "aspect_ratio": "9:16"
+  },
+  "theme": {
+    "id": "dark-explainer-v1",
+    "background": "#0c1117",
+    "surface": "#151d26",
+    "surfaceMuted": "#202a34",
+    "text": "#f4f7fb",
+    "textMuted": "#a9b6c7",
+    "accent": "#44d7b6",
+    "accentStrong": "#f4b44b",
+    "border": "rgba(255, 255, 255, 0.14)"
+  },
+  "video": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "duration_frames": 1652,
+    "safe_area": {
+      "top": 120,
+      "right": 72,
+      "bottom": 180,
+      "left": 72
+    }
+  },
+  "audio": {
+    "duration_seconds": 55.05451247165533,
+    "voiceover_path": "audio/voiceover.wav"
+  },
+  "captions": {
+    "enabled": true,
+    "items": [
+      {
+        "start_frame": 0,
+        "end_frame": 273,
+        "text": "AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환합니다. 먼저 핵심을 한 문장으로 짚어보세요."
+      },
+      {
+        "start_frame": 273,
+        "end_frame": 524,
+        "text": "이번 콘텐츠는 다음을 중심으로 합니다: AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환."
+      },
+      {
+        "start_frame": 524,
+        "end_frame": 730,
+        "text": "스크린샷, 개념 카드, 또는 순서도를 사용하여 시청자에게 시각적 앵커를 제공합니다."
+      },
+      {
+        "start_frame": 730,
+        "end_frame": 894,
+        "text": "복잡한 내용을 3~4개의 따라하기 쉬운 단계로 분해합니다."
+      },
+      {
+        "start_frame": 894,
+        "end_frame": 1060,
+        "text": "수동 제작과 구조화 제작을 비교하여 템플릿화의 가치를 강조합니다."
+      },
+      {
+        "start_frame": 1060,
+        "end_frame": 1231,
+        "text": "brief, script, storyboard, render-plan을 하나의 파이프라인으로 연결합니다."
+      },
+      {
+        "start_frame": 1231,
+        "end_frame": 1409,
+        "text": "먼저 콘텐츠를 검토 가능하게 만들고, 그다음에 영상을 렌더링 가능하게 만듭니다."
+      },
+      {
+        "start_frame": 1409,
+        "end_frame": 1652,
+        "text": "마지막으로 재사용 가능하고, 확인 가능하며, 렌더링 가능한 그림 설명 비디오를 출력합니다."
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "title": "타이틀 카드",
+      "narration": "AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환합니다. 먼저 핵심을 한 문장으로 짚어보세요.",
+      "caption": "AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환합니다. 먼저 핵심을 한 문장으로 짚어보세요.",
+      "duration_seconds": 9.113832199546485,
+      "start_frame": 0,
+      "duration_frames": 273,
+      "visual": {
+        "eyebrow": "AI-Remotion Draft",
+        "primary": "AI-Remotion: 검토 가능하고 렌더링 가능한 설명 비디오",
+        "secondary": "타이틀 카드, 주제를 빠르게 이해해야 하는 중국어 숏폼 비디오 시청자 대상. 스타일: 어두운 배경, 정보 카드, 가벼운 애니메이션."
+      }
+    },
+    {
+      "id": "scene-02",
+      "type": "key_point",
+      "title": "단일 핵심 카드로 이번 회차에서 반드시 설명해야 할 개념을 제시",
+      "narration": "이번 콘텐츠는 다음을 중심으로 합니다: AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환.",
+      "caption": "이번 콘텐츠는 다음을 중심으로 합니다: AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환.",
+      "duration_seconds": 8.359183673469389,
+      "start_frame": 273,
+      "duration_frames": 251,
+      "visual": {
+        "primary": "이번 콘텐츠는 다음을 중심으로 합니다: AI-Remotion: 제품 소개를 검토 및 렌더링 가능한 그림 설명 비디오로 변환.",
+        "secondary": "단일 핵심 카드로 이번 회차에서 반드시 설명해야 할 개념을 제시."
+      }
+    },
+    {
+      "id": "scene-03",
+      "type": "image_card",
+      "title": "스크린샷",
+      "narration": "스크린샷, 개념 카드, 또는 순서도를 사용하여 시청자에게 시각적 앵커를 제공합니다.",
+      "caption": "스크린샷, 개념 카드, 또는 순서도를 사용하여 시청자에게 시각적 앵커를 제공합니다.",
+      "duration_seconds": 6.873106575963718,
+      "start_frame": 524,
+      "duration_frames": 206,
+      "visual": {
+        "eyebrow": "Visual Evidence",
+        "primary": "图文证据",
+        "secondary": "스크린샷, 개념 카드, 흐름 화살표를 담은 이미지 카드를 표시.",
+        "assets": [
+          "截图",
+          "概念卡",
+          "流程图"
+        ]
+      }
+    },
+    {
+      "id": "scene-04",
+      "type": "list",
+      "title": "목록 카드로 스크립트",
+      "narration": "복잡한 내용을 3~4개의 따라하기 쉬운 단계로 분해합니다.",
+      "caption": "복잡한 내용을 3~4개의 따라하기 쉬운 단계로 분해합니다.",
+      "duration_seconds": 5.479909297052155,
+      "start_frame": 730,
+      "duration_frames": 164,
+      "visual": {
+        "bullets": [
+          "脚本",
+          "分镜",
+          "渲染",
+          "复查"
+        ]
+      }
+    },
+    {
+      "id": "scene-05",
+      "type": "comparison",
+      "title": "좌우 비교: 수동 제작 vs 구조화 제작",
+      "narration": "수동 제작과 구조화 제작을 비교하여 템플릿화의 가치를 강조합니다.",
+      "caption": "수동 제작과 구조화 제작을 비교하여 템플릿화의 가치를 강조합니다.",
+      "duration_seconds": 5.5147392290249435,
+      "start_frame": 894,
+      "duration_frames": 166,
+      "visual": {
+        "left_label": "手动制作",
+        "left_points": [
+          "重复摆放",
+          "难以复用",
+          "修改成本高"
+        ],
+        "right_label": "结构化生产",
+        "right_points": [
+          "文件驱动",
+          "模板复用",
+          "可检查"
+        ]
+      }
+    },
+    {
+      "id": "scene-06",
+      "type": "timeline",
+      "title": "brief부터 render-plan까지의 순서를 보여주는 타임라인",
+      "narration": "brief, script, storyboard, render-plan을 하나의 파이프라인으로 연결합니다.",
+      "caption": "brief, script, storyboard, render-plan을 하나의 파이프라인으로 연결합니다.",
+      "duration_seconds": 5.688888888888889,
+      "start_frame": 1060,
+      "duration_frames": 171,
+      "visual": {
+        "timeline_items": [
+          {
+            "label": "1",
+            "text": "Brief"
+          },
+          {
+            "label": "2",
+            "text": "Script"
+          },
+          {
+            "label": "3",
+            "text": "Render"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-07",
+      "type": "quote",
+      "title": "인용 카드로 '검토 가능",
+      "narration": "먼저 콘텐츠를 검토 가능하게 만들고, 그다음에 영상을 렌더링 가능하게 만듭니다.",
+      "caption": "먼저 콘텐츠를 검토 가능하게 만들고, 그다음에 영상을 렌더링 가능하게 만듭니다.",
+      "duration_seconds": 5.932698412698413,
+      "start_frame": 1231,
+      "duration_frames": 178,
+      "visual": {
+        "quote": "먼저 콘텐츠를 검토 가능하게 만들고, 그다음에 영상을 렌더링 가능하게 만듭니다.",
+        "attribution": "AI-Remotion workflow"
+      }
+    },
+    {
+      "id": "scene-08",
+      "type": "cta",
+      "title": "마무리 CTA로",
+      "narration": "마지막으로 재사용 가능하고, 확인 가능하며, 렌더링 가능한 그림 설명 비디오를 출력합니다.",
+      "caption": "마지막으로 재사용 가능하고, 확인 가능하며, 렌더링 가능한 그림 설명 비디오를 출력합니다.",
+      "duration_seconds": 8.092154195011338,
+      "start_frame": 1409,
+      "duration_frames": 243,
+      "visual": {
+        "primary": "reviewable script -> deterministic render",
+        "secondary": "마무리 CTA로, 다음 단계인 보이스오버, 자막, QA 생성을 안내."
+      }
+    }
+  ]
+}

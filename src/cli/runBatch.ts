@@ -5,6 +5,7 @@ import {
   runBatchPlan,
   type BatchStep,
 } from "../episodes/batchWorkflow";
+import type { VoiceoverProvider } from "../audio/voiceover";
 
 type CliOptions = {
   all: boolean;
@@ -13,7 +14,7 @@ type CliOptions = {
   help: boolean;
   qaRenderFrames: boolean;
   steps: BatchStep[];
-  voiceProvider: "silent" | "macos-say";
+  voiceProvider: VoiceoverProvider;
 };
 
 const main = async (): Promise<void> => {
@@ -100,8 +101,8 @@ const parseArgs = (argv: string[]): CliOptions => {
 
     if (arg === "--voice-provider") {
       const value = requireValue(arg, next);
-      if (value !== "silent" && value !== "macos-say") {
-        throw new Error("--voice-provider must be silent or macos-say");
+      if (value !== "silent" && value !== "macos-say" && value !== "cosyvoice") {
+        throw new Error("--voice-provider must be silent, macos-say, or cosyvoice");
       }
       options.voiceProvider = value;
       index += 1;

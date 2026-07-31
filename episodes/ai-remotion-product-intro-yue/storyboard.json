@@ -1,0 +1,86 @@
+{
+  "duration_notes": "Generated from reviewable script scene durations.",
+  "episode_id": "ai-remotion-product-intro-yue",
+  "scenes": [
+    {
+      "animation": "Title rises softly with signal line expansion.",
+      "assets": [],
+      "caption": "AI-Remotion：將產品介紹變成可審、可渲染嘅圖文講解視頻，先用一句話抓住重點。",
+      "duration_seconds": 7.5,
+      "id": "scene-01",
+      "narration": "AI-Remotion：將產品介紹變成可審、可渲染嘅圖文講解視頻，先用一句話抓住重點。",
+      "visual_direction": "標題卡，面向需要快速理解主題嘅中文短視頻觀眾，風格：深色背景、信息卡片、輕量動效。",
+      "visual_type": "title"
+    },
+    {
+      "animation": "Key card fades in.",
+      "assets": [],
+      "caption": "今期內容圍繞：AI-Remotion：將產品介紹變成可審、可渲染嘅圖文講解視頻。",
+      "duration_seconds": 7.5,
+      "id": "scene-02",
+      "narration": "今期內容圍繞：AI-Remotion：將產品介紹變成可審、可渲染嘅圖文講解視頻。",
+      "visual_direction": "用單個重點卡呈現今期必須講清楚嘅概念。",
+      "visual_type": "key_point"
+    },
+    {
+      "animation": "Image card lifts in with asset labels.",
+      "assets": [],
+      "caption": "用截圖、概念卡或流程圖畀觀眾一個可視化錨點。",
+      "duration_seconds": 7.5,
+      "id": "scene-03",
+      "narration": "用截圖、概念卡或流程圖畀觀眾一個可視化錨點。",
+      "visual_direction": "展示一個圖像卡片，承載截圖、概念卡同流程箭頭。",
+      "visual_type": "image_card"
+    },
+    {
+      "animation": "Rows enter as a group.",
+      "assets": [],
+      "caption": "將複雜內容拆成三到四個容易跟嘅步驟。",
+      "duration_seconds": 7.5,
+      "id": "scene-04",
+      "narration": "將複雜內容拆成三到四個容易跟嘅步驟。",
+      "visual_direction": "列表卡，逐條展示腳本、分鏡、渲染、複查。",
+      "visual_type": "list"
+    },
+    {
+      "animation": "Columns fade in together.",
+      "assets": [],
+      "caption": "對比手動製作同結構化生產，強調點解值得模板化。",
+      "duration_seconds": 7.5,
+      "id": "scene-05",
+      "narration": "對比手動製作同結構化生產，強調點解值得模板化。",
+      "visual_direction": "左右對比：手動製作 vs 結構化生產。",
+      "visual_type": "comparison"
+    },
+    {
+      "animation": "Timeline steps enter from top to bottom.",
+      "assets": [],
+      "caption": "將 brief、script、storyboard、render-plan 串成一條流水線。",
+      "duration_seconds": 7.5,
+      "id": "scene-06",
+      "narration": "將 brief、script、storyboard、render-plan 串成一條流水線。",
+      "visual_direction": "時間線展示從 brief 到 render-plan 嘅順序。",
+      "visual_type": "timeline"
+    },
+    {
+      "animation": "Quote rule expands, text fades in.",
+      "assets": [],
+      "caption": "先令內容可審，再令畫面可渲染。",
+      "duration_seconds": 7.5,
+      "id": "scene-07",
+      "narration": "先令內容可審，再令畫面可渲染。",
+      "visual_direction": "引用卡強調可審稿、可復現、可疊代。",
+      "visual_type": "quote"
+    },
+    {
+      "animation": "CTA card fades in.",
+      "assets": [],
+      "caption": "最後輸出可復用、可檢查、可渲染嘅一期圖文講解視頻。",
+      "duration_seconds": 7.5,
+      "id": "scene-08",
+      "narration": "最後輸出可復用、可檢查、可渲染嘅一期圖文講解視頻。",
+      "visual_direction": "收尾 CTA，提示下一步生成 voiceover、captions 同 QA。",
+      "visual_type": "cta"
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "episode_id": "ai-remotion-product-intro",
+  "metadata": {
+    "title": "AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频",
+    "subtitle": "需要快速理解主题的中文短视频观众",
+    "platform": "抖音",
+    "language": "zh",
+    "duration_seconds": 35.833333333333336,
+    "aspect_ratio": "9:16"
+  },
+  "theme": {
+    "id": "dark-explainer-v1",
+    "background": "#0c1117",
+    "surface": "#151d26",
+    "surfaceMuted": "#202a34",
+    "text": "#f4f7fb",
+    "textMuted": "#a9b6c7",
+    "accent": "#44d7b6",
+    "accentStrong": "#f4b44b",
+    "border": "rgba(255, 255, 255, 0.14)"
+  },
+  "video": {
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "duration_frames": 1075,
+    "safe_area": {
+      "top": 120,
+      "right": 72,
+      "bottom": 180,
+      "left": 72
+    }
+  },
+  "audio": {
+    "duration_seconds": 35.81678004535147,
+    "voiceover_path": "audio/voiceover.wav"
+  },
+  "captions": {
+    "enabled": true,
+    "items": [
+      {
+        "start_frame": 0,
+        "end_frame": 197,
+        "text": "AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频，先用一句话抓住重点。"
+      },
+      {
+        "start_frame": 197,
+        "end_frame": 374,
+        "text": "这期内容围绕：AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频。"
+      },
+      {
+        "start_frame": 374,
+        "end_frame": 482,
+        "text": "用截图、概念卡或流程图给观众一个可视化锚点。"
+      },
+      {
+        "start_frame": 482,
+        "end_frame": 589,
+        "text": "把复杂内容拆成三到四个容易跟上的步骤。"
+      },
+      {
+        "start_frame": 589,
+        "end_frame": 708,
+        "text": "对比手动制作和结构化生产，强调为什么值得模板化。"
+      },
+      {
+        "start_frame": 708,
+        "end_frame": 857,
+        "text": "把 brief、script、storyboard、render-plan 串成一条流水线。"
+      },
+      {
+        "start_frame": 857,
+        "end_frame": 937,
+        "text": "先让内容可审，再让画面可渲染。"
+      },
+      {
+        "start_frame": 937,
+        "end_frame": 1075,
+        "text": "最后输出可复用、可检查、可渲染的一期图文讲解视频。"
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "title": "标题卡",
+      "narration": "AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频，先用一句话抓住重点。",
+      "caption": "AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频，先用一句话抓住重点。",
+      "duration_seconds": 6.5712471655328795,
+      "start_frame": 0,
+      "duration_frames": 197,
+      "visual": {
+        "eyebrow": "AI-Remotion Draft",
+        "primary": "AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频",
+        "secondary": "标题卡，面向需要快速理解主题的中文短视频观众，风格：深色背景、信息卡片、轻量动效。"
+      }
+    },
+    {
+      "id": "scene-02",
+      "type": "key_point",
+      "title": "用单个重点卡呈现本期必须讲清楚的概念",
+      "narration": "这期内容围绕：AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频。",
+      "caption": "这期内容围绕：AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频。",
+      "duration_seconds": 5.897868480725624,
+      "start_frame": 197,
+      "duration_frames": 177,
+      "visual": {
+        "primary": "这期内容围绕：AI-Remotion：把产品介绍变成可审、可渲染的图文讲解视频。",
+        "secondary": "用单个重点卡呈现本期必须讲清楚的概念。"
+      }
+    },
+    {
+      "id": "scene-03",
+      "type": "image_card",
+      "title": "展示一个图像卡片",
+      "narration": "用截图、概念卡或流程图给观众一个可视化锚点。",
+      "caption": "用截图、概念卡或流程图给观众一个可视化锚点。",
+      "duration_seconds": 3.610702947845805,
+      "start_frame": 374,
+      "duration_frames": 108,
+      "visual": {
+        "eyebrow": "Visual Evidence",
+        "primary": "图文证据",
+        "secondary": "展示一个图像卡片，承载截图、概念卡和流程箭头。",
+        "assets": [
+          "截图",
+          "概念卡",
+          "流程图"
+        ]
+      }
+    },
+    {
+      "id": "scene-04",
+      "type": "list",
+      "title": "列表卡",
+      "narration": "把复杂内容拆成三到四个容易跟上的步骤。",
+      "caption": "把复杂内容拆成三到四个容易跟上的步骤。",
+      "duration_seconds": 3.5526530612244898,
+      "start_frame": 482,
+      "duration_frames": 107,
+      "visual": {
+        "bullets": [
+          "脚本",
+          "分镜",
+          "渲染",
+          "复查"
+        ]
+      }
+    },
+    {
+      "id": "scene-05",
+      "type": "comparison",
+      "title": "左右对比：手动制作 vs 结构化生产",
+      "narration": "对比手动制作和结构化生产，强调为什么值得模板化。",
+      "caption": "对比手动制作和结构化生产，强调为什么值得模板化。",
+      "duration_seconds": 3.959002267573696,
+      "start_frame": 589,
+      "duration_frames": 119,
+      "visual": {
+        "left_label": "手动制作",
+        "left_points": [
+          "重复摆放",
+          "难以复用",
+          "修改成本高"
+        ],
+        "right_label": "结构化生产",
+        "right_points": [
+          "文件驱动",
+          "模板复用",
+          "可检查"
+        ]
+      }
+    },
+    {
+      "id": "scene-06",
+      "type": "timeline",
+      "title": "时间线展示从 brief 到 render-plan 的顺序",
+      "narration": "把 brief、script、storyboard、render-plan 串成一条流水线。",
+      "caption": "把 brief、script、storyboard、render-plan 串成一条流水线。",
+      "duration_seconds": 4.96907029478458,
+      "start_frame": 708,
+      "duration_frames": 149,
+      "visual": {
+        "timeline_items": [
+          {
+            "label": "1",
+            "text": "Brief"
+          },
+          {
+            "label": "2",
+            "text": "Script"
+          },
+          {
+            "label": "3",
+            "text": "Render"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-07",
+      "type": "quote",
+      "title": "引用卡强调可审稿、可复现、可迭代",
+      "narration": "先让内容可审，再让画面可渲染。",
+      "caption": "先让内容可审，再让画面可渲染。",
+      "duration_seconds": 2.6586848072562357,
+      "start_frame": 857,
+      "duration_frames": 80,
+      "visual": {
+        "quote": "先让内容可审，再让画面可渲染。",
+        "attribution": "AI-Remotion workflow"
+      }
+    },
+    {
+      "id": "scene-08",
+      "type": "cta",
+      "title": "收尾 CTA",
+      "narration": "最后输出可复用、可检查、可渲染的一期图文讲解视频。",
+      "caption": "最后输出可复用、可检查、可渲染的一期图文讲解视频。",
+      "duration_seconds": 4.597551020408163,
+      "start_frame": 937,
+      "duration_frames": 138,
+      "visual": {
+        "primary": "reviewable script -> deterministic render",
+        "secondary": "收尾 CTA，提示下一步生成 voiceover、captions 和 QA。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "total_duration_s": 60,
+  "width": 1920,
+  "height": 1080,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 1,
+      "start": 0.199,
+      "end": 2.059,
+      "text": "编码智能体已经很聪明了。",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "编码智能体已经很聪明了。",
+          "start": 0.199,
+          "end": 1.939
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 1,
+      "start": 2.44,
+      "end": 3.919,
+      "text": "可是，没人管它们。",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "可是，没人管它们。",
+          "start": 2.44,
+          "end": 3.799
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 2,
+      "start": 4.44,
+      "end": 7.179,
+      "text": "deepdog，把编码智能体变成真正的队友。",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "deepdog，把编码智能体变成真正的队友。",
+          "start": 4.44,
+          "end": 7.059
+        }
+      ]
+    },
+    {
+      "id": "caption-group-3",
+      "frame": 2,
+      "start": 7.699,
+      "end": 10.08,
+      "text": "你接下来要招的十个人，都不是人。",
+      "words": [
+        {
+          "id": "caption-word-3-0",
+          "text": "你接下来要招的十个人，都不是人。",
+          "start": 7.699,
+          "end": 9.96
+        }
+      ]
+    },
+    {
+      "id": "caption-group-4",
+      "frame": 3,
+      "start": 10.439,
+      "end": 14.139,
+      "text": "在同一个议题看板里，给智能体派单，就像派给同事。",
+      "words": [
+        {
+          "id": "caption-word-4-0",
+          "text": "在同一个议题看板里，给智能体派单，就像派给同事。",
+          "start": 10.439,
+          "end": 14.019
+        }
+      ]
+    },
+    {
+      "id": "caption-group-5",
+      "frame": 3,
+      "start": 14.519,
+      "end": 17.38,
+      "text": "它会认领、执行、评论，也会主动建单。",
+      "words": [
+        {
+          "id": "caption-word-5-0",
+          "text": "它会认领、执行、评论，也会主动建单。",
+          "start": 14.519,
+          "end": 17.26
+        }
+      ]
+    },
+    {
+      "id": "caption-group-6",
+      "frame": 4,
+      "start": 17.639,
+      "end": 25.159,
+      "text": "完整的任务生命周期，加上实时进度流，让每一次工具调用、文件改动和状态变化都清晰可见。",
+      "words": [
+        {
+          "id": "caption-word-6-0",
+          "text": "完整的任务生命周期，加上实时进度流，让每一次工具调用、文件改动和状态变化都清晰可见。",
+          "start": 17.639,
+          "end": 25.039
+        }
+      ]
+    },
+    {
+      "id": "caption-group-7",
+      "frame": 4,
+      "start": 25.459,
+      "end": 26.599,
+      "text": "没有静默失败。",
+      "words": [
+        {
+          "id": "caption-word-7-0",
+          "text": "没有静默失败。",
+          "start": 25.459,
+          "end": 26.479
+        }
+      ]
+    },
+    {
+      "id": "caption-group-8",
+      "frame": 5,
+      "start": 26.899,
+      "end": 29.38,
+      "text": "每个解法，都能沉淀为团队技能。",
+      "words": [
+        {
+          "id": "caption-word-8-0",
+          "text": "每个解法，都能沉淀为团队技能。",
+          "start": 26.899,
+          "end": 29.26
+        }
+      ]
+    },
+    {
+      "id": "caption-group-9",
+      "frame": 5,
+      "start": 29.5,
+      "end": 31.659,
+      "text": "第一天，你教会一个智能体部署。",
+      "words": [
+        {
+          "id": "caption-word-9-0",
+          "text": "第一天，你教会一个智能体部署。",
+          "start": 29.5,
+          "end": 31.539
+        }
+      ]
+    },
+    {
+      "id": "caption-group-10",
+      "frame": 5,
+      "start": 31.92,
+      "end": 36.159,
+      "text": "第三十天，整个团队都会部署、写测试、做代码审查。",
+      "words": [
+        {
+          "id": "caption-word-10-0",
+          "text": "第三十天，整个团队都会部署、写测试、做代码审查。",
+          "start": 31.92,
+          "end": 36.039
+        }
+      ]
+    },
+    {
+      "id": "caption-group-11",
+      "frame": 6,
+      "start": 36.439,
+      "end": 43.04,
+      "text": "一块面板，管理本地机器和云端算力、混合小队，以及你自己的会话上下文。",
+      "words": [
+        {
+          "id": "caption-word-11-0",
+          "text": "一块面板，管理本地机器和云端算力、混合小队，以及你自己的会话上下文。",
+          "start": 36.439,
+          "end": 42.979
+        }
+      ]
+    },
+    {
+      "id": "caption-group-12",
+      "frame": 7,
+      "start": 43.04,
+      "end": 44.899,
+      "text": "deepdog 完全开源。",
+      "words": [
+        {
+          "id": "caption-word-12-0",
+          "text": "deepdog 完全开源。",
+          "start": 43.04,
+          "end": 44.779
+        }
+      ]
+    },
+    {
+      "id": "caption-group-13",
+      "frame": 7,
+      "start": 44.96,
+      "end": 49.419,
+      "text": "执行发生在你自己的机器或自有云，代码不经过 deepdog 服务器。",
+      "words": [
+        {
+          "id": "caption-word-13-0",
+          "text": "执行发生在你自己的机器或自有云，代码不经过 deepdog 服务器。",
+          "start": 44.96,
+          "end": 49.299
+        }
+      ]
+    },
+    {
+      "id": "caption-group-14",
+      "frame": 8,
+      "start": 49.659,
+      "end": 51.879,
+      "text": "现在，雇佣你的第一位 AI 员工。",
+      "words": [
+        {
+          "id": "caption-word-14-0",
+          "text": "现在，雇佣你的第一位 AI 员工。",
+          "start": 49.659,
+          "end": 51.759
+        }
+      ]
+    }
+  ]
+}

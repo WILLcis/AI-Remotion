@@ -14,6 +14,8 @@ https://github.com/WILLcis/AI--First-Coding-Loop-Codex
 - State directory conventions in `state/`
 - GitHub PR template
 - CI workflow adapted to npm + Remotion
+- Project onboarding profile in `docs/AI_FIRST_PROJECT_PROFILE.md`
+- BIOS parent work item recorded as `YES-549`; BIOS write access remains unverified
 
 ## Active Gates
 

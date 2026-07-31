@@ -2,6 +2,7 @@ import { execFile } from "node:child_process";
 import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { promisify } from "node:util";
+import type { VoiceoverProvider } from "../audio/voiceover";
 
 const execFileAsync = promisify(execFile);
 
@@ -9,8 +10,9 @@ export const batchSteps = [
   "script",
   "storyboard",
   "render-plan",
-  "captions",
   "voice",
+  "captions",
+  "avatar",
   "render",
   "qa",
   "validate",
@@ -34,7 +36,7 @@ export type CreateBatchPlanOptions = {
   episodeIds: string[];
   qaRenderFrames?: boolean;
   steps: BatchStep[];
-  voiceProvider?: "silent" | "macos-say";
+  voiceProvider?: VoiceoverProvider;
 };
 
 export type RunBatchPlanResult = {
@@ -120,7 +122,7 @@ const commandForStep = ({
   episodeId: string;
   qaRenderFrames: boolean;
   step: BatchStep;
-  voiceProvider: "silent" | "macos-say";
+  voiceProvider: VoiceoverProvider;
 }): BatchCommand => {
   const baseArgs = ["run", stepToScript(step), "--", "--episode", episodeId];
 
@@ -163,6 +165,10 @@ const stepToScript = (step: BatchStep): string => {
 
   if (step === "voice") {
     return "episode:voice";
+  }
+
+  if (step === "avatar") {
+    return "episode:avatar";
   }
 
   if (step === "render") {

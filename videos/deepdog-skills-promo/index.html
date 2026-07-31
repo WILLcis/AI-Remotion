@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #F5F6F8;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="60"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="el-01-nobody-manages"
+        class="scene"
+        data-composition-id="01-nobody-manages"
+        data-composition-src="compositions/frames/01-nobody-manages.html"
+        data-start="0"
+        data-duration="4.7"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-02-management-layer"
+        class="scene"
+        data-composition-id="02-management-layer"
+        data-composition-src="compositions/frames/02-management-layer.html"
+        data-start="4.3"
+        data-duration="6.5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-03-assign-work"
+        class="scene"
+        data-composition-id="03-assign-work"
+        data-composition-src="compositions/frames/03-assign-work.html"
+        data-start="10.3"
+        data-duration="7.7"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-04-no-silent-failure"
+        class="scene"
+        data-composition-id="04-no-silent-failure"
+        data-composition-src="compositions/frames/04-no-silent-failure.html"
+        data-start="17.5"
+        data-duration="9.7"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-05-skills-compound"
+        class="scene"
+        data-composition-id="05-skills-compound"
+        data-composition-src="compositions/frames/05-skills-compound.html"
+        data-start="26.8"
+        data-duration="10"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-06-control-plane"
+        class="scene"
+        data-composition-id="06-control-plane"
+        data-composition-src="compositions/frames/06-control-plane.html"
+        data-start="36.3"
+        data-duration="7.3"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-07-trust-by-design"
+        class="scene"
+        data-composition-id="07-trust-by-design"
+        data-composition-src="compositions/frames/07-trust-by-design.html"
+        data-start="43"
+        data-duration="6.9"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-08-hire-first-agent"
+        class="scene"
+        data-composition-id="08-hire-first-agent"
+        data-composition-src="compositions/frames/08-hire-first-agent.html"
+        data-start="49.5"
+        data-duration="10.5"
+        data-track-index="1"
+      ></div>
+
+      <!-- approved source narration: one continuous track -->
+      <audio
+        id="el-source-narration"
+        src="audio/narration.mp3"
+        data-start="0"
+        data-duration="51.984"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+      <!-- captions -->
+      <div
+        id="el-captions"
+        class="scene"
+        data-composition-id="captions"
+        data-composition-src="compositions/captions.html"
+        data-start="0"
+        data-duration="60"
+        data-track-index="2"
+      ></div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-nobody-manages", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 4.3);
+        tl.fromTo("#el-02-management-layer", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 4.3);
+        tl.to("#el-02-management-layer", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 10.3);
+        tl.fromTo("#el-03-assign-work", { x: 1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 10.3);
+        tl.to("#el-03-assign-work", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 17.5);
+        tl.fromTo("#el-04-no-silent-failure", { x: 1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 17.5);
+        tl.to("#el-04-no-silent-failure", { scaleX: 0, transformOrigin: "left center", duration: 0.4, ease: "power3.inOut" }, 26.8);
+        tl.fromTo("#el-05-skills-compound", { scaleX: 0, transformOrigin: "right center", opacity: 1 }, { scaleX: 1, transformOrigin: "right center", duration: 0.4, ease: "power3.inOut" }, 26.8);
+        tl.to("#el-05-skills-compound", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 36.3);
+        tl.fromTo("#el-06-control-plane", { x: 1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 36.3);
+        tl.to("#el-06-control-plane", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 43);
+        tl.fromTo("#el-07-trust-by-design", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 43);
+        tl.to("#el-07-trust-by-design", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 49.5);
+        tl.fromTo("#el-08-hire-first-agent", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 49.5);
+        tl.to({}, { duration: 60 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

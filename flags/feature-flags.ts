@@ -22,6 +22,16 @@ export const FLAGS = {
   NEW_CHECKOUT_FLOW: 'new_checkout_flow',
   RERANK_V3: 'rerank_v3',
   AVATAR_LAZY_LOAD: 'avatar_lazy_load',
+  VOICE_CLONE: 'voice_clone',
+  TALKING_AVATAR: 'talking_avatar',
+  AVATAR_MOTION: 'avatar_motion',
+  GENERATIVE_BROLL: 'generative_broll',
+  SEEDANCE_PRESENTER: 'seedance_presenter',
+  LATENTSYNC_LIPSYNC: 'latentsync_lipsync',
+  INFINITETALK_AVATAR: 'infinitetalk_avatar',
+  LONGCAT_AVATAR: 'longcat_avatar',
+  HEYGEN_AVATAR: 'heygen_avatar',
+  HEYGEN_HYPERFRAMES: 'heygen_hyperframes',
 } as const;
 
 export type FlagKey = (typeof FLAGS)[keyof typeof FLAGS];
@@ -31,6 +41,16 @@ const FLAG_DEFAULTS: Record<FlagKey, boolean> = {
   [FLAGS.NEW_CHECKOUT_FLOW]: false,
   [FLAGS.RERANK_V3]: false,
   [FLAGS.AVATAR_LAZY_LOAD]: false,
+  [FLAGS.VOICE_CLONE]: false,
+  [FLAGS.TALKING_AVATAR]: false,
+  [FLAGS.AVATAR_MOTION]: false,
+  [FLAGS.GENERATIVE_BROLL]: false,
+  [FLAGS.SEEDANCE_PRESENTER]: false,
+  [FLAGS.LATENTSYNC_LIPSYNC]: false,
+  [FLAGS.INFINITETALK_AVATAR]: false,
+  [FLAGS.LONGCAT_AVATAR]: false,
+  [FLAGS.HEYGEN_AVATAR]: false,
+  [FLAGS.HEYGEN_HYPERFRAMES]: false,
 };
 
 // ============================================================================

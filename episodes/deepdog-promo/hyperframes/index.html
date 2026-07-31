@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN" data-composition-id="deepdog-promo" data-composition-duration="60" data-width="1920" data-height="1080">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>deepdog — Human + Agent Workforce</title>
+    <style>
+      :root { --void:#05070b; --paper:#f5f6f8; --ink:#0a0d12; --purple:#7567c8; --green:#19c785; --line:#26303d; --muted:#8c96a5; }
+      * { box-sizing:border-box; }
+      html, body { width:100%; height:100%; margin:0; overflow:hidden; background:var(--void); }
+      body { color:var(--paper); font-family:sans-serif; }
+      .stage { width:1920px; height:1080px; position:relative; overflow:hidden; background:var(--void); }
+      .atmosphere { position:absolute; inset:0; background:radial-gradient(circle at 72% 18%,#272343 0,transparent 32%),radial-gradient(circle at 18% 85%,#102c25 0,transparent 28%),#05070b; }
+      .grid { position:absolute; inset:-40%; opacity:.22; background-image:linear-gradient(#5f6c7d22 1px,transparent 1px),linear-gradient(90deg,#5f6c7d22 1px,transparent 1px); background-size:80px 80px; transform:perspective(900px) rotateX(64deg) translateY(380px); }
+      .noise { position:absolute; inset:0; opacity:.09; background-image:radial-gradient(#fff 0.6px,transparent .7px); background-size:6px 6px; mix-blend-mode:soft-light; }
+      .beam { position:absolute; width:2px; height:150%; left:50%; top:-25%; background:linear-gradient(transparent,#fff,transparent); box-shadow:0 0 35px #fff; opacity:0; transform:rotate(18deg); }
+      .scene { position:absolute; inset:0; opacity:0; overflow:hidden; }
+      .scene-inner { position:absolute; inset:0; padding:92px 112px; }
+      .kicker { color:#9da8b8; font-family:monospace; font-size:19px; letter-spacing:.2em; text-transform:uppercase; }
+      .kicker em { color:var(--green); font-style:normal; }
+      h1, h2, p { margin:0; }
+      h1 { max-width:1450px; font-family:serif; font-size:132px; font-weight:500; line-height:.94; letter-spacing:-.055em; }
+      h2 { font-family:serif; font-size:76px; font-weight:500; line-height:1.02; letter-spacing:-.045em; }
+      .sub { margin-top:32px; max-width:1000px; color:#b2bac7; font-size:30px; line-height:1.45; }
+      .caption { position:absolute; left:50%; bottom:48px; z-index:30; transform:translateX(-50%); min-width:640px; max-width:1320px; padding:15px 30px; border:1px solid #ffffff25; border-radius:12px; background:#05070bd9; color:#f9fafb; font-size:27px; font-weight:650; line-height:1.35; text-align:center; box-shadow:0 16px 70px #0008; backdrop-filter:blur(20px); }
+      .scene > .caption { display:none; }
+      .voice-caption { opacity:0; }
+      .progress { position:absolute; left:0; bottom:0; z-index:50; width:0; height:4px; background:linear-gradient(90deg,var(--purple),var(--green)); box-shadow:0 0 18px #62dab1; }
+      .brand { position:absolute; top:54px; right:68px; z-index:40; color:#fff; font-family:serif; font-size:28px; letter-spacing:-.04em; }
+      .brand i { display:inline-block; width:8px; height:8px; margin-right:10px; border-radius:50%; background:var(--green); box-shadow:0 0 18px var(--green); }
+      .terminal-stack { position:absolute; inset:0; display:grid; place-items:center; }
+      .terminal { width:1120px; padding:44px 52px; border:1px solid #354151; border-radius:18px; background:#080c12ed; box-shadow:0 44px 160px #000; font-family:monospace; font-size:31px; line-height:1.9; }
+      .terminal .prompt { color:#718096; }.terminal .copy { color:#e9edf3; }.terminal .wait { color:#f0b95d; }.terminal .lost { color:#ef6470; }
+      .clock { position:absolute; right:190px; top:168px; color:#ffffff18; font-family:monospace; font-size:150px; font-weight:800; letter-spacing:-.08em; }
+      .hero-mark { position:absolute; left:112px; top:235px; width:96px; height:96px; border:1px solid #7367c899; border-radius:50%; }
+      .hero-mark::before,.hero-mark::after { content:""; position:absolute; inset:18px; border:1px solid #25c89099; border-radius:50%; }
+      .hero-mark::after { inset:38px; background:#fff; border:0; box-shadow:0 0 26px #fff; }
+      .hero-copy { position:absolute; left:112px; top:390px; }
+      .hero-copy strong { display:block; color:#fff; font-family:serif; font-size:138px; font-weight:500; letter-spacing:-.075em; }
+      .hero-copy span { display:block; margin-top:22px; color:#aeb7c5; font-size:31px; }
+      .screenshot-wrap { position:absolute; overflow:hidden; border:1px solid #ffffff2b; border-radius:18px; background:#fff; box-shadow:0 50px 150px #000b; }
+      .screenshot-wrap img { width:100%; height:100%; display:block; object-fit:cover; }
+      .screen-main { width:1420px; height:887px; left:250px; top:92px; }
+      .screen-angle { width:1280px; height:800px; right:-80px; top:150px; transform:perspective(1600px) rotateY(-8deg) rotateX(2deg); transform-origin:right center; }
+      .glass-label { position:absolute; z-index:8; padding:18px 24px; border:1px solid #ffffff28; border-radius:12px; background:#080d15dc; box-shadow:0 22px 70px #0009; backdrop-filter:blur(18px); }
+      .glass-label b { display:block; font-family:monospace; color:var(--green); font-size:16px; letter-spacing:.12em; text-transform:uppercase; }
+      .glass-label span { display:block; margin-top:6px; font-size:27px; font-weight:700; }
+      .cursor { position:absolute; z-index:12; width:34px; height:42px; filter:drop-shadow(0 4px 8px #0008); }
+      .cursor::before { content:""; position:absolute; width:0; height:0; border-top:34px solid #111822; border-right:22px solid transparent; transform:rotate(-18deg); filter:drop-shadow(0 0 1px #fff); }
+      .pulse { position:absolute; z-index:11; width:18px; height:18px; border:3px solid var(--purple); border-radius:50%; opacity:0; }
+      .lifecycle { position:absolute; left:240px; top:122px; display:flex; align-items:center; gap:18px; z-index:10; }
+      .life { min-width:210px; padding:22px 25px; border:1px solid #354153; border-radius:14px; background:#0b1018ed; font-family:monospace; font-size:23px; }
+      .life i { display:inline-block; width:9px; height:9px; margin-right:10px; border-radius:50%; background:#7a8493; }
+      .life.active i { background:var(--green); box-shadow:0 0 18px var(--green); }
+      .arrow { color:#6f7989; font-size:27px; }
+      .stream { position:absolute; right:88px; top:196px; z-index:9; width:520px; padding:24px; border:1px solid #3a4657; border-radius:16px; background:#070b11ec; box-shadow:0 30px 90px #000c; font-family:monospace; }
+      .event { margin-bottom:12px; padding:14px 16px; border-left:3px solid var(--purple); background:#111721; color:#c9d1dc; font-size:17px; }
+      .event.tool { border-color:var(--green); }.event small { display:block; margin-bottom:6px; color:#6f7b8d; }
+      .skill-stage { position:absolute; inset:0; }
+      .skill-core { position:absolute; left:50%; top:50%; z-index:8; width:270px; height:150px; display:grid; place-items:center; transform:translate(-50%,-50%); border:1px solid #8175d8; border-radius:20px; background:#121120; box-shadow:0 0 80px #7567c855; font-size:28px; font-weight:700; }
+      .agent-node { position:absolute; z-index:6; width:76px; height:76px; display:grid; place-items:center; border:1px solid #576478; border-radius:50%; background:#0b1017; font-family:monospace; font-size:18px; }
+      .agent-node::after { content:""; position:absolute; width:220px; height:1px; left:50%; top:50%; z-index:-1; transform-origin:left center; background:linear-gradient(90deg,#776bca99,transparent); }
+      .day { position:absolute; left:112px; top:100px; color:#fff; font-family:monospace; font-size:95px; font-weight:800; letter-spacing:-.08em; }
+      .day small { display:block; color:#8c96a5; font-size:18px; letter-spacing:.18em; }
+      .split-three { position:absolute; inset:150px 90px 150px; display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+      .mini-screen { position:relative; overflow:hidden; border:1px solid #303a48; border-radius:18px; background:#fff; box-shadow:0 35px 100px #0008; }
+      .mini-screen img { width:100%; height:100%; object-fit:cover; }
+      .mini-screen .tag { position:absolute; left:18px; top:18px; padding:9px 13px; border-radius:8px; background:#070b10e8; color:#fff; font-family:monospace; font-size:15px; }
+      .trust-grid { position:absolute; left:112px; right:112px; top:250px; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+      .trust { padding:30px 32px; border-top:1px solid #354052; background:linear-gradient(90deg,#0d121a,transparent); font-size:31px; }
+      .trust b { margin-right:18px; color:var(--green); font-family:monospace; font-size:17px; letter-spacing:.12em; }
+      .cta { position:absolute; left:112px; bottom:130px; display:flex; align-items:center; gap:24px; }
+      .cta-button { padding:19px 30px; border-radius:10px; background:#f5f6f8; color:#090c11; font-size:22px; font-weight:800; }
+      .cta-link { color:#99a4b4; font-family:monospace; font-size:20px; }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="atmosphere"></div><div class="grid"></div><div class="noise"></div><div class="beam"></div>
+      <div class="brand"><i></i>deepdog</div>
+
+      <section class="scene s1">
+        <div class="terminal-stack">
+          <div class="clock">02:47</div>
+          <div class="terminal">
+            <div><span class="prompt">you ›</span> <span class="copy">复制 prompt，重新解释上下文……</span></div>
+            <div><span class="prompt">agent ›</span> <span class="wait">等待执行</span></div>
+            <div><span class="prompt">you ›</span> <span class="copy">打开另一个终端，再粘贴一次。</span></div>
+            <div><span class="prompt">agent ›</span> <span class="lost">session context missing</span></div>
+          </div>
+        </div>
+        <div class="caption">编码智能体已经很聪明了。可是，没人管它们。</div>
+      </section>
+
+      <section class="scene s2">
+        <div class="hero-mark"></div>
+        <div class="hero-copy">
+          <div class="kicker"><em>OPEN SOURCE</em> · HUMAN + AGENT WORKFORCE</div>
+          <strong>Your next 10 hires<br>won't be human.</strong>
+          <span>deepdog — 把编码智能体变成真正的队友。</span>
+        </div>
+        <div class="caption">deepdog，把编码智能体变成真正的队友。你接下来要招的十个人，都不是人。</div>
+      </section>
+
+      <section class="scene s3">
+        <div class="screenshot-wrap screen-angle"><img src="assets/issues-board.png" alt="deepdog issue board"></div>
+        <div class="screenshot-wrap" style="width:740px;height:463px;left:120px;top:465px;z-index:5"><img src="assets/create-task.png" alt="deepdog create task"></div>
+        <div class="glass-label" style="left:112px;top:122px"><b>ASSIGNMENT / NATIVE</b><span>派给智能体，和派给同事一样。</span></div>
+        <div class="cursor"></div><div class="pulse"></div>
+        <div class="caption">在同一个议题看板里，给智能体派单，就像派给同事。它会认领、执行、评论，也会主动建单。</div>
+      </section>
+
+      <section class="scene s4">
+        <div class="screenshot-wrap screen-main"><img src="assets/control-tower.png" alt="deepdog control tower"></div>
+        <div class="screenshot-wrap" style="width:1020px;height:638px;left:188px;top:318px;z-index:6"><img src="assets/verification.png" alt="deepdog verification queue"></div>
+        <div class="lifecycle">
+          <div class="life"><i></i>enqueue</div><div class="arrow">→</div>
+          <div class="life"><i></i>claim</div><div class="arrow">→</div>
+          <div class="life"><i></i>start</div><div class="arrow">→</div>
+          <div class="life"><i></i>complete</div>
+        </div>
+        <div class="stream">
+          <div class="event"><small>13:42:08 · THINKING</small>分析任务依赖与验收条件</div>
+          <div class="event tool"><small>13:42:09 · TOOL CALL</small>read_file → src/runtime/agent.ts</div>
+          <div class="event tool"><small>13:42:11 · TOOL RESULT</small>tests passed · 18 checks</div>
+          <div class="event"><small>13:42:12 · STATUS</small>等待人工验收</div>
+        </div>
+        <div class="caption">完整的任务生命周期，加上实时进度流。每一次工具调用和状态变化都清晰可见。没有静默失败。</div>
+      </section>
+
+      <section class="scene s5">
+        <div class="skill-stage">
+          <div class="day"><small>COMPOUNDING SKILLS</small><span class="day-value">DAY 1</span></div>
+          <div class="skill-core">部署到 staging</div>
+          <div class="screenshot-wrap" style="width:500px;height:312px;right:100px;bottom:90px;opacity:.55"><img src="assets/knowledge.png" alt="deepdog knowledge base"></div>
+          <div class="agent-node" style="left:280px;top:310px">A01</div>
+          <div class="agent-node" style="left:1450px;top:270px">A02</div>
+          <div class="agent-node" style="left:1500px;top:720px">A03</div>
+          <div class="agent-node" style="left:340px;top:760px">A04</div>
+          <div class="agent-node" style="left:850px;top:160px">A05</div>
+          <div class="agent-node" style="left:900px;top:850px">A06</div>
+          <div class="glass-label" style="right:120px;top:110px"><b>WRITE ONCE · REUSE EVERYWHERE</b><span>技能会成为团队资产。</span></div>
+        </div>
+        <div class="caption">第一天，你教会一个智能体部署。第三十天，整个团队都会部署、写测试、做代码审查。</div>
+      </section>
+
+      <section class="scene s6">
+        <div class="split-three">
+          <div class="mini-screen"><img src="assets/runtimes.png" alt="Runtimes"><span class="tag">01 / RUNTIMES</span></div>
+          <div class="mini-screen"><img src="assets/agents.png" alt="Agents"><span class="tag">02 / AGENTS</span></div>
+          <div class="mini-screen"><img src="assets/time-state.png" alt="Observer"><span class="tag">03 / CONTEXT</span></div>
+        </div>
+        <div class="glass-label" style="left:112px;top:82px"><b>ONE CONTROL PLANE</b><span>一块面板，管理所有算力与协作。</span></div>
+        <div class="caption">一块面板，管理本地机器和云端算力、混合小队，以及你自己的会话上下文。</div>
+      </section>
+
+      <section class="scene s7">
+        <div class="scene-inner">
+          <div class="kicker"><em>TRUST BY DESIGN</em> · EXECUTION STAYS LOCAL</div>
+          <h2 style="margin-top:30px;font-size:105px">Your code never leaves<br>your network.</h2>
+          <div class="trust-grid">
+            <div class="trust"><b>01</b>完全开源，每一行可审计</div>
+            <div class="trust"><b>02</b>云托管 + 自托管自由选择</div>
+            <div class="trust"><b>03</b>执行发生在你的机器或自有云</div>
+            <div class="trust"><b>04</b>不锁厂商，自带 LLM、可换后端</div>
+          </div>
+          <div class="cta"><span class="cta-button">Hire your first AI employee</span><span class="cta-link">deepdog · Open source for all.</span></div>
+        </div>
+        <div class="caption">deepdog 完全开源。执行发生在你自己的机器或自有云，代码不经过 deepdog 服务器。</div>
+      </section>
+      <div class="caption voice-caption"></div>
+      <div class="progress"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script>
+      const $ = (q) => document.querySelector(q);
+      const $$ = (q) => Array.from(document.querySelectorAll(q));
+      const tl = gsap.timeline({ paused:true, defaults:{ ease:"power3.out" } });
+      const scenes = $$(".scene");
+      const show = (index, at) => tl.set(scenes[index],{opacity:1},at).fromTo(scenes[index],{scale:.96},{scale:1,duration:.8},at);
+      const hide = (index, at) => tl.to(scenes[index],{opacity:0,scale:1.035,duration:.55,ease:"power2.in"},at);
+      const voiceCaptions = [
+        { start:0.199, end:1.939, text:"编码智能体已经很聪明了。" },
+        { start:2.440, end:3.799, text:"可是，没人管它们。" },
+        { start:4.440, end:7.059, text:"deepdog，把编码智能体变成真正的队友。" },
+        { start:7.699, end:9.960, text:"你接下来要招的十个人，都不是人。" },
+        { start:10.439, end:14.019, text:"在同一个议题看板里，给智能体派单，就像派给同事。" },
+        { start:14.519, end:17.260, text:"它会认领、执行、评论，也会主动建单。" },
+        { start:17.639, end:25.039, text:"完整的任务生命周期，加上实时进度流，让每一次工具调用、文件改动和状态变化都清晰可见。" },
+        { start:25.459, end:26.479, text:"没有静默失败。" },
+        { start:26.899, end:29.260, text:"每个解法，都能沉淀为团队技能。" },
+        { start:29.500, end:31.539, text:"第一天，你教会一个智能体部署。" },
+        { start:31.920, end:36.039, text:"第三十天，整个团队都会部署、写测试、做代码审查。" },
+        { start:36.439, end:42.979, text:"一块面板，管理本地机器和云端算力、混合小队，以及你自己的会话上下文。" },
+        { start:43.040, end:44.779, text:"deepdog 完全开源。" },
+        { start:44.939, end:49.299, text:"执行发生在你自己的机器或自有云，代码不经过 deepdog 服务器。" },
+        { start:49.659, end:51.759, text:"现在，雇佣你的第一位 AI 员工。" }
+      ];
+      voiceCaptions.forEach((caption, index) => {
+        const next = voiceCaptions[index + 1];
+        tl.set(".voice-caption",{textContent:caption.text,opacity:1},caption.start);
+        if (!next || next.start - caption.end > .2) {
+          tl.set(".voice-caption",{opacity:0},Math.min(caption.end + .15,next ? next.start - .05 : caption.end + .15));
+        }
+      });
+      tl.to(".progress",{width:"100%",duration:60,ease:"none"},0)
+        .to(".grid",{y:-220,x:80,duration:60,ease:"none"},0)
+        .fromTo(".beam",{x:-1000,opacity:0},{x:1200,opacity:.5,duration:1.6,ease:"power2.inOut"},3.2)
+        .to(".beam",{opacity:0,duration:.2},4.8);
+
+      show(0,0);
+      tl.from(".terminal",{y:100,opacity:0,duration:.8},.2)
+        .from(".terminal div",{x:-35,opacity:0,stagger:.3,duration:.25},.6)
+        .set(".clock",{textContent:"03:58"},2.2)
+        .to(".terminal",{x:-35,duration:.06,yoyo:true,repeat:5},3);
+      hide(0,4.6);
+
+      show(1,3.9);
+      tl.from(".hero-mark",{scale:0,rotation:-180,opacity:0,duration:.7},4.1)
+        .from(".hero-copy .kicker",{y:28,opacity:0,duration:.4},4.5)
+        .from(".hero-copy strong",{y:110,opacity:0,duration:.8},4.7)
+        .from(".hero-copy span",{y:30,opacity:0,duration:.4},5.5)
+        .to(".hero-mark",{rotation:360,duration:5,ease:"none"},4.3);
+      hide(1,10.6);
+
+      show(2,9.9);
+      tl.from(".s3 .screen-angle",{x:400,rotationY:-24,opacity:0,duration:.7},10.1)
+        .from(".s3 .screenshot-wrap:nth-of-type(2)",{x:-320,y:120,rotation:-4,opacity:0,duration:.7},10.6)
+        .from(".s3 .glass-label",{y:-30,opacity:0,duration:.4},11.1)
+        .set(".cursor",{left:1450,top:220},11.1)
+        .to(".cursor",{left:660,top:780,duration:1.5,ease:"power2.inOut"},11.4)
+        .set(".pulse",{left:650,top:770,opacity:1,scale:.2},12.9)
+        .to(".pulse",{scale:5,opacity:0,duration:.6},12.9)
+        .to(".s3 .screen-angle img",{scale:1.08,x:-45,y:-12,duration:7,ease:"none"},10.1);
+      hide(2,17.8);
+
+      show(3,17.1);
+      tl.from(".s4 .screen-main",{y:180,opacity:0,duration:.7},17.3)
+        .from(".life",{y:-50,opacity:0,stagger:.1,duration:.35},17.9)
+        .from(".stream",{x:180,opacity:0,duration:.5},18.6)
+        .from(".event",{x:80,opacity:0,stagger:.42,duration:.35},19)
+        .set(".life:nth-child(1)",{className:"life active"},18.2)
+        .set(".life:nth-child(3)",{className:"life active"},19.2)
+        .set(".life:nth-child(5)",{className:"life active"},20.2)
+        .set(".life:nth-child(7)",{className:"life active"},21.2)
+        .to(".s4 .screen-main img",{scale:1.1,y:-22,duration:9,ease:"none"},17.4);
+      hide(3,27.1);
+
+      show(4,26.4);
+      tl.from(".skill-core",{scale:.25,opacity:0,duration:.6},26.6)
+        .from(".s5 .screenshot-wrap",{x:120,y:80,opacity:0,duration:.5},26.9)
+        .from(".agent-node",{scale:0,opacity:0,stagger:.18,duration:.4},27.3)
+        .set(".day-value",{textContent:"DAY 30"},31.8)
+        .to(".skill-core",{boxShadow:"0 0 180px #7567c8aa",scale:1.12,duration:.8},32)
+        .to(".agent-node",{borderColor:"#19c785",boxShadow:"0 0 24px #19c78555",stagger:.08,duration:.4},32.8);
+      hide(4,36.7);
+
+      show(5,35.9);
+      tl.from(".mini-screen",{y:260,opacity:0,rotation:(i)=>i===1?0:(i===0?-3:3),stagger:.14,duration:.6},36.1)
+        .from(".s6 .glass-label",{y:-30,opacity:0,duration:.4},36.7)
+        .to(".mini-screen img",{scale:1.08,y:-18,duration:7,ease:"none"},36.1);
+      hide(5,43.3);
+
+      show(6,42.6);
+      tl.from(".s7 .kicker",{x:-80,opacity:0,duration:.5},42.8)
+        .from(".s7 h2",{y:80,opacity:0,duration:.8},43.1)
+        .from(".trust",{x:-120,opacity:0,stagger:.14,duration:.5},43.9)
+        .from(".cta",{y:40,opacity:0,duration:.5},45.5)
+        .to(".cta-button",{boxShadow:"0 0 40px #ffffff55",duration:.8,yoyo:true,repeat:9},46.5);
+      tl.set({}, {}, 60);
+      window.__timelines = { "deepdog-promo":tl };
+    </script>
+  </body>
+</html>

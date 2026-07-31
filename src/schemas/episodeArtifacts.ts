@@ -1,12 +1,14 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import { type ZodIssue, type ZodType } from "zod";
 import {
   type Brief,
   briefSchema,
+  type EpisodeRights,
   type RenderPlan,
   renderPlanSchema,
+  rightsSchema,
   type Storyboard,
   storyboardSchema,
 } from "./artifacts";
@@ -15,10 +17,11 @@ export type EpisodeArtifacts = {
   brief: Brief;
   storyboard: Storyboard;
   renderPlan: RenderPlan;
+  rights?: EpisodeRights;
 };
 
 export type ArtifactValidationIssue = {
-  artifact: "brief" | "storyboard" | "render-plan";
+  artifact: "brief" | "storyboard" | "render-plan" | "rights";
   file: string;
   path: string;
   message: string;
@@ -72,13 +75,25 @@ export const parseRenderPlanFile = (filePath: string): RenderPlan => {
   });
 };
 
+export const parseRightsFile = (filePath: string): EpisodeRights => {
+  return parseArtifactFile({
+    artifact: "rights",
+    filePath,
+    parser: YAML.parse,
+    schema: rightsSchema,
+  });
+};
+
 export const loadEpisodeArtifacts = (episodeDir: string): EpisodeArtifacts => {
+  const rightsPath = path.join(episodeDir, "rights.yaml");
+
   return {
     brief: parseBriefFile(path.join(episodeDir, "brief.yaml")),
     storyboard: parseStoryboardFile(path.join(episodeDir, "storyboard.json")),
     renderPlan: parseRenderPlanFile(
       path.join(episodeDir, "render-plan.json"),
     ),
+    ...(existsSync(rightsPath) ? { rights: parseRightsFile(rightsPath) } : {}),
   };
 };
 

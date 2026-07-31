@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import path from "node:path";
-import { resolveScriptGenerationMode } from "../agent/providers/llm";
+import { generateScriptWithProvider } from "../agent/providers/llm";
 import { generateScriptFromBrief } from "../agent/workflows";
 import { loadRuntimeConfig } from "../config/runtimeConfig";
 import { parseBriefFile } from "../schemas";
@@ -11,7 +11,7 @@ type CliOptions = {
   help: boolean;
 };
 
-const main = (): void => {
+const main = async (): Promise<void> => {
   const options = parseArgs(process.argv.slice(2));
 
   if (options.help) {
@@ -20,14 +20,32 @@ const main = (): void => {
   }
 
   const episodeDir = resolveEpisodeDir(options);
-  const scriptMode = resolveScriptGenerationMode(loadRuntimeConfig().llm);
   const brief = parseBriefFile(path.join(episodeDir, "brief.yaml"));
   const scriptPath = path.join(episodeDir, "script.md");
+  const generatedScript = await generateScriptWithProvider({
+    config: loadRuntimeConfig().llm,
+    deterministicScript: () => generateScriptFromBrief(brief),
+    messages: [
+      {
+        content:
+          "You write reviewable explainer-video scripts. Return Markdown only: one '# title' line followed by at least six '## Segment N' sections. Every section must contain Spoken:, Visual:, and Duration: fields. Do not state uncertain factual claims as verified facts.",
+        role: "system",
+      },
+      {
+        content: `Create a Chinese explainer-video script from this brief:\n${JSON.stringify(
+          brief,
+          null,
+          2,
+        )}`,
+        role: "user",
+      },
+    ],
+  });
 
-  writeFileSync(scriptPath, `${generateScriptFromBrief(brief)}\n`);
+  writeFileSync(scriptPath, `${generatedScript.text}\n`);
 
   console.log(`Generated script: ${path.relative(process.cwd(), scriptPath)}`);
-  console.log(`- llm: ${scriptMode.provider} (${scriptMode.reason})`);
+  console.log(`- llm: ${generatedScript.provider} (${generatedScript.reason})`);
 };
 
 const parseArgs = (argv: string[]): CliOptions => {
@@ -93,9 +111,7 @@ Usage:
 `);
 };
 
-try {
-  main();
-} catch (error) {
+main().catch((error: unknown) => {
   console.error(error instanceof Error ? error.message : String(error));
   process.exitCode = 1;
-}
+});
