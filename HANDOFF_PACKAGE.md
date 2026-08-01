@@ -12,8 +12,9 @@
 | P5 | `YES-1920` |
 | P6 | `YES-1923`（`in_progress`；契约已落地） |
 | P6.4 | 待建（本机 daemon blocker）；本地审计收口与 captions no-render trial 已完成 |
-| 最新已推/已提交基线（本机） | `c2e7d54 feat: add multi-workflow video agent routing` |
-| 工作树 | **不干净** — P4/P5/P6 大量未提交 |
+| P6.5 | 待建（本机 daemon blocker）；motion-graphics no-render trial 已完成 |
+| P4–P6.4 已提交基线（本机） | `5d8e02d feat: expand video agent specialist routing`；最新状态以 `git log --oneline -5` 为准 |
+| 工作树 | 接手前先运行 `git status --short`；不提交任何生成媒体 |
 
 ---
 
@@ -56,6 +57,7 @@ Video Job YAML
 | P5 | 完成（含出片） | `state/tasks/YES-1920-p5-controlled-trial.md`；`videos/heygen-out-recut-trial/output.mp4` |
 | P6 | 契约完成 | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`；`state/tasks/YES-1923-p6.md`；11 fixtures |
 | P6.4 | 本地完成；BIOS 建单待 daemon 恢复 | `docs/VIDEO_AGENT_PLATFORM_P6_4_DEVELOPMENT_PLAN.md`；embedded-captions no-render evidence |
+| P6.5 | 本地完成；BIOS 建单待 daemon 恢复 | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
 | P7 | 未做 | `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 ### 验证（交接时点）

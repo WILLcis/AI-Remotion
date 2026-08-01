@@ -94,6 +94,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | P5 Existing-Video Recut + 本地出片 | YES-1920 | 完成（`videos/heygen-out-recut-trial/output.mp4`） |
 | P6 七专家契约接入 | YES-1923 | **契约层完成**；未强制七条真实出片 |
 | P6.4 审计收口 + captions no-render trial | 待建（daemon blocker） | 完成本地证据、生成媒体排除和一条无付费试运行 |
+| P6.5 motion-graphics no-render trial | 待建（daemon blocker） | 完成第二条无外部输入、无付费试运行 |
 | P7 backlog 晋升 | — | 未开工；见 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 父工单：`YES-549`。
