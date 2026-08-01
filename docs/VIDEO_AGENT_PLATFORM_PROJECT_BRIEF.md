@@ -95,6 +95,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | P6 七专家契约接入 | YES-1923 | **契约层完成**；未强制七条真实出片 |
 | P6.4 审计收口 + captions no-render trial | 待建（daemon blocker） | 完成本地证据、生成媒体排除和一条无付费试运行 |
 | P6.5 motion-graphics no-render trial | 待建（daemon blocker） | 完成第二条无外部输入、无付费试运行 |
+| P6.6 Host-Agnostic Agent Package | 待建（daemon blocker） | 提供任意 Agent 可读的中立入口与 specialist map |
 | P7 backlog 晋升 | — | 未开工；见 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 父工单：`YES-549`。
@@ -108,7 +109,9 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | `AGENTS.md` | 仓库总纪律 |
 | `docs/VIDEO_AGENT_PLATFORM_PROJECT_BRIEF.md` | **本说明** |
 | `HANDOFF_PACKAGE.md` | **接力包**（状态、未提交面、下一步） |
-| `docs/VIDEO_AGENT_PLATFORM_AGENT_USAGE.md` | 喂给执行 Agent |
+| `agents/video-producer/AGENT.md` | **任意 Agent 的中立入口** |
+| `agents/video-producer/SPECIALISTS.md` | 11 specialist 的 route-selected profile map |
+| `docs/VIDEO_AGENT_PLATFORM_AGENT_USAGE.md` | 宿主接入与执行手册 |
 | `docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md` | 非开发用户 10 步 |
 | `docs/VIDEO_AGENT_PLATFORM_ARCHITECTURE.md` | 架构 |
 | `docs/VIDEO_AGENT_PLATFORM_DEVELOPMENT_PLAN.md` | 总开发计划 |
@@ -134,7 +137,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 1. **提交 / PR**：工作树大量未提交 P4–P6 增量，优先整理提交再开 PR。
 2. **P6 出片 trial**：为 captions / PR / music / motion / slideshow / port 各选一条做 no-render 或批准后 render（translation 单独付费门）。
 3. **P7**：从 backlog 挑 `product-demo` 或 `shorts-repackage`，先写计划 + BIOS 再动 schema。
-4. **Codex 封装**：`.codex/agents/video-producer.toml` 或 skills symlink。
+4. **可选宿主适配**：为某个宿主增加只指向 `agents/video-producer/AGENT.md` 的薄封装。
 5. **文档对齐**：`AGENT_USAGE` 第 4 节仍偏重前四专家，可补 P6 一节。
 
 详细检查清单与命令见 `HANDOFF_PACKAGE.md`。

@@ -362,79 +362,51 @@ review_gates:
 
 ### 仓库里三套东西分别给谁用
 
-| 路径 | 宿主 | 用途 |
+| 路径 | 适用对象 | 用途 |
 | --- | --- | --- |
-| `.devin/skills/video-producer/` + `.devin/agents/*-producer.md` | Devin / 兼容 Devin 的会话；也可被任意 Agent **当文件读** | 视频平台入口与四个专业 producer |
-| `.agents/skills/*` | Codex / Cursor 等 harness skill | 写码纪律、分解任务等（**不含**视频 producer） |
-| `.codex/agents/*.toml` | Codex custom agents | implementer / explorer / verifier 等编码回路（**不是**视频 producer） |
+| `agents/video-producer/` | **任意 Agent** | 宿主无关入口、11 specialist map、可复制 handoff prompt |
+| `.devin/skills/video-producer/` + `.devin/agents/*-producer.md` | Devin 自动发现；任意 Agent 也可直接读取 profile Markdown | Devin 薄发现适配与 repository-owned specialist 协议 |
+| `.agents/skills/*` / `.codex/agents/*.toml` | Coding harness / Codex coding loop | 写码纪律和 implementer/verifier，不替代视频入口 |
 
-因此：**Codex 默认不会自动变成 `product-promo-producer`。** 要显式喂上下文或挂一层薄封装。
+因此：任意 Agent 不需要安装某个宿主插件；只要能读取仓库、运行 npm，就可从 `agents/video-producer/AGENT.md` 启动。Codex、Cursor、Claude、Devin 的差异只应停留在“如何把入口文档喂给会话”的薄适配层。
 
 ### 推荐调用方式（按稳妥程度）
 
-#### 方式 A — Prompt 调用（Codex / Cursor / Claude 通用，推荐）
+#### 方式 A — Host-neutral Prompt 调用（推荐）
 
 在目标 Agent 会话开头粘贴或引用：
 
 ```text
-你在 AI-Remotion 仓库内工作。
-1. 读 docs/VIDEO_AGENT_PLATFORM_AGENT_USAGE.md
-2. 读 .devin/skills/video-producer/SKILL.md 与 references/job-contract.md
-3. 启用 FLAG_video_agent_platform='{"enabled":true}'
-4. 用 npm run video:route -- --job <job.yaml> 决定唯一 primary_agent
-5. 再读 .devin/agents/<primary_agent>.md 并只扮演该角色
-6. pending gate 必须 needs_approval，不得自行批准
+Read agents/video-producer/AGENT.md. Validate and route <job-file> with the Video Agent Platform flag enabled. Read only the mapped specialist profile. Do not approve pending gates, call paid/cloud services, or render without my explicit approval. Return the required result JSON.
 ```
 
-Codex 示例（在仓库根）：
-
-```bash
-codex exec "$(cat <<'EOF'
-Read docs/VIDEO_AGENT_PLATFORM_AGENT_USAGE.md and
-.devin/skills/video-producer/SKILL.md.
-Enable VIDEO_AGENT_PLATFORM, route tests/fixtures/video-jobs/existing-video-recut.yaml,
-then act only as the returned primary_agent profile under .devin/agents/.
-Stop at any pending review gate.
-EOF
-)"
-```
-
-（具体 `codex` 子命令以本机 Codex CLI 为准；核心是 **强制读手册 + route CLI + 单 primary profile**。）
+该入口不假设 Agent 是 Codex、Cursor、Claude 或 Devin。
 
 #### 方式 B — CLI 作为 Agent 间机器接口（最稳）
 
-任何上游 Agent（Codex / Cursor / 脚本）只负责：
+任何上游 Agent / 脚本只负责：
 
-1. 写好 Job YAML
-2. 调用路由，拿到 JSON
-3. 把 JSON + Job 交给下游 specialist 会话
+1. 写好 Job YAML；
+2. 调用路由，拿到 JSON；
+3. 将 JSON + Job 交给 `agents/video-producer/SPECIALISTS.md` 映射的 profile。
 
 ```bash
 FLAG_video_agent_platform='{"enabled":true}' \
   npm run video:route -- --job path/to/job.yaml > /tmp/route.json
 ```
 
-`route.json` 里的 `primary_agent` / `requires_approval` / `renderer` 是跨 Agent 的唯一真相；不要靠自然语言再猜一遍工作流。
+`route.json` 的 `primary_agent` / `requires_approval` / `renderer` 是跨 Agent 的唯一机器真相；不要靠自然语言重猜 workflow。
 
-#### 方式 C — 把 Skill 链到 Codex 技能目录（可选发现增强）
+#### 方式 C — 可选宿主发现适配
 
-若希望 Codex 自动发现 `video-producer` skill（与 HeyGen skills 类似）：
+若某个宿主支持自定义 skill/agent discovery，可创建**薄适配**，只指向：
 
-```bash
-mkdir -p ~/.codex/skills
-ln -s "$(pwd)/.devin/skills/video-producer" ~/.codex/skills/video-producer
+```text
+agents/video-producer/AGENT.md
+agents/video-producer/SPECIALISTS.md
 ```
 
-注意：
-
-- 这只提升 **入口 Skill 可发现性**；四个 producer 仍在 `.devin/agents/`，需要会话内再读或再链。
-- 不要复制后双份漂移；优先 symlink。
-- Cursor 可用同样方式链到其 skills 目录（若你使用全局 skills）。
-
-#### 方式 D — 加 Codex custom agent toml（可选，尚未内置）
-
-可在 `.codex/agents/` 增加薄封装，例如 `video-producer.toml`，`instructions` 指向本手册与 `.devin` profile。
-**当前仓库还没有这些 toml**；未加之前请用方式 A/B。
+适配不得复制 11 个 profile、不得实现自己的路由、不得绕开 `VIDEO_AGENT_PLATFORM`。用户级 symlink 或宿主配置是可选部署动作，不是使用此 package 的前提。
 
 ### Devin 宿主
 
@@ -450,7 +422,7 @@ devin skills show video-producer
 
 ### 不要这样做
 
-- 不要把四个 producer 合成一个 Codex「万能视频 agent」。
+- 不要把 11 个 producer 合成一个宿主专属「万能视频 agent」。
 - 不要在 flag 关闭时直接读 producer 文件开干。
 - 不要部署云队列 / 对象存储 / 自动发布来「完成封装」——超出当前产品合同。
 - 不要让上游 Agent 跳过 `video:route` 自己指定 primary（除非用户显式指定且仍通过 schema）。

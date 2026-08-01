@@ -365,8 +365,10 @@ describe("video agent platform", () => {
     );
   });
 
-  it("ships one root entry skill and eleven specialist profiles", () => {
+  it("ships a host-neutral entry package, Devin adapter, and eleven specialist profiles", () => {
     const skill = readProjectFile(".devin/skills/video-producer/SKILL.md");
+    const neutralEntry = readProjectFile("agents/video-producer/AGENT.md");
+    const specialistMap = readProjectFile("agents/video-producer/SPECIALISTS.md");
     const specialists = [
       "product-promo-producer",
       "digital-human-producer",
@@ -385,7 +387,16 @@ describe("video agent platform", () => {
       name: "video-producer",
       triggers: ["user", "model"],
     });
-    expect(skill).toContain("Dispatch exactly one primary");
+    expect(skill).toContain("agents/video-producer/AGENT.md");
+    expect(neutralEntry).not.toMatch(/^---/);
+    expect(neutralEntry).toContain("npm run video:route");
+    expect(neutralEntry).toContain("FLAGS.VIDEO_AGENT_PLATFORM");
+    expect(neutralEntry).toContain("exactly one primary");
+    expect(neutralEntry).toContain("needs_approval");
+    expect(neutralEntry).toContain('"status": "done | needs_approval | blocked | failed"');
+    expect(readProjectFile("agents/video-producer/README.md")).toContain(
+      "No global installation",
+    );
 
     for (const name of specialists) {
       const body = readProjectFile(`.devin/agents/${name}.md`);
@@ -393,6 +404,8 @@ describe("video agent platform", () => {
         name,
       });
       expect(body).toContain("needs_approval");
+      expect(specialistMap).toContain(`| ${name.replace("-producer", "")} | ${name} |`);
+      expect(specialistMap).toContain(`.devin/agents/${name}.md`);
     }
 
     expect(
