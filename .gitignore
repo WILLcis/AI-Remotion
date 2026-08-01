@@ -28,6 +28,8 @@ videos/*/audio/*.wav
 videos/*/.hyperframes/frame-packets/
 videos/*/renders/
 videos/*/snapshots/
+# Local P5 recut trial evidence; generated media and copies are not repository artifacts.
+videos/heygen-out-recut-trial/
 
 state/tasks/*.tmp.*
 state/_local/

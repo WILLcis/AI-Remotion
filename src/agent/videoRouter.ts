@@ -22,6 +22,38 @@ const routeConfig = {
     agent: "faceless-explainer-producer",
     renderer: "remotion",
   },
+  "existing-video-recut": {
+    agent: "existing-video-recut-producer",
+    renderer: "hyperframes",
+  },
+  "embedded-captions": {
+    agent: "embedded-captions-producer",
+    renderer: "hyperframes",
+  },
+  "pr-video": {
+    agent: "pr-video-producer",
+    renderer: "hyperframes",
+  },
+  "music-video": {
+    agent: "music-video-producer",
+    renderer: "hyperframes",
+  },
+  "video-translation": {
+    agent: "video-translation-producer",
+    renderer: "remotion",
+  },
+  "motion-graphics": {
+    agent: "motion-graphics-producer",
+    renderer: "hyperframes",
+  },
+  slideshow: {
+    agent: "slideshow-producer",
+    renderer: "hyperframes",
+  },
+  "remotion-port": {
+    agent: "remotion-port-producer",
+    renderer: "hyperframes",
+  },
 } as const;
 
 export const routeVideoJob = (
@@ -49,7 +81,11 @@ export const routeVideoJob = (
       ? (["digital-human-presenter"] as const)
       : [];
   const providerRequirements =
-    job.presenter.mode === "digital-human" ? [job.presenter.provider] : [];
+    workflow === "video-translation"
+      ? [job.presenter.provider!]
+      : job.presenter.mode === "digital-human"
+        ? [job.presenter.provider!]
+        : [];
   const requiresApproval = (
     ["script", "storyboard", "final_render"] as const
   ).filter((gate) => job.review_gates[gate] === "pending");
@@ -77,6 +113,30 @@ const resolveWorkflow = (
     return "product-promo";
   }
 
+  if (job.source.type === "github-pr") {
+    return "pr-video";
+  }
+
+  if (job.source.type === "music") {
+    return "music-video";
+  }
+
+  if (job.source.type === "deck") {
+    return "slideshow";
+  }
+
+  if (job.source.type === "remotion-project") {
+    return "remotion-port";
+  }
+
+  if (job.source.type === "motion-brief") {
+    return "motion-graphics";
+  }
+
+  if (job.source.type === "existing-video") {
+    return "existing-video-recut";
+  }
+
   if (job.presenter.mode === "digital-human") {
     return "digital-human";
   }
@@ -92,13 +152,25 @@ const getRouteReason = (
     return `Explicit workflow selected: ${workflow}`;
   }
 
-  if (workflow === "product-promo") {
-    return `Source type ${job.source.type} is product-led`;
-  }
+  const reasons: Record<Exclude<VideoJob["workflow"], "auto">, string> = {
+    "product-promo": `Source type ${job.source.type} is product-led`,
+    "digital-human":
+      "Digital-human presenter requested for a non-product-led source",
+    "faceless-explainer": `Source type ${job.source.type} uses the faceless explainer pipeline`,
+    "existing-video-recut":
+      "Source type existing-video uses the existing footage recut pipeline",
+    "embedded-captions":
+      "Source type existing-video uses the embedded captions pipeline",
+    "pr-video": "Source type github-pr uses the pull-request video pipeline",
+    "music-video": "Source type music uses the beat-synced music video pipeline",
+    "video-translation":
+      "Source type existing-video uses the video translation pipeline",
+    "motion-graphics":
+      "Source type motion-brief uses the short motion-graphics pipeline",
+    slideshow: "Source type deck uses the slideshow / pitch-deck pipeline",
+    "remotion-port":
+      "Source type remotion-project uses the Remotion-to-HyperFrames port pipeline",
+  };
 
-  if (workflow === "digital-human") {
-    return "Digital-human presenter requested for a non-product-led source";
-  }
-
-  return `Source type ${job.source.type} uses the faceless explainer pipeline`;
+  return reasons[workflow];
 };

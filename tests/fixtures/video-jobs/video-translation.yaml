@@ -1,0 +1,20 @@
+job_id: video-translation-trial
+workflow: video-translation
+source:
+  type: existing-video
+  subject: 成片译制试运行
+  refs:
+    - episodes/res/video/HeyGen_out.mp4
+output:
+  duration_seconds: 54.187
+  aspect_ratio: "9:16"
+  language: en
+presenter:
+  mode: none
+  provider: heygen
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

@@ -21,8 +21,12 @@ Expose one lightweight `video-producer` Skill that validates a top-level Video J
 - `product-promo-producer`
 - `digital-human-producer`
 - `faceless-explainer-producer`
+- `existing-video-recut-producer`
+- plus P6 specialists: embedded-captions, pr-video, music-video, video-translation, motion-graphics, slideshow, remotion-port
 
 Keep deterministic capabilities in schemas, libraries, CLI commands, provider adapters, and QA utilities. Do not model captions, TTS, rendering, or media probing as personality agents.
+
+Existing-video recut jobs keep the source footage immutable and add designed, transcript-synced graphic overlays through HyperFrames `talking-head-recut`. They are not caption-only packaging. Plain captions and paid translation use explicit workflows.
 
 A Job has one primary agent. Delegated workers may produce bounded artifacts but must not edit shared script, storyboard, render plan, root timeline, or QA state.
 
@@ -61,4 +65,4 @@ Rejected for the first version because product-promo specialists already dispatc
 
 ## Rollback
 
-Remove the Video Job schema/router/CLI, `.devin/skills/video-producer/`, the three specialist profiles, and the `VIDEO_AGENT_PLATFORM` flag. Existing episode, HyperFrames, avatar, and QA paths remain intact.
+Remove the Video Job schema/router/CLI, `.devin/skills/video-producer/`, the specialist profiles (including `existing-video-recut-producer`), and the `VIDEO_AGENT_PLATFORM` flag. Existing episode, HyperFrames, avatar, local source media, and QA paths remain intact.

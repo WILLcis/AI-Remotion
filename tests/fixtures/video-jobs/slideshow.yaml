@@ -1,0 +1,19 @@
+job_id: slideshow-trial
+workflow: auto
+source:
+  type: deck
+  subject: 融资 Pitch Deck 演示片
+  refs:
+    - docs/decks/sample-pitch.pdf
+output:
+  duration_seconds: 120
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

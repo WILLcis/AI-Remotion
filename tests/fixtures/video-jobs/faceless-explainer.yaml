@@ -1,0 +1,19 @@
+job_id: faceless-explainer-trial
+workflow: auto
+source:
+  type: topic
+  subject: 普通人如何理解 Remotion，以及 AI-Remotion 如何生成图文讲解视频
+  refs:
+    - episodes/sample/brief.yaml
+output:
+  duration_seconds: 60
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

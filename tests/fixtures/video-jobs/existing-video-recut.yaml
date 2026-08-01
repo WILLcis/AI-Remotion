@@ -1,0 +1,20 @@
+job_id: heygen-out-recut-trial
+workflow: auto
+source:
+  type: existing-video
+  subject: HeyGen Human3 设计化重剪试运行
+  refs:
+    - episodes/res/video/HeyGen_out.mp4
+    - episodes/avatar-human3-reference/captions/reference.srt
+output:
+  duration_seconds: 54.187
+  aspect_ratio: "9:16"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: approved
+  storyboard: approved
+  final_render: approved

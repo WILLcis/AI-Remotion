@@ -6,6 +6,14 @@ const workflowIdSchema = z.enum([
   "product-promo",
   "digital-human",
   "faceless-explainer",
+  "existing-video-recut",
+  "embedded-captions",
+  "pr-video",
+  "music-video",
+  "video-translation",
+  "motion-graphics",
+  "slideshow",
+  "remotion-port",
 ]);
 
 export const videoWorkflowSchema = z.enum([
@@ -18,6 +26,12 @@ export const videoSourceTypeSchema = z.enum([
   "script",
   "product-brief",
   "website",
+  "existing-video",
+  "github-pr",
+  "music",
+  "deck",
+  "motion-brief",
+  "remotion-project",
 ]);
 
 export const presenterModeSchema = z.enum(["none", "digital-human"]);
@@ -27,6 +41,48 @@ export const videoRenderEngineSchema = z.enum([
   "hyperframes",
 ]);
 export const reviewGateStatusSchema = z.enum(["pending", "approved"]);
+
+const existingVideoWorkflows = new Set([
+  "auto",
+  "existing-video-recut",
+  "embedded-captions",
+  "video-translation",
+]);
+
+const requireSourceType = (
+  job: {
+    workflow: z.infer<typeof videoWorkflowSchema>;
+    source: { type: z.infer<typeof videoSourceTypeSchema> };
+  },
+  workflow: z.infer<typeof workflowIdSchema>,
+  sourceType: z.infer<typeof videoSourceTypeSchema>,
+  context: z.RefinementCtx,
+) => {
+  if (job.workflow === workflow && job.source.type !== sourceType) {
+    context.addIssue({
+      code: "custom",
+      message: `${workflow} workflow requires source.type=${sourceType}`,
+      path: ["source", "type"],
+    });
+  }
+};
+
+const requirePresenterNone = (
+  job: {
+    workflow: z.infer<typeof videoWorkflowSchema>;
+    presenter: { mode: z.infer<typeof presenterModeSchema> };
+  },
+  workflow: z.infer<typeof workflowIdSchema>,
+  context: z.RefinementCtx,
+) => {
+  if (job.workflow === workflow && job.presenter.mode !== "none") {
+    context.addIssue({
+      code: "custom",
+      message: `${workflow} workflow requires presenter.mode=none`,
+      path: ["presenter", "mode"],
+    });
+  }
+};
 
 export const videoJobSchema = z
   .object({
@@ -74,7 +130,13 @@ export const videoJobSchema = z
   })
   .strict()
   .superRefine((job, context) => {
-    if (job.presenter.mode === "none" && job.presenter.provider) {
+    const providerAllowedWithNone = job.workflow === "video-translation";
+
+    if (
+      job.presenter.mode === "none" &&
+      job.presenter.provider &&
+      !providerAllowedWithNone
+    ) {
       context.addIssue({
         code: "custom",
         message: "presenter.provider requires presenter.mode=digital-human",
@@ -114,12 +176,132 @@ export const videoJobSchema = z
         path: ["presenter", "mode"],
       });
     }
+
+    requireSourceType(job, "existing-video-recut", "existing-video", context);
+    requirePresenterNone(job, "existing-video-recut", context);
+    requireSourceType(job, "embedded-captions", "existing-video", context);
+    requirePresenterNone(job, "embedded-captions", context);
+    requireSourceType(job, "video-translation", "existing-video", context);
+    requirePresenterNone(job, "video-translation", context);
+    requireSourceType(job, "pr-video", "github-pr", context);
+    requirePresenterNone(job, "pr-video", context);
+    requireSourceType(job, "music-video", "music", context);
+    requirePresenterNone(job, "music-video", context);
+    requireSourceType(job, "slideshow", "deck", context);
+    requirePresenterNone(job, "slideshow", context);
+    requireSourceType(job, "motion-graphics", "motion-brief", context);
+    requirePresenterNone(job, "motion-graphics", context);
+    requireSourceType(job, "remotion-port", "remotion-project", context);
+    requirePresenterNone(job, "remotion-port", context);
+
+    if (
+      job.workflow === "video-translation" &&
+      !job.presenter.provider
+    ) {
+      context.addIssue({
+        code: "custom",
+        message:
+          "video-translation workflow requires presenter.provider (e.g. heygen)",
+        path: ["presenter", "provider"],
+      });
+    }
+
+    if (job.source.type === "existing-video" && job.source.refs.length === 0) {
+      context.addIssue({
+        code: "custom",
+        message: "existing-video source requires at least one local file ref",
+        path: ["source", "refs"],
+      });
+    }
+
+    if (
+      job.source.type === "existing-video" &&
+      !existingVideoWorkflows.has(job.workflow)
+    ) {
+      context.addIssue({
+        code: "custom",
+        message:
+          "existing-video source supports only auto, existing-video-recut, embedded-captions, or video-translation",
+        path: ["workflow"],
+      });
+    }
+
+    if (
+      job.source.type === "existing-video" &&
+      job.presenter.mode === "digital-human"
+    ) {
+      context.addIssue({
+        code: "custom",
+        message:
+          "existing-video source cannot request a digital-human presenter",
+        path: ["presenter", "mode"],
+      });
+    }
+
+    const typedSources: Array<{
+      type: z.infer<typeof videoSourceTypeSchema>;
+      workflows: Set<string>;
+    }> = [
+      {
+        type: "github-pr",
+        workflows: new Set(["auto", "pr-video"]),
+      },
+      {
+        type: "music",
+        workflows: new Set(["auto", "music-video"]),
+      },
+      {
+        type: "deck",
+        workflows: new Set(["auto", "slideshow"]),
+      },
+      {
+        type: "motion-brief",
+        workflows: new Set(["auto", "motion-graphics"]),
+      },
+      {
+        type: "remotion-project",
+        workflows: new Set(["auto", "remotion-port"]),
+      },
+    ];
+
+    for (const entry of typedSources) {
+      if (
+        job.source.type === entry.type &&
+        !entry.workflows.has(job.workflow)
+      ) {
+        context.addIssue({
+          code: "custom",
+          message: `${entry.type} source supports only ${[...entry.workflows].join(" or ")}`,
+          path: ["workflow"],
+        });
+      }
+
+      if (
+        job.source.type === entry.type &&
+        job.source.refs.length === 0 &&
+        entry.type !== "motion-brief"
+      ) {
+        context.addIssue({
+          code: "custom",
+          message: `${entry.type} source requires at least one ref`,
+          path: ["source", "refs"],
+        });
+      }
+    }
   });
 
 export const videoAgentSchema = z.enum([
   "product-promo-producer",
   "digital-human-producer",
   "faceless-explainer-producer",
+  "existing-video-recut-producer",
+  "embedded-captions-producer",
+  "pr-video-producer",
+  "music-video-producer",
+  "video-translation-producer",
+  "motion-graphics-producer",
+  "slideshow-producer",
+  "remotion-port-producer",
 ]);
 export const videoApprovalGateSchema = z.enum([
   "script",

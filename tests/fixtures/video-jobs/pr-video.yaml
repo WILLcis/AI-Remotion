@@ -1,0 +1,19 @@
+job_id: pr-video-trial
+workflow: auto
+source:
+  type: github-pr
+  subject: 示例 PR 变更讲解
+  refs:
+    - https://github.com/example/repo/pull/1
+output:
+  duration_seconds: 90
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

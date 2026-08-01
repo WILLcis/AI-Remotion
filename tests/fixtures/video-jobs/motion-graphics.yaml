@@ -1,0 +1,18 @@
+job_id: motion-graphics-trial
+workflow: auto
+source:
+  type: motion-brief
+  subject: 品牌 Logo sting 3 秒
+  refs: []
+output:
+  duration_seconds: 3
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: approved
+  storyboard: pending
+  final_render: pending

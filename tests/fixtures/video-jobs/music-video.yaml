@@ -1,0 +1,19 @@
+job_id: music-video-trial
+workflow: auto
+source:
+  type: music
+  subject: 节拍驱动短片试运行
+  refs:
+    - assets/audio/sample-beat.mp3
+output:
+  duration_seconds: 30
+  aspect_ratio: "9:16"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: approved
+  storyboard: pending
+  final_render: pending

@@ -1,0 +1,20 @@
+job_id: digital-human-routing
+workflow: digital-human
+source:
+  type: script
+  subject: AI-Remotion digital-human routing fixture
+  refs:
+    - episodes/sample/script.md
+output:
+  duration_seconds: 60
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: digital-human
+  provider: heygen
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

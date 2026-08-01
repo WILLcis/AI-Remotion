@@ -1,0 +1,19 @@
+job_id: remotion-port-trial
+workflow: auto
+source:
+  type: remotion-project
+  subject: 将 sample Remotion 组合迁移到 HyperFrames
+  refs:
+    - src/remotion
+output:
+  duration_seconds: 60
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: approved
+  storyboard: pending
+  final_render: pending

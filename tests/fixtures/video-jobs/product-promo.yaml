@@ -1,0 +1,19 @@
+job_id: deepdog-skills-promo-trial
+workflow: auto
+source:
+  type: product-brief
+  subject: deepdog 产品宣传片
+  refs:
+    - videos/deepdog-skills-promo/BRIEF.md
+output:
+  duration_seconds: 60
+  aspect_ratio: 16:9
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: approved
+  storyboard: approved
+  final_render: pending

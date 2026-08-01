@@ -1,0 +1,85 @@
+{
+  "task_id": "YES-1909-p4-controlled-trial",
+  "requirement": "完成多工作流视频 Agent 平台 P4 受控试运行：建立三类 Video Job fixtures，验证 feature flag 开关路由，对 deepdog-skills-promo 执行只读专业 Agent 试运行，并回填验证证据。",
+  "rounds": [
+    {
+      "round": 1,
+      "parallel": true,
+      "subtasks": [
+        {
+          "id": "fixture-product-promo",
+          "scope": "新增 tests/fixtures/video-jobs/product-promo.yaml，使用 deepdog-skills-promo 的本地 brief，script/storyboard 已批准，final_render 保持 pending。",
+          "no_touch": [
+            "tests/video-agent-platform.test.ts",
+            "src/",
+            "videos/deepdog-skills-promo/",
+            "docs/",
+            "state/tasks/"
+          ],
+          "verifies": "FLAG_video_agent_platform='{\"enabled\":true}' npm run video:route -- --job tests/fixtures/video-jobs/product-promo.yaml"
+        },
+        {
+          "id": "fixture-digital-human",
+          "scope": "新增 tests/fixtures/video-jobs/digital-human.yaml，使用本地 script 引用和显式 digital-human provider，仅做路由验证，不调用 provider。",
+          "no_touch": [
+            "tests/video-agent-platform.test.ts",
+            "src/",
+            "episodes/",
+            "docs/",
+            "state/tasks/"
+          ],
+          "verifies": "FLAG_video_agent_platform='{\"enabled\":true}' npm run video:route -- --job tests/fixtures/video-jobs/digital-human.yaml"
+        },
+        {
+          "id": "fixture-faceless-explainer",
+          "scope": "新增 tests/fixtures/video-jobs/faceless-explainer.yaml，引用 canonical sample 的本地 brief，仅做路由验证。",
+          "no_touch": [
+            "tests/video-agent-platform.test.ts",
+            "src/",
+            "episodes/",
+            "docs/",
+            "state/tasks/"
+          ],
+          "verifies": "FLAG_video_agent_platform='{\"enabled\":true}' npm run video:route -- --job tests/fixtures/video-jobs/faceless-explainer.yaml"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "parallel": false,
+      "subtasks": [
+        {
+          "id": "routing-matrix-and-trial",
+          "scope": "更新 tests/video-agent-platform.test.ts 读取三个 fixtures，覆盖三路由、部分审核门和 flag off；执行三组 CLI flag on/off 矩阵；对 videos/deepdog-skills-promo 做只读 inventory，记录 primary ownership、审核门暂停点和恢复动作到 state/tasks/YES-1909-p4-controlled-trial.md。",
+          "no_touch": [
+            "src/schemas/videoJob.ts",
+            "src/agent/videoRouter.ts",
+            "src/cli/routeVideoJob.ts",
+            "videos/deepdog-skills-promo/",
+            "episodes/"
+          ],
+          "verifies": "npx vitest run tests/video-agent-platform.test.ts tests/feature-flags.test.ts && FLAG_video_agent_platform='{\"enabled\":true}' npm run video:route -- --job tests/fixtures/video-jobs/product-promo.yaml",
+          "depends_on_round": 1
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "parallel": false,
+      "subtasks": [
+        {
+          "id": "p4-regression-and-handoff",
+          "scope": "运行 P4 回归门禁，更新 docs/VIDEO_AGENT_PLATFORM_DEVELOPMENT_PLAN.md 与 state/tasks/YES-1909-video-agent-platform.md 的 P4 证据，并向 BIOS YES-1909 回填实际命令、结果、风险和未执行项。",
+          "no_touch": [
+            "src/",
+            "videos/",
+            "episodes/"
+          ],
+          "verifies": "npm run typecheck && npm run lint && npm test && make verify-harness",
+          "depends_on_round": 2
+        }
+      ]
+    }
+  ],
+  "rationale": "三个 fixture 文件互不重叠，可在第一轮并行；共享测试、只读试运行证据和文档回填依赖 fixtures，必须后续串行。全程不调用付费 provider、不修改现有 video/episode artifact、不执行最终渲染。"
+}

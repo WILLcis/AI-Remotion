@@ -1,0 +1,43 @@
+{
+  "task_id": "YES-1909-p4-controlled-trial",
+  "status": "completed_with_known_blockers",
+  "completed_rounds": [
+    {
+      "round": 1,
+      "result": "Three reusable Video Job fixtures created and routed successfully."
+    },
+    {
+      "round": 2,
+      "result": "Flag on/off routing matrix passed; deepdog product-promo trial paused and resumed at final_render without writes, provider calls, or render."
+    },
+    {
+      "round": 3,
+      "result": "Focused tests, harness verification, non-rendering quality gate, documentation, and BIOS evidence completed."
+    }
+  ],
+  "verification": {
+    "focused_tests": "2 files, 17 tests passed",
+    "full_tests": "23 files, 107 tests passed",
+    "sample_validation": "8 scenes, 720 frames",
+    "harness": "17/17 passed",
+    "make_check": "typecheck, lint, validation, and tests passed; npm audit failed on 12 high vulnerabilities with no fix available"
+  },
+  "constraints_preserved": [
+    "No paid or cloud provider calls",
+    "No existing episode or video artifacts modified",
+    "No final render or publish",
+    "No approval inferred",
+    "VIDEO_AGENT_PLATFORM remains default-off"
+  ],
+  "blockers": [
+    "devin CLI is unavailable in the current environment; Cursor specialist fallback used",
+    "npm audit reports 12 high brace-expansion/minimatch vulnerabilities with no fix available"
+  ],
+  "pending_gate": "final_render",
+  "rollback_boundary": [
+    "tests/fixtures/video-jobs/",
+    "P4 additions in tests/video-agent-platform.test.ts",
+    "state/tasks/YES-1909-p4-controlled-trial.md",
+    "P4 evidence updates in development/task documents"
+  ]
+}

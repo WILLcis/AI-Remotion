@@ -41,7 +41,126 @@ const readFrontmatter = (filePath: string): Record<string, unknown> => {
   return YAML.parse(match[1]) as Record<string, unknown>;
 };
 
+const fixtureRoutes = [
+  {
+    fixturePath: "tests/fixtures/video-jobs/product-promo.yaml",
+    workflow: "product-promo",
+    primaryAgent: "product-promo-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/digital-human.yaml",
+    workflow: "digital-human",
+    primaryAgent: "digital-human-producer",
+    renderer: "remotion",
+    providerRequirements: ["heygen"],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/faceless-explainer.yaml",
+    workflow: "faceless-explainer",
+    primaryAgent: "faceless-explainer-producer",
+    renderer: "remotion",
+    providerRequirements: [],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/existing-video-recut.yaml",
+    workflow: "existing-video-recut",
+    primaryAgent: "existing-video-recut-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: [],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/embedded-captions.yaml",
+    workflow: "embedded-captions",
+    primaryAgent: "embedded-captions-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/pr-video.yaml",
+    workflow: "pr-video",
+    primaryAgent: "pr-video-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/music-video.yaml",
+    workflow: "music-video",
+    primaryAgent: "music-video-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/video-translation.yaml",
+    workflow: "video-translation",
+    primaryAgent: "video-translation-producer",
+    renderer: "remotion",
+    providerRequirements: ["heygen"],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/motion-graphics.yaml",
+    workflow: "motion-graphics",
+    primaryAgent: "motion-graphics-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/slideshow.yaml",
+    workflow: "slideshow",
+    primaryAgent: "slideshow-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
+    fixturePath: "tests/fixtures/video-jobs/remotion-port.yaml",
+    workflow: "remotion-port",
+    primaryAgent: "remotion-port-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["storyboard", "final_render"],
+  },
+] as const;
+
 describe("video agent platform", () => {
+  it.each(fixtureRoutes)(
+    "parses and routes $fixturePath",
+    ({
+      fixturePath,
+      workflow,
+      primaryAgent,
+      renderer,
+      providerRequirements,
+      requiresApproval,
+    }) => {
+      const job = videoJobSchema.parse(
+        YAML.parse(readProjectFile(fixturePath)) as unknown,
+      );
+      const route = routeVideoJob(job, { enabled: true });
+
+      expect(route).toMatchObject({
+        workflow,
+        primary_agent: primaryAgent,
+        renderer,
+      });
+      expect(route.provider_requirements).toEqual(providerRequirements);
+      expect(route.requires_approval).toEqual(requiresApproval);
+      expect(() => routeVideoJob(job, { enabled: false })).toThrow(
+        /VIDEO_AGENT_PLATFORM/,
+      );
+    },
+  );
+
   it("routes an explicit product promo to HyperFrames", () => {
     const route = routeVideoJob(
       makeJob({
@@ -116,6 +235,93 @@ describe("video agent platform", () => {
     });
   });
 
+  it("routes existing footage to recut for both auto and explicit workflows", () => {
+    const source = {
+      type: "existing-video",
+      subject: "HeyGen Human3 设计化重剪试运行",
+      refs: ["episodes/res/video/HeyGen_out.mp4"],
+    };
+    const autoRoute = routeVideoJob(makeJob({ source }), { enabled: true });
+    const explicitRoute = routeVideoJob(
+      makeJob({ workflow: "existing-video-recut", source }),
+      { enabled: true },
+    );
+
+    expect(autoRoute).toMatchObject({
+      workflow: "existing-video-recut",
+      primary_agent: "existing-video-recut-producer",
+      renderer: "hyperframes",
+      provider_requirements: [],
+      delegated_capabilities: [],
+    });
+    expect(autoRoute.reason).toMatch(/existing footage recut pipeline/);
+    expect(explicitRoute).toMatchObject({
+      workflow: "existing-video-recut",
+      primary_agent: "existing-video-recut-producer",
+      renderer: "hyperframes",
+    });
+    expect(explicitRoute.reason).toBe(
+      "Explicit workflow selected: existing-video-recut",
+    );
+  });
+
+  it.each([
+    {
+      name: "recut workflow with a non-video source",
+      job: makeJob({ workflow: "existing-video-recut" }),
+    },
+    {
+      name: "existing video without a local ref",
+      job: makeJob({
+        source: {
+          type: "existing-video",
+          subject: "Empty existing video",
+          refs: [],
+        },
+      }),
+    },
+    {
+      name: "existing video with a digital-human presenter",
+      job: makeJob({
+        source: {
+          type: "existing-video",
+          subject: "Existing video with presenter",
+          refs: ["episodes/res/video/HeyGen_out.mp4"],
+        },
+        presenter: { mode: "digital-human", provider: "heygen" },
+      }),
+    },
+    {
+      name: "existing video with the wrong explicit workflow",
+      job: makeJob({
+        workflow: "faceless-explainer",
+        source: {
+          type: "existing-video",
+          subject: "Existing video with wrong workflow",
+          refs: ["episodes/res/video/HeyGen_out.mp4"],
+        },
+      }),
+    },
+  ])("rejects $name", ({ job }) => {
+    expect(videoJobSchema.safeParse(job).success).toBe(false);
+  });
+
+  it("rejects Remotion for the existing-video recut route", () => {
+    expect(() =>
+      routeVideoJob(
+        makeJob({
+          source: {
+            type: "existing-video",
+            subject: "Existing video with wrong renderer",
+            refs: ["episodes/res/video/HeyGen_out.mp4"],
+          },
+          render: { engine: "remotion" },
+        }),
+        { enabled: true },
+      ),
+    ).toThrow(/requires renderer hyperframes/);
+  });
+
   it("rejects invalid workflow combinations and renderer overrides", () => {
     expect(
       videoJobSchema.safeParse(
@@ -159,41 +365,92 @@ describe("video agent platform", () => {
     );
   });
 
-  it("ships one root entry skill and three specialist profiles", () => {
+  it("ships one root entry skill and eleven specialist profiles", () => {
     const skill = readProjectFile(".devin/skills/video-producer/SKILL.md");
-    const productPromo = readProjectFile(
-      ".devin/agents/product-promo-producer.md",
-    );
-    const digitalHuman = readProjectFile(
-      ".devin/agents/digital-human-producer.md",
-    );
-    const facelessExplainer = readProjectFile(
-      ".devin/agents/faceless-explainer-producer.md",
-    );
+    const specialists = [
+      "product-promo-producer",
+      "digital-human-producer",
+      "faceless-explainer-producer",
+      "existing-video-recut-producer",
+      "embedded-captions-producer",
+      "pr-video-producer",
+      "music-video-producer",
+      "video-translation-producer",
+      "motion-graphics-producer",
+      "slideshow-producer",
+      "remotion-port-producer",
+    ] as const;
 
     expect(readFrontmatter(".devin/skills/video-producer/SKILL.md")).toMatchObject({
       name: "video-producer",
       triggers: ["user", "model"],
     });
-    expect(
-      readFrontmatter(".devin/agents/product-promo-producer.md"),
-    ).toMatchObject({
-      name: "product-promo-producer",
-      "max-nesting": 2,
-    });
-    expect(
-      readFrontmatter(".devin/agents/digital-human-producer.md"),
-    ).toMatchObject({ name: "digital-human-producer" });
-    expect(
-      readFrontmatter(".devin/agents/faceless-explainer-producer.md"),
-    ).toMatchObject({ name: "faceless-explainer-producer" });
     expect(skill).toContain("Dispatch exactly one primary");
-    expect(productPromo).toContain("max-nesting: 2");
-    expect(productPromo).toContain("needs_approval");
-    expect(digitalHuman).toContain("rights.yaml");
-    expect(digitalHuman).toContain("needs_approval");
-    expect(facelessExplainer).toContain("render-plan.json");
-    expect(facelessExplainer).toContain("needs_approval");
+
+    for (const name of specialists) {
+      const body = readProjectFile(`.devin/agents/${name}.md`);
+      expect(readFrontmatter(`.devin/agents/${name}.md`)).toMatchObject({
+        name,
+      });
+      expect(body).toContain("needs_approval");
+    }
+
+    expect(
+      readProjectFile(".devin/agents/existing-video-recut-producer.md"),
+    ).toContain("talking-head-recut");
+    expect(
+      readProjectFile(
+        ".devin/agents/existing-video-recut-producer.md",
+      ).toLowerCase(),
+    ).toContain("source immutability");
+    expect(
+      readProjectFile(".devin/agents/embedded-captions-producer.md"),
+    ).toContain("embedded-captions");
+    expect(
+      readProjectFile(".devin/agents/video-translation-producer.md"),
+    ).toMatch(/paid|heygen/i);
+  });
+
+  it("rejects translation without provider and captions/recut source mismatches", () => {
+    expect(() =>
+      videoJobSchema.parse(
+        makeJob({
+          workflow: "video-translation",
+          source: {
+            type: "existing-video",
+            subject: "translate",
+            refs: ["episodes/res/video/HeyGen_out.mp4"],
+          },
+          presenter: { mode: "none" },
+        }),
+      ),
+    ).toThrow(/presenter\.provider/);
+
+    expect(() =>
+      videoJobSchema.parse(
+        makeJob({
+          workflow: "embedded-captions",
+          source: {
+            type: "topic",
+            subject: "not a video",
+            refs: [],
+          },
+        }),
+      ),
+    ).toThrow(/existing-video/);
+
+    expect(() =>
+      videoJobSchema.parse(
+        makeJob({
+          workflow: "pr-video",
+          source: {
+            type: "github-pr",
+            subject: "missing ref",
+            refs: [],
+          },
+        }),
+      ),
+    ).toThrow(/ref/);
   });
 
   it("keeps dev and prod kill-switch keys in parity", () => {

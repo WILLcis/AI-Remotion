@@ -12,11 +12,12 @@ AI-Remotion 最初以图文讲解视频为核心，正式流水线是：
 brief -> script -> storyboard -> render-plan -> voiceover -> captions -> Remotion MP4 -> QA report
 ```
 
-仓库现已出现三类边界明显不同的生产路径：
+仓库现已出现四类边界明显不同的生产路径：
 
 1. 图文讲解：结构化 episode artifacts + Remotion。
 2. 产品宣传片：产品 brief、实机截图、HyperFrames 场景 composition、独立字幕时间线和本地渲染。
 3. 数字人口播：脚本、授权材料、TTS、头像 provider、口型同步、Remotion 后处理与 QA。
+4. 现有视频设计化重剪：本地 talking-head / 访谈 / 播客源片只读，叠加 transcript 同步的图形卡片（HyperFrames `talking-head-recut`），不是纯字幕。
 
 它们共享脚本、媒体登记、语音、字幕、渲染检查和 revision routing，但输入、创意判断、provider、渲染器、审核风险和失败模式不同。继续扩展单个万能 Agent 会导致上下文污染、权限过宽和难以测试；完全独立的 Agent 又会重复实现共享能力。
 
@@ -60,6 +61,14 @@ video-producer Skill（轻量入口，在根会话执行）
     +-- product-promo-producer
     +-- digital-human-producer
     +-- faceless-explainer-producer
+    +-- existing-video-recut-producer
+    +-- embedded-captions-producer
+    +-- pr-video-producer
+    +-- music-video-producer
+    +-- video-translation-producer
+    +-- motion-graphics-producer
+    +-- slideshow-producer
+    +-- remotion-port-producer
             |
             v
 共享 schema / Skills / CLI / provider adapters / QA
@@ -113,6 +122,35 @@ root -> router -> specialist -> worker
 - 审核门：script、render plan、final render。
 - 禁止：未标记的不确定事实、无关 artifact 重生成。
 
+### 6.4 `existing-video-recut-producer`
+
+拥有本地现有 talking-head / 访谈 / 播客视频的设计化图形叠加重剪。
+
+- 输入：本地源视频、已批准或待批准的 transcript、画幅与权利约束。
+- 主要工作流：HyperFrames `/hyperframes` → `talking-head-recut`（kinetic titles、lower-thirds、callouts、quotes、side panels、PiP）；明确不是 `/embedded-captions`。
+- 默认渲染器：HyperFrames。
+- 源片约束：source immutability；不得裁剪、重定时、重排、调色或改写源片；保留时长与节目音频。
+- 可分派：每个 overlay card 一个有界 worker，仅写分配的 `public/cards/<card-id>.html`。
+- 写入范围：自己的 `videos/<project>/` 派生 composition；绝不覆盖源 MP4。
+- 审核门：`script`=transcript、`storyboard`=overlay plan、`final_render`=preview/render。
+- 禁止：无本地源片或未证明权利时继续生产；未批准时调用 provider / 云预览 / 最终渲染；把重剪做成纯字幕。
+
+### 6.5 P6 立刻可接专家（契约已接入）
+
+以下与 HyperFrames / HeyGen 工作流对齐；细节见 `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`。
+
+| Agent | 要点 |
+| --- | --- |
+| `embedded-captions-producer` | 纯字幕；显式 workflow；源片只读 |
+| `pr-video-producer` | `github-pr` → `/pr-to-video` |
+| `music-video-producer` | `music` → `/music-to-video` |
+| `video-translation-producer` | 显式 + `presenter.provider`；付费门 |
+| `motion-graphics-producer` | `motion-brief` → 短动效 |
+| `slideshow-producer` | `deck` → `/slideshow` |
+| `remotion-port-producer` | `remotion-project` → 单向移植 |
+
+相邻高需求但未接入的候选项只记在 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md`。
+
 ## 7. Primary Agent 与组合能力
 
 每个 Job 只有一个 `primary_agent`。组合需求通过有界委派处理：
@@ -163,9 +201,15 @@ review_gates:
 
 1. 用户显式指定受支持 workflow 时尊重指定值。
 2. `product-brief` 或 `website` -> `product-promo-producer`。
-3. `presenter.mode=digital-human` -> `digital-human-producer`。
-4. `topic` 或普通 `script` -> `faceless-explainer-producer`。
-5. 无法唯一判断时返回结构化错误，不猜测、不进入生产。
+3. `github-pr` -> `pr-video-producer`。
+4. `music` -> `music-video-producer`。
+5. `deck` -> `slideshow-producer`。
+6. `remotion-project` -> `remotion-port-producer`。
+7. `motion-brief` -> `motion-graphics-producer`。
+8. `existing-video` -> `existing-video-recut-producer`（纯字幕/译制须显式 workflow）。
+9. `presenter.mode=digital-human` -> `digital-human-producer`。
+10. `topic` 或普通 `script` -> `faceless-explainer-producer`。
+11. 无法唯一判断时返回结构化错误，不猜测、不进入生产。
 
 产品宣传片带数字人时，产品宣传片仍是 primary；数字人作为 delegated capability。
 
@@ -231,4 +275,4 @@ FLAG_video_agent_platform={"enabled":false}
 
 ## 15. 回滚边界
 
-删除 `.devin/skills/video-producer/`、三个 `.devin/agents/*.md`、Video Job schema/router/CLI 和 `VIDEO_AGENT_PLATFORM` flag 即可回滚。现有 episode、HyperFrames 项目、数字人 provider 和直接命令保持不变。
+删除 `.devin/skills/video-producer/`、四个 `.devin/agents/*.md`、Video Job schema/router/CLI 和 `VIDEO_AGENT_PLATFORM` flag 即可回滚。现有 episode、HyperFrames 项目、数字人 provider、本地源片和直接命令保持不变。
