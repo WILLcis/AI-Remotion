@@ -238,11 +238,11 @@ FLAG_video_agent_platform='{"enabled":true}' npm run video:route -- --job path/t
 # 平台测试
 npx vitest run tests/video-agent-platform.test.ts tests/feature-flags.test.ts
 
-# 本地门禁（audit 可能因 brace-expansion 失败，属已知外部 blocker）
+# 本地门禁（当前完整通过；历史 audit blocker 保留证据）
 make check
 make verify-harness
 
-# Existing-video / HyperFrames（在 videos/<project>/ 内）
+# Existing-video / HyperFrames（在 videos/<project>/ 内；render 前须有 final_render 明文批准）
 npx hyperframes check
 PRODUCER_BROWSER_GPU_MODE=hardware npx hyperframes render . --skill=talking-head-recut -o output.mp4 --fps 25 --browser-gpu
 

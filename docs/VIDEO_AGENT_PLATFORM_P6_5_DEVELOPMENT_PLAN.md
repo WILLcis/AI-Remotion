@@ -1,6 +1,6 @@
 # P6.5 — Motion Graphics 免费 No-Render Trial 计划
 
-状态：Executed locally；BIOS `YES-1962` 已创建并进入 `in_review`
+状态：Completed；BIOS `YES-1962` 已关闭为 `done`
 日期：2026-08-01
 父工单：`YES-549`；关联平台：`YES-1909`；P6：`YES-1923`、P6.5：`YES-1962`
 

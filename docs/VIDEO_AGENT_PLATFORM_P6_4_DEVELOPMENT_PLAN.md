@@ -1,6 +1,6 @@
 # P6.4 — 审计收口与无付费试运行计划
 
-状态：Executed locally；BIOS `YES-1961` 已创建并进入 `in_review`
+状态：Completed；BIOS `YES-1961` 已关闭为 `done`
 日期：2026-08-01
 父工单：`YES-549`；关联平台：`YES-1909`、P5：`YES-1920`、P6：`YES-1923`、P6.4：`YES-1961`
 

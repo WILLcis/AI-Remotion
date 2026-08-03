@@ -49,7 +49,7 @@ git diff --check
 
 ### P1 — Video Job 契约与确定性路由
 
-BIOS 子工单：`YES-1966`（历史补录，`in_review`）
+BIOS 子工单：`YES-1966`（历史补录，`done`）
 
 依赖：P0。
 
@@ -82,7 +82,7 @@ npx vitest run tests/video-agent-platform.test.ts tests/feature-flags.test.ts
 
 ### P2 — 统一入口 Skill 与三个专业 Agent
 
-BIOS 子工单：`YES-1967`（历史补录，`in_review`）
+BIOS 子工单：`YES-1967`（历史补录，`done`）
 
 依赖：P1。
 
@@ -113,7 +113,7 @@ npx vitest run tests/video-agent-platform.test.ts
 
 ### P3 — 回归与质量门禁
 
-BIOS 子工单：`YES-1968`（历史补录，`in_review`）
+BIOS 子工单：`YES-1968`（历史补录，`done`）
 
 依赖：P1、P2。
 
@@ -140,7 +140,7 @@ npm audit --audit-level=low
 
 ### P4 — 首个受控试运行
 
-BIOS 子工单：`YES-1969`（历史补录，`in_review`）
+BIOS 子工单：`YES-1969`（历史补录，`done`）
 
 依赖：P3；按用户批准的 no-render 边界完成，不执行真实 provider/render。
 
@@ -249,12 +249,12 @@ P1 修改共享契约，必须串行完成。P2 的三个 Agent 文件可以并�
 - 三条 workflow 路由有单元测试。
 - Agent 配置能被 Devin 发现或有精确环境 blocker。
 - `make test-integration` 通过。
-- `make check` 除已记录且不可修复的外部 audit blocker 外无失败。
+- `make check` 完整通过。
 - BIOS 记录真实命令、结果、风险和回滚边界。
 
 ## 7. 当前状态
 
-- [x] BIOS `YES-1909` 已创建并进入 `in_progress`。
+- [x] BIOS `YES-1909` 及其所有阶段子工单已关闭为 `done`。
 - [x] YES-620 既有工作已单独提交，工作树已切换到 `feat/agent/YES-1909-video-agent-platform`。
 - [x] P0 文档完成并通过 `git diff --check`。
 - [x] P1 契约、路由、CLI 和 flag。

@@ -9,15 +9,15 @@
 | 分支 | `feat/agent/YES-1909-video-agent-platform` |
 | 父 BIOS | `YES-549` |
 | 平台 | `YES-1909` |
-| P1 | `YES-1966`（历史补录；`in_review`） |
-| P2 | `YES-1967`（历史补录；`in_review`） |
-| P3 | `YES-1968`（历史补录；`in_review`） |
-| P4 | `YES-1969`（历史补录；`in_review`） |
-| P5 | `YES-1920`（`in_review`） |
-| P6 | `YES-1923`（`in_review`；契约已落地） |
-| P6.4 | `YES-1961`（`in_review`）；本地审计收口与 captions no-render trial 已完成 |
-| P6.5 | `YES-1962`（`in_review`）；motion-graphics no-render trial 已完成 |
-| P6.6 | `YES-1960`（`in_review`）；任意 Agent 可读的中立 package 已完成 |
+| P1 | `YES-1966`（历史补录；`done`） |
+| P2 | `YES-1967`（历史补录；`done`） |
+| P3 | `YES-1968`（历史补录；`done`） |
+| P4 | `YES-1969`（历史补录；`done`） |
+| P5 | `YES-1920`（`done`） |
+| P6 | `YES-1923`（`done`；契约已落地） |
+| P6.4 | `YES-1961`（`done`）；本地审计收口与 captions no-render trial 已完成 |
+| P6.5 | `YES-1962`（`done`）；motion-graphics no-render trial 已完成 |
+| P6.6 | `YES-1960`（`done`）；任意 Agent 可读的中立 package 已完成 |
 | P4–P6.4 已提交基线（本机） | `5d8e02d feat: expand video agent specialist routing`；最新状态以 `git log --oneline -5` 为准 |
 | 工作树 | 接手前先运行 `git status --short`；不提交任何生成媒体 |
 
@@ -58,15 +58,16 @@ Video Job YAML
 | 阶段 | 状态 | 证据 |
 | --- | --- | --- |
 | P0 | 完成 | 父工单 `YES-1909` 的架构与可追踪性范围 |
-| P1 | BIOS `YES-1966` in review | schema/router/CLI/flag 基线已在 `c2e7d54`；历史补录 |
-| P2 | BIOS `YES-1967` in review | 统一入口与三专业 Agent 基线已在 `c2e7d54`；历史补录 |
-| P3 | BIOS `YES-1968` in review | 回归与质量门禁证据；历史补录 |
-| P4 | BIOS `YES-1969` in review | `state/tasks/YES-1909-p4-controlled-trial.md`；历史补录 |
-| P5 | BIOS `YES-1920` in review | `state/tasks/YES-1920-p5-controlled-trial.md`；本地出片目录 Git-ignored |
-| P6 | BIOS `YES-1923` in review | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`；`state/tasks/YES-1923-p6.md`；11 fixtures |
-| P6.4 | BIOS `YES-1961` in review | `docs/VIDEO_AGENT_PLATFORM_P6_4_DEVELOPMENT_PLAN.md`；embedded-captions no-render evidence |
-| P6.5 | BIOS `YES-1962` in review | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
-| P6.6 | BIOS `YES-1960` in review | `agents/video-producer/AGENT.md`；host-agnostic package plan |
+| P1 | BIOS `YES-1966` done | schema/router/CLI/flag 基线已在 `c2e7d54`；历史补录 |
+| P2 | BIOS `YES-1967` done | 统一入口与三专业 Agent 基线已在 `c2e7d54`；历史补录 |
+| P3 | BIOS `YES-1968` done | 回归与质量门禁证据；历史补录 |
+| P4 | BIOS `YES-1969` done | `state/tasks/YES-1909-p4-controlled-trial.md`；历史补录 |
+| P5 | BIOS `YES-1920` done | `state/tasks/YES-1920-p5-controlled-trial.md`；本地出片目录 Git-ignored |
+| P6 | BIOS `YES-1923` done | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`；`state/tasks/YES-1923-p6.md`；11 fixtures |
+| P6.4 | BIOS `YES-1961` done | `docs/VIDEO_AGENT_PLATFORM_P6_4_DEVELOPMENT_PLAN.md`；embedded-captions no-render evidence |
+| P6.5 | BIOS `YES-1962` done | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
+| P6.6 | BIOS `YES-1960` done | `agents/video-producer/AGENT.md`；host-agnostic package plan |
+| Final acceptance | BIOS `YES-1909` done | `state/tasks/YES-1909-final-acceptance.md`；make check + cross-Agent handoff passed |
 | P7 | 未做 | `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 ### 验证（交接时点）
@@ -78,7 +79,7 @@ npm run typecheck   # passed
 npm run lint -- --quiet  # passed
 ```
 
-`make check` 业务段可通过；最终 `npm audit` 仍因 brace-expansion/minimatch **12 high / No fix available** — **禁止降门禁**。
+`make check` 已完整通过：typecheck、lint、sample validation、23 个测试文件 / 122 个测试及 `npm audit --audit-level=low` 均通过（0 vulnerabilities）。历史 audit blocker 未通过降低门禁或添加 override 解决。
 
 ---
 
@@ -156,7 +157,7 @@ Auto 优先级摘要：
 | `devin` CLI 可能缺失 | Cursor/Codex 直接读 `.devin/agents/*.md` |
 | MCP `bios_*` 报 `deepdog daemon is not running` | **不是 CLI 坏了**：observer bridge 依赖本机 daemon。先 `deepdog daemon status`；若 stopped → `deepdog daemon start`；再 `curl -s http://127.0.0.1:19514/health`；必要时重启 Cursor MCP。详见下文 §6.1 |
 | BIOS 远程评论偶发失败 | 本地 `state/tasks/YES-*.md`；或 `deepdog issue comment add <KEY> --content-stdin` |
-| npm audit 12 high | 记录，不降级、不乱 override |
+| npm audit | 当前 `make check` 通过（0 vulnerabilities）；历史 blocker 保留证据，不降级、不乱 override |
 | HyperFrames skill 未装全 | Agent 内 `npx hyperframes skills update <name>` |
 
 ### 6.1 BIOS 建单：MCP vs CLI（必读）
@@ -190,7 +191,7 @@ curl -sS http://127.0.0.1:19514/health
 
 1. 与用户确认：`videos/heygen-out-recut-trial/output.mp4` 是否提交或 gitignore
 2. 分提交：P4 证据 / P5 recut / P6 七专家 / 文档
-3. PR + 本地 `make check` 说明 audit blocker
+3. PR + 本地 `make check` 完整通过证据
 4. 按 harness：tag + Release（若合入 main）
 
 ### B. P6 深化

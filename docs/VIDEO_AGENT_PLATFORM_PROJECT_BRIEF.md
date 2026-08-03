@@ -90,15 +90,16 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | 阶段 | BIOS | 状态 |
 | --- | --- | --- |
 | P0 决策与可追踪性 | YES-1909 | 完成 |
-| P1 Job 契约、路由与 flag | YES-1966 | 历史补录；`in_review` |
-| P2 统一入口与首批专业 Agent | YES-1967 | 历史补录；`in_review` |
-| P3 回归与质量门禁 | YES-1968 | 历史补录；`in_review` |
-| P4 三工作流 no-render 试运行 | YES-1969 | 历史补录；`in_review` |
-| P5 Existing-Video Recut + 本地出片 | YES-1920 | 完成；`in_review` |
-| P6 七专家契约接入 | YES-1923 | **契约层完成**；`in_review`；未强制七条真实出片 |
-| P6.4 审计收口 + captions no-render trial | YES-1961 | 完成本地证据、生成媒体排除和一条无付费试运行；`in_review` |
-| P6.5 motion-graphics no-render trial | YES-1962 | 完成第二条无外部输入、无付费试运行；`in_review` |
-| P6.6 Host-Agnostic Agent Package | YES-1960 | 提供任意 Agent 可读的中立入口与 specialist map；`in_review` |
+| P1 Job 契约、路由与 flag | YES-1966 | 历史补录；`done` |
+| P2 统一入口与首批专业 Agent | YES-1967 | 历史补录；`done` |
+| P3 回归与质量门禁 | YES-1968 | 历史补录；`done` |
+| P4 三工作流 no-render 试运行 | YES-1969 | 历史补录；`done` |
+| P5 Existing-Video Recut + 本地出片 | YES-1920 | 完成；`done` |
+| P6 七专家契约接入 | YES-1923 | **契约层完成**；`done`；未强制七条真实出片 |
+| P6.4 审计收口 + captions no-render trial | YES-1961 | 完成本地证据、生成媒体排除和一条无付费试运行；`done` |
+| P6.5 motion-graphics no-render trial | YES-1962 | 完成第二条无外部输入、无付费试运行；`done` |
+| P6.6 Host-Agnostic Agent Package | YES-1960 | 提供任意 Agent 可读的中立入口与 specialist map；`done` |
+| 最终验收与关闭 | YES-1909 | `make check` 与跨 Agent handoff 通过；`done` |
 | P7 backlog 晋升 | — | 未开工；见 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 父工单：`YES-549`。
@@ -127,7 +128,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 ## 7. 红线（接手后仍必须遵守）
 
 1. 先读再写；最小 diff；加测试。
-2. 不降 `npm audit` 门禁（已知 brace-expansion/minimatch 12 high，无修复）。
+2. 不降 `npm audit` 门禁；当前完整门禁通过，历史 audit blocker 保留审计证据。
 3. 不提交密钥；生成大媒体是否入库按团队策略（默认不强制提交 `output.mp4`）。
 4. 不把 backlog 项偷偷塞进 schema。
 5. 付费 / 最终 render 必须用户明文批准。

@@ -1,6 +1,6 @@
 # P6 — 立刻可接专业 Agent 分步开发计划
 
-状态：Contract layer complete；BIOS `YES-1923` 保持 `in_progress`，待独立 trial/提交收口后更新
+状态：Completed；BIOS `YES-1923` 已关闭为 `done`
 日期：2026-08-01
 父 BIOS：`YES-1909` · 父工单：`YES-549` · **P6 子工单：`YES-1923`**
 范围：仅「立刻能接」七类；相邻高需求专家见 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md`（只记录不实现）。

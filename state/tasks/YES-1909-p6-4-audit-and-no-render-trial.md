@@ -3,7 +3,7 @@
 日期：2026-08-01
 父工单：`YES-549`
 关联平台：`YES-1909`
-BIOS 子工单：`YES-1961`（`in_review`）
+BIOS 子工单：`YES-1961`（`done`）
 
 ## BIOS 创建尝试
 
@@ -17,7 +17,7 @@ BIOS 子工单：`YES-1961`（`in_review`）
 
 首次结果：`deepdog daemon is not running on this machine`。
 
-daemon 恢复后已用同一幂等 token 重试，成功创建 `YES-1961`，并通过 MCP 更新至 `verify` stage（BIOS 状态 `in_review`）及回填进度证据。
+daemon 恢复后已用同一幂等 token 重试，成功创建 `YES-1961`，并通过 MCP 更新至 `verify` stage 后完成关闭（BIOS 状态 `done`）及回填进度证据。
 
 ## 目标
 
