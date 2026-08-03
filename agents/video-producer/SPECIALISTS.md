@@ -10,6 +10,7 @@ The Video Job route JSON is authoritative. Do not choose a row from this table b
 | digital-human | digital-human-producer | remotion | `.devin/agents/digital-human-producer.md` |
 | faceless-explainer | faceless-explainer-producer | remotion | `.devin/agents/faceless-explainer-producer.md` |
 | existing-video-recut | existing-video-recut-producer | hyperframes | `.devin/agents/existing-video-recut-producer.md` |
+| shorts-repackage | shorts-repackage-producer | hyperframes | `.devin/agents/shorts-repackage-producer.md` |
 | embedded-captions | embedded-captions-producer | hyperframes | `.devin/agents/embedded-captions-producer.md` |
 | pr-video | pr-video-producer | hyperframes | `.devin/agents/pr-video-producer.md` |
 | music-video | music-video-producer | hyperframes | `.devin/agents/music-video-producer.md` |

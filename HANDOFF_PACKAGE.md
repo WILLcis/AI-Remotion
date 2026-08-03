@@ -49,7 +49,7 @@ Video Job YAML
   → 批准后 HyperFrames / Remotion / provider
 ```
 
-11 个 primary 已接入契约层。详情见 PROJECT_BRIEF。
+12 个 primary 已接入契约层；P7 shorts-repackage 正在独立开发。详情见 PROJECT_BRIEF。
 
 ---
 
@@ -68,7 +68,7 @@ Video Job YAML
 | P6.5 | BIOS `YES-1962` done | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
 | P6.6 | BIOS `YES-1960` done | `agents/video-producer/AGENT.md`；host-agnostic package plan |
 | Final acceptance | BIOS `YES-1909` done | `state/tasks/YES-1909-final-acceptance.md`；make check + cross-Agent handoff passed |
-| P7 | 未做 | `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
+| P7 | BIOS `YES-1987` in review | `docs/SHORTS_REPACKAGE_P7_DEVELOPMENT_PLAN.md`；shorts-repackage no-render trial + complete quality gate |
 
 ### 验证（交接时点）
 
@@ -102,7 +102,7 @@ npm run lint -- --quiet  # passed
 **未跟踪（重要）**
 
 - `.devin/agents/` 下 P5/P6 新增：`existing-video-recut-*`、`embedded-captions-*`、`pr-video-*`、`music-video-*`、`video-translation-*`、`motion-graphics-*`、`slideshow-*`、`remotion-port-*`
-- `tests/fixtures/video-jobs/`（11 个 yaml）
+- `tests/fixtures/video-jobs/`（12 个 yaml，含 P7 shorts-repackage）
 - `docs/VIDEO_AGENT_PLATFORM_{PROJECT_BRIEF,AGENT_USAGE,QUICKSTART,P6_*,BACKLOG}.md`
 - `HANDOFF_PACKAGE.md`
 - `state/tasks/YES-1909-p4-*`、`YES-1920-*`、`YES-1923-*`
@@ -244,7 +244,7 @@ npm run video:route -- --job tests/fixtures/video-jobs/pr-video.yaml
 
 - [ ] 读 PROJECT_BRIEF + 本接力包 + AGENTS.md + coding-discipline
 - [ ] `git status` / `git log -5` 对齐上文
-- [ ] 确认 11 个 `.devin/agents/*-producer.md` 与 11 fixtures
+- [ ] 确认 12 个 `.devin/agents/*-producer.md` 与 12 fixtures
 - [ ] 跑 32 条平台相关 Vitest
 - [ ] 问用户：先提交 PR，还是做 P6 trial / P7 / Codex 封装
 - [ ] 未获批准不调付费、不最终 render、不降 audit
@@ -260,4 +260,4 @@ npm run video:route -- --job tests/fixtures/video-jobs/pr-video.yaml
 
 ---
 
-**交接结语**：平台 **契约与路由已扩到 11 专家**；P5 有一条完整本地出片样例；P6 **未**做七条出片 trial；**大量变更尚未 commit**。下一 Agent 的第一决策应是：与用户确认「提交收口」还是「继续功能」，不要默默开 P7。
+**交接结语**：平台基础的 12 个专家已具备契约与路由；P7 `YES-1987` 已完成 contract/no-render trial/完整质量门禁并处于 review。下一 Agent 应先完成 P7 review 或在明确批准的真实 Job 上恢复；不得调用 provider、自动出片或越过 pending gate。

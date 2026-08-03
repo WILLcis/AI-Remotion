@@ -75,6 +75,14 @@ const fixtureRoutes = [
     requiresApproval: [],
   },
   {
+    fixturePath: "tests/fixtures/video-jobs/shorts-repackage.yaml",
+    workflow: "shorts-repackage",
+    primaryAgent: "shorts-repackage-producer",
+    renderer: "hyperframes",
+    providerRequirements: [],
+    requiresApproval: ["script", "storyboard", "final_render"],
+  },
+  {
     fixturePath: "tests/fixtures/video-jobs/embedded-captions.yaml",
     workflow: "embedded-captions",
     primaryAgent: "embedded-captions-producer",
@@ -235,7 +243,7 @@ describe("video agent platform", () => {
     });
   });
 
-  it("routes existing footage to recut for both auto and explicit workflows", () => {
+  it("keeps existing-video auto routing on recut while supporting explicit shorts repackage", () => {
     const source = {
       type: "existing-video",
       subject: "HeyGen Human3 设计化重剪试运行",
@@ -263,6 +271,18 @@ describe("video agent platform", () => {
     expect(explicitRoute.reason).toBe(
       "Explicit workflow selected: existing-video-recut",
     );
+
+    const shortsRoute = routeVideoJob(
+      makeJob({ workflow: "shorts-repackage", source }),
+      { enabled: true },
+    );
+    expect(shortsRoute).toMatchObject({
+      workflow: "shorts-repackage",
+      primary_agent: "shorts-repackage-producer",
+      renderer: "hyperframes",
+      provider_requirements: [],
+      delegated_capabilities: [],
+    });
   });
 
   it.each([
@@ -292,6 +312,30 @@ describe("video agent platform", () => {
       }),
     },
     {
+      name: "shorts repackage with a digital-human presenter",
+      job: makeJob({
+        workflow: "shorts-repackage",
+        source: {
+          type: "existing-video",
+          subject: "Approved source",
+          refs: ["episodes/res/video/HeyGen_out.mp4"],
+        },
+        presenter: { mode: "digital-human", provider: "heygen" },
+      }),
+    },
+    {
+      name: "shorts repackage over the maximum duration",
+      job: makeJob({
+        workflow: "shorts-repackage",
+        source: {
+          type: "existing-video",
+          subject: "Approved source",
+          refs: ["episodes/res/video/HeyGen_out.mp4"],
+        },
+        output: { duration_seconds: 61, aspect_ratio: "9:16", language: "zh" },
+      }),
+    },
+    {
       name: "existing video with the wrong explicit workflow",
       job: makeJob({
         workflow: "faceless-explainer",
@@ -306,20 +350,21 @@ describe("video agent platform", () => {
     expect(videoJobSchema.safeParse(job).success).toBe(false);
   });
 
-  it("rejects Remotion for the existing-video recut route", () => {
-    expect(() =>
-      routeVideoJob(
-        makeJob({
-          source: {
-            type: "existing-video",
-            subject: "Existing video with wrong renderer",
-            refs: ["episodes/res/video/HeyGen_out.mp4"],
-          },
-          render: { engine: "remotion" },
-        }),
-        { enabled: true },
-      ),
-    ).toThrow(/requires renderer hyperframes/);
+  it("rejects Remotion for existing-video recut and shorts-repackage routes", () => {
+    const source = {
+      type: "existing-video",
+      subject: "Existing video with wrong renderer",
+      refs: ["episodes/res/video/HeyGen_out.mp4"],
+    };
+
+    for (const workflow of ["auto", "shorts-repackage"] as const) {
+      expect(() =>
+        routeVideoJob(
+          makeJob({ source, workflow, render: { engine: "remotion" } }),
+          { enabled: true },
+        ),
+      ).toThrow(/requires renderer hyperframes/);
+    }
   });
 
   it("rejects invalid workflow combinations and renderer overrides", () => {
@@ -365,7 +410,7 @@ describe("video agent platform", () => {
     );
   });
 
-  it("ships a host-neutral entry package, Devin adapter, and eleven specialist profiles", () => {
+  it("ships a host-neutral entry package, Devin adapter, and twelve specialist profiles", () => {
     const skill = readProjectFile(".devin/skills/video-producer/SKILL.md");
     const neutralEntry = readProjectFile("agents/video-producer/AGENT.md");
     const specialistMap = readProjectFile("agents/video-producer/SPECIALISTS.md");
@@ -374,6 +419,7 @@ describe("video agent platform", () => {
       "digital-human-producer",
       "faceless-explainer-producer",
       "existing-video-recut-producer",
+      "shorts-repackage-producer",
       "embedded-captions-producer",
       "pr-video-producer",
       "music-video-producer",
@@ -416,6 +462,11 @@ describe("video agent platform", () => {
         ".devin/agents/existing-video-recut-producer.md",
       ).toLowerCase(),
     ).toContain("source immutability");
+    expect(
+      readProjectFile(
+        ".devin/agents/shorts-repackage-producer.md",
+      ).toLowerCase(),
+    ).toContain("source video");
     expect(
       readProjectFile(".devin/agents/embedded-captions-producer.md"),
     ).toContain("embedded-captions");

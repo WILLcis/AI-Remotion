@@ -26,6 +26,10 @@ const routeConfig = {
     agent: "existing-video-recut-producer",
     renderer: "hyperframes",
   },
+  "shorts-repackage": {
+    agent: "shorts-repackage-producer",
+    renderer: "hyperframes",
+  },
   "embedded-captions": {
     agent: "embedded-captions-producer",
     renderer: "hyperframes",
@@ -159,6 +163,8 @@ const getRouteReason = (
     "faceless-explainer": `Source type ${job.source.type} uses the faceless explainer pipeline`,
     "existing-video-recut":
       "Source type existing-video uses the existing footage recut pipeline",
+    "shorts-repackage":
+      "Explicit workflow shorts-repackage uses the approved short-form repackage pipeline",
     "embedded-captions":
       "Source type existing-video uses the embedded captions pipeline",
     "pr-video": "Source type github-pr uses the pull-request video pipeline",

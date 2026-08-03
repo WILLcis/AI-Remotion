@@ -1,0 +1,20 @@
+job_id: shorts-repackage-trial
+workflow: shorts-repackage
+source:
+  type: existing-video
+  subject: 已批准的 30 秒竖屏短片拆条计划
+  refs:
+    - episodes/res/video/HeyGen_out.mp4
+    - episodes/avatar-human3-reference/captions/reference.srt
+output:
+  duration_seconds: 30
+  aspect_ratio: "9:16"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

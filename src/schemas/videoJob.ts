@@ -7,6 +7,7 @@ const workflowIdSchema = z.enum([
   "digital-human",
   "faceless-explainer",
   "existing-video-recut",
+  "shorts-repackage",
   "embedded-captions",
   "pr-video",
   "music-video",
@@ -45,6 +46,7 @@ export const reviewGateStatusSchema = z.enum(["pending", "approved"]);
 const existingVideoWorkflows = new Set([
   "auto",
   "existing-video-recut",
+  "shorts-repackage",
   "embedded-captions",
   "video-translation",
 ]);
@@ -179,6 +181,8 @@ export const videoJobSchema = z
 
     requireSourceType(job, "existing-video-recut", "existing-video", context);
     requirePresenterNone(job, "existing-video-recut", context);
+    requireSourceType(job, "shorts-repackage", "existing-video", context);
+    requirePresenterNone(job, "shorts-repackage", context);
     requireSourceType(job, "embedded-captions", "existing-video", context);
     requirePresenterNone(job, "embedded-captions", context);
     requireSourceType(job, "video-translation", "existing-video", context);
@@ -221,8 +225,19 @@ export const videoJobSchema = z
       context.addIssue({
         code: "custom",
         message:
-          "existing-video source supports only auto, existing-video-recut, embedded-captions, or video-translation",
+          "existing-video source supports only auto, existing-video-recut, shorts-repackage, embedded-captions, or video-translation",
         path: ["workflow"],
+      });
+    }
+
+    if (
+      job.workflow === "shorts-repackage" &&
+      job.output.duration_seconds > 60
+    ) {
+      context.addIssue({
+        code: "custom",
+        message: "shorts-repackage workflow requires output.duration_seconds <= 60",
+        path: ["output", "duration_seconds"],
       });
     }
 
@@ -295,6 +310,7 @@ export const videoAgentSchema = z.enum([
   "digital-human-producer",
   "faceless-explainer-producer",
   "existing-video-recut-producer",
+  "shorts-repackage-producer",
   "embedded-captions-producer",
   "pr-video-producer",
   "music-video-producer",

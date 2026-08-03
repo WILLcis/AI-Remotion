@@ -406,7 +406,7 @@ agents/video-producer/AGENT.md
 agents/video-producer/SPECIALISTS.md
 ```
 
-适配不得复制 11 个 profile、不得实现自己的路由、不得绕开 `VIDEO_AGENT_PLATFORM`。用户级 symlink 或宿主配置是可选部署动作，不是使用此 package 的前提。
+适配不得复制 12 个 profile、不得实现自己的路由、不得绕开 `VIDEO_AGENT_PLATFORM`。用户级 symlink 或宿主配置是可选部署动作，不是使用此 package 的前提。
 
 ### Devin 宿主
 
@@ -422,7 +422,7 @@ devin skills show video-producer
 
 ### 不要这样做
 
-- 不要把 11 个 producer 合成一个宿主专属「万能视频 agent」。
+- 不要把 12 个 producer 合成一个宿主专属「万能视频 agent」。
 - 不要在 flag 关闭时直接读 producer 文件开干。
 - 不要部署云队列 / 对象存储 / 自动发布来「完成封装」——超出当前产品合同。
 - 不要让上游 Agent 跳过 `video:route` 自己指定 primary（除非用户显式指定且仍通过 schema）。

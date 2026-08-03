@@ -7,12 +7,17 @@
 本文件记录与现有能力相邻、市场需求高、但 **尚未** 进入 Video Job schema / 路由的专业 Agent 候选。
 开新工单前必须有稳定重复需求、独立验收与回滚边界；禁止借机做成万能 Agent。
 
+## 已晋升
+
+| primary | P 阶段 | 状态 |
+| --- | --- | --- |
+| `shorts-repackage-producer` | P7 / `YES-1987` | 已进入 `in_review`；显式 workflow，详见 `docs/SHORTS_REPACKAGE_P7_DEVELOPMENT_PLAN.md` |
+
 ## 候选清单
 
 | 候选 primary | 典型输入 | 与现有关系 | 主要风险 | 建议优先级 |
 | --- | --- | --- | --- | --- |
 | `product-demo-producer` | 产品 URL / 可登录环境 / 操作脚本 | 邻近 product-promo；偏真实浏览器操作录屏+旁白 | 账号密钥、环境不稳定、云浏览器成本 | 高 |
-| `shorts-repackage-producer` | 已有长片 / 成片 | 邻近 recut/captions；多画幅与 15s 切片 | 与 recut 边界糊；避免二次改源片 | 高 |
 | `training-sop-producer` | PDF / 飞书 / SOP / 入职文档 | faceless-explainer 垂直版 | 事实审核；企业内部材料权限 | 中高 |
 | `data-report-producer` | 表、看板导出、指标 brief | motion-graphics + explainer 组合 | 数字准确性；图表可读性 | 中 |
 | `news-brief-producer` | 热点链接 / 快评提纲 | faceless 变体 | **事实与合规**；不得未核实断言 | 中（合规先行） |

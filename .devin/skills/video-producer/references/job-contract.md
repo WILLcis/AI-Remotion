@@ -28,7 +28,7 @@ review_gates:
 
 ## Supported values
 
-- `workflow`: `auto`, `product-promo`, `digital-human`, `faceless-explainer`, `existing-video-recut`, `embedded-captions`, `pr-video`, `music-video`, `video-translation`, `motion-graphics`, `slideshow`, `remotion-port`
+- `workflow`: `auto`, `product-promo`, `digital-human`, `faceless-explainer`, `existing-video-recut`, `shorts-repackage`, `embedded-captions`, `pr-video`, `music-video`, `video-translation`, `motion-graphics`, `slideshow`, `remotion-port`
 - `source.type`: `topic`, `script`, `product-brief`, `website`, `existing-video`, `github-pr`, `music`, `deck`, `motion-brief`, `remotion-project`
 - `presenter.mode`: `none`, `digital-human`; digital-human mode requires an explicit `presenter.provider`
 - `video-translation` also requires `presenter.provider` while keeping `presenter.mode=none`
@@ -42,6 +42,7 @@ review_gates:
 | workflow | source.type | presenter | renderer |
 | --- | --- | --- | --- |
 | existing-video-recut | existing-video | none | hyperframes |
+| shorts-repackage | existing-video | none | hyperframes |
 | embedded-captions | existing-video | none | hyperframes |
 | video-translation | existing-video | none + provider | remotion |
 | pr-video | github-pr | none | hyperframes |
@@ -50,7 +51,7 @@ review_gates:
 | motion-graphics | motion-brief | none | hyperframes |
 | remotion-port | remotion-project | none | hyperframes |
 
-`existing-video` must include at least one local file ref. The source file is immutable for recut/captions/translation.
+`existing-video` must include at least one local file ref. The source file is immutable for recut/shorts-repackage/captions/translation. `shorts-repackage` is explicit-only and requires `output.duration_seconds <= 60`.
 
 ## Routing
 
@@ -61,7 +62,7 @@ review_gates:
 5. Deck -> slideshow.
 6. Remotion project -> remotion-port.
 7. Motion brief -> motion-graphics.
-8. Existing video -> existing-video recut (plain captions and translation require an **explicit** workflow).
+8. Existing video -> existing-video recut (shorts repackage, plain captions, and translation require an **explicit** workflow).
 9. Digital-human presenter on a non-product source -> digital human.
 10. Topic or ordinary script -> faceless explainer.
 

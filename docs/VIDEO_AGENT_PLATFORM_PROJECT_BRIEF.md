@@ -53,8 +53,8 @@ brief → script → storyboard → render-plan → voice → captions → Remot
 | CLI | `src/cli/routeVideoJob.ts` → `npm run video:route` |
 | Flag | `FLAGS.VIDEO_AGENT_PLATFORM`（默认 false） |
 | 入口 Skill | `.devin/skills/video-producer/` |
-| Specialists | `.devin/agents/*-producer.md`（现 11 个） |
-| Fixtures | `tests/fixtures/video-jobs/*.yaml`（现 11 个） |
+| Specialists | `.devin/agents/*-producer.md`（现 12 个） |
+| Fixtures | `tests/fixtures/video-jobs/*.yaml`（现 12 个） |
 
 启用示例：
 
@@ -65,7 +65,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 
 ---
 
-## 4. 已接入的 11 个专家
+## 4. 已接入的 12 个专家
 
 | workflow | primary | renderer | 备注 |
 | --- | --- | --- | --- |
@@ -73,6 +73,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | digital-human | digital-human-producer | remotion | 需 `presenter.provider` |
 | faceless-explainer | faceless-explainer-producer | remotion | topic / script |
 | existing-video-recut | existing-video-recut-producer | hyperframes | `existing-video` **自动默认** |
+| shorts-repackage | shorts-repackage-producer | hyperframes | 仅显式 workflow；批准的短视频 segment/reframe plan |
 | embedded-captions | embedded-captions-producer | hyperframes | 须 **显式** workflow |
 | video-translation | video-translation-producer | remotion | 须显式 + provider |
 | pr-video | pr-video-producer | hyperframes | github-pr |
@@ -100,7 +101,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | P6.5 motion-graphics no-render trial | YES-1962 | 完成第二条无外部输入、无付费试运行；`done` |
 | P6.6 Host-Agnostic Agent Package | YES-1960 | 提供任意 Agent 可读的中立入口与 specialist map；`done` |
 | 最终验收与关闭 | YES-1909 | `make check` 与跨 Agent handoff 通过；`done` |
-| P7 backlog 晋升 | — | 未开工；见 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
+| P7 Shorts Repackage Producer | YES-1987 | 显式 workflow、no-render trial 与完整质量门禁完成；`in_review` |
 
 父工单：`YES-549`。
 
@@ -142,7 +143,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 1. **提交 / PR**：工作树大量未提交 P4–P6 增量，优先整理提交再开 PR。
 2. **P6 出片 trial**：为 captions / PR / music / motion / slideshow / port 各选一条做 no-render 或批准后 render（translation 单独付费门）。
 3. **P7**：从 backlog 挑 `product-demo` 或 `shorts-repackage`，先写计划 + BIOS 再动 schema。
-4. **可选宿主适配**：为某个宿主增加只指向 `agents/video-producer/AGENT.md` 的薄封装。
+4. **P7 状态**：完成 shorts-repackage 的契约、试运行与审核后，再选择下一条 backlog 候选或可选宿主适配。
 5. **文档对齐**：`AGENT_USAGE` 第 4 节仍偏重前四专家，可补 P6 一节。
 
 详细检查清单与命令见 `HANDOFF_PACKAGE.md`。
