@@ -1,6 +1,6 @@
 # P7 — Shorts Repackage Producer 开发计划
 
-状态：Contract/no-render trial complete；BIOS `YES-1987` 为 `in_review`
+状态：Completed；BIOS `YES-1987` 已关闭为 `done`
 日期：2026-08-03
 父工单：`YES-549`；P7 工单：`YES-1987`
 独立于已关闭的平台工单：`YES-1909`

@@ -101,7 +101,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | P6.5 motion-graphics no-render trial | YES-1962 | 完成第二条无外部输入、无付费试运行；`done` |
 | P6.6 Host-Agnostic Agent Package | YES-1960 | 提供任意 Agent 可读的中立入口与 specialist map；`done` |
 | 最终验收与关闭 | YES-1909 | `make check` 与跨 Agent handoff 通过；`done` |
-| P7 Shorts Repackage Producer | YES-1987 | 显式 workflow、no-render trial 与完整质量门禁完成；`in_review` |
+| P7 Shorts Repackage Producer | YES-1987 | 显式 workflow、no-render trial 与完整质量门禁完成；`done` |
 
 父工单：`YES-549`。
 

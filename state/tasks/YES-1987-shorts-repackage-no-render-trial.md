@@ -2,7 +2,7 @@
 
 日期：2026-08-03
 父工单：`YES-549`
-BIOS：`YES-1987`（`in_review`）
+BIOS：`YES-1987`（`done`）
 
 ## 范围与约束
 
@@ -72,6 +72,10 @@ cd9f6009de6bad3024a071b188011bb02cf1afd23e3e17227cf4be61f25b4922  episodes/res/v
 - flag on/off CLI matrix：通过。
 - source/transcript SHA-256：前后相同。
 - 无 output directory、provider、网络、preview 或 render。
+
+## P7 review approval
+
+用户已批准 P7 实现与 no-render trial 评审，BIOS 工单已关闭。此批准不适用于任何具体 shorts Job：source/segment intent、storyboard 与 `final_render` 仍须按具体 Job 分别取得用户当时的明文批准。
 
 ## 回滚
 

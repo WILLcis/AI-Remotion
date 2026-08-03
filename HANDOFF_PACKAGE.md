@@ -68,7 +68,7 @@ Video Job YAML
 | P6.5 | BIOS `YES-1962` done | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
 | P6.6 | BIOS `YES-1960` done | `agents/video-producer/AGENT.md`；host-agnostic package plan |
 | Final acceptance | BIOS `YES-1909` done | `state/tasks/YES-1909-final-acceptance.md`；make check + cross-Agent handoff passed |
-| P7 | BIOS `YES-1987` in review | `docs/SHORTS_REPACKAGE_P7_DEVELOPMENT_PLAN.md`；shorts-repackage no-render trial + complete quality gate |
+| P7 | BIOS `YES-1987` done | `docs/SHORTS_REPACKAGE_P7_DEVELOPMENT_PLAN.md`；shorts-repackage no-render trial + complete quality gate |
 
 ### 验证（交接时点）
 
@@ -260,4 +260,4 @@ npm run video:route -- --job tests/fixtures/video-jobs/pr-video.yaml
 
 ---
 
-**交接结语**：平台基础的 12 个专家已具备契约与路由；P7 `YES-1987` 已完成 contract/no-render trial/完整质量门禁并处于 review。下一 Agent 应先完成 P7 review 或在明确批准的真实 Job 上恢复；不得调用 provider、自动出片或越过 pending gate。
+**交接结语**：平台基础的 12 个专家已具备契约与路由；P7 `YES-1987` 已完成并关闭。下一 Agent 应只在明确批准的真实 Job 上恢复；不得调用 provider、自动出片或越过 pending gate。
