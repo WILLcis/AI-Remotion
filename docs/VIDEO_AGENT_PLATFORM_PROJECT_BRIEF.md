@@ -89,10 +89,13 @@ FLAG_video_agent_platform='{"enabled":true}' \
 
 | 阶段 | BIOS | 状态 |
 | --- | --- | --- |
-| P0–P3 契约与门禁 | YES-1909 | 完成 |
-| P4 三工作流 no-render 试运行 | YES-1909 | 完成 |
-| P5 Existing-Video Recut + 本地出片 | YES-1920 | 完成（`videos/heygen-out-recut-trial/output.mp4`） |
-| P6 七专家契约接入 | YES-1923 | **契约层完成**；未强制七条真实出片 |
+| P0 决策与可追踪性 | YES-1909 | 完成 |
+| P1 Job 契约、路由与 flag | YES-1966 | 历史补录；`in_review` |
+| P2 统一入口与首批专业 Agent | YES-1967 | 历史补录；`in_review` |
+| P3 回归与质量门禁 | YES-1968 | 历史补录；`in_review` |
+| P4 三工作流 no-render 试运行 | YES-1969 | 历史补录；`in_review` |
+| P5 Existing-Video Recut + 本地出片 | YES-1920 | 完成；`in_review` |
+| P6 七专家契约接入 | YES-1923 | **契约层完成**；`in_review`；未强制七条真实出片 |
 | P6.4 审计收口 + captions no-render trial | YES-1961 | 完成本地证据、生成媒体排除和一条无付费试运行；`in_review` |
 | P6.5 motion-graphics no-render trial | YES-1962 | 完成第二条无外部输入、无付费试运行；`in_review` |
 | P6.6 Host-Agnostic Agent Package | YES-1960 | 提供任意 Agent 可读的中立入口与 specialist map；`in_review` |

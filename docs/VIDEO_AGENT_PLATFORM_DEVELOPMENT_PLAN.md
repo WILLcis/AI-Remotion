@@ -49,6 +49,8 @@ git diff --check
 
 ### P1 — Video Job 契约与确定性路由
 
+BIOS 子工单：`YES-1966`（历史补录，`in_review`）
+
 依赖：P0。
 
 范围：
@@ -80,6 +82,8 @@ npx vitest run tests/video-agent-platform.test.ts tests/feature-flags.test.ts
 
 ### P2 — 统一入口 Skill 与三个专业 Agent
 
+BIOS 子工单：`YES-1967`（历史补录，`in_review`）
+
 依赖：P1。
 
 范围：
@@ -109,6 +113,8 @@ npx vitest run tests/video-agent-platform.test.ts
 
 ### P3 — 回归与质量门禁
 
+BIOS 子工单：`YES-1968`（历史补录，`in_review`）
+
 依赖：P1、P2。
 
 范围：
@@ -133,6 +139,8 @@ npm audit --audit-level=low
 回滚：测试和配置可随对应实现一起回滚。
 
 ### P4 — 首个受控试运行
+
+BIOS 子工单：`YES-1969`（历史补录，`in_review`）
 
 依赖：P3；按用户批准的 no-render 边界完成，不执行真实 provider/render。
 

@@ -9,8 +9,12 @@
 | 分支 | `feat/agent/YES-1909-video-agent-platform` |
 | 父 BIOS | `YES-549` |
 | 平台 | `YES-1909` |
-| P5 | `YES-1920` |
-| P6 | `YES-1923`（`in_progress`；契约已落地） |
+| P1 | `YES-1966`（历史补录；`in_review`） |
+| P2 | `YES-1967`（历史补录；`in_review`） |
+| P3 | `YES-1968`（历史补录；`in_review`） |
+| P4 | `YES-1969`（历史补录；`in_review`） |
+| P5 | `YES-1920`（`in_review`） |
+| P6 | `YES-1923`（`in_review`；契约已落地） |
 | P6.4 | `YES-1961`（`in_review`）；本地审计收口与 captions no-render trial 已完成 |
 | P6.5 | `YES-1962`（`in_review`）；motion-graphics no-render trial 已完成 |
 | P6.6 | `YES-1960`（`in_review`）；任意 Agent 可读的中立 package 已完成 |
@@ -53,10 +57,13 @@ Video Job YAML
 
 | 阶段 | 状态 | 证据 |
 | --- | --- | --- |
-| P0–P3 | 完成 | schema/router/CLI/flag/三专家基线已在 `c2e7d54` |
-| P4 | 完成（no-render） | `state/tasks/YES-1909-p4-controlled-trial.md` |
-| P5 | 完成（含出片） | `state/tasks/YES-1920-p5-controlled-trial.md`；`videos/heygen-out-recut-trial/output.mp4` |
-| P6 | 契约完成 | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`；`state/tasks/YES-1923-p6.md`；11 fixtures |
+| P0 | 完成 | 父工单 `YES-1909` 的架构与可追踪性范围 |
+| P1 | BIOS `YES-1966` in review | schema/router/CLI/flag 基线已在 `c2e7d54`；历史补录 |
+| P2 | BIOS `YES-1967` in review | 统一入口与三专业 Agent 基线已在 `c2e7d54`；历史补录 |
+| P3 | BIOS `YES-1968` in review | 回归与质量门禁证据；历史补录 |
+| P4 | BIOS `YES-1969` in review | `state/tasks/YES-1909-p4-controlled-trial.md`；历史补录 |
+| P5 | BIOS `YES-1920` in review | `state/tasks/YES-1920-p5-controlled-trial.md`；本地出片目录 Git-ignored |
+| P6 | BIOS `YES-1923` in review | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`；`state/tasks/YES-1923-p6.md`；11 fixtures |
 | P6.4 | BIOS `YES-1961` in review | `docs/VIDEO_AGENT_PLATFORM_P6_4_DEVELOPMENT_PLAN.md`；embedded-captions no-render evidence |
 | P6.5 | BIOS `YES-1962` in review | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
 | P6.6 | BIOS `YES-1960` in review | `agents/video-producer/AGENT.md`；host-agnostic package plan |
