@@ -3,7 +3,7 @@
 日期：2026-08-01
 父工单：`YES-549`
 关联平台：`YES-1909`
-BIOS 子工单：未创建（见 blocker）
+BIOS 子工单：`YES-1961`（`in_review`）
 
 ## BIOS 创建尝试
 
@@ -15,9 +15,9 @@ BIOS 子工单：未创建（见 blocker）
 - 优先级：`medium`
 - 幂等 token：`ai-remotion-p6-4-audit-no-render-trial-2026-08-01`
 
-结果：`deepdog daemon is not running on this machine`。
+首次结果：`deepdog daemon is not running on this machine`。
 
-未返回 BIOS 子工单号，未创建工单，未声明任何远端进度更新成功。daemon 恢复后应使用同一幂等 token 重试。
+daemon 恢复后已用同一幂等 token 重试，成功创建 `YES-1961`，并通过 MCP 更新至 `verify` stage（BIOS 状态 `in_review`）及回填进度证据。
 
 ## 目标
 

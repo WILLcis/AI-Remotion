@@ -11,9 +11,9 @@
 | 平台 | `YES-1909` |
 | P5 | `YES-1920` |
 | P6 | `YES-1923`（`in_progress`；契约已落地） |
-| P6.4 | 待建（本机 daemon blocker）；本地审计收口与 captions no-render trial 已完成 |
-| P6.5 | 待建（本机 daemon blocker）；motion-graphics no-render trial 已完成 |
-| P6.6 | 待建（本机 daemon blocker）；任意 Agent 可读的中立 package 已完成 |
+| P6.4 | `YES-1961`（`in_review`）；本地审计收口与 captions no-render trial 已完成 |
+| P6.5 | `YES-1962`（`in_review`）；motion-graphics no-render trial 已完成 |
+| P6.6 | `YES-1960`（`in_review`）；任意 Agent 可读的中立 package 已完成 |
 | P4–P6.4 已提交基线（本机） | `5d8e02d feat: expand video agent specialist routing`；最新状态以 `git log --oneline -5` 为准 |
 | 工作树 | 接手前先运行 `git status --short`；不提交任何生成媒体 |
 
@@ -57,9 +57,9 @@ Video Job YAML
 | P4 | 完成（no-render） | `state/tasks/YES-1909-p4-controlled-trial.md` |
 | P5 | 完成（含出片） | `state/tasks/YES-1920-p5-controlled-trial.md`；`videos/heygen-out-recut-trial/output.mp4` |
 | P6 | 契约完成 | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md`；`state/tasks/YES-1923-p6.md`；11 fixtures |
-| P6.4 | 本地完成；BIOS 建单待 daemon 恢复 | `docs/VIDEO_AGENT_PLATFORM_P6_4_DEVELOPMENT_PLAN.md`；embedded-captions no-render evidence |
-| P6.5 | 本地完成；BIOS 建单待 daemon 恢复 | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
-| P6.6 | 本地完成；BIOS 建单待 daemon 恢复 | `agents/video-producer/AGENT.md`；host-agnostic package plan |
+| P6.4 | BIOS `YES-1961` in review | `docs/VIDEO_AGENT_PLATFORM_P6_4_DEVELOPMENT_PLAN.md`；embedded-captions no-render evidence |
+| P6.5 | BIOS `YES-1962` in review | `docs/VIDEO_AGENT_PLATFORM_P6_5_DEVELOPMENT_PLAN.md`；motion-graphics no-render evidence |
+| P6.6 | BIOS `YES-1960` in review | `agents/video-producer/AGENT.md`；host-agnostic package plan |
 | P7 | 未做 | `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 ### 验证（交接时点）
@@ -147,9 +147,33 @@ Auto 优先级摘要：
 | 问题 | 处理 |
 | --- | --- |
 | `devin` CLI 可能缺失 | Cursor/Codex 直接读 `.devin/agents/*.md` |
-| BIOS 远程评论偶发失败 | 本地 `state/tasks/YES-*.md`；可用 `deepdog issue comment add` |
+| MCP `bios_*` 报 `deepdog daemon is not running` | **不是 CLI 坏了**：observer bridge 依赖本机 daemon。先 `deepdog daemon status`；若 stopped → `deepdog daemon start`；再 `curl -s http://127.0.0.1:19514/health`；必要时重启 Cursor MCP。详见下文 §6.1 |
+| BIOS 远程评论偶发失败 | 本地 `state/tasks/YES-*.md`；或 `deepdog issue comment add <KEY> --content-stdin` |
 | npm audit 12 high | 记录，不降级、不乱 override |
 | HyperFrames skill 未装全 | Agent 内 `npx hyperframes skills update <name>` |
+
+### 6.1 BIOS 建单：MCP vs CLI（必读）
+
+两条路径：
+
+| 路径 | 依赖 | 命令/工具 |
+| --- | --- | --- |
+| **A. deepdog CLI（推荐兜底）** | 已 `deepdog auth` / login；**不需要** daemon 也可建单（走云 API） | `deepdog issue create --parent YES-1909 --title "..." ...` |
+| **B. MCP `bios_create_issue`** | Cursor 的 `deepdog-observer` bridge **必须**本机 daemon 在跑（默认 health `127.0.0.1:19514`） | MCP tools |
+
+修复 B：
+
+```bash
+deepdog version
+deepdog daemon status          # 若 Daemon: stopped
+deepdog daemon start
+deepdog daemon status          # 期望 running
+curl -sS http://127.0.0.1:19514/health
+```
+
+仍失败时：检查 MCP env 是否含 `MULTICA_OBSERVER_ENDPOINT=http://127.0.0.1:19514/observer/events`（见 `docs/deepdog BIOS · MCP 工具对接文档.md`），然后重启 Cursor / 重载 MCP。
+
+**Agent 纪律**：MCP 建单失败时立刻改走 CLI（路径 A），并把结果写入 `state/tasks/`；不要把「daemon 未启动」记成平台功能缺失。
 
 ---
 

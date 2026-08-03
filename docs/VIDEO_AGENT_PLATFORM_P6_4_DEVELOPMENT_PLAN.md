@@ -1,8 +1,8 @@
 # P6.4 — 审计收口与无付费试运行计划
 
-状态：Executed locally；BIOS 建单被本机 daemon blocker 阻止，待恢复后用记录的幂等 token 补建
+状态：Executed locally；BIOS `YES-1961` 已创建并进入 `in_review`
 日期：2026-08-01
-父工单：`YES-549`；关联平台：`YES-1909`、P5：`YES-1920`、P6：`YES-1923`
+父工单：`YES-549`；关联平台：`YES-1909`、P5：`YES-1920`、P6：`YES-1923`、P6.4：`YES-1961`
 
 ## 1. 背景与问题
 

@@ -93,9 +93,9 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | P4 三工作流 no-render 试运行 | YES-1909 | 完成 |
 | P5 Existing-Video Recut + 本地出片 | YES-1920 | 完成（`videos/heygen-out-recut-trial/output.mp4`） |
 | P6 七专家契约接入 | YES-1923 | **契约层完成**；未强制七条真实出片 |
-| P6.4 审计收口 + captions no-render trial | 待建（daemon blocker） | 完成本地证据、生成媒体排除和一条无付费试运行 |
-| P6.5 motion-graphics no-render trial | 待建（daemon blocker） | 完成第二条无外部输入、无付费试运行 |
-| P6.6 Host-Agnostic Agent Package | 待建（daemon blocker） | 提供任意 Agent 可读的中立入口与 specialist map |
+| P6.4 审计收口 + captions no-render trial | YES-1961 | 完成本地证据、生成媒体排除和一条无付费试运行；`in_review` |
+| P6.5 motion-graphics no-render trial | YES-1962 | 完成第二条无外部输入、无付费试运行；`in_review` |
+| P6.6 Host-Agnostic Agent Package | YES-1960 | 提供任意 Agent 可读的中立入口与 specialist map；`in_review` |
 | P7 backlog 晋升 | — | 未开工；见 `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md` |
 
 父工单：`YES-549`。
@@ -129,6 +129,7 @@ FLAG_video_agent_platform='{"enabled":true}' \
 4. 不把 backlog 项偷偷塞进 schema。
 5. 付费 / 最终 render 必须用户明文批准。
 6. 回滚边界写进交付说明。
+7. BIOS：MCP `bios_*` 失败若报 daemon not running → 先 `deepdog daemon start`，或改用 `deepdog issue create` CLI；见 `HANDOFF_PACKAGE.md` §6.1。
 
 ---
 

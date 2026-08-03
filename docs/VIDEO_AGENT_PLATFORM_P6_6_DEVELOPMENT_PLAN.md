@@ -1,8 +1,8 @@
 # P6.6 — Host-Agnostic Video Producer Agent Package 计划
 
-状态：Executed locally；BIOS 建单被本机 daemon blocker 阻止，待恢复后用记录的幂等 token 补建
+状态：Executed locally；BIOS `YES-1960` 已创建并进入 `in_review`
 日期：2026-08-01
-父工单：`YES-549`；关联平台：`YES-1909`
+父工单：`YES-549`；关联平台：`YES-1909`、P6.6：`YES-1960`
 
 ## 1. 问题
 
