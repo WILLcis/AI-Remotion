@@ -7,12 +7,15 @@ import {execFileSync} from "node:child_process";
 import {mkdirSync, readFileSync, rmSync, writeFileSync} from "node:fs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
+import {
+  cosyVoice3ZeroShotPcm,
+  requireCosyVoice3Config,
+} from "../../../scripts/cosyvoice3-client.mjs";
 
 const project = fileURLToPath(new URL("..", import.meta.url));
+const cv3 = requireCosyVoice3Config();
 const clips = JSON.parse(readFileSync(path.join(project, "clips.json"), "utf8"));
 const outDir = path.join(project, "audio", "cosyvoice");
-const baseUrl = process.env.AI_REMOTION_TTS_BASE_URL || "http://127.0.0.1:8000";
-const speaker = clips.voice.speaker || "中文男";
 const targetSpeed = Number(clips.voice.speed || 1.1);
 const gapMs = Number(clips.voice.sentence_gap_ms || 160);
 const maxSeconds = Number(clips.seconds_per_clip || 15);
@@ -46,14 +49,14 @@ function atempoChain(factor) {
 }
 
 function splitSentences(text) {
+  // Pause only on sentence enders — fewer TTS calls, still natural breaths.
   const parts = text
-    .split(/(?<=[。！？；])|(?<=[，、：——])(?=[^，、：——]{8,})/)
+    .split(/(?<=[。！？])/)
     .map((s) => s.trim())
     .filter(Boolean);
-  // merge tiny fragments
   const merged = [];
   for (const p of parts) {
-    if (merged.length && merged[merged.length - 1].length < 6) {
+    if (merged.length && (merged[merged.length - 1].length < 8 || p.length < 4)) {
       merged[merged.length - 1] += p;
     } else {
       merged.push(p);
@@ -64,12 +67,8 @@ function splitSentences(text) {
 
 async function ttsToWav(text, wavPath, speed) {
   const pcmPath = wavPath.replace(/\.wav$/, ".pcm");
-  const response = await fetch(new URL("inference_sft", `${baseUrl.replace(/\/+$/, "")}/`), {
-    method: "POST",
-    body: new URLSearchParams({spk_id: speaker, tts_text: text}),
-  });
-  if (!response.ok) throw new Error(`CosyVoice HTTP ${response.status} for ${text.slice(0, 24)}`);
-  writeFileSync(pcmPath, Buffer.from(await response.arrayBuffer()));
+  const buf = await cosyVoice3ZeroShotPcm(text, cv3);
+  writeFileSync(pcmPath, buf);
   execFileSync("ffmpeg", [
     "-y",
     "-v",
@@ -236,10 +235,15 @@ writeFileSync(
   path.join(project, "audio_meta.json"),
   JSON.stringify(
     {
-      provider: "cosyvoice",
-      speaker,
+      provider: "cosyvoice-clone",
+      model: "Fun-CosyVoice3-0.5B-2512",
+      base_url: cv3.baseUrl,
+      speaker: clips.voice.speaker || "中文男",
       speed: targetSpeed,
       sentence_gap_ms: gapMs,
+      sample_rate_in: 24000,
+      mix: "single-voiceover",
+      voiceover: "audio/cosyvoice/voiceover.wav",
       total_duration: t,
       segments: timeline,
     },

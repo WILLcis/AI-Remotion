@@ -2,15 +2,17 @@ import {execFileSync} from "node:child_process";
 import {mkdirSync, readFileSync, rmSync, writeFileSync} from "node:fs";
 import {fileURLToPath} from "node:url";
 import path from "node:path";
+import {
+  cosyVoice3ZeroShotPcm,
+  requireCosyVoice3Config,
+} from "../../../scripts/cosyvoice3-client.mjs";
 
 const project = fileURLToPath(new URL("..", import.meta.url));
 const outDir = path.join(project, "audio", "cosyvoice");
-const baseUrl = process.env.AI_REMOTION_TTS_BASE_URL;
-const speaker = process.env.DEEPDOG_COSYVOICE_SPEAKER || "中文男";
+const cv3 = requireCosyVoice3Config();
 const speed = 1.15;
 const gapSeconds = 0.09;
 
-if (!baseUrl) throw new Error("AI_REMOTION_TTS_BASE_URL is required.");
 rmSync(outDir, {force: true, recursive: true});
 mkdirSync(outDir, {recursive: true});
 
@@ -31,19 +33,7 @@ for (const [index, line] of lines.entries()) {
   const stem = `seg_${String(index).padStart(2, "0")}`;
   const pcmPath = path.join(outDir, `${stem}.pcm`);
   const wavPath = path.join(outDir, `${stem}.wav`);
-  const response = await fetch(
-    new URL("inference_sft", `${baseUrl.replace(/\/+$/, "")}/`),
-    {
-      method: "POST",
-      body: new URLSearchParams({spk_id: speaker, tts_text: line.text}),
-    },
-  );
-  if (!response.ok) {
-    throw new Error(
-      `CosyVoice segment ${index + 1} failed: HTTP ${response.status}`,
-    );
-  }
-  writeFileSync(pcmPath, Buffer.from(await response.arrayBuffer()));
+  writeFileSync(pcmPath, await cosyVoice3ZeroShotPcm(line.text, cv3));
   execFileSync("ffmpeg", [
     "-y",
     "-v",

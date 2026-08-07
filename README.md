@@ -113,7 +113,7 @@ AI_REMOTION_TTS_PROVIDER=cosyvoice
 
 External providers are opt-in. To use DeepSeek through its OpenAI-compatible Chat Completions API, set `AI_REMOTION_LLM_PROVIDER=openai-compatible`, `AI_REMOTION_LLM_BASE_URL=https://api.deepseek.com`, an API key, and an explicit model. When `AI_REMOTION_LLM_FALLBACK_TO_DETERMINISTIC=true`, missing configuration, timeouts, and invalid responses fall back to the local deterministic script generator.
 
-CosyVoice runs as a separately managed local FastAPI service. Set `AI_REMOTION_TTS_PROVIDER=cosyvoice`, `AI_REMOTION_TTS_BASE_URL` to its local server, and `AI_REMOTION_TTS_VOICE` to a CosyVoice speaker ID; the `/inference_sft` endpoint must return a WAV file. CosyVoice failures fail loudly and do not substitute silent audio. FunASR is reserved for a future transcription and caption-alignment stage, not TTS. `edge-tts`, `doubao`, `azure`, and `elevenlabs` remain pending and will not run silently.
+CosyVoice 3 runs on the cornerstone GPU host over Tailscale. Set `AI_REMOTION_TTS_PROVIDER=cosyvoice-clone`, `AI_REMOTION_TTS_BASE_URL=http://100.125.33.44:8000`, and use the default reference assets under `assets/tts/` (or episode rights for personal clones). The `/inference_zero_shot` endpoint returns PCM; failures fail loudly and do not substitute silent audio. Legacy `cosyvoice` + local CosyVoice-300M-SFT `/inference_sft` remains available but is not the default path. FunASR is reserved for a future transcription and caption-alignment stage, not TTS. `edge-tts`, `doubao`, `azure`, and `elevenlabs` remain pending and will not run silently.
 
 ## New Episode Flow
 

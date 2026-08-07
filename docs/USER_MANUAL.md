@@ -239,7 +239,7 @@ AI_REMOTION_ENV_FILE=.env.local npm run config:check
 注意：
 
 - DeepSeek 可通过 `openai-compatible` 使用：设置 `AI_REMOTION_LLM_BASE_URL=https://api.deepseek.com`、API Key 和模型；网络失败、超时或返回不符合脚本格式时，会在 fallback 开启时回到本地 deterministic 脚本。
-- CosyVoice 是本地运行的独立 FastAPI 服务。设置 `AI_REMOTION_TTS_PROVIDER=cosyvoice`、服务地址和 speaker ID 后，`episode:voice` 会调用 `/inference_sft` 并写入 WAV；服务失败时会明确报错，不会偷偷改成静音。
+- CosyVoice 3 部署在 cornerstone（Tailscale），推荐 `AI_REMOTION_TTS_PROVIDER=cosyvoice-clone` + `AI_REMOTION_TTS_BASE_URL=http://100.125.33.44:8000`；默认参考音色在 `assets/tts/cosyvoice3-zh-male-ref.*`。服务失败时会明确报错，不会偷偷改成静音。本地 300M-SFT `/inference_sft` 仅作 legacy。
 - FunASR 是“语音转文字”工具，本期不用于生成旁白；以后再单独用于转写和字幕时间轴对齐。
 - `edge-tts`、`doubao`、`azure`、`elevenlabs` 会被识别为 pending provider，不会悄悄运行。
 - 不要把真实 key 提交到 git。

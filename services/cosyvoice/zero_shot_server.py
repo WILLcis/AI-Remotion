@@ -1,7 +1,8 @@
-"""Private FastAPI adapter for consent-gated CosyVoice zero-shot synthesis."""
+"""Private FastAPI adapter for CosyVoice 3 zero-shot synthesis."""
 
 from __future__ import annotations
 
+import asyncio
 import os
 import tempfile
 from pathlib import Path
@@ -16,14 +17,31 @@ MODEL_DIR = os.environ["COSYVOICE_MODEL_DIR"]
 MAX_PROMPT_BYTES = 10 * 1024 * 1024
 SAMPLE_RATE = 24_000
 COSYVOICE3_PROMPT_PREFIX = "You are a helpful assistant.<|endofprompt|>"
+INFERENCE_LOCK = asyncio.Lock()
 
-app = FastAPI(title="AI-Remotion CosyVoice")
+app = FastAPI(title="AI-Remotion CosyVoice 3")
 model = AutoModel(model_dir=MODEL_DIR)
 
 
 @app.get("/health")
 def health() -> dict[str, str | int]:
-    return {"model_dir": MODEL_DIR, "sample_rate": SAMPLE_RATE, "status": "ok"}
+    return {
+        "model_dir": MODEL_DIR,
+        "sample_rate": SAMPLE_RATE,
+        "status": "ok",
+    }
+
+
+@app.get("/model-info")
+def model_info() -> dict[str, str | int]:
+    model_path = Path(MODEL_DIR)
+    return {
+        "model_dir": MODEL_DIR,
+        "model_name": model_path.name,
+        "sample_rate": SAMPLE_RATE,
+        "endpoints": "health,model-info,inference_zero_shot",
+        "status": "ok" if model_path.exists() else "missing",
+    }
 
 
 @app.post("/inference_zero_shot")
@@ -50,14 +68,15 @@ async def inference_zero_shot(
         prompt_path = Path(prompt_file.name)
 
     try:
-        chunks = [
-            result["tts_speech"].cpu()
-            for result in model.inference_zero_shot(
-                tts_text,
-                formatted_prompt_text,
-                str(prompt_path),
-            )
-        ]
+        async with INFERENCE_LOCK:
+            chunks = [
+                result["tts_speech"].cpu()
+                for result in model.inference_zero_shot(
+                    tts_text,
+                    formatted_prompt_text,
+                    str(prompt_path),
+                )
+            ]
         if not chunks:
             raise HTTPException(status_code=502, detail="CosyVoice returned no audio")
         speech = torch.cat(chunks, dim=1).squeeze().numpy()

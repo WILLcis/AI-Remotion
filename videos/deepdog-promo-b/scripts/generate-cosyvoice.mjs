@@ -2,17 +2,18 @@ import {execFileSync} from "node:child_process";
 import {mkdirSync, readFileSync, rmSync, writeFileSync} from "node:fs";
 import {fileURLToPath} from "node:url";
 import path from "node:path";
+import {
+  cosyVoice3ZeroShotPcm,
+  requireCosyVoice3Config,
+} from "../../../scripts/cosyvoice3-client.mjs";
 
 const project = fileURLToPath(new URL("..", import.meta.url));
 const outDir = path.join(project, "audio", "cosyvoice");
-const baseUrl = process.env.AI_REMOTION_TTS_BASE_URL;
-const speaker = process.env.DEEPDOG_COSYVOICE_SPEAKER || "中文男";
+const cv3 = requireCosyVoice3Config();
 const speed = 1.15;
 const gapSeconds = 0.11;
-const timeoutMs = 300_000;
 const maxAttempts = 3;
 
-if (!baseUrl) throw new Error("AI_REMOTION_TTS_BASE_URL is required.");
 rmSync(outDir, {force: true, recursive: true});
 mkdirSync(outDir, {recursive: true});
 
@@ -22,28 +23,16 @@ const segments = [];
 const synthesize = async (text, segmentNumber) => {
   let lastError;
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const response = await fetch(new URL("inference_sft", `${baseUrl.replace(/\/+$/, "")}/`), {
-        method: "POST",
-        body: new URLSearchParams({spk_id: speaker, tts_text: text}),
-        signal: controller.signal,
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      return Buffer.from(await response.arrayBuffer());
+      return await cosyVoice3ZeroShotPcm(text, cv3);
     } catch (error) {
       lastError = error;
       if (attempt < maxAttempts) {
         await new Promise((resolve) => setTimeout(resolve, 2 ** attempt * 1000));
       }
-    } finally {
-      clearTimeout(timeout);
     }
   }
-  throw new Error(`CosyVoice segment ${segmentNumber} failed after ${maxAttempts} attempts: ${lastError}`);
+  throw new Error(`CosyVoice 3 segment ${segmentNumber} failed after ${maxAttempts} attempts: ${lastError}`);
 };
 
 for (const [index, line] of lines.entries()) {

@@ -9,7 +9,7 @@ language: zh-CN
 audience: B2B market creators, brokers, traffic/data platforms, market makers
 length: "~165s CosyVoice-driven (≤15s/clip)"
 angle: operator-business
-narration: "yes — local CosyVoice 中文男, sentence pauses, speed ~1.10 (less AI-stretch)"
+narration: "yes — CosyVoice 3 zero-shot on cornerstone (Mandarin male ref), sentence pauses, speed ~1.10"
 vo_mode: verbatim
 ---
 
@@ -20,7 +20,7 @@ Rebuild the YesONO 3.0 B2B promo in HyperFrames (not MiniMax/HeyGen). Follow `ep
 ## Assets
 
 - Source of truth: `../../episodes/res/doc/yesono-3-26-b2b-minimax-script.md`
-- Local CosyVoice at `http://127.0.0.1:8000` (offline / free)
+- CosyVoice 3 at `http://100.125.33.44:8000` (Tailscale / Fun-CosyVoice3-0.5B-2512)
 - No site scrape; no-capture design system from script palette
 
 ## Customizations
