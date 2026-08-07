@@ -1,0 +1,165 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: #f4f3ee;
+      font-family: sans-serif;
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+    .ground {
+      background:
+        radial-gradient(circle at 50% 42%, rgba(139, 124, 255, 0.14), transparent 28%),
+        #05070b;
+    }
+    .hairline-field {
+      position: absolute;
+      left: 176px;
+      right: 176px;
+      top: 250px;
+      height: 390px;
+    }
+    .hairline {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      transform-origin: center center;
+      background: rgba(244, 243, 238, 0.16);
+    }
+    .hairline:nth-child(1) { top: 40px; }
+    .hairline:nth-child(2) { top: 195px; background: rgba(139, 124, 255, 0.38); }
+    .hairline:nth-child(3) { top: 350px; }
+    .brand-stage {
+      position: absolute;
+      left: 150px;
+      right: 150px;
+      top: 160px;
+      height: 640px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .kicker {
+      position: absolute;
+      top: 26px;
+      color: #4ade80;
+      font: 600 18px/1 monospace;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .wordmark {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      color: #f4f3ee;
+      font: 400 196px/0.9 serif;
+      letter-spacing: -0.075em;
+    }
+    .letter {
+      display: inline-block;
+      min-width: 0.42em;
+      text-align: center;
+    }
+    .underline {
+      display: block;
+      width: 628px;
+      height: 5px;
+      margin-top: 46px;
+      transform-origin: left center;
+      background: #4ade80;
+    }
+    .tagline {
+      margin-top: 34px;
+      color: #f4f3ee;
+      font: 400 42px/1.12 serif;
+      letter-spacing: -0.025em;
+    }
+    .meta-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 42px;
+    }
+    .meta {
+      padding: 11px 16px;
+      border: 1px solid rgba(244, 243, 238, 0.18);
+      border-radius: 999px;
+      color: #8290a6;
+      font: 600 15px/1 monospace;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .corner {
+      position: absolute;
+      color: #8290a6;
+      font: 500 17px/1 monospace;
+      letter-spacing: 0.08em;
+    }
+    .corner.left { left: 82px; top: 72px; }
+    .corner.right { right: 82px; top: 72px; }
+    .footer-rule {
+      position: absolute;
+      left: 82px;
+      right: 82px;
+      top: 844px;
+      height: 1px;
+      transform-origin: left center;
+      background: rgba(244, 243, 238, 0.14);
+    }
+  </style>
+
+  <div data-hf-id="hf-8wz5" id="root" data-composition-id="03-brand-lockup" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-soai" id="f03-ground" class="clip ground" data-start="0" data-duration="4" data-track-index="0"></div>
+
+    <div data-hf-id="hf-48wu" id="f03-content" class="clip" data-start="0" data-duration="4" data-track-index="1">
+      <div data-hf-id="hf-mcd5" id="f03-hairlines" class="hairline-field" data-layout-ignore="">
+        <span data-hf-id="hf-a0e7" class="hairline"></span><span data-hf-id="hf-egzj" class="hairline"></span><span data-hf-id="hf-e2oi" class="hairline"></span>
+      </div>
+      <div data-hf-id="hf-fiuv" class="corner left">HUMAN + AGENT</div>
+      <div data-hf-id="hf-p65e" class="corner right">03 / 03</div>
+
+      <section data-hf-id="hf-djby" class="brand-stage">
+        <div data-hf-id="hf-1m7w" id="f03-kicker" class="kicker">✱ Real teammates</div>
+        <div data-hf-id="hf-lhy7" id="f03-wordmark" class="wordmark" aria-label="deepdog">
+          <span data-hf-id="hf-3647" class="letter">d</span><span data-hf-id="hf-3kf8" class="letter">e</span><span data-hf-id="hf-q4f0" class="letter">e</span><span data-hf-id="hf-yefv" class="letter">p</span><span data-hf-id="hf-63sn" class="letter">d</span><span data-hf-id="hf-5y9e" class="letter">o</span><span data-hf-id="hf-2rt6" class="letter">g</span>
+        </div>
+        <span data-hf-id="hf-0lrl" id="f03-underline" class="underline"></span>
+        <div data-hf-id="hf-c9w7" id="f03-tagline" class="tagline">Your next 10 hires won't be human.</div>
+        <div data-hf-id="hf-f79f" id="f03-meta" class="meta-row">
+          <span data-hf-id="hf-bvmv" class="meta">assign</span><span data-hf-id="hf-6q31" class="meta">track</span><span data-hf-id="hf-beur" class="meta">compound skills</span>
+        </div>
+      </section>
+      <div data-hf-id="hf-84f9" id="f03-footer" class="footer-rule"></div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const lines = gsap.utils.toArray(".hairline");
+      const letters = gsap.utils.toArray(".letter");
+      const meta = gsap.utils.toArray(".meta");
+
+      tl.fromTo(lines, { opacity: 0, scaleX: 0.08 }, { opacity: 1, scaleX: 1, duration: 0.78, stagger: 0.12, ease: "power3.out" }, 0);
+      tl.fromTo("#f03-kicker", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.42);
+      tl.fromTo(letters, { opacity: 0, x: -44, y: 24, rotation: -4 }, { opacity: 1, x: 0, y: 0, rotation: 0, duration: 0.56, stagger: 0.13, ease: "power3.out" }, 0.82);
+      tl.fromTo("#f03-underline", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.64, ease: "power3.out" }, 2.02);
+      tl.fromTo("#f03-tagline", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.58, ease: "power3.out" }, 2.5);
+      tl.fromTo(meta, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.42, stagger: 0.14, ease: "power3.out" }, 2.95);
+      tl.fromTo("#f03-footer", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.55, ease: "power3.out" }, 3.35);
+
+      window.__timelines["03-brand-lockup"] = tl;
+    })();
+  </script>
+</template>

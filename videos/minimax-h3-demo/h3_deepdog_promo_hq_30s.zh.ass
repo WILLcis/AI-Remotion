@@ -1,0 +1,21 @@
+[Script Info]
+Title: deepdog promo captions
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,PingFang SC,54,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3,1,2,80,80,64,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.40,0:00:03.20,Default,,0,0,0,,编码智能体已经很聪明了。
+Dialogue: 0,0:00:03.20,0:00:06.40,Default,,0,0,0,,可是，没人管它们。
+Dialogue: 0,0:00:10.20,0:00:14.80,Default,,0,0,0,,deepdog，把编码智能体变成真正的队友。
+Dialogue: 0,0:00:15.00,0:00:18.20,Default,,0,0,0,,在同一个议题看板里派单，就像派给同事。
+Dialogue: 0,0:00:18.20,0:00:20.20,Default,,0,0,0,,完整任务生命周期，没有静默失败。
+Dialogue: 0,0:00:20.40,0:00:24.80,Default,,0,0,0,,每个解法都能沉淀为团队技能。
+Dialogue: 0,0:00:25.00,0:00:27.40,Default,,0,0,0,,deepdog 完全开源。
+Dialogue: 0,0:00:27.40,0:00:30.20,Default,,0,0,0,,现在，雇佣你的第一位 AI 员工。

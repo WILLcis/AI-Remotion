@@ -1,0 +1,41 @@
+Create a ~40 second Mandarin Chinese product promo for YesONO 3.0, landscape 16:9.
+
+Format: Presenter-led B2B pitch. A professional selected presenter speaks to camera in a modern fintech studio, with motion-graphics overlays and AI-generated trading infrastructure B-roll between talking beats.
+
+Audience: partners, institutions, market makers, and platform operators who want to launch prediction markets / event trading without building exchange infrastructure from scratch.
+
+Core message to convey in Chinese narration:
+- Hook: 预测市场和事件金融正在成为新一代交易入口，但真正难的不是做一个页面，而是整套交易基础设施。
+- Problem: 市场创建、准入风控、撮合、账本、链上资金托管、清算和做市，缺一不可。
+- Solution: YesONO 3.0 是面向预测市场与事件金融的模块化交易操作系统，不只是单一交易应用。
+- Proof points: 自研 Rust 撮合引擎；链下高性能 CLOB；链下账本 + 链上资金托管；多层风控准入；Outcome 与 CFD 双产品域；多租户共享市场与白标专属市场；可审计可扩展。
+- CTA: 让合作伙伴专注市场运营与流动性建设，而不是从零搭建交易底座。一句话：YesONO 3.0，为预测市场打造可信、高性能、可扩展的交易基础设施。
+
+Tone: confident, precise, institutional, conversational Mandarin — like a senior product lead pitching partners, not a consumer ad.
+
+This script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.
+
+CRITICAL ON-SCREEN TEXT (exact):
+- YesONO 3.0
+- Prediction Markets OS
+- Rust Matching Engine
+- Off-chain Ledger + On-chain Custody
+- Multi-tenant Markets
+- Risk · Clearing · Market Making
+
+Media guidance:
+- Use the selected presenter for A-roll credibility moments.
+- Use Motion Graphics for architecture layers, order-book flows, risk gates, and keyword callouts.
+- Use AI-generated visuals for abstract trading rails, vaults, and market network metaphors.
+- Prefer dark fintech UI aesthetics over generic office stock.
+
+STYLE — DIGITAL GRID:
+Monospaced / clean sans type. Dark #0a0a0a with cyan #00E5FF and amber #FFB300 accents.
+Pixel-grid overlays, terminal/fintech dashboard language, clean wipe transitions.
+Keep branding premium and restrained — no carnival colors, no meme energy.
+
+
+LANGUAGE / VOICE (CRITICAL):
+Narration language is Mandarin Chinese only (普通话).
+Use a native mainland Chinese speaking voice — clear, natural Chinese, no foreign accent, no Chinglish pronunciation, no English-accented Mandarin.
+All spoken lines must be Chinese. On-screen English labels may remain as brand keywords.

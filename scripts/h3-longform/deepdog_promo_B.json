@@ -1,0 +1,51 @@
+{
+  "id": "deepdog_promo_B_70s_7seg",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": false,
+  "segments": [
+    {
+      "seconds": 8,
+      "seed": 420201,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/agents.png",
+      "prompt": "Premium deepdog commercial, dark tech. From first frame: one human avatar, agent avatars gradually crowd the frame 10x-20x. Sharp photoreal UI, restrained cyan, landscape 1344x768.\nAudio Chinese female VO: 当 AI 同事的数量，是人类同事的十倍、二十倍——协同要怎么跑？"
+    },
+    {
+      "seconds": 10,
+      "seed": 420202,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/issues-board.png",
+      "prompt": "From first frame issue board: the same task card moves freely between human and agent assignees—drag, assign, comment, identical actions. Agents are first-class teammates. Ultra sharp UI.\nAudio Chinese female VO: 人和 AI 不是两套系统。在 BIOS 里，agent 和人类共享同一套工作对象——能被指派、能建单、能评论、能推进状态。AI 是正式成员，不是外挂的机器人。"
+    },
+    {
+      "seconds": 10,
+      "seed": 420203,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/create-task.png",
+      "prompt": "From first frame create-task UI evolving into a delegation tree: agent forks to child agents, every line returns to one accountable human avatar. Sharp deepdog product look.\nAudio Chinese female VO: 数量越多，问责越不能丢。委派可以一层层级联，但每一层都归属并问责于一个具体的人，权限不会失控上升。"
+    },
+    {
+      "seconds": 10,
+      "seed": 420204,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/control-tower.png",
+      "prompt": "From first frame control tower wide shot: dense task streams compress into a calm dashboard; red blockers auto-surface. Control-tower metaphor, sharp UI.\nAudio Chinese female VO: 人不该去逐个盯几百个 agent。BIOS 是一座控制塔——一屏看清全公司谁在干什么、卡在哪，该升级的自动冒泡，该消化的留在部门内。"
+    },
+    {
+      "seconds": 8,
+      "seed": 420205,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/verification.png",
+      "prompt": "From first frame: AI output approaches a verification gate icon; only green-pass can close. Emphasize no completion without verification. Ultra sharp.\nAudio Chinese female VO: 产出再多，也绕不过验证。无验证，不完成。"
+    },
+    {
+      "seconds": 8,
+      "seed": 420206,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/runtimes.png",
+      "prompt": "From first frame runtimes panel: each agent avatar ringed by a clear dashed boundary with repo/key/quota icons; boundaries stay crisp as scale grows. Sharp product UI.\nAudio Chinese female VO: 规模翻十倍，边界不会松一寸——每个 agent 只能碰它被批准的资源。"
+    },
+    {
+      "seconds": 8,
+      "seed": 420207,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/agents.png",
+      "prompt": "Final hero from first frame: humans and agents ordered in one OS interface; lowercase deepdog logo centers; English slogan exactly Your next 10 hires won't be human. Hold sharp.\nAudio Chinese female VO: BIOS——让十倍以上的 AI 同事，和人类同事，在同一套规则里安全协同。"
+    }
+  ]
+}

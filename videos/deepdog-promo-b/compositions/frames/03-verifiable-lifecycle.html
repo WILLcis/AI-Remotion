@@ -1,0 +1,36 @@
+<template>
+  <style>
+    *{box-sizing:border-box}#f3{width:1920px;height:1080px;overflow:hidden;color:#f4f6fb;font-family:Inter,-apple-system,sans-serif}.scene{position:absolute;inset:0;background:#05070b;overflow:hidden}.grid{position:absolute;inset:0;background-image:radial-gradient(#2a3140 1.5px,transparent 1.5px);background-size:30px 30px;opacity:.45}
+    .meta{position:absolute;top:66px;font:500 20px 'JetBrains Mono',monospace;letter-spacing:.13em;color:#9aa3b2}.m1{left:104px}.m2{right:104px}.title{position:absolute;left:104px;top:142px;font:400 82px Georgia,serif}.title span{color:#8b7cf6}
+    .rail{position:absolute;left:120px;right:120px;top:410px;height:160px}.base{position:absolute;left:70px;right:70px;top:67px;height:4px;background:#2a3140}.active{position:absolute;left:70px;top:67px;width:78%;height:4px;background:#8b7cf6;transform-origin:left}.state{position:absolute;top:0;width:200px;margin-left:-100px;text-align:center}.p1{left:6%}.p2{left:33%}.p3{left:60%}.p4{left:87%}.node{width:82px;height:82px;margin:auto;border:3px solid #8b7cf6;border-radius:50%;background:#0d1119;display:grid;place-items:center;font:700 25px 'JetBrains Mono',monospace}.state label{display:block;margin-top:15px;font:600 20px 'JetBrains Mono',monospace;color:#c0b8ff}
+    .outcomes{display:flex;gap:10px;justify-content:center}.outcome{width:92px;padding:18px 8px;border-radius:14px;font:700 13px 'JetBrains Mono',monospace}.done{border:2px solid #6ee7a8;color:#6ee7a8}.fail{border:2px solid #ff7b86;color:#ff7b86}
+    .feed{position:absolute;left:118px;top:620px;width:970px;height:220px;border:2px solid #2a3140;border-radius:20px;background:#0d1119;padding:28px 30px}.feed-head{font:600 18px 'JetBrains Mono',monospace;color:#9aa3b2;letter-spacing:.1em}.row{display:grid;grid-template-columns:160px 1fr 90px;gap:20px;padding:16px 0;border-bottom:1px solid #2a3140;font:500 18px 'JetBrains Mono',monospace}.row b{color:#c0b8ff}.row i{font-style:normal;color:#6ee7a8;text-align:right}
+    .resume{position:absolute;right:118px;top:620px;width:620px;height:220px;border:2px solid #8b7cf688;border-radius:20px;background:#151a24;padding:28px 30px}.resume h3{font:600 18px 'JetBrains Mono',monospace;color:#c0b8ff;letter-spacing:.1em}.resume code{display:block;margin-top:24px;padding:18px;border-radius:12px;background:#05070b;color:#9aa3b2;font:500 18px/1.6 'JetBrains Mono',monospace}.claim{position:absolute;right:105px;bottom:170px;font:400 70px Georgia,serif}.claim span{color:#8b7cf6}
+    .spinner{width:28px;height:28px;border:3px solid #2a3140;border-top-color:#8b7cf6;border-radius:50%}
+  </style>
+  <div data-hf-id="hf-fr70" id="f3" data-composition-id="f3" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-j6la" id="f3-scene" class="clip scene" data-start="0" data-duration="12" data-track-index="1">
+      <div data-hf-id="hf-kxq8" class="grid"></div><div data-hf-id="hf-pp10" class="meta m1">03 / VERIFIABLE LIFECYCLE</div><div data-hf-id="hf-s95r" class="meta m2">CONCEPTUAL VIEW</div><div data-hf-id="hf-pbc6" class="title">每一步，都有<span data-hf-id="hf-v1b0">状态</span></div>
+      <div data-hf-id="hf-qzq8" class="rail"><div data-hf-id="hf-9327" class="base"></div><div data-hf-id="hf-gppk" class="active" id="f3-active"></div>
+        <div data-hf-id="hf-8abg" class="state p1"><div data-hf-id="hf-4f73" class="node">01</div><label data-hf-id="hf-iff9">ENQUEUE</label></div><div data-hf-id="hf-gy7b" class="state p2"><div data-hf-id="hf-40w2" class="node">02</div><label data-hf-id="hf-n3nr">CLAIM</label></div>
+        <div data-hf-id="hf-d03a" class="state p3"><div data-hf-id="hf-cdek" class="node"><div data-hf-id="hf-xi6v" class="spinner"></div></div><label data-hf-id="hf-y9mv">START</label></div>
+        <div data-hf-id="hf-nvkx" class="state p4"><div data-hf-id="hf-galz" class="outcomes"><div data-hf-id="hf-qfmr" class="outcome done">COMPLETE</div><div data-hf-id="hf-g6s4" class="outcome fail">FAIL</div></div><label data-hf-id="hf-dgq1">TERMINAL</label></div>
+      </div>
+      <div data-hf-id="hf-v4i4" class="feed"><div data-hf-id="hf-67ly" class="feed-head">REAL-TIME PROGRESS</div><div data-hf-id="hf-tar7" class="row r1"><b data-hf-id="hf-t9hk">tool_call</b><span data-hf-id="hf-9f8g">read repository files</span><i data-hf-id="hf-xqxo">done</i></div><div data-hf-id="hf-if9k" class="row r2"><b data-hf-id="hf-5wcl">test</b><span data-hf-id="hf-cscq">run targeted suite</span><i data-hf-id="hf-piy6">active</i></div><div data-hf-id="hf-j6xd" class="row r3"><b data-hf-id="hf-m4qi">diff</b><span data-hf-id="hf-qi7x">3 files changed</span><i data-hf-id="hf-jr11">queued</i></div></div>
+      <div data-hf-id="hf-0e5l" class="resume"><h3 data-hf-id="hf-vtoa">RESUME POINTER</h3><code data-hf-id="hf-fu3v">session_id: sess_8f42<br data-hf-id="hf-x5px">work_dir: /work/acme-42<br data-hf-id="hf-rsrt">state: resumable</code></div>
+      <div data-hf-id="hf-8ahu" class="claim">没有<span data-hf-id="hf-qdsy">静默失败</span></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+    tl.fromTo("#f3 .title",{opacity:0,x:-70},{opacity:1,x:0,duration:.75,ease:"power3.out"},.2);
+    tl.fromTo("#f3-active",{scaleX:0},{scaleX:1,duration:5.4,ease:"power2.inOut"},1.2);
+    tl.fromTo("#f3 .state",{opacity:0,scale:.65},{opacity:1,scale:1,duration:.55,stagger:1.35,ease:"power3.out"},1.05);
+    tl.to("#f3 .spinner",{rotation:1080,duration:3.2,ease:"none"},3.7);
+    tl.fromTo("#f3 .row",{opacity:0,x:-35},{opacity:1,x:0,duration:.55,stagger:.65,ease:"power3.out"},4.4);
+    tl.fromTo("#f3 .resume",{opacity:0,x:90},{opacity:1,x:0,duration:.8,ease:"power4.out"},7.0);
+    tl.fromTo("#f3 .outcome",{opacity:0,scale:.65},{opacity:1,scale:1,duration:.55,stagger:.18,ease:"power3.out"},8.5);
+    tl.fromTo("#f3 .claim",{opacity:0,y:55},{opacity:1,y:0,duration:.75,ease:"power4.out"},9.7);
+    window.__timelines.f3=tl;
+  </script>
+</template>

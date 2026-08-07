@@ -1,12 +1,13 @@
 # Video Agent Platform — Agent 使用手册
 
 面向：任何接手 AI-Remotion 视频生产的 coding / specialist agent。
-目标：按 Video Job 路由到正确专业 Agent，在审核门处停住，不越权、不付费、不毁源片。
+目标：用户白话说需求；**你**写 Job、开 flag、路由、dispatch 唯一专家；在审核门处停住，不越权、不付费、不毁源片。CLI 是你的工具，不是用户作业。
 
 BIOS 父线：`YES-549` · 平台工单：`YES-1909` · Recut：`YES-1920` · P6：`YES-1923`
-开关：`FLAGS.VIDEO_AGENT_PLATFORM`（默认 **关闭**）
+开关：`FLAGS.VIDEO_AGENT_PLATFORM`（默认 **关闭**；由 Agent 在命令里打开）
 
-非开发用户先读：`docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md`
+权威单文档：`docs/VIDEO_AGENT_WORKFLOW.md`  
+人用入口：`agents/START_HERE.md` · 快速开始：`docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md`  
 P6 计划 / 相邻 backlog：`docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md` · `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md`
 
 ---
@@ -14,18 +15,19 @@ P6 计划 / 相邻 backlog：`docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md` 
 ## 0. 开场必读（60 秒）
 
 1. 读仓库根 `AGENTS.md`。
-2. 读本文件。
-3. 读入口 Skill：`.devin/skills/video-producer/SKILL.md` + `references/job-contract.md`。
-4. 读将要 dispatch 的那一个 `.devin/agents/<primary>.md`。
-5. **不要**跳过 flag、不要直接当万能视频 Agent 干活。
+2. 读 `agents/video-producer/AGENT.md`（白话入口是默认路径）。
+3. 读本文件需要的章节；Devin 适配可读 `.devin/skills/video-producer/SKILL.md`。
+4. 路由后只读那一个 `.devin/agents/<primary>.md`。
+5. **不要**把 CLI 甩给用户；**不要**跳过 flag 直接当万能视频 Agent 干活。
 
 权威实现：
 
 | 层 | 路径 |
 | --- | --- |
+| 人用入口 | `agents/START_HERE.md` |
 | Job/Route schema | `src/schemas/videoJob.ts` |
 | 路由 | `src/agent/videoRouter.ts` |
-| CLI | `npm run video:route -- --job <path>` |
+| CLI（Agent 工具） | `npm run video:route -- --job <path>` |
 | 入口 Skill | `.devin/skills/video-producer/` |
 | 专业 Agent | `.devin/agents/*-producer.md` |
 | Fixtures | `tests/fixtures/video-jobs/*.yaml` |
@@ -48,10 +50,10 @@ P6 计划 / 相邻 backlog：`docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md` 
 ## 2. 标准执行回路
 
 ```text
-用户意图 / Job 文件
-    -> 确认 VIDEO_AGENT_PLATFORM 已启用
-    -> 规范化或加载 Video Job
-    -> npm run video:route -- --job <file>
+用户白话（或已有 Job 文件）
+    -> Agent 追问缺字段 / 确认草案（用户不必跑 CLI）
+    -> Agent 写入 state/jobs/<id>.yaml（gates 保持 pending）
+    -> Agent 启用 VIDEO_AGENT_PLATFORM 并 npm run video:route
     -> 读取 primary_agent / renderer / requires_approval
     -> 加载对应 .devin/agents/<primary>.md
     -> 执行到下一 pending gate 或 blocked/failed/done
@@ -364,7 +366,7 @@ review_gates:
 
 | 路径 | 适用对象 | 用途 |
 | --- | --- | --- |
-| `agents/video-producer/` | **任意 Agent** | 宿主无关入口、11 specialist map、可复制 handoff prompt |
+| `agents/video-producer/` + `agents/START_HERE.md` | **任意 Agent** / 人 | 宿主无关入口、specialist map、粘贴即用开场 |
 | `.devin/skills/video-producer/` + `.devin/agents/*-producer.md` | Devin 自动发现；任意 Agent 也可直接读取 profile Markdown | Devin 薄发现适配与 repository-owned specialist 协议 |
 | `.agents/skills/*` / `.codex/agents/*.toml` | Coding harness / Codex coding loop | 写码纪律和 implementer/verifier，不替代视频入口 |
 
@@ -374,13 +376,18 @@ review_gates:
 
 #### 方式 A — Host-neutral Prompt 调用（推荐）
 
-在目标 Agent 会话开头粘贴或引用：
+在目标 Agent 会话开头粘贴或引用 `agents/START_HERE.md`：
 
 ```text
-Read agents/video-producer/AGENT.md. Validate and route <job-file> with the Video Agent Platform flag enabled. Read only the mapped specialist profile. Do not approve pending gates, call paid/cloud services, or render without my explicit approval. Return the required result JSON.
+Read agents/START_HERE.md and agents/video-producer/AGENT.md.
+You run intake, Job file, route, and the specialist yourself.
+Ask me only if required fields are missing, or for 批准 storyboard / 批准 final_render / paid providers.
+Do not ask me to run npm or FLAG_ commands.
+
+My request: <一句话说明要做什么；有本地素材就写出路径>
 ```
 
-该入口不假设 Agent 是 Codex、Cursor、Claude 或 Devin。
+该入口不假设 Agent 是 Codex、Cursor、Claude 或 Devin。用户不必提供 Job 文件；有现成 Job 时可把路径写进请求。
 
 #### 方式 B — CLI 作为 Agent 间机器接口（最稳）
 

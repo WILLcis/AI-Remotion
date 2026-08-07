@@ -1,0 +1,9 @@
+{
+  "request_id": "promo-intake",
+  "description": "为 AI-Remotion 产品做一个 30 秒竖屏宣传视频",
+  "defaults": {
+    "duration_seconds": 30,
+    "aspect_ratio": "9:16",
+    "language": "zh"
+  }
+}

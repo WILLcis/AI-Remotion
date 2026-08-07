@@ -1,0 +1,31 @@
+<template>
+  <style>
+    *{box-sizing:border-box}#f1{width:1920px;height:1080px;overflow:hidden;color:#f4f6fb;font-family:Inter,-apple-system,sans-serif}
+    .scene{position:absolute;inset:0;background:#05070b;overflow:hidden}.grid{position:absolute;inset:0;background-image:linear-gradient(#2a314055 1px,transparent 1px),linear-gradient(90deg,#2a314055 1px,transparent 1px);background-size:64px 64px;opacity:.34}
+    .ghost{position:absolute;left:70px;top:40px;font:400 230px/1 Georgia,serif;color:#5b5b67;opacity:.24;white-space:nowrap}.meta{position:absolute;top:66px;font:500 20px/1.2 'JetBrains Mono',monospace;letter-spacing:.13em;color:#9aa3b2}.m1{left:104px}.m2{right:104px}
+    .operator{position:absolute;left:146px;top:338px;width:250px;height:250px;border:2px solid #f4f6fb;border-radius:50%;display:grid;place-items:center;background:#0d1119;z-index:5}.human{width:72px;height:72px;border:3px solid #f4f6fb;border-radius:50%;position:relative}.human:after{content:"";position:absolute;width:116px;height:60px;border:3px solid #f4f6fb;border-radius:70px 70px 22px 22px;left:-25px;top:83px}.operator b{position:absolute;bottom:28px;font:500 18px 'JetBrains Mono',monospace;letter-spacing:.12em}
+    .agent{position:absolute;width:126px;height:92px;border:2px solid #8b7cf6;border-radius:18px;background:#151a24;display:grid;place-items:center;color:#c0b8ff;font:700 22px 'JetBrains Mono',monospace;box-shadow:0 18px 50px #0008}.a1{left:570px;top:210px}.a2{left:850px;top:170px}.a3{left:1140px;top:240px}.a4{left:1450px;top:190px}.a5{left:690px;top:590px}.a6{left:1040px;top:650px}.a7{left:1390px;top:560px}
+    .terminal{position:absolute;width:310px;padding:20px 22px;border:2px solid #2a3140;border-radius:14px;background:#0d1119;color:#9aa3b2;font:500 17px/1.7 'JetBrains Mono',monospace;box-shadow:0 22px 70px #000b}.terminal strong{color:#f4f6fb}.t1{left:490px;top:370px}.t2{left:850px;top:390px}.t3{left:1220px;top:385px}.t4{left:740px;top:730px}.t5{left:1200px;top:730px}
+    .question{position:absolute;left:520px;right:110px;top:430px;font:400 112px/1.05 Georgia,serif;letter-spacing:-.04em;z-index:8}.question span{color:#8b7cf6}.rule{position:absolute;left:520px;top:574px;width:1070px;height:3px;background:#8b7cf6;transform-origin:left}
+  </style>
+  <div data-hf-id="hf-zu28" id="f1" data-composition-id="f1" data-start="0" data-duration="9" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-m2a4" id="f1-scene" class="clip scene" data-start="0" data-duration="9" data-track-index="1">
+      <div data-hf-id="hf-kxq8" class="grid"></div><div data-hf-id="hf-mhpt" class="ghost" data-layout-allow-occlusion="" data-layout-allow-overlap="">执行力</div><div data-hf-id="hf-ku38" class="meta m1">01 / MANAGEMENT GAP</div><div data-hf-id="hf-s95r" class="meta m2">CONCEPTUAL VIEW</div>
+      <div data-hf-id="hf-8y7e" class="operator" id="f1-operator"><div data-hf-id="hf-ocuj" class="human"></div><b data-hf-id="hf-6gsa">HUMAN</b></div>
+      <div data-hf-id="hf-yg07" class="agent a1">AGENT 01</div><div data-hf-id="hf-i8zh" class="agent a2">AGENT 02</div><div data-hf-id="hf-e9cv" class="agent a3">AGENT 03</div><div data-hf-id="hf-s8fl" class="agent a4">AGENT 04</div><div data-hf-id="hf-2nb3" class="agent a5">AGENT 05</div><div data-hf-id="hf-gvdh" class="agent a6">AGENT 06</div><div data-hf-id="hf-1wav" class="agent a7">AGENT 07</div>
+      <div data-hf-id="hf-h6dg" class="terminal t1" data-layout-allow-overlap=""><strong data-hf-id="hf-53mu">$ task run</strong><br data-hf-id="hf-x5px">status: working<br data-hf-id="hf-rsrt">tool: test</div><div data-hf-id="hf-8xo9" class="terminal t2" data-layout-allow-overlap=""><strong data-hf-id="hf-901v">$ agent start</strong><br data-hf-id="hf-szow">status: queued<br data-hf-id="hf-sldv">issue: ACME-42</div><div data-hf-id="hf-m9br" class="terminal t3" data-layout-allow-overlap=""><strong data-hf-id="hf-rkjv">$ task claim</strong><br data-hf-id="hf-qluq">runtime: local-02<br data-hf-id="hf-q7jp">progress: 37%</div><div data-hf-id="hf-c5ev" class="terminal t4" data-layout-allow-overlap=""><strong data-hf-id="hf-0njq">$ review</strong><br data-hf-id="hf-regs">diff: +128 -34<br data-hf-id="hf-r05r">state: waiting</div><div data-hf-id="hf-u9lg" class="terminal t5" data-layout-allow-overlap=""><strong data-hf-id="hf-5pye">$ build</strong><br data-hf-id="hf-p0mm">files: 18<br data-hf-id="hf-ombl">state: active</div>
+      <div data-hf-id="hf-kpsv" class="question" id="f1-question">谁在做什么<span data-hf-id="hf-w80q">？</span></div><div data-hf-id="hf-asam" class="rule" id="f1-rule"></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+    tl.fromTo("#f1-operator",{opacity:0,scale:.72},{opacity:1,scale:1,duration:.8,ease:"power3.out"},.2);
+    tl.fromTo("#f1 .agent",{opacity:0,scale:.35,x:-120},{opacity:1,scale:1,x:0,duration:.8,stagger:.16,ease:"power3.out"},1.1);
+    tl.fromTo("#f1 .terminal",{opacity:0,y:90,rotation:-2},{opacity:1,y:0,rotation:0,duration:.65,stagger:.34,ease:"power4.out"},2.7);
+    tl.to("#f1 .agent",{x:(i)=>i%2?90:-50,y:(i)=>i%3?45:-20,duration:1.2,ease:"power3.inOut"},5.7);
+    tl.to("#f1 .terminal",{x:(i)=>i%2?260:-180,opacity:.24,duration:.9,ease:"power3.inOut"},5.8);
+    tl.fromTo("#f1-question",{opacity:0,scale:.82},{opacity:1,scale:1,duration:.75,ease:"power4.out"},6.35);
+    tl.fromTo("#f1-rule",{scaleX:0},{scaleX:1,duration:1.05,ease:"power3.out"},6.75);
+    window.__timelines.f1=tl;
+  </script>
+</template>

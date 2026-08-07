@@ -1,0 +1,273 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: #f4f3ee;
+      font-family: sans-serif;
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+    .ground {
+      background:
+        radial-gradient(circle at 26% 38%, rgba(139, 124, 255, 0.14), transparent 29%),
+        #05070b;
+    }
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(244, 243, 238, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 243, 238, 0.055) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 92%);
+    }
+    .kicker {
+      position: absolute;
+      left: 82px;
+      top: 68px;
+      color: #4ade80;
+      font: 600 21px/1 monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .index {
+      position: absolute;
+      right: 82px;
+      top: 68px;
+      color: #8290a6;
+      font: 500 19px/1 monospace;
+      letter-spacing: 0.08em;
+    }
+    .leader {
+      position: absolute;
+      left: 118px;
+      top: 238px;
+      width: 472px;
+      height: 428px;
+      padding: 42px;
+      border: 1px solid rgba(244, 243, 238, 0.2);
+      border-radius: 12px;
+      background: rgba(21, 24, 22, 0.94);
+      box-shadow: 0 22px 80px rgba(0, 0, 0, 0.28);
+    }
+    .leader-orb {
+      width: 104px;
+      height: 104px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f4f3ee;
+      color: #05070b;
+      font: 400 55px/1 serif;
+    }
+    .leader-role {
+      margin-top: 34px;
+      color: #8290a6;
+      font: 600 18px/1 monospace;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .leader-title {
+      margin-top: 16px;
+      max-width: 360px;
+      font: 400 56px/1.03 serif;
+      letter-spacing: -0.03em;
+    }
+    .leader-status {
+      position: absolute;
+      left: 42px;
+      bottom: 38px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #f4f3ee;
+      font: 500 22px/1 sans-serif;
+    }
+    .leader-status::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.12);
+    }
+    .agent-field {
+      position: absolute;
+      left: 700px;
+      top: 188px;
+      width: 1110px;
+      height: 590px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .agent {
+      position: relative;
+      min-width: 0;
+      padding: 24px 22px 22px;
+      border: 1px solid rgba(139, 124, 255, 0.34);
+      border-radius: 10px;
+      background: rgba(21, 24, 22, 0.9);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
+    }
+    .agent-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .agent-orb {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #8b7cff;
+      color: #05070b;
+      font: 700 16px/1 monospace;
+    }
+    .agent-name {
+      overflow: hidden;
+      color: #f4f3ee;
+      font: 600 20px/1 sans-serif;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .agent-task {
+      margin-top: 22px;
+      color: #8290a6;
+      font: 500 17px/1.25 monospace;
+    }
+    .status-rail {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 20px;
+      height: 4px;
+      overflow: hidden;
+      border-radius: 4px;
+      background: rgba(244, 243, 238, 0.12);
+    }
+    .status-fill {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform-origin: left center;
+      background: #8b7cff;
+    }
+    .agent.active .agent-orb,
+    .agent.active .status-fill {
+      background: #4ade80;
+    }
+    .connectors {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 900px;
+      pointer-events: none;
+    }
+    .connectors path {
+      fill: none;
+      stroke: rgba(139, 124, 255, 0.28);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+    }
+    .footer {
+      position: absolute;
+      left: 82px;
+      right: 82px;
+      top: 824px;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 22px;
+      border-top: 1px solid rgba(244, 243, 238, 0.14);
+      color: #8290a6;
+      font: 500 18px/1 monospace;
+      letter-spacing: 0.05em;
+    }
+  </style>
+
+  <div data-hf-id="hf-bo81" id="root" data-composition-id="01-agent-constellation" data-start="0" data-duration="5.55" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-u7ah" id="f01-ground" class="clip ground" data-start="0" data-duration="5.55" data-track-index="0">
+      <div data-hf-id="hf-80b5" class="grid" data-layout-ignore=""></div>
+    </div>
+
+    <div data-hf-id="hf-g2d5" id="f01-content" class="clip" data-start="0" data-duration="5.55" data-track-index="1">
+      <div data-hf-id="hf-b8tu" id="f01-kicker" class="kicker">✱ Scale, under control</div>
+      <div data-hf-id="hf-v3c9" id="f01-index" class="index">01 / 03</div>
+
+      <svg data-hf-id="hf-vij7" class="connectors" viewBox="0 0 1920 900" aria-hidden="true" data-layout-ignore="">
+        <path data-hf-id="hf-hw6s" pathLength="1" d="M590 452 C690 452 702 278 838 278" />
+        <path data-hf-id="hf-rkpp" pathLength="1" d="M590 452 C720 452 840 278 1116 278" />
+        <path data-hf-id="hf-4sau" pathLength="1" d="M590 452 C740 452 1040 278 1394 278" />
+        <path data-hf-id="hf-3jy5" pathLength="1" d="M590 452 C760 452 1240 278 1672 278" />
+        <path data-hf-id="hf-teg4" pathLength="1" d="M590 452 C690 452 702 475 838 475" />
+        <path data-hf-id="hf-swvn" pathLength="1" d="M590 452 C720 452 840 475 1116 475" />
+        <path data-hf-id="hf-hi0k" pathLength="1" d="M590 452 C740 452 1040 475 1394 475" />
+        <path data-hf-id="hf-u4tb" pathLength="1" d="M590 452 C760 452 1240 475 1672 475" />
+        <path data-hf-id="hf-72pw" pathLength="1" d="M590 452 C690 452 702 672 838 672" />
+        <path data-hf-id="hf-sjf9" pathLength="1" d="M590 452 C720 452 840 672 1116 672" />
+        <path data-hf-id="hf-bb5e" pathLength="1" d="M590 452 C740 452 1040 672 1394 672" />
+        <path data-hf-id="hf-fq2x" pathLength="1" d="M590 452 C760 452 1240 672 1672 672" />
+      </svg>
+
+      <section data-hf-id="hf-g516" id="f01-leader" class="leader">
+        <div data-hf-id="hf-j34r" class="leader-orb">人</div>
+        <div data-hf-id="hf-9uro" class="leader-role">Engineering leader</div>
+        <div data-hf-id="hf-a7ef" class="leader-title">One clear point of direction.</div>
+        <div data-hf-id="hf-a08b" class="leader-status">online · directing</div>
+      </section>
+
+      <section data-hf-id="hf-nxdt" class="agent-field" aria-label="coding agent team">
+        <article data-hf-id="hf-xfpw" class="agent"><div data-hf-id="hf-dqua" class="agent-head"><span data-hf-id="hf-qokm" class="agent-orb">A1</span><span data-hf-id="hf-9ias" class="agent-name">frontend</span></div><div data-hf-id="hf-05so" class="agent-task">ACME-42 · working</div><div data-hf-id="hf-4yer" class="status-rail"><span data-hf-id="hf-f6s7" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-r8q4" class="agent"><div data-hf-id="hf-aqyu" class="agent-head"><span data-hf-id="hf-r2vn" class="agent-orb">A2</span><span data-hf-id="hf-168o" class="agent-name">backend</span></div><div data-hf-id="hf-0hbh" class="agent-task">ACME-43 · queued</div><div data-hf-id="hf-gkur" class="status-rail"><span data-hf-id="hf-xt07" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-q1t1" class="agent"><div data-hf-id="hf-b59v" class="agent-head"><span data-hf-id="hf-rh6o" class="agent-orb">A3</span><span data-hf-id="hf-wxqd" class="agent-name">tests</span></div><div data-hf-id="hf-594b" class="agent-task">ACME-44 · review</div><div data-hf-id="hf-g6jq" class="status-rail"><span data-hf-id="hf-xep6" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-zps2" class="agent active"><div data-hf-id="hf-bjkw" class="agent-head"><span data-hf-id="hf-op1h" class="agent-orb">A4</span><span data-hf-id="hf-7qlp" class="agent-name">release</span></div><div data-hf-id="hf-b1c1" class="agent-task">ACME-45 · working</div><div data-hf-id="hf-fs8p" class="status-rail"><span data-hf-id="hf-x0e5" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-qg42" class="agent"><div data-hf-id="hf-8rfp" class="agent-head"><span data-hf-id="hf-p3ci" class="agent-orb">A5</span><span data-hf-id="hf-j9np" class="agent-name">research</span></div><div data-hf-id="hf-2pe0" class="agent-task">ACME-46 · queued</div><div data-hf-id="hf-fdxo" class="status-rail"><span data-hf-id="hf-zsjc" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-tehy" class="agent active"><div data-hf-id="hf-95qq" class="agent-head"><span data-hf-id="hf-phnj" class="agent-orb">A6</span><span data-hf-id="hf-rsd3" class="agent-name">docs</span></div><div data-hf-id="hf-41k3" class="agent-task">ACME-47 · working</div><div data-hf-id="hf-ezmn" class="status-rail"><span data-hf-id="hf-ze8b" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-sfn7" class="agent"><div data-hf-id="hf-9k1r" class="agent-head"><span data-hf-id="hf-pvyk" class="agent-orb">A7</span><span data-hf-id="hf-bpv2" class="agent-name">infra</span></div><div data-hf-id="hf-k95j" class="agent-task">ACME-48 · review</div><div data-hf-id="hf-elbm" class="status-rail"><span data-hf-id="hf-yzxa" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-sty8" class="agent"><div data-hf-id="hf-9ycs" class="agent-head"><span data-hf-id="hf-n3td" class="agent-orb">A8</span><span data-hf-id="hf-kply" class="agent-name">security</span></div><div data-hf-id="hf-gjon" class="agent-task">ACME-49 · queued</div><div data-hf-id="hf-e70l" class="status-rail"><span data-hf-id="hf-ylm9" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-tssz" class="agent active"><div data-hf-id="hf-767l" class="agent-head"><span data-hf-id="hf-ni4e" class="agent-orb">A9</span><span data-hf-id="hf-x07s" class="agent-name">triage</span></div><div data-hf-id="hf-kkjz" class="agent-task">ACME-50 · working</div><div data-hf-id="hf-dspk" class="status-rail"><span data-hf-id="hf-1drg" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-rn15" class="agent"><div data-hf-id="hf-7kim" class="agent-head"><span data-hf-id="hf-qkte" class="agent-orb">A10</span><span data-hf-id="hf-ih62" class="agent-name">mobile</span></div><div data-hf-id="hf-heyc" class="agent-task">ACME-51 · queued</div><div data-hf-id="hf-deej" class="status-rail"><span data-hf-id="hf-0zgf" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-s1c6" class="agent"><div data-hf-id="hf-57uq" class="agent-head"><span data-hf-id="hf-q6id" class="agent-orb">A11</span><span data-hf-id="hf-0z94" class="agent-name">data</span></div><div data-hf-id="hf-yoku" class="agent-task">ACME-52 · review</div><div data-hf-id="hf-qqah" class="status-rail"><span data-hf-id="hf-2ag5" class="status-fill"></span></div></article>
+        <article data-hf-id="hf-nnyv" class="agent"><div data-hf-id="hf-4tjp" class="agent-head"><span data-hf-id="hf-rdfg" class="agent-orb">A12</span><span data-hf-id="hf-lzgc" class="agent-name">ops</span></div><div data-hf-id="hf-oz0e" class="agent-task">ACME-53 · queued</div><div data-hf-id="hf-r4li" class="status-rail"><span data-hf-id="hf-2or6" class="status-fill"></span></div></article>
+      </section>
+
+      <div data-hf-id="hf-av8e" id="f01-footer" class="footer">
+        <span data-hf-id="hf-et7y">HUMAN + AGENT WORKFORCE</span>
+        <span data-hf-id="hf-48e0">DETERMINISTIC ORCHESTRATION</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const agents = gsap.utils.toArray(".agent");
+      const paths = gsap.utils.toArray(".connectors path");
+      const fills = gsap.utils.toArray(".status-fill");
+
+      tl.fromTo("#f01-kicker", { opacity: 0, x: -28 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, 0.05);
+      tl.fromTo("#f01-index", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" }, 0.12);
+      tl.fromTo("#f01-leader", { opacity: 0, x: -54, scale: 0.94 }, { opacity: 1, x: 0, scale: 1, duration: 0.78, ease: "power3.out" }, 0.18);
+      tl.fromTo(paths, { strokeDasharray: 1, strokeDashoffset: 1, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 1.45, stagger: 0.035, ease: "power2.inOut" }, 1.05);
+      tl.fromTo(agents, { opacity: 0, x: -110, y: 22, scale: 0.82 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.68, stagger: 0.17, ease: "power3.out" }, 1.15);
+      tl.fromTo(fills, { scaleX: 0 }, { scaleX: 1, duration: 0.72, stagger: 0.12, ease: "power3.out" }, 2.7);
+      tl.fromTo(".agent.active .agent-orb", { backgroundColor: "#8b7cff" }, { backgroundColor: "#4ade80", duration: 0.34, stagger: 0.16, ease: "power2.out" }, 3.65);
+      tl.fromTo("#f01-footer", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 4.15);
+
+      window.__timelines["01-agent-constellation"] = tl;
+    })();
+  </script>
+</template>

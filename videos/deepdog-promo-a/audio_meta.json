@@ -1,0 +1,98 @@
+{
+  "bgm": null,
+  "bgm_pending": false,
+  "voices": [
+    {
+      "frame": 1,
+      "path": "audio/cosyvoice/seg_00.wav",
+      "duration_s": 2.159333,
+      "provider": "cosyvoice",
+      "speaker": "中文男",
+      "speed": 1.15,
+      "words": [
+        {
+          "id": "segment-1",
+          "text": "一个人带起一队编码智能体。",
+          "start": 0,
+          "end": 2.159333
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "path": "audio/cosyvoice/seg_01.wav",
+      "duration_s": 3.303,
+      "provider": "cosyvoice",
+      "speaker": "中文男",
+      "speed": 1.15,
+      "words": [
+        {
+          "id": "segment-2",
+          "text": "deepdog从一个控制台统一派单、追踪进度。",
+          "start": 0,
+          "end": 3.303
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "path": "audio/cosyvoice/seg_02.wav",
+      "duration_s": 2.8435,
+      "provider": "cosyvoice",
+      "speaker": "中文男",
+      "speed": 1.15,
+      "words": [
+        {
+          "id": "segment-3",
+          "text": "让每个编码智能体都成为真正队友。",
+          "start": 0,
+          "end": 2.8435
+        }
+      ]
+    }
+  ],
+  "sfx": [
+    {
+      "frame": 1,
+      "file": "assets/sfx/click-soft.mp3",
+      "offset_s": 0,
+      "duration_s": 0.37,
+      "volume": 0.35
+    },
+    {
+      "frame": 1,
+      "file": "assets/sfx/whoosh-short.mp3",
+      "offset_s": 0,
+      "duration_s": 0.57,
+      "volume": 0.35
+    },
+    {
+      "frame": 2,
+      "file": "assets/sfx/click.mp3",
+      "offset_s": 0,
+      "duration_s": 0.37,
+      "volume": 0.35
+    },
+    {
+      "frame": 2,
+      "file": "assets/sfx/whoosh-short.mp3",
+      "offset_s": 0,
+      "duration_s": 0.57,
+      "volume": 0.35
+    },
+    {
+      "frame": 3,
+      "file": "assets/sfx/ping.mp3",
+      "offset_s": 0,
+      "duration_s": 1.32,
+      "volume": 0.35
+    },
+    {
+      "frame": 3,
+      "file": "assets/sfx/chime.mp3",
+      "offset_s": 0,
+      "duration_s": 2.5,
+      "volume": 0.35
+    }
+  ]
+}

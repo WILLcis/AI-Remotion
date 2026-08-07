@@ -1,0 +1,1595 @@
+[
+  {
+    "id": "caption-group-0",
+    "frame": 1,
+    "start": 0.05,
+    "end": 1.087,
+    "text": "这是 Yes or No",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "这是",
+        "start": 0.05,
+        "end": 0.405
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "Yes",
+        "start": 0.405,
+        "end": 0.697
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "or",
+        "start": 0.697,
+        "end": 0.892
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "No",
+        "start": 0.892,
+        "end": 1.087
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 1,
+    "start": 1.087,
+    "end": 4.297,
+    "text": "3.0—— 写给经营者， 而不是写给工 程师的一支演",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "3.0——",
+        "start": 1.087,
+        "end": 1.282
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "写给经营者，",
+        "start": 1.282,
+        "end": 2.169
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "而不是写给工",
+        "start": 2.169,
+        "end": 3.233
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "程师的一支演",
+        "start": 3.233,
+        "end": 4.297
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 1,
+    "start": 4.297,
+    "end": 7.666,
+    "text": "示。 接下来两分钟， 讲清楚一件事： 这套底座能为",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "示。",
+        "start": 4.297,
+        "end": 4.474
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "接下来两分钟，",
+        "start": 4.474,
+        "end": 5.538
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "讲清楚一件事：",
+        "start": 5.538,
+        "end": 6.602
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "这套底座能为",
+        "start": 6.602,
+        "end": 7.666
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 1,
+    "start": 7.666,
+    "end": 9.084,
+    "text": "你打开多大的 生意。",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "你打开多大的",
+        "start": 7.666,
+        "end": 8.729
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "生意。",
+        "start": 8.729,
+        "end": 9.084
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 2,
+    "start": 9.204,
+    "end": 12.417,
+    "text": "自己建一个交 易场， 真正的门槛不 在前台，",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "自己建一个交",
+        "start": 9.204,
+        "end": 10.338
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "易场，",
+        "start": 10.338,
+        "end": 10.716
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "真正的门槛不",
+        "start": 10.716,
+        "end": 11.85
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "在前台，",
+        "start": 11.85,
+        "end": 12.417
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 2,
+    "start": 12.417,
+    "end": 15.064,
+    "text": "而在撮合、 风控、 账本、 清算这些看不",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "而在撮合、",
+        "start": 12.417,
+        "end": 13.173
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "风控、",
+        "start": 13.173,
+        "end": 13.551
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "账本、",
+        "start": 13.551,
+        "end": 13.929
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "清算这些看不",
+        "start": 13.929,
+        "end": 15.064
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 2,
+    "start": 15.064,
+    "end": 18.277,
+    "text": "见的地方。 每一块都要专 业团队长期投 入——",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "见的地方。",
+        "start": 15.064,
+        "end": 15.82
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "每一块都要专",
+        "start": 15.82,
+        "end": 16.954
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "业团队长期投",
+        "start": 16.954,
+        "end": 18.088
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "入——",
+        "start": 18.088,
+        "end": 18.277
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 2,
+    "start": 18.277,
+    "end": 20.734,
+    "text": "而且出错的代 价， 是客户的信任。",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "而且出错的代",
+        "start": 18.277,
+        "end": 19.411
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "价，",
+        "start": 19.411,
+        "end": 19.6
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "是客户的信任。",
+        "start": 19.6,
+        "end": 20.734
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 3,
+    "start": 20.854,
+    "end": 21.977,
+    "text": "Yes or No 3.0",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "Yes",
+        "start": 20.854,
+        "end": 21.228
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "or",
+        "start": 21.228,
+        "end": 21.478
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "No",
+        "start": 21.478,
+        "end": 21.728
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "3.0",
+        "start": 21.728,
+        "end": 21.977
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 3,
+    "start": 21.977,
+    "end": 25.382,
+    "text": "把这些全部下 沉为平台层： 治理、 市场、",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "把这些全部下",
+        "start": 21.977,
+        "end": 23.339
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "沉为平台层：",
+        "start": 23.339,
+        "end": 24.474
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "治理、",
+        "start": 24.474,
+        "end": 24.928
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "市场、",
+        "start": 24.928,
+        "end": 25.382
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 3,
+    "start": 25.382,
+    "end": 28.105,
+    "text": "交易、 资金、 做市， 五层交易所级",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "交易、",
+        "start": 25.382,
+        "end": 25.836
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "资金、",
+        "start": 25.836,
+        "end": 26.29
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "做市，",
+        "start": 26.29,
+        "end": 26.744
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "五层交易所级",
+        "start": 26.744,
+        "end": 28.105
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 3,
+    "start": 28.105,
+    "end": 31.056,
+    "text": "能力。 你只保留最上 面一层—— 品牌、",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "能力。",
+        "start": 28.105,
+        "end": 28.559
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "你只保留最上",
+        "start": 28.559,
+        "end": 29.921
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "面一层——",
+        "start": 29.921,
+        "end": 30.602
+      },
+      {
+        "id": "caption-word-3-3",
+        "text": "品牌、",
+        "start": 30.602,
+        "end": 31.056
+      }
+    ]
+  },
+  {
+    "id": "caption-group-4",
+    "frame": 3,
+    "start": 31.056,
+    "end": 35.141,
+    "text": "客户、 玩法和增长。 那才是你该花 时间的地方。",
+    "words": [
+      {
+        "id": "caption-word-4-0",
+        "text": "客户、",
+        "start": 31.056,
+        "end": 31.51
+      },
+      {
+        "id": "caption-word-4-1",
+        "text": "玩法和增长。",
+        "start": 31.51,
+        "end": 32.644
+      },
+      {
+        "id": "caption-word-4-2",
+        "text": "那才是你该花",
+        "start": 32.644,
+        "end": 34.006
+      },
+      {
+        "id": "caption-word-4-3",
+        "text": "时间的地方。",
+        "start": 34.006,
+        "end": 35.141
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 4,
+    "start": 35.261,
+    "end": 38.354,
+    "text": "每个租户是一 个独立经营域： 账户、 结算、",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "每个租户是一",
+        "start": 35.261,
+        "end": 36.421
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "个独立经营域：",
+        "start": 36.421,
+        "end": 37.58
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "账户、",
+        "start": 37.58,
+        "end": 37.967
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "结算、",
+        "start": 37.967,
+        "end": 38.354
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 4,
+    "start": 38.354,
+    "end": 42.219,
+    "text": "数据全部按租 户隔离。 客户关系与经 营数据归你，",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "数据全部按租",
+        "start": 38.354,
+        "end": 39.513
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "户隔离。",
+        "start": 39.513,
+        "end": 40.093
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "客户关系与经",
+        "start": 40.093,
+        "end": 41.253
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "营数据归你，",
+        "start": 41.253,
+        "end": 42.219
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 4,
+    "start": 42.219,
+    "end": 44.732,
+    "text": "平台不越界， 其他租户也碰 不到。",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "平台不越界，",
+        "start": 42.219,
+        "end": 43.186
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "其他租户也碰",
+        "start": 43.186,
+        "end": 44.345
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "不到。",
+        "start": 44.345,
+        "end": 44.732
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 5,
+    "start": 44.852,
+    "end": 47.648,
+    "text": "开市场像上架 商品： 热门标的接共 享订单簿，",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "开市场像上架",
+        "start": 44.852,
+        "end": 45.784
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "商品：",
+        "start": 45.784,
+        "end": 46.095
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "热门标的接共",
+        "start": 46.095,
+        "end": 47.026
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "享订单簿，",
+        "start": 47.026,
+        "end": 47.648
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 5,
+    "start": 47.648,
+    "end": 50.288,
+    "text": "第一天就有流 动性。 更关键的是专 有市场——",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "第一天就有流",
+        "start": 47.648,
+        "end": 48.58
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "动性。",
+        "start": 48.58,
+        "end": 48.89
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "更关键的是专",
+        "start": 48.89,
+        "end": 49.822
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "有市场——",
+        "start": 49.822,
+        "end": 50.288
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 5,
+    "start": 50.288,
+    "end": 53.55,
+    "text": "面向你的客群 做独家玩法， 这是别人抄不 走的壁垒。",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "面向你的客群",
+        "start": 50.288,
+        "end": 51.22
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "做独家玩法，",
+        "start": 51.22,
+        "end": 51.997
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "这是别人抄不",
+        "start": 51.997,
+        "end": 52.929
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "走的壁垒。",
+        "start": 52.929,
+        "end": 53.55
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 5,
+    "start": 53.55,
+    "end": 56.19,
+    "text": "一天， 开出一家全能 的交易所。 这不是口号，",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "一天，",
+        "start": 53.55,
+        "end": 53.861
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "开出一家全能",
+        "start": 53.861,
+        "end": 54.793
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "的交易所。",
+        "start": 54.793,
+        "end": 55.414
+      },
+      {
+        "id": "caption-word-3-3",
+        "text": "这不是口号，",
+        "start": 55.414,
+        "end": 56.19
+      }
+    ]
+  },
+  {
+    "id": "caption-group-4",
+    "frame": 5,
+    "start": 56.19,
+    "end": 56.967,
+    "text": "是上线周期。",
+    "words": [
+      {
+        "id": "caption-word-4-0",
+        "text": "是上线周期。",
+        "start": 56.19,
+        "end": 56.967
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 6,
+    "start": 57.087,
+    "end": 61.112,
+    "text": "能开什么市场？ 先看 Outcome： 任何结果明确、",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "能开什么市场？",
+        "start": 57.087,
+        "end": 58.44
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "先看",
+        "start": 58.44,
+        "end": 58.891
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "Outcome：",
+        "start": 58.891,
+        "end": 59.759
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "任何结果明确、",
+        "start": 59.759,
+        "end": 61.112
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 6,
+    "start": 61.112,
+    "end": 64.19,
+    "text": "可公正裁决的 事件， 都能开成 Yes",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "可公正裁决的",
+        "start": 61.112,
+        "end": 62.465
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "事件，",
+        "start": 62.465,
+        "end": 62.916
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "都能开成",
+        "start": 62.916,
+        "end": 63.818
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "Yes",
+        "start": 63.818,
+        "end": 64.19
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 6,
+    "start": 64.19,
+    "end": 65.588,
+    "text": "or No 市场—— 体育、",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "or",
+        "start": 64.19,
+        "end": 64.438
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "No",
+        "start": 64.438,
+        "end": 64.686
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "市场——",
+        "start": 64.686,
+        "end": 65.137
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "体育、",
+        "start": 65.137,
+        "end": 65.588
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 6,
+    "start": 65.588,
+    "end": 68.519,
+    "text": "选举、 宏观数据、 行业里程碑。 再看",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "选举、",
+        "start": 65.588,
+        "end": 66.039
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "宏观数据、",
+        "start": 66.039,
+        "end": 66.941
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "行业里程碑。",
+        "start": 66.941,
+        "end": 68.068
+      },
+      {
+        "id": "caption-word-3-3",
+        "text": "再看",
+        "start": 68.068,
+        "end": 68.519
+      }
+    ]
+  },
+  {
+    "id": "caption-group-4",
+    "frame": 6,
+    "start": 68.519,
+    "end": 70.244,
+    "text": "CFD： 股票、 股指、 黄金、",
+    "words": [
+      {
+        "id": "caption-word-4-0",
+        "text": "CFD：",
+        "start": 68.519,
+        "end": 68.891
+      },
+      {
+        "id": "caption-word-4-1",
+        "text": "股票、",
+        "start": 68.891,
+        "end": 69.342
+      },
+      {
+        "id": "caption-word-4-2",
+        "text": "股指、",
+        "start": 69.342,
+        "end": 69.793
+      },
+      {
+        "id": "caption-word-4-3",
+        "text": "黄金、",
+        "start": 69.793,
+        "end": 70.244
+      }
+    ]
+  },
+  {
+    "id": "caption-group-5",
+    "frame": 6,
+    "start": 70.244,
+    "end": 72.792,
+    "text": "外汇、 BTC、 ETH， 永续与到期合",
+    "words": [
+      {
+        "id": "caption-word-5-0",
+        "text": "外汇、",
+        "start": 70.244,
+        "end": 70.695
+      },
+      {
+        "id": "caption-word-5-1",
+        "text": "BTC、",
+        "start": 70.695,
+        "end": 71.067
+      },
+      {
+        "id": "caption-word-5-2",
+        "text": "ETH，",
+        "start": 71.067,
+        "end": 71.439
+      },
+      {
+        "id": "caption-word-5-3",
+        "text": "永续与到期合",
+        "start": 71.439,
+        "end": 72.792
+      }
+    ]
+  },
+  {
+    "id": "caption-group-6",
+    "frame": 6,
+    "start": 72.792,
+    "end": 75.645,
+    "text": "约， USD 现金结算。 事件的世界加",
+    "words": [
+      {
+        "id": "caption-word-6-0",
+        "text": "约，",
+        "start": 72.792,
+        "end": 73.018
+      },
+      {
+        "id": "caption-word-6-1",
+        "text": "USD",
+        "start": 73.018,
+        "end": 73.39
+      },
+      {
+        "id": "caption-word-6-2",
+        "text": "现金结算。",
+        "start": 73.39,
+        "end": 74.292
+      },
+      {
+        "id": "caption-word-6-3",
+        "text": "事件的世界加",
+        "start": 74.292,
+        "end": 75.645
+      }
+    ]
+  },
+  {
+    "id": "caption-group-7",
+    "frame": 6,
+    "start": 75.645,
+    "end": 79.478,
+    "text": "资产的世界—— 客户想交易的， 你都开得出来。",
+    "words": [
+      {
+        "id": "caption-word-7-0",
+        "text": "资产的世界——",
+        "start": 75.645,
+        "end": 76.772
+      },
+      {
+        "id": "caption-word-7-1",
+        "text": "客户想交易的，",
+        "start": 76.772,
+        "end": 78.125
+      },
+      {
+        "id": "caption-word-7-2",
+        "text": "你都开得出来。",
+        "start": 78.125,
+        "end": 79.478
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 7,
+    "start": 79.598,
+    "end": 82.541,
+    "text": "客户每下一笔 单： 风控准入、 撮合成交、",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "客户每下一笔",
+        "start": 79.598,
+        "end": 80.775
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "单：",
+        "start": 80.775,
+        "end": 80.972
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "风控准入、",
+        "start": 80.972,
+        "end": 81.757
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "撮合成交、",
+        "start": 81.757,
+        "end": 82.541
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 7,
+    "start": 82.541,
+    "end": 85.681,
+    "text": "逐笔入账、 清算交割—— 平台替你跑完 全程。",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "逐笔入账、",
+        "start": 82.541,
+        "end": 83.326
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "清算交割——",
+        "start": 83.326,
+        "end": 84.111
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "平台替你跑完",
+        "start": 84.111,
+        "end": 85.289
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "全程。",
+        "start": 85.289,
+        "end": 85.681
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 7,
+    "start": 85.681,
+    "end": 89.017,
+    "text": "机构级、 全程留痕。 这个团队， 你不用自己养。",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "机构级、",
+        "start": 85.681,
+        "end": 86.27
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "全程留痕。",
+        "start": 86.27,
+        "end": 87.055
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "这个团队，",
+        "start": 87.055,
+        "end": 87.84
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "你不用自己养。",
+        "start": 87.84,
+        "end": 89.017
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 8,
+    "start": 89.137,
+    "end": 92.285,
+    "text": "资金事实逐笔 入账， 并在链上取得 最终性——",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "资金事实逐笔",
+        "start": 89.137,
+        "end": 90.248
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "入账，",
+        "start": 90.248,
+        "end": 90.618
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "并在链上取得",
+        "start": 90.618,
+        "end": 91.729
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "最终性——",
+        "start": 91.729,
+        "end": 92.285
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 8,
+    "start": 92.285,
+    "end": 95.432,
+    "text": "不可篡改、 可以查证。 你向客户讲\" 资金安全\"",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "不可篡改、",
+        "start": 92.285,
+        "end": 93.025
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "可以查证。",
+        "start": 93.025,
+        "end": 93.766
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "你向客户讲\"",
+        "start": 93.766,
+        "end": 94.692
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "资金安全\"",
+        "start": 94.692,
+        "end": 95.432
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 8,
+    "start": 95.432,
+    "end": 98.395,
+    "text": "时， 讲的不是承诺， 而是一条可验 证的链。",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "时，",
+        "start": 95.432,
+        "end": 95.618
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "讲的不是承诺，",
+        "start": 95.618,
+        "end": 96.729
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "而是一条可验",
+        "start": 96.729,
+        "end": 97.84
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "证的链。",
+        "start": 97.84,
+        "end": 98.395
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 9,
+    "start": 98.515,
+    "end": 101.709,
+    "text": "流动性不用从 零攒： 做市商资格、 额度、",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "流动性不用从",
+        "start": 98.515,
+        "end": 99.793
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "零攒：",
+        "start": 99.793,
+        "end": 100.219
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "做市商资格、",
+        "start": 100.219,
+        "end": 101.283
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "额度、",
+        "start": 101.283,
+        "end": 101.709
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 9,
+    "start": 101.709,
+    "end": 104.925,
+    "text": "保证金由工作 台管理， 专业做市与 AI",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "保证金由工作",
+        "start": 101.709,
+        "end": 102.987
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "台管理，",
+        "start": 102.987,
+        "end": 103.626
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "专业做市与",
+        "start": 103.626,
+        "end": 104.69
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "AI",
+        "start": 104.69,
+        "end": 104.925
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 9,
+    "start": 104.925,
+    "end": 109.183,
+    "text": "策略随市接入。 开市第一天， 你的市场就有 对手盘。",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "策略随市接入。",
+        "start": 104.925,
+        "end": 106.202
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "开市第一天，",
+        "start": 106.202,
+        "end": 107.267
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "你的市场就有",
+        "start": 107.267,
+        "end": 108.545
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "对手盘。",
+        "start": 108.545,
+        "end": 109.183
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 9,
+    "start": 109.183,
+    "end": 113.868,
+    "text": "哪怕预算只有 一万美元， 也能用上投行 级的顶级做市",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "哪怕预算只有",
+        "start": 109.183,
+        "end": 110.461
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "一万美元，",
+        "start": 110.461,
+        "end": 111.313
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "也能用上投行",
+        "start": 111.313,
+        "end": 112.59
+      },
+      {
+        "id": "caption-word-3-3",
+        "text": "级的顶级做市",
+        "start": 112.59,
+        "end": 113.868
+      }
+    ]
+  },
+  {
+    "id": "caption-group-4",
+    "frame": 9,
+    "start": 113.868,
+    "end": 114.294,
+    "text": "策略。",
+    "words": [
+      {
+        "id": "caption-word-4-0",
+        "text": "策略。",
+        "start": 113.868,
+        "end": 114.294
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 10,
+    "start": 114.414,
+    "end": 118.287,
+    "text": "收入不止手续 费： 专有市场溢价、 做市协同、",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "收入不止手续",
+        "start": 114.414,
+        "end": 115.781
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "费：",
+        "start": 115.781,
+        "end": 116.009
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "专有市场溢价、",
+        "start": 116.009,
+        "end": 117.376
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "做市协同、",
+        "start": 117.376,
+        "end": 118.287
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 10,
+    "start": 118.287,
+    "end": 122.127,
+    "text": "数据产品、 客户资产服务—— 再加上 Outcome",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "数据产品、",
+        "start": 118.287,
+        "end": 119.199
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "客户资产服务——",
+        "start": 119.199,
+        "end": 120.566
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "再加上",
+        "start": 120.566,
+        "end": 121.249
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "Outcome",
+        "start": 121.249,
+        "end": 122.127
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 10,
+    "start": 122.127,
+    "end": 124.781,
+    "text": "与 CFD 双产品域， 同一批客户，",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "与",
+        "start": 122.127,
+        "end": 122.355
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "CFD",
+        "start": 122.355,
+        "end": 122.73
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "双产品域，",
+        "start": 122.73,
+        "end": 123.642
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "同一批客户，",
+        "start": 123.642,
+        "end": 124.781
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 10,
+    "start": 124.781,
+    "end": 129.11,
+    "text": "两倍经营面。 开新市场、 进新客群， 边际成本趋近",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "两倍经营面。",
+        "start": 124.781,
+        "end": 125.92
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "开新市场、",
+        "start": 125.92,
+        "end": 126.832
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "进新客群，",
+        "start": 126.832,
+        "end": 127.743
+      },
+      {
+        "id": "caption-word-3-3",
+        "text": "边际成本趋近",
+        "start": 127.743,
+        "end": 129.11
+      }
+    ]
+  },
+  {
+    "id": "caption-group-4",
+    "frame": 10,
+    "start": 129.11,
+    "end": 132.984,
+    "text": "于零。 一句话： 把自建交易所 的千万级投入，",
+    "words": [
+      {
+        "id": "caption-word-4-0",
+        "text": "于零。",
+        "start": 129.11,
+        "end": 129.566
+      },
+      {
+        "id": "caption-word-4-1",
+        "text": "一句话：",
+        "start": 129.566,
+        "end": 130.249
+      },
+      {
+        "id": "caption-word-4-2",
+        "text": "把自建交易所",
+        "start": 130.249,
+        "end": 131.617
+      },
+      {
+        "id": "caption-word-4-3",
+        "text": "的千万级投入，",
+        "start": 131.617,
+        "end": 132.984
+      }
+    ]
+  },
+  {
+    "id": "caption-group-5",
+    "frame": 10,
+    "start": 132.984,
+    "end": 135.49,
+    "text": "变成一笔可控 的接入成本。",
+    "words": [
+      {
+        "id": "caption-word-5-0",
+        "text": "变成一笔可控",
+        "start": 132.984,
+        "end": 134.351
+      },
+      {
+        "id": "caption-word-5-1",
+        "text": "的接入成本。",
+        "start": 134.351,
+        "end": 135.49
+      }
+    ]
+  },
+  {
+    "id": "caption-group-0",
+    "frame": 11,
+    "start": 135.61,
+    "end": 138.072,
+    "text": "权威、 安全、 清算、 审计，",
+    "words": [
+      {
+        "id": "caption-word-0-0",
+        "text": "权威、",
+        "start": 135.61,
+        "end": 136.225
+      },
+      {
+        "id": "caption-word-0-1",
+        "text": "安全、",
+        "start": 136.225,
+        "end": 136.841
+      },
+      {
+        "id": "caption-word-0-2",
+        "text": "清算、",
+        "start": 136.841,
+        "end": 137.456
+      },
+      {
+        "id": "caption-word-0-3",
+        "text": "审计，",
+        "start": 137.456,
+        "end": 138.072
+      }
+    ]
+  },
+  {
+    "id": "caption-group-1",
+    "frame": 11,
+    "start": 138.072,
+    "end": 141.149,
+    "text": "平台承担； 客户、 玩法、 品牌、",
+    "words": [
+      {
+        "id": "caption-word-1-0",
+        "text": "平台承担；",
+        "start": 138.072,
+        "end": 139.302
+      },
+      {
+        "id": "caption-word-1-1",
+        "text": "客户、",
+        "start": 139.302,
+        "end": 139.918
+      },
+      {
+        "id": "caption-word-1-2",
+        "text": "玩法、",
+        "start": 139.918,
+        "end": 140.533
+      },
+      {
+        "id": "caption-word-1-3",
+        "text": "品牌、",
+        "start": 140.533,
+        "end": 141.149
+      }
+    ]
+  },
+  {
+    "id": "caption-group-2",
+    "frame": 11,
+    "start": 141.149,
+    "end": 145.764,
+    "text": "增长， 归你。 你负责生意， 交易所交给我",
+    "words": [
+      {
+        "id": "caption-word-2-0",
+        "text": "增长，",
+        "start": 141.149,
+        "end": 141.764
+      },
+      {
+        "id": "caption-word-2-1",
+        "text": "归你。",
+        "start": 141.764,
+        "end": 142.379
+      },
+      {
+        "id": "caption-word-2-2",
+        "text": "你负责生意，",
+        "start": 142.379,
+        "end": 143.918
+      },
+      {
+        "id": "caption-word-2-3",
+        "text": "交易所交给我",
+        "start": 143.918,
+        "end": 145.764
+      }
+    ]
+  },
+  {
+    "id": "caption-group-3",
+    "frame": 11,
+    "start": 145.764,
+    "end": 147.841,
+    "text": "们。 这就是 Yes or",
+    "words": [
+      {
+        "id": "caption-word-3-0",
+        "text": "们。",
+        "start": 145.764,
+        "end": 146.072
+      },
+      {
+        "id": "caption-word-3-1",
+        "text": "这就是",
+        "start": 146.072,
+        "end": 146.995
+      },
+      {
+        "id": "caption-word-3-2",
+        "text": "Yes",
+        "start": 146.995,
+        "end": 147.503
+      },
+      {
+        "id": "caption-word-3-3",
+        "text": "or",
+        "start": 147.503,
+        "end": 147.841
+      }
+    ]
+  },
+  {
+    "id": "caption-group-4",
+    "frame": 11,
+    "start": 147.841,
+    "end": 148.518,
+    "text": "No 3.0。",
+    "words": [
+      {
+        "id": "caption-word-4-0",
+        "text": "No",
+        "start": 147.841,
+        "end": 148.18
+      },
+      {
+        "id": "caption-word-4-1",
+        "text": "3.0。",
+        "start": 148.18,
+        "end": 148.518
+      }
+    ]
+  }
+]

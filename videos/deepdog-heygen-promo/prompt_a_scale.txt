@@ -1,0 +1,42 @@
+Create a ~40 second Mandarin Chinese product promo for BIOS / DeepDog (AI workforce OS), landscape 16:9.
+
+Format: Presenter-led punchy launch promo. The selected presenter speaks to camera between kinetic motion-graphics beats.
+
+PRESENTER IDENTITY (CRITICAL): Keep the selected presenter's mainland Chinese / East Asian appearance. Do NOT replace with a Western presenter.
+
+Product truth from brief:
+- AI coworkers may outnumber humans 10x.
+- BIOS: humans and agents share one workbench — one screen shows who is doing what and where work is stuck.
+- Every delegation layer is accountable to a concrete human — permission does not escalate out of control.
+- AI output must pass verification gates: 无验证，不完成.
+- BIOS is a control tower: divide work, listen, coordinate, surface risks.
+- Slogan: 当 AI 同事是人类的十倍——BIOS，让人和 AI 在同一套操作系统里安全协同。
+
+Structure (Chinese VO):
+1) Hook on 10x AI coworkers flooding in.
+2) Shared workbench with humans + agents.
+3) Accountability tree collapsing back to one human owner.
+4) Verification gate: green pass / red block.
+5) Control tower dashboard.
+6) End card: BIOS / DeepDog — 人和 AI 安全协同.
+
+Tone: sharp, confident Mandarin product launch — not soft lifestyle ad.
+
+This script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.
+
+SUBTITLES (CRITICAL): Burn in large Simplified Chinese subtitles for every spoken line. White text + dark outline, bottom-safe, synced to speech.
+
+CRITICAL ON-SCREEN TEXT:
+- BIOS
+- 10x AI Coworkers
+- 无验证，不完成
+- Control Tower
+- DeepDog
+
+Media: selected presenter A-roll + Motion Graphics for agent grids, delegation trees, verification gates, dashboards. Dark product UI aesthetic.
+
+LANGUAGE / VOICE: Mandarin Chinese only, native mainland pronunciation.
+
+STYLE — DECONSTRUCTED: Dark grey #1a1a1a, rust orange #D4501E, angled type, gritty tech energy, smash cuts.
+
+FRAMING NOTE: Frame the presenter from the chest up, centered in landscape 16:9. Generative-fill horizontally into a modern dark product studio. No black bars.

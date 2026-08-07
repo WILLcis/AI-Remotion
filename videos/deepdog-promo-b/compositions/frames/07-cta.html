@@ -1,0 +1,24 @@
+<template>
+  <style>
+    *{box-sizing:border-box}#f7{width:1920px;height:1080px;overflow:hidden;color:#f4f6fb;font-family:Inter,-apple-system,sans-serif}.scene{position:absolute;inset:0;background:#05070b;overflow:hidden}.grid{position:absolute;inset:0;background-image:linear-gradient(#2a314044 1px,transparent 1px),linear-gradient(90deg,#2a314044 1px,transparent 1px);background-size:96px 96px;opacity:.42}
+    .meta{position:absolute;top:66px;font:500 20px 'JetBrains Mono',monospace;letter-spacing:.13em;color:#9aa3b2}.m1{left:104px}.m2{right:104px}.traces{position:absolute;left:0;right:0;top:460px;height:4px}.trace{position:absolute;top:0;height:4px;background:#8b7cf6}.l{left:0;width:50%;transform-origin:right}.r{right:0;width:50%;transform-origin:left}.v{left:50%;top:-330px;width:4px;height:330px;transform-origin:bottom}
+    .lockup{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:70px}.word{font:400 178px/.95 Georgia,serif;letter-spacing:-.055em}.word span{display:inline-block}.tag{margin-top:30px;font:500 30px Inter,sans-serif;color:#9aa3b2}.tag b{font-weight:600;color:#c0b8ff}.cta{margin-top:58px;display:flex;align-items:center;gap:24px}.open{padding:16px 24px;border:2px solid #6ee7a8;border-radius:999px;color:#6ee7a8;font:700 19px 'JetBrains Mono',monospace;letter-spacing:.1em}.url{font:600 21px 'JetBrains Mono',monospace;color:#f4f6fb}.dot{width:8px;height:8px;border-radius:50%;background:#8b7cf6}.foot{position:absolute;left:104px;right:104px;bottom:70px;display:flex;justify-content:space-between;font:500 17px 'JetBrains Mono',monospace;color:#9aa3b2;letter-spacing:.1em}
+  </style>
+  <div data-hf-id="hf-okvd" id="f7" data-composition-id="f7" data-start="0" data-duration="5.165" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-7bpj" id="f7-scene" class="clip scene" data-start="0" data-duration="5.165" data-track-index="1">
+      <div data-hf-id="hf-kxq8" class="grid"></div><div data-hf-id="hf-vtpr" class="meta m1">07 / DEEPDOG</div><div data-hf-id="hf-ksyd" class="meta m2">VISIBLE · RESUMABLE · AUDITABLE</div><div data-hf-id="hf-gugi" class="traces"><div data-hf-id="hf-6fpj" class="trace l"></div><div data-hf-id="hf-0uop" class="trace r"></div><div data-hf-id="hf-m131" class="trace v"></div></div>
+      <div data-hf-id="hf-6jvi" class="lockup"><div data-hf-id="hf-01wz" class="word" aria-label="deepdog"><span data-hf-id="hf-xifz">d</span><span data-hf-id="hf-xwr0">e</span><span data-hf-id="hf-pn38">e</span><span data-hf-id="hf-sqrn">p</span><span data-hf-id="hf-3h27">d</span><span data-hf-id="hf-txoq">o</span><span data-hf-id="hf-x44y">g</span></div><div data-hf-id="hf-k52j" class="tag">Project management for <b data-hf-id="hf-3kr6">human + agent teams.</b></div><div data-hf-id="hf-apeu" class="cta"><div data-hf-id="hf-oa65" class="open">OPEN SOURCE</div><div data-hf-id="hf-lu65" class="dot"></div><div data-hf-id="hf-usjc" class="url">github.com/deepdog</div></div></div>
+      <div data-hf-id="hf-mlgk" class="foot"><span data-hf-id="hf-ideq">deepdog · lowercase by design</span><span data-hf-id="hf-fgh2">BUILD THE MANAGEMENT LAYER</span></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+    tl.fromTo("#f7 .trace.l,#f7 .trace.r",{scaleX:0},{scaleX:1,duration:.75,stagger:.1,ease:"power3.inOut"},.15);
+    tl.fromTo("#f7 .trace.v",{scaleY:0},{scaleY:1,duration:.65,ease:"power3.out"},.4);
+    tl.fromTo("#f7 .word span",{opacity:0,y:90,rotationX:-55},{opacity:1,y:0,rotationX:0,duration:.5,stagger:.08,ease:"power4.out"},1.15);
+    tl.fromTo("#f7 .tag",{opacity:0,y:28},{opacity:1,y:0,duration:.45,ease:"power3.out"},2.35);
+    tl.fromTo("#f7 .cta>*",{opacity:0,x:-28},{opacity:1,x:0,duration:.4,stagger:.12,ease:"power3.out"},3.0);
+    tl.fromTo("#f7 .foot",{opacity:0},{opacity:1,duration:.5,ease:"power2.out"},4.05);
+    window.__timelines.f7=tl;
+  </script>
+</template>

@@ -1,0 +1,26 @@
+deepdog
+
+Project management for human + agent teams.
+
+deepdog is the management layer and control tower for mixed human and coding-agent teams. Humans and agents share issues as the same work object. Agent runs follow a visible lifecycle: enqueue, claim, start, then complete or fail. Progress is reported in real time; failures are not silent.
+
+For repeated work, a task can resume the prior session and working directory. Reusable skills let practices taught once become available to the team. Runtime, Squad, and Observer provide complementary global views of execution capacity, mixed teams, and the user’s own local AI-client sessions.
+
+Execution happens locally on the user’s machine or owned cloud. deepdog is open source, auditable, and self-hostable.
+
+Required story:
+1. As agents multiply, manually watching terminals stops scaling.
+2. Humans and agents share issues: assign, comment, and advance work in one place.
+3. enqueue → claim → start → complete / fail, with real-time progress and session resumption.
+4. Day 1: teach one reusable skill. Day 30: the team reuses deployment, testing, and review practices.
+5. Runtime + Squad + Observer form a global operational view.
+6. Local execution and open source establish trust.
+7. CTA: deepdog · Open source.
+
+Factual constraints:
+- Always write deepdog in lowercase.
+- Never use BIOS or historical internal names.
+- Do not claim cascading accountability.
+- Do not claim per-agent permission or resource boundaries.
+- Do not fabricate metrics, customers, endorsements, real UI screenshots, or unsupported guarantees.
+- Observer means observing and preserving the user’s own local AI-client work context, never employee surveillance.

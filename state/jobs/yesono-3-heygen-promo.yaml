@@ -1,0 +1,19 @@
+job_id: yesono-3-heygen-promo
+workflow: product-promo
+source:
+  type: script
+  subject: "YesONO 3.0 B2B 交易所操作系统宣传片"
+  refs:
+    - episodes/res/doc/yesono-3-26-b2b-minimax-script.md
+output:
+  duration_seconds: 165
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: hyperframes
+review_gates:
+  script: approved
+  storyboard: approved
+  final_render: approved

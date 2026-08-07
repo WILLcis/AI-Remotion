@@ -1,0 +1,19 @@
+job_id: ai-remotion-intro-avatar-zh
+workflow: auto
+source:
+  type: topic
+  subject: 数字人口播介绍 AI-Remotion 仓库
+  refs: []
+output:
+  duration_seconds: 30
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: digital-human
+  provider: heygen
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

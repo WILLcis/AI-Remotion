@@ -1,0 +1,34 @@
+{
+  "job_id": "yesono_promo_cool_v2_6x6",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": true,
+  "segments": [
+    {
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/yesono_promo_cool_v2_6x6/seg_00.mp4",
+      "seconds_request": 6
+    },
+    {
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/yesono_promo_cool_v2_6x6/seg_01.mp4",
+      "seconds_request": 6
+    },
+    {
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/yesono_promo_cool_v2_6x6/seg_02.mp4",
+      "seconds_request": 6
+    },
+    {
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/yesono_promo_cool_v2_6x6/seg_03.mp4",
+      "seconds_request": 6
+    },
+    {
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/yesono_promo_cool_v2_6x6/seg_04.mp4",
+      "seconds_request": 6
+    },
+    {
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/yesono_promo_cool_v2_6x6/seg_05.mp4",
+      "seconds_request": 6
+    }
+  ],
+  "output": "/home/cornerstone/ComfyUI-H3/output/stitched/yesono_promo_cool_v2_6x6.mp4"
+}

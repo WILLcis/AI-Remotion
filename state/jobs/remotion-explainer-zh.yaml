@@ -1,0 +1,18 @@
+job_id: remotion-explainer-zh
+workflow: auto
+source:
+  type: topic
+  subject: "普通人怎么理解 Remotion"
+  refs: []
+output:
+  duration_seconds: 30
+  aspect_ratio: "16:9"
+  language: zh
+presenter:
+  mode: none
+render:
+  engine: auto
+review_gates:
+  script: pending
+  storyboard: pending
+  final_render: pending

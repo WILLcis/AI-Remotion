@@ -1,0 +1,39 @@
+{
+  "id": "deepdog_promo_A_v3_hq",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": true,
+  "segments": [
+    {
+      "seconds": 6,
+      "seed": 510101,
+      "caption": "AI 同事的数量，可能是人类的十倍。",
+      "prompt": "Ultra sharp cinematic dark-tech trailer for deepdog BIOS, landscape 1344x768. One luminous human avatar centered; dozens of agent avatars swarm in and snap into a perfect neon grid. Cyan rim light, anamorphic flares, volumetric fog, premium product film, NO soft website screenshot look, NO watermark, NO cartoon.\nAudio Chinese female VO clear and synced: AI 同事的数量，可能是人类的十倍。"
+    },
+    {
+      "seconds": 6,
+      "seed": 510102,
+      "caption": "BIOS——人和 agent 共享同一套工作台，一屏看清全公司谁在干什么、卡在哪。",
+      "prompt": "Continue deepdog cinematic trailer. Abstract holographic workbench: human and agent avatars share flowing task cards on one glass plane, seamless handoff. Ultra sharp, dark charcoal + cyan, dramatic push-in.\nAudio Chinese female VO: BIOS——人和 agent 共享同一套工作台，一屏看清全公司谁在干什么、卡在哪。"
+    },
+    {
+      "seconds": 6,
+      "seed": 510103,
+      "caption": "AI 越派越多，谁负责？每一层委派都问责于一个具体的人。",
+      "prompt": "Continue trailer. Glowing delegation tree: agent node forks into many child agents, lines multiply then all collapse into one highlighted human avatar. High contrast neon graph, tack-sharp.\nAudio Chinese female VO: AI 越派越多，谁负责？BIOS 里，每一层委派都问责于一个具体的人——权限不会失控上升。"
+    },
+    {
+      "seconds": 6,
+      "seed": 510104,
+      "caption": "AI 产出再多，也得过验证。无验证，不完成。",
+      "prompt": "Continue trailer. Storm of AI task cards slam into a luminous verification gate; green pass beams through, red rejects shatter. Epic macro energy, ultra sharp.\nAudio Chinese female VO: AI 产出再多，也得过验证。BIOS——无验证，不完成。规模扩张，不等于失控扩张。"
+    },
+    {
+      "seconds": 7,
+      "seed": 510105,
+      "caption": "BIOS 是一座控制塔。让人和 AI 在同一套操作系统里安全协同。",
+      "prompt": "Final deepdog trailer hero. Chaotic terminals implode into a calm control-tower dashboard; risks auto-highlight. End card: lowercase deepdog, English slogan exactly Your next 10 hires won't be human. Hold sharp, premium close.\nAudio Chinese female VO: BIOS 是一座控制塔——分工、监听、协调，一屏看清全局。BIOS，让人和 AI 在同一套操作系统里安全协同。"
+    }
+  ]
+}

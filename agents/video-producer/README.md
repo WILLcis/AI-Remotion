@@ -1,22 +1,31 @@
 # Portable Video Producer Package
 
-Use this directory when handing AI-Remotion video work to any Agent framework.
+Hand AI-Remotion video work to any Agent framework. **Humans talk; the Agent runs the CLI.**
 
-1. Give the Agent `AGENT.md` and a Video Job YAML/JSON file.
-2. The Agent enables `FLAGS.VIDEO_AGENT_PLATFORM` for the route command.
-3. It runs `npm run video:route -- --job <job-file>`.
-4. It reads the route-selected profile using `SPECIALISTS.md`.
-5. It stops at pending review gates and returns the result JSON.
+## Default: plain-language request
 
-No global installation, symlink, host-specific plugin, or cloud account is required for this package. The host only needs repository read access and permission to run the local npm command.
+1. Point the Agent at `agents/START_HERE.md` and `AGENT.md`.
+2. The Agent asks only for missing required fields, drafts a Job, waits for a one-line confirm, writes `state/jobs/<id>.yaml`, routes with the platform flag, and runs the mapped specialist.
+3. It stops at pending review gates and returns the result JSON.
+
+Do not ask the user to run `video:intake` or `video:route`. Intake helpers under `agents/video-job-intake/` are **internal** Agent steps.
+
+## Job-file shortcut
+
+If a Job YAML/JSON already exists:
+
+1. Give the Agent `AGENT.md` and the Job path.
+2. It enables `FLAGS.VIDEO_AGENT_PLATFORM`, runs `npm run video:route -- --job <job-file>`, reads `SPECIALISTS.md`, and stops at pending gates.
+
+No global installation, symlink, host plugin, or cloud account is required. The host needs repository access and permission to run local npm.
 
 ## Host adapters
 
-A host adapter may expose this entry point through its own discovery mechanism, but must remain thin:
+Keep adapters thin:
 
-- point to `agents/video-producer/AGENT.md`;
+- point to `agents/video-producer/AGENT.md` (and `agents/START_HERE.md` for humans);
 - preserve `npm run video:route` as the routing authority;
 - preserve the feature flag and approval rules;
 - never duplicate all specialist profiles into an adapter format.
 
-The existing `.devin/skills/video-producer/` directory is one such discovery adapter. It does not replace this package.
+`.devin/skills/video-producer/` is one discovery adapter. It does not replace this package.

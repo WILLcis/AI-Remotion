@@ -1,0 +1,23 @@
+{
+  "status": "final",
+  "language": "zh-CN",
+  "timing_source": "measured CosyVoice scene audio, phrase groups aligned within each scene",
+  "groups": [
+    {"id":"cap-01a","start":0.15,"end":4.12,"text":"智能体越来越多，真正稀缺的，不再是执行力，而是管理。"},
+    {"id":"cap-01b","start":4.12,"end":7.9,"text":"逐个盯终端，团队越快，你越看不清谁在做什么、进展到哪一步。"},
+    {"id":"cap-02a","start":8.316,"end":11.851,"text":"deepdog 把人和智能体放进同一套工作对象。"},
+    {"id":"cap-02b","start":11.851,"end":16.671,"text":"一个 issue，可以分配给人，也可以分配给智能体；评论、状态和进度，都留在同一条时间线上。"},
+    {"id":"cap-03a","start":17.084,"end":22.444,"text":"每次执行都有完整生命周期：入队、认领、启动，最后完成或失败。"},
+    {"id":"cap-03b","start":22.444,"end":27.8,"text":"进度实时回到时间线；中断后，还能沿着保存的会话和工作目录继续。"},
+    {"id":"cap-03c","start":27.8,"end":28.6,"text":"没有静默失败。"},
+    {"id":"cap-04a","start":29.013,"end":33.893,"text":"今天教会一个智能体部署。把方法沉淀成可复用 skill。"},
+    {"id":"cap-04b","start":33.893,"end":38.573,"text":"到了第三十天，部署、测试、代码审查，不必再从零解释；团队在复用同一套实践。"},
+    {"id":"cap-05a","start":38.984,"end":44.648,"text":"你不需要逐个追着智能体跑。Runtime 看执行机器和在线状态。"},
+    {"id":"cap-05b","start":44.648,"end":47.3,"text":"Squad 看人和智能体的编队与当前工作。"},
+    {"id":"cap-05c","start":47.3,"end":51.44,"text":"Observer 留下你自己本地 AI 会话的事件和上下文。"},
+    {"id":"cap-06a","start":51.849,"end":57,"text":"执行发生在你自己的机器，或你拥有的云环境。deepdog 负责协调任务状态和事件。"},
+    {"id":"cap-06b","start":57,"end":61.43,"text":"它开源、可审计，也可以自托管。控制来自可见，而不是把代码交出去。"},
+    {"id":"cap-07a","start":61.839,"end":64.7,"text":"让更多智能体加入团队之前，先让工作可见、可续、可追溯。"},
+    {"id":"cap-07b","start":64.7,"end":66.7,"text":"deepdog，面向人和智能体团队的项目管理。开源。"}
+  ]
+}

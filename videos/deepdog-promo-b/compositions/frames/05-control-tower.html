@@ -1,0 +1,36 @@
+<template>
+  <style>
+    *{box-sizing:border-box}#f5{width:1920px;height:1080px;overflow:hidden;color:#f4f6fb;font-family:Inter,-apple-system,sans-serif}.scene{position:absolute;inset:0;background:#05070b;overflow:hidden}.world{position:absolute;inset:0;transform-origin:center}.meta{position:absolute;top:66px;font:500 20px 'JetBrains Mono',monospace;letter-spacing:.13em;color:#9aa3b2}.m1{left:104px}.m2{right:104px}
+    .headline{position:absolute;left:104px;top:138px;font:400 78px Georgia,serif}.headline span{color:#8b7cf6}.toprail{position:absolute;right:104px;top:162px;font:600 19px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#c0b8ff}
+    .panels{position:absolute;left:104px;right:104px;top:310px;height:520px;display:grid;grid-template-columns:1.05fr 1fr 1.15fr;gap:24px}.panel{border:2px solid #2a3140;border-radius:22px;background:#0d1119;padding:30px;overflow:hidden;box-shadow:0 26px 80px #0008}.panel h3{font:600 21px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#c0b8ff;margin-bottom:28px}.machine,.member,.event{border:1px solid #2a3140;border-radius:13px;background:#151a24;margin-bottom:12px;padding:16px 18px;display:flex;align-items:center;gap:14px;font:500 17px 'JetBrains Mono',monospace}.dot{width:13px;height:13px;border-radius:50%;background:#6ee7a8;box-shadow:0 0 18px #6ee7a888}.dot.idle{background:#9aa3b2;box-shadow:none}.bar{height:7px;background:#2a3140;border-radius:8px;flex:1;overflow:hidden}.bar i{display:block;height:100%;background:#8b7cf6;transform-origin:left}.member .avatar{width:38px;height:38px;border-radius:50%;border:2px solid #8b7cf6;display:grid;place-items:center;color:#c0b8ff}.member b{font-size:14px;color:#9aa3b2;margin-left:auto}.event{display:block;font-size:15px;line-height:1.5}.event strong{color:#6ee7a8}.event code{color:#c0b8ff}
+    .macro{position:absolute;left:212px;top:430px;width:420px;height:210px;border:3px solid #8b7cf6;border-radius:24px;background:#0d1119;z-index:8;padding:34px}.macro small{font:600 18px 'JetBrains Mono',monospace;color:#9aa3b2}.heartbeat{display:flex;align-items:center;gap:22px;margin-top:34px;font:700 28px 'JetBrains Mono',monospace}.pulse{width:30px;height:30px;border-radius:50%;background:#6ee7a8;box-shadow:0 0 40px #6ee7a8}
+    .foot{position:absolute;left:104px;right:104px;bottom:188px;display:flex;justify-content:space-between;align-items:center}.foot strong{font:400 48px Georgia,serif}.foot span{font:600 18px 'JetBrains Mono',monospace;color:#9aa3b2}
+  </style>
+  <div data-hf-id="hf-mz6r" id="f5" data-composition-id="f5" data-start="0" data-duration="11" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-o97j" id="f5-scene" class="clip scene" data-start="0" data-duration="11" data-track-index="1">
+      <div data-hf-id="hf-of8m" class="world" id="f5-world"><div data-hf-id="hf-0uul" class="meta m1">05 / CONTROL TOWER</div><div data-hf-id="hf-s95r" class="meta m2">CONCEPTUAL VIEW</div><div data-hf-id="hf-n46l" class="headline">一屏看清<span data-hf-id="hf-6wc1">全局</span></div><div data-hf-id="hf-8ov9" class="toprail">RUNTIME · SQUAD · OBSERVER</div>
+        <div data-hf-id="hf-86bp" class="panels">
+          <div data-hf-id="hf-epv2" class="panel runtime"><h3 data-hf-id="hf-vh7c">RUNTIME</h3><div data-hf-id="hf-wi0g" class="machine"><span data-hf-id="hf-9gry" class="dot"></span>local-mac-01<div data-hf-id="hf-ufsv" class="bar"><i data-hf-id="hf-vowx" style="width:72%"></i></div></div><div data-hf-id="hf-4vl5" class="machine"><span data-hf-id="hf-zcc2" class="dot"></span>owned-cloud-02<div data-hf-id="hf-c51b" class="bar"><i data-hf-id="hf-bgb0" style="width:48%"></i></div></div><div data-hf-id="hf-hunp" class="machine"><span data-hf-id="hf-ryo8" class="dot idle"></span>local-linux-03<div data-hf-id="hf-bqqa" class="bar"><i data-hf-id="hf-muei" style="width:8%"></i></div></div></div>
+          <div data-hf-id="hf-7p1o" class="panel squad"><h3 data-hf-id="hf-2hpa">SQUAD</h3><div data-hf-id="hf-4dkd" class="member"><div data-hf-id="hf-bvx5" class="avatar">H</div>Lin · HUMAN<b data-hf-id="hf-pd3c">ACME-37</b></div><div data-hf-id="hf-2li6" class="member"><div data-hf-id="hf-rfzx" class="avatar">A1</div>Agent 01<b data-hf-id="hf-zxsc">ACME-42</b></div><div data-hf-id="hf-2zt7" class="member"><div data-hf-id="hf-smx0" class="avatar">A2</div>Agent 02<b data-hf-id="hf-8ucz">IDLE</b></div></div>
+          <div data-hf-id="hf-e23o" class="panel observer"><h3 data-hf-id="hf-fvx1">OBSERVER · LOCAL SESSIONS</h3><div data-hf-id="hf-0bgl" class="event"><strong data-hf-id="hf-ms1d">session_start</strong> · cursor<br data-hf-id="hf-x5px"><code data-hf-id="hf-lq6c">session #184</code></div><div data-hf-id="hf-aquy" class="event"><strong data-hf-id="hf-bao8">tool_use</strong> · read_file<br data-hf-id="hf-rsrt"><code data-hf-id="hf-h2pz">src/runtime/worker.ts</code></div><div data-hf-id="hf-3dul" class="event"><strong data-hf-id="hf-q0gh">message</strong> · local context preserved<br data-hf-id="hf-szow"><code data-hf-id="hf-2rox">seq 028</code></div></div>
+        </div>
+        <div data-hf-id="hf-mlgk" class="foot"><strong data-hf-id="hf-hm0a">不是逐个追着跑，是看见系统怎么跑。</strong><span data-hf-id="hf-16wm">VISIBLE · RESUMABLE · AUDITABLE</span></div>
+      </div>
+      <div data-hf-id="hf-bo1y" class="macro" id="f5-macro"><small data-hf-id="hf-78ag">RUNTIME HEARTBEAT</small><div data-hf-id="hf-40v7" class="heartbeat"><span data-hf-id="hf-a8ns" class="pulse"></span>online · task active</div></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+    tl.fromTo("#f5-macro",{opacity:0,scale:.88},{opacity:1,scale:1,duration:.75,ease:"power3.out"},.2);
+    tl.fromTo("#f5 .pulse",{scale:.65,opacity:.55},{scale:1.25,opacity:1,duration:.55,repeat:3,yoyo:true,ease:"sine.inOut"},.8);
+    tl.fromTo("#f5-world",{scale:3.2,x:570,y:90},{scale:1,x:0,y:0,duration:1.15,ease:"power4.out"},2.6);
+    tl.to("#f5-macro",{opacity:0,scale:.7,duration:.35,ease:"power2.in"},2.7);
+    tl.fromTo("#f5 .headline,#f5 .toprail",{opacity:0,y:-30},{opacity:1,y:0,duration:.55,stagger:.15,ease:"power3.out"},3.7);
+    tl.fromTo("#f5 .panel",{opacity:0,y:60},{opacity:1,y:0,duration:.7,stagger:.45,ease:"power3.out"},4.4);
+    tl.fromTo("#f5 .machine",{opacity:0,x:-25},{opacity:1,x:0,duration:.4,stagger:.25,ease:"power3.out"},5.0);
+    tl.fromTo("#f5 .member",{opacity:0,y:25},{opacity:1,y:0,duration:.4,stagger:.3,ease:"power3.out"},6.3);
+    tl.fromTo("#f5 .event",{opacity:0,x:25},{opacity:1,x:0,duration:.4,stagger:.35,ease:"power3.out"},7.5);
+    tl.fromTo("#f5 .foot",{opacity:0,y:30},{opacity:1,y:0,duration:.65,ease:"power3.out"},9.0);
+    window.__timelines.f5=tl;
+  </script>
+</template>

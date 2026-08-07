@@ -114,10 +114,11 @@ FLAG_video_agent_platform='{"enabled":true}' \
 | `AGENTS.md` | 仓库总纪律 |
 | `docs/VIDEO_AGENT_PLATFORM_PROJECT_BRIEF.md` | **本说明** |
 | `HANDOFF_PACKAGE.md` | **接力包**（状态、未提交面、下一步） |
-| `agents/video-producer/AGENT.md` | **任意 Agent 的中立入口** |
-| `agents/video-producer/SPECIALISTS.md` | 11 specialist 的 route-selected profile map |
+| `agents/START_HERE.md` | **人对 Agent 说话的入口（先读这个）** |
+| `agents/video-producer/AGENT.md` | 任意 Agent 的中立执行契约 |
+| `agents/video-producer/SPECIALISTS.md` | specialist route-selected profile map |
 | `docs/VIDEO_AGENT_PLATFORM_AGENT_USAGE.md` | 宿主接入与执行手册 |
-| `docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md` | 非开发用户 10 步 |
+| `docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md` | 5 步快速开始 |
 | `docs/VIDEO_AGENT_PLATFORM_ARCHITECTURE.md` | 架构 |
 | `docs/VIDEO_AGENT_PLATFORM_DEVELOPMENT_PLAN.md` | 总开发计划 |
 | `docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md` | P6 细节 |

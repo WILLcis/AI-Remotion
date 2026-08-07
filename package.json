@@ -36,6 +36,7 @@
     "validate:sample": "npm run episode:validate -- --episode sample",
     "verify:harness": "bash tools/verify.sh",
     "video:route": "tsx src/cli/routeVideoJob.ts",
+    "video:intake": "tsx src/cli/intakeVideoJob.ts",
     "render:sample": "remotion render src/remotion/index.ts ExplainerVideo episodes/sample/out/final.mp4 --props=episodes/sample/render-plan.json"
   },
   "sideEffects": [

@@ -25,11 +25,24 @@ episodes/res/video/
 public/**/*.mp4
 videos/*/audio/*.mp3
 videos/*/audio/*.wav
+videos/**/audio/**/*.mp3
+videos/**/audio/**/*.wav
+videos/**/assets/voice/
+videos/**/*.pcm
+videos/**/*.mp4
+videos/**/*.mov
+videos/**/*.webm
 videos/*/.hyperframes/frame-packets/
+videos/*/.thumbnails/
+videos/*/.waveform-cache/
 videos/*/renders/
 videos/*/snapshots/
+videos/**/cosyvoice/
 # Local P5 recut trial evidence; generated media and copies are not repository artifacts.
 videos/heygen-out-recut-trial/
+heygen-video-log.jsonl
+videos/heygen_batch_done.json
+*.err
 
 state/tasks/*.tmp.*
 state/_local/

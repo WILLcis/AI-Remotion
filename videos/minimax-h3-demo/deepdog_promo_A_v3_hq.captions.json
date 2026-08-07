@@ -1,0 +1,50 @@
+{
+  "cues": [
+    {
+      "index": 0,
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/deepdog_promo_A_v3_hq/seg_00.mp4",
+      "seconds_request": 6,
+      "duration": 6.583333,
+      "start": 0.0,
+      "end": 6.583,
+      "caption": "AI 同事的数量，可能是人类的十倍。"
+    },
+    {
+      "index": 1,
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/deepdog_promo_A_v3_hq/seg_01.mp4",
+      "seconds_request": 6,
+      "duration": 6.583333,
+      "start": 6.583,
+      "end": 13.167,
+      "caption": "BIOS——人和 agent 共享同一套工作台，一屏看清全公司谁在干什么、卡在哪。"
+    },
+    {
+      "index": 2,
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/deepdog_promo_A_v3_hq/seg_02.mp4",
+      "seconds_request": 6,
+      "duration": 6.583333,
+      "start": 13.167,
+      "end": 19.75,
+      "caption": "AI 越派越多，谁负责？每一层委派都问责于一个具体的人。"
+    },
+    {
+      "index": 3,
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/deepdog_promo_A_v3_hq/seg_03.mp4",
+      "seconds_request": 6,
+      "duration": 6.583333,
+      "start": 19.75,
+      "end": 26.333,
+      "caption": "AI 产出再多，也得过验证。无验证，不完成。"
+    },
+    {
+      "index": 4,
+      "path": "/home/cornerstone/ComfyUI-H3/output/segments/deepdog_promo_A_v3_hq/seg_04.mp4",
+      "seconds_request": 7,
+      "duration": 7.292,
+      "start": 26.333,
+      "end": 33.625,
+      "caption": "BIOS 是一座控制塔。让人和 AI 在同一套操作系统里安全协同。"
+    }
+  ],
+  "total_duration": 33.625
+}

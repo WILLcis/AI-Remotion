@@ -4,7 +4,15 @@ This repository follows the AI-First Coding Loop harness from:
 
 https://github.com/WILLcis/AI--First-Coding-Loop-Codex
 
-Any coding agent entering this repo must read this file first, then read `.agents/skills/agent-coding-discipline/SKILL.md`, then load any task-specific skill that applies.
+Any coding agent entering this repo must read this file first, then read:
+
+1. `.agents/skills/agent-coding-discipline/SKILL.md`
+2. `docs/HeyGen_skills.md` — mandatory HeyGen agent install / transport / skills contract
+3. `docs/HeyGen.md` — mandatory HeyGen developer surface index (auth ladder, Video Agent, CLI)
+
+Then load any task-specific skill that applies (including installed `heygen-video` / `heygen-avatar` / `heygen-translate` when the work involves HeyGen).
+
+**HeyGen production rule:** for any new HeyGen video, follow `docs/HeyGen_skills.md` + `docs/HeyGen.md` and the official `heygen-video` skill. Prefer CLI/skills over raw `curl` to `api.heygen.com`. Do not invent v1/v2 endpoints.
 
 ## Project Goal
 
@@ -135,6 +143,8 @@ npm run episode:render-plan -- --episode sample
 npm run episode:qa -- --episode sample --render-frames
 npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
+npm run video:intake -- --request tests/fixtures/video-intake/product-promo.json
+npm run video:route -- --job tests/fixtures/video-jobs/product-promo.yaml
 npm run validate:sample
 npm test
 npm run render:sample

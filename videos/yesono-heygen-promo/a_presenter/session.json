@@ -1,0 +1,43 @@
+{
+  "created_at": 1785995035,
+  "messages": [
+    {
+      "content": "Your YesONO 3.0 product promo is ready! It features a professional presenter delivering the pitch in Mandarin, integrated with the dark \"Digital Grid\" fintech visuals we planned.\n\nTake a look at the final video:",
+      "created_at": 1785995648,
+      "resource_ids": [
+        "video_pqltlm"
+      ],
+      "role": "model",
+      "type": "resource"
+    },
+    {
+      "content": "I've designed and submitted your institutional promo for YesONO 3.0. The video features a professional presenter in a high-tech studio environment, paired with \"Digital Grid\" motion graphics and abstract trading infrastructure B-roll.\n\nThe Mandarin Chinese narration highlights the Rust matching engine, multi-tenant market support, and institutional-grade risk controls. The final render is being processed now—take a look!",
+      "created_at": 1785995461,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Great! The plan is set. Now I'll generate the motion graphics, fintech visuals, and background music to match the \"Digital Grid\" style. Then I'll build the scenes and assemble the final video.",
+      "created_at": 1785995077,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "I'm on it! I'll start by finding a professional presenter for your fintech pitch and setting up the \"Digital Grid\" brand style you described. Then, I'll draft the Mandarin Chinese script and scene plan for YesONO 3.0.",
+      "created_at": 1785995046,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Create a ~40 second Mandarin Chinese product promo for YesONO 3.0, landscape 16:9.\n\nFormat: Presenter-led B2B pitch. A professional selected presenter speaks to camera in a modern fintech studio, with motion-graphics overlays and AI-generated trading infrastructure B-roll between talking beats.\n\nAudience: partners, institutions, market makers, and platform operators who want to launch prediction markets / event trading without building exchange infrastructure from scratch.\n\nCore message to convey in Chinese narration:\n- Hook: 预测市场和事件金融正在成为新一代交易入口，但真正难的不是做一个页面，而是整套交易基础设施。\n- Problem: 市场创建、准入风控、撮合、账本、链上资金托管、清算和做市，缺一不可。\n- Solution: YesONO 3.0 是面向预测市场与事件金融的模块化交易操作系统，不只是单一交易应用。\n- Proof points: 自研 Rust 撮合引擎；链下高性能 CLOB；链下账本 + 链上资金托管；多层风控准入；Outcome 与 CFD 双产品域；多租户共享市场与白标专属市场；可审计可扩展。\n- CTA: 让合作伙伴专注市场运营与流动性建设，而不是从零搭建交易底座。一句话：YesONO 3.0，为预测市场打造可信、高性能、可扩展的交易基础设施。\n\nTone: confident, precise, institutional, conversational Mandarin — like a senior product lead pitching partners, not a consumer ad.\n\nThis script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.\n\nCRITICAL ON-SCREEN TEXT (exact):\n- YesONO 3.0\n- Prediction Markets OS\n- Rust Matching Engine\n- Off-chain Ledger + On-chain Custody\n- Multi-tenant Markets\n- Risk · Clearing · Market Making\n\nMedia guidance:\n- Use the selected presenter for A-roll credibility moments.\n- Use Motion Graphics for architecture layers, order-book flows, risk gates, and keyword callouts.\n- Use AI-generated visuals for abstract trading rails, vaults, and market network metaphors.\n- Prefer dark fintech UI aesthetics over generic office stock.\n\nSTYLE — DIGITAL GRID:\nMonospaced / clean sans type. Dark #0a0a0a with cyan #00E5FF and amber #FFB300 accents.\nPixel-grid overlays, terminal/fintech dashboard language, clean wipe transitions.\nKeep branding premium and restrained — no carnival colors, no meme energy.",
+      "created_at": 1785995036,
+      "role": "user",
+      "type": "text"
+    }
+  ],
+  "progress": 100,
+  "session_id": "0f3ba0dc59d34994b07b2c096925cb8b",
+  "status": "completed",
+  "title": "YesONO 3.0 Promo",
+  "video_id": "6ef6abc4201245a1bad883f7a3de9864"
+}

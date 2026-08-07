@@ -1,0 +1,23 @@
+{
+  "tts_provider": "cosyvoice",
+  "voice_id": "中文男",
+  "voice_speed": 1.15,
+  "bgm": null,
+  "bgm_pending": false,
+  "bgm_provider": null,
+  "bgm_pid": null,
+  "bgm_log": null,
+  "bgm_mode": null,
+  "bgm_target_duration_s": null,
+  "bgm_seed_duration_s": null,
+  "bgm_loop_count": null,
+  "voices": [
+    {
+      "path": "audio/cosyvoice/voiceover.wav",
+      "segments": "audio/cosyvoice/timings.json",
+      "captions": "audio/cosyvoice/captions.srt"
+    }
+  ],
+  "sfx": [],
+  "total_duration_s": 66.853499
+}

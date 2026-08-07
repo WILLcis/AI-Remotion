@@ -1,0 +1,20 @@
+{
+  "done": {
+    "a_presenter": true,
+    "b_faceless": true
+  },
+  "jobs": {
+    "a_presenter": {
+      "created_at": 1785995036,
+      "session_id": "0f3ba0dc59d34994b07b2c096925cb8b",
+      "status": "generating",
+      "video_id": "6ef6abc4201245a1bad883f7a3de9864"
+    },
+    "b_faceless": {
+      "created_at": 1785995038,
+      "session_id": "8e4b9dc2a4fe40ecac6b17b486479bbb",
+      "status": "generating",
+      "video_id": "0401adff5b174f0bb0ba152a2f76f5f7"
+    }
+  }
+}

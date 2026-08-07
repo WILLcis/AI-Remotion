@@ -1,0 +1,49 @@
+{
+  "created_at": 1786000127,
+  "messages": [
+    {
+      "content": "Your YesONO 3.0 institutional promo is ready! \n\nI've crafted a professional Mandarin-led pitch featuring the \"Digital Grid\" aesthetic. The video balances expert presenter moments with high-tech motion graphics that visualize your modular architecture, matching engine, and multi-tenant market structure.\n\nTake a look at the final result:",
+      "created_at": 1786000748,
+      "resource_ids": [
+        "video_1j06wd"
+      ],
+      "role": "model",
+      "type": "resource"
+    },
+    {
+      "content": "I have successfully assembled the scenes and submitted your video for generation! The high-performance B2B product promo for YesONO 3.0 is now rendering. \n\nI'll notify you here the second it's complete.",
+      "created_at": 1786000348,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "All visuals are ready! Assembling the timeline with the presenter A-roll and high-tech digital grid B-roll scenes...",
+      "created_at": 1786000328,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Now let me generate the \"Digital Grid\" motion graphics and high-tech visuals for your promo. I'm also selecting the perfect monospaced font and fintech background track.",
+      "created_at": 1786000168,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "I'm on it! I'll find a professional fintech presenter and build a high-performance Mandarin promo for YesONO 3.0 using the \"Digital Grid\" style you've described.",
+      "created_at": 1786000144,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Create a ~40 second Mandarin Chinese product promo for YesONO 3.0, landscape 16:9.\n\nFormat: Presenter-led B2B pitch. A professional selected presenter speaks to camera in a modern fintech studio, with motion-graphics overlays and AI-generated trading infrastructure B-roll between talking beats.\n\nAudience: partners, institutions, market makers, and platform operators who want to launch prediction markets / event trading without building exchange infrastructure from scratch.\n\nCore message to convey in Chinese narration:\n- Hook: 预测市场和事件金融正在成为新一代交易入口，但真正难的不是做一个页面，而是整套交易基础设施。\n- Problem: 市场创建、准入风控、撮合、账本、链上资金托管、清算和做市，缺一不可。\n- Solution: YesONO 3.0 是面向预测市场与事件金融的模块化交易操作系统，不只是单一交易应用。\n- Proof points: 自研 Rust 撮合引擎；链下高性能 CLOB；链下账本 + 链上资金托管；多层风控准入；Outcome 与 CFD 双产品域；多租户共享市场与白标专属市场；可审计可扩展。\n- CTA: 让合作伙伴专注市场运营与流动性建设，而不是从零搭建交易底座。一句话：YesONO 3.0，为预测市场打造可信、高性能、可扩展的交易基础设施。\n\nTone: confident, precise, institutional, conversational Mandarin — like a senior product lead pitching partners, not a consumer ad.\n\nThis script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.\n\nCRITICAL ON-SCREEN TEXT (exact):\n- YesONO 3.0\n- Prediction Markets OS\n- Rust Matching Engine\n- Off-chain Ledger + On-chain Custody\n- Multi-tenant Markets\n- Risk · Clearing · Market Making\n\nMedia guidance:\n- Use the selected presenter for A-roll credibility moments.\n- Use Motion Graphics for architecture layers, order-book flows, risk gates, and keyword callouts.\n- Use AI-generated visuals for abstract trading rails, vaults, and market network metaphors.\n- Prefer dark fintech UI aesthetics over generic office stock.\n\nSTYLE — DIGITAL GRID:\nMonospaced / clean sans type. Dark #0a0a0a with cyan #00E5FF and amber #FFB300 accents.\nPixel-grid overlays, terminal/fintech dashboard language, clean wipe transitions.\nKeep branding premium and restrained — no carnival colors, no meme energy.\n\n\nLANGUAGE / VOICE (CRITICAL):\nNarration language is Mandarin Chinese only (普通话).\nUse a native mainland Chinese speaking voice — clear, natural Chinese, no foreign accent, no Chinglish pronunciation, no English-accented Mandarin.\nAll spoken lines must be Chinese. On-screen English labels may remain as brand keywords.",
+      "created_at": 1786000128,
+      "role": "user",
+      "type": "text"
+    }
+  ],
+  "progress": 100,
+  "session_id": "e44662179efe4226854a471945a23a5b",
+  "status": "completed",
+  "title": "YesONO 3.0 Promo",
+  "video_id": "38ce6c2635454741aabe54d57140314b"
+}

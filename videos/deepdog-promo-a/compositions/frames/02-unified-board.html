@@ -1,0 +1,331 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: #05070b;
+      font-family: sans-serif;
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+    .ground {
+      background:
+        radial-gradient(circle at 78% 18%, rgba(139, 124, 255, 0.2), transparent 26%),
+        #f4f3ee;
+    }
+    .route-field {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(5, 7, 11, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5, 7, 11, 0.15) 1px, transparent 1px);
+      background-size: 96px 96px;
+      mask-image: radial-gradient(circle at center, black, transparent 76%);
+    }
+    .aperture {
+      position: absolute;
+      left: 842px;
+      top: 370px;
+      width: 236px;
+      height: 236px;
+      border: 2px solid #8b7cff;
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 28px rgba(139, 124, 255, 0.08),
+        0 0 0 58px rgba(139, 124, 255, 0.04);
+    }
+    .route {
+      position: absolute;
+      width: 520px;
+      height: 2px;
+      transform-origin: right center;
+      background: linear-gradient(90deg, transparent, #8b7cff);
+    }
+    .route.r1 { left: 338px; top: 390px; }
+    .route.r2 { left: 280px; top: 488px; }
+    .route.r3 { left: 338px; top: 586px; }
+    .route.r4 { left: 1064px; top: 390px; transform-origin: left center; background: linear-gradient(90deg, #8b7cff, transparent); }
+    .route.r5 { left: 1064px; top: 488px; transform-origin: left center; background: linear-gradient(90deg, #8b7cff, transparent); }
+    .route.r6 { left: 1064px; top: 586px; transform-origin: left center; background: linear-gradient(90deg, #8b7cff, transparent); }
+    .board {
+      position: absolute;
+      left: 72px;
+      top: 74px;
+      width: 1776px;
+      height: 766px;
+      overflow: hidden;
+      border: 1px solid rgba(5, 7, 11, 0.22);
+      border-radius: 14px;
+      background: rgba(244, 243, 238, 0.98);
+      box-shadow: 0 34px 100px rgba(5, 7, 11, 0.18);
+    }
+    .board-top {
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 38px;
+      border-bottom: 1px solid rgba(5, 7, 11, 0.14);
+    }
+    .wordmark {
+      font: 400 48px/1 serif;
+      letter-spacing: -0.04em;
+    }
+    .wordmark-meta {
+      margin-left: 18px;
+      color: #657082;
+      font: 600 16px/1 monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #657082;
+      font: 500 17px/1 monospace;
+    }
+    .live-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.12);
+    }
+    .board-body {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 662px;
+    }
+    .column {
+      min-width: 0;
+      padding: 28px;
+      border-right: 1px solid rgba(5, 7, 11, 0.1);
+    }
+    .column:last-child {
+      border-right: 0;
+    }
+    .column-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      color: #05070b;
+      font: 700 19px/1 monospace;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .column-count {
+      min-width: 34px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: rgba(5, 7, 11, 0.07);
+      text-align: center;
+      font: 600 15px/1 monospace;
+    }
+    .task {
+      position: relative;
+      min-height: 142px;
+      margin-bottom: 18px;
+      padding: 23px 24px 20px;
+      border: 1px solid rgba(5, 7, 11, 0.16);
+      border-radius: 10px;
+      background: #f4f3ee;
+      box-shadow: 0 6px 20px rgba(5, 7, 11, 0.06);
+    }
+    .task-id {
+      color: #657082;
+      font: 600 15px/1 monospace;
+      letter-spacing: 0.08em;
+    }
+    .task-title {
+      margin-top: 14px;
+      color: #05070b;
+      font: 600 24px/1.15 sans-serif;
+    }
+    .task-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 22px;
+    }
+    .assignee {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #05070b;
+      font: 600 16px/1 sans-serif;
+    }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #05070b;
+      color: #f4f3ee;
+      font: 700 12px/1 monospace;
+    }
+    .assignee.agent .avatar {
+      background: #8b7cff;
+      color: #05070b;
+    }
+    .state {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(139, 124, 255, 0.14);
+      color: #5b4ed8;
+      font: 700 13px/1 monospace;
+      text-transform: uppercase;
+    }
+    .state.done {
+      background: rgba(74, 222, 128, 0.15);
+      color: #18713e;
+    }
+    .progress-shell {
+      position: absolute;
+      left: 112px;
+      right: 112px;
+      top: 786px;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 28px;
+      border: 1px solid rgba(244, 243, 238, 0.16);
+      border-radius: 9px;
+      background: #151816;
+      color: #f4f3ee;
+      box-shadow: 0 18px 48px rgba(5, 7, 11, 0.22);
+    }
+    .progress-label {
+      flex: 0 0 190px;
+      color: #f4f3ee;
+      font: 600 16px/1 monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .progress-track {
+      height: 8px;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 8px;
+      background: rgba(244, 243, 238, 0.12);
+    }
+    .progress-fill {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform-origin: left center;
+      background: #4ade80;
+    }
+    .progress-state {
+      flex: 0 0 150px;
+      color: #4ade80;
+      font: 700 16px/1 monospace;
+      text-align: right;
+      text-transform: uppercase;
+    }
+    .frame-index {
+      position: absolute;
+      right: 82px;
+      top: 34px;
+      color: #606a7b;
+      font: 500 18px/1 monospace;
+    }
+  </style>
+
+  <div data-hf-id="hf-lz0a" id="root" data-composition-id="02-unified-board" data-start="0" data-duration="6.45" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-p5pm" id="f02-ground" class="clip ground" data-start="0" data-duration="6.45" data-track-index="0">
+      <div data-hf-id="hf-e725" class="route-field" data-layout-ignore=""></div>
+    </div>
+
+    <div data-hf-id="hf-uh5w" id="f02-content" class="clip" data-start="0" data-duration="6.45" data-track-index="1">
+      <div data-hf-id="hf-ci77" id="f02-routes" data-layout-ignore="">
+        <span data-hf-id="hf-rvoj" class="route r1"></span><span data-hf-id="hf-j7so" class="route r2"></span><span data-hf-id="hf-jzgh" class="route r3"></span>
+        <span data-hf-id="hf-93yu" class="route r4"></span><span data-hf-id="hf-f9on" class="route r5"></span><span data-hf-id="hf-4e70" class="route r6"></span>
+        <span data-hf-id="hf-94sh" class="aperture"></span>
+      </div>
+
+      <section data-hf-id="hf-r54t" id="f02-board" class="board">
+        <header data-hf-id="hf-ipoy" class="board-top">
+          <div data-hf-id="hf-yeow"><span data-hf-id="hf-whwm" id="f02-wordmark" class="wordmark">deepdog</span><span data-hf-id="hf-nduv" class="wordmark-meta">unified work</span></div>
+          <div data-hf-id="hf-p5hs" class="top-right"><span data-hf-id="hf-d399" class="live-dot"></span><span data-hf-id="hf-grfm">activity live</span></div>
+        </header>
+        <div data-hf-id="hf-33hp" class="board-body">
+          <section data-hf-id="hf-jjdm" class="column">
+            <div data-hf-id="hf-q99d" class="column-head"><span data-hf-id="hf-j80o">Queued</span><span data-hf-id="hf-239h" class="column-count">2</span></div>
+            <article data-hf-id="hf-1msq" class="task">
+              <div data-hf-id="hf-hp2g" class="task-id">ACME-57</div><div data-hf-id="hf-29ph" class="task-title">Prepare release notes</div>
+              <div data-hf-id="hf-w9xw" class="task-foot"><span data-hf-id="hf-m48n" class="assignee"><span data-hf-id="hf-2w4n" class="avatar">林</span>Lin</span><span data-hf-id="hf-klkx" class="state">queued</span></div>
+            </article>
+            <article data-hf-id="hf-dtgu" class="task">
+              <div data-hf-id="hf-w221" class="task-id">ACME-61</div><div data-hf-id="hf-01bo" class="task-title">Audit migration plan</div>
+              <div data-hf-id="hf-h9ik" class="task-foot"><span data-hf-id="hf-233u" class="assignee agent"><span data-hf-id="hf-1976" class="avatar">A7</span>agent-07</span><span data-hf-id="hf-48d1" class="state">queued</span></div>
+            </article>
+          </section>
+          <section data-hf-id="hf-ms5a" class="column">
+            <div data-hf-id="hf-1k6t" class="column-head"><span data-hf-id="hf-d4l8">Working</span><span data-hf-id="hf-8gux" class="column-count">2</span></div>
+            <article data-hf-id="hf-e7rv" class="task">
+              <div data-hf-id="hf-w9u2" class="task-id">ACME-42</div><div data-hf-id="hf-b55c" class="task-title">Implement access rules</div>
+              <div data-hf-id="hf-g2lh" class="task-foot"><span data-hf-id="hf-3oby" class="assignee agent"><span data-hf-id="hf-2ufa" class="avatar">A3</span>agent-03</span><span data-hf-id="hf-cyv7" class="state">working</span></div>
+            </article>
+            <article data-hf-id="hf-em2w" class="task">
+              <div data-hf-id="hf-wuo3" class="task-id">ACME-63</div><div data-hf-id="hf-nefx" class="task-title">Verify integration suite</div>
+              <div data-hf-id="hf-ggwi" class="task-foot"><span data-hf-id="hf-7ne8" class="assignee agent"><span data-hf-id="hf-0gl4" class="avatar">A9</span>agent-09</span><span data-hf-id="hf-rncz" class="state">working</span></div>
+            </article>
+          </section>
+          <section data-hf-id="hf-n6gb" class="column">
+            <div data-hf-id="hf-2r3w" class="column-head"><span data-hf-id="hf-l8rh">Review</span><span data-hf-id="hf-9ns0" class="column-count">2</span></div>
+            <article data-hf-id="hf-btxp" class="task">
+              <div data-hf-id="hf-gi5d" class="task-id">ACME-54</div><div data-hf-id="hf-wddo" class="task-title">Review API contract</div>
+              <div data-hf-id="hf-igfn" class="task-foot"><span data-hf-id="hf-h956" class="assignee"><span data-hf-id="hf-j32e" class="avatar">周</span>Zhou</span><span data-hf-id="hf-rze4" class="state done">review</span></div>
+            </article>
+            <article data-hf-id="hf-c88q" class="task">
+              <div data-hf-id="hf-ihoi" class="task-id">ACME-59</div><div data-hf-id="hf-ynai" class="task-title">Check deployment output</div>
+              <div data-hf-id="hf-iuqo" class="task-foot"><span data-hf-id="hf-2vpw" class="assignee agent"><span data-hf-id="hf-21t8" class="avatar">A5</span>agent-05</span><span data-hf-id="hf-i1l0" class="state done">review</span></div>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <div data-hf-id="hf-3oa6" id="f02-progress" class="progress-shell">
+        <span data-hf-id="hf-af2g" class="progress-label">Task lifecycle</span>
+        <span data-hf-id="hf-ds6q" class="progress-track"><span data-hf-id="hf-zprm" class="progress-fill"></span></span>
+        <span data-hf-id="hf-yawa" class="progress-state">on track</span>
+      </div>
+      <div data-hf-id="hf-1lk0" class="frame-index">02 / 03</div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const routes = gsap.utils.toArray(".route");
+      const tasks = gsap.utils.toArray(".task");
+      const columns = gsap.utils.toArray(".column-head");
+
+      tl.fromTo(routes, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.62, stagger: 0.055, ease: "power3.out" }, 0);
+      tl.fromTo(".aperture", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 0.1);
+      tl.fromTo("#f02-board", { opacity: 0, scale: 1.22 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, 0.62);
+      tl.fromTo(columns, { opacity: 0, y: -22 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.16, ease: "power3.out" }, 1.45);
+      tl.fromTo(tasks, { opacity: 0, y: 52, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.58, stagger: 0.38, ease: "power3.out" }, 1.75);
+      tl.fromTo("#f02-wordmark", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.52, ease: "power3.out" }, 3.72);
+      tl.fromTo("#f02-progress", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.58, ease: "power3.out" }, 4.18);
+      tl.fromTo(".progress-fill", { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: "power3.out" }, 4.48);
+      tl.fromTo(".state.done", { backgroundColor: "rgba(139, 124, 255, 0.14)", color: "#5b4ed8" }, { backgroundColor: "rgba(74, 222, 128, 0.15)", color: "#18713e", duration: 0.42, stagger: 0.18, ease: "power2.out" }, 5.1);
+
+      window.__timelines["02-unified-board"] = tl;
+    })();
+  </script>
+</template>

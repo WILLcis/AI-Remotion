@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #05070b;
+      }
+      body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      code,
+      pre, .monospace {
+        font-family: "JetBrains Mono", monospace;
+      }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #05070b; }
+      .frame-host { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+      .caption {
+        position: absolute;
+        left: 250px;
+        right: 250px;
+        bottom: 64px;
+        min-height: 92px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 38px;
+        border: 2px solid rgba(192,184,255,.28);
+        border-radius: 24px;
+        background: rgba(5,7,11,.91);
+        color: #f4f6fb;
+        box-shadow: 0 18px 55px rgba(0,0,0,.42);
+        font-size: 38px;
+        font-weight: 600;
+        line-height: 1.35;
+        text-align: center;
+        letter-spacing: .01em;
+        z-index: 40;
+      }
+      .caption b { color: #c0b8ff; font-weight: 700; }
+      .caption > span { display:block; }
+      .transition-wash {
+        position: absolute;
+        inset: -120px;
+        z-index: 30;
+        pointer-events: none;
+      }
+      .wash-inner { position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, rgba(139,124,246,.34), transparent 70%); }
+      .cut-line { position:absolute;left:0;top:50%;width:100%;height:4px;background:#8b7cf6;transform-origin:left; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-120y" id="root" data-composition-id="main" data-start="0" data-duration="66.854" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-tv7v" id="f1" class="clip frame-host" data-composition-id="f1" data-composition-src="compositions/frames/01-agents-multiply.html" data-start="0" data-duration="8.166" data-track-index="1"></div>
+      <div data-hf-id="hf-t138" id="f2" class="clip frame-host" data-composition-id="f2" data-composition-src="compositions/frames/02-shared-issue.html" data-start="8.166" data-duration="8.768" data-track-index="1"></div>
+      <div data-hf-id="hf-kufh" id="f3" class="clip frame-host" data-composition-id="f3" data-composition-src="compositions/frames/03-verifiable-lifecycle.html" data-start="16.934" data-duration="11.929" data-track-index="1"></div>
+      <div data-hf-id="hf-4ijw" id="f4" class="clip frame-host" data-composition-id="f4" data-composition-src="compositions/frames/04-skills-compound.html" data-start="28.863" data-duration="9.971" data-track-index="1"></div>
+      <div data-hf-id="hf-ej1r" id="f5" class="clip frame-host" data-composition-id="f5" data-composition-src="compositions/frames/05-control-tower.html" data-start="38.834" data-duration="12.865" data-track-index="1"></div>
+      <div data-hf-id="hf-zaoy" id="f6" class="clip frame-host" data-composition-id="f6" data-composition-src="compositions/frames/06-local-open.html" data-start="51.699" data-duration="9.990" data-track-index="1"></div>
+      <div data-hf-id="hf-nwqd" id="f7" class="clip frame-host" data-composition-id="f7" data-composition-src="compositions/frames/07-cta.html" data-start="61.689" data-duration="5.165" data-track-index="1"></div>
+
+      <audio data-hf-id="hf-2p0e" id="voiceover" class="clip" src="audio/cosyvoice/voiceover.wav" preload="auto" data-start="0" data-duration="66.854" data-track-index="5"></audio>
+
+      <div data-hf-id="hf-c8he" id="cap-01a" class="clip caption" data-start=".15" data-duration="3.97" data-track-index="10"><span data-hf-id="hf-kysc">智能体越来越多，真正稀缺的，不再是执行力，而是<b data-hf-id="hf-7zjy">管理</b>。</span></div>
+      <div data-hf-id="hf-qaoa" id="cap-01b" class="clip caption" data-start="4.12" data-duration="3.78" data-track-index="10"><span data-hf-id="hf-ocxv">逐个盯终端，团队越快，你越看不清谁在做什么、进展到哪一步。</span></div>
+      <div data-hf-id="hf-np5l" id="cap-02a" class="clip caption" data-start="8.316" data-duration="3.535" data-track-index="10"><span data-hf-id="hf-0vx0"><b data-hf-id="hf-8hk7">deepdog</b> 把人和智能体放进同一套工作对象。</span></div>
+      <div data-hf-id="hf-r9e7" id="cap-02b" class="clip caption" data-start="11.851" data-duration="4.82" data-track-index="10"><span data-hf-id="hf-q5jb">一个 issue，可以分配给人，也可以分配给智能体；评论、状态和进度，都留在同一条时间线上。</span></div>
+      <div data-hf-id="hf-olr0" id="cap-03a" class="clip caption" data-start="17.084" data-duration="5.36" data-track-index="10"><span data-hf-id="hf-fk5a">每次执行都有完整生命周期：入队、认领、启动，最后完成或失败。</span></div>
+      <div data-hf-id="hf-7pj2" id="cap-03b" class="clip caption" data-start="22.444" data-duration="5.356" data-track-index="10"><span data-hf-id="hf-4wzu">进度实时回到时间线；中断后，还能沿着保存的会话和工作目录继续。</span></div>
+      <div data-hf-id="hf-q8nn" id="cap-03c" class="clip caption" data-start="27.80" data-duration=".80" data-track-index="10"><span data-hf-id="hf-uckh"><b data-hf-id="hf-z3cu">没有静默失败。</b></span></div>
+      <div data-hf-id="hf-c8z2" id="cap-04a" class="clip caption" data-start="29.013" data-duration="4.88" data-track-index="10"><span data-hf-id="hf-12o1">今天教会一个智能体部署。把方法沉淀成可复用 skill。</span></div>
+      <div data-hf-id="hf-3s4w" id="cap-04b" class="clip caption" data-start="33.893" data-duration="4.68" data-track-index="10"><span data-hf-id="hf-rbkd">到了第三十天，部署、测试、代码审查，不必再从零解释；团队在复用同一套实践。</span></div>
+      <div data-hf-id="hf-ijue" id="cap-05a" class="clip caption" data-start="38.984" data-duration="5.664" data-track-index="10"><span data-hf-id="hf-8tt7">你不需要逐个追着智能体跑。Runtime 看执行机器和在线状态。</span></div>
+      <div data-hf-id="hf-tns1" id="cap-05b" class="clip caption" data-start="44.648" data-duration="2.652" data-track-index="10"><span data-hf-id="hf-uk78">Squad 看人和智能体的编队与当前工作。</span></div>
+      <div data-hf-id="hf-s3d1" id="cap-05c" class="clip caption" data-start="47.30" data-duration="4.14" data-track-index="10"><span data-hf-id="hf-2km8">Observer 留下你自己本地 AI 会话的事件和上下文。</span></div>
+      <div data-hf-id="hf-3svq" id="cap-06a" class="clip caption" data-start="51.849" data-duration="5.151" data-track-index="10"><span data-hf-id="hf-rmby">执行发生在你自己的机器，或你拥有的云环境。deepdog 负责协调任务状态和事件。</span></div>
+      <div data-hf-id="hf-59yu" id="cap-06b" class="clip caption" data-start="57.00" data-duration="4.43" data-track-index="10"><span data-hf-id="hf-ri8l">它开源、可审计，也可以自托管。<b data-hf-id="hf-4a8z">控制来自可见</b>，而不是把代码交出去。</span></div>
+      <div data-hf-id="hf-3ha6" id="cap-07a" class="clip caption" data-start="61.839" data-duration="2.861" data-track-index="10"><span data-hf-id="hf-4139">让更多智能体加入团队之前，先让工作可见、可续、可追溯。</span></div>
+      <div data-hf-id="hf-s3ei" id="cap-07b" class="clip caption" data-start="64.70" data-duration="2.00" data-track-index="10"><span data-hf-id="hf-fki7"><b data-hf-id="hf-5jev">deepdog</b>，面向人和智能体团队的项目管理。开源。</span></div>
+
+      <div data-hf-id="hf-y22k" id="transition-09" class="clip transition-wash" data-start="7.816" data-duration=".7" data-track-index="20"><div data-hf-id="hf-oio2" class="wash-inner"><div data-hf-id="hf-ecp3" class="cut-line"></div></div></div>
+      <div data-hf-id="hf-ygbm" id="transition-19" class="clip transition-wash" data-start="16.584" data-duration=".7" data-track-index="20"><div data-hf-id="hf-zlk6" class="wash-inner"><div data-hf-id="hf-gv6v" class="cut-line"></div></div></div>
+      <div data-hf-id="hf-7hle" id="transition-31" class="clip transition-wash" data-start="28.513" data-duration=".7" data-track-index="20"><div data-hf-id="hf-zzv7" class="wash-inner"><div data-hf-id="hf-ggvu" class="cut-line"></div></div></div>
+      <div data-hf-id="hf-nh4p" id="transition-41" class="clip transition-wash" data-start="38.484" data-duration=".7" data-track-index="20"><div data-hf-id="hf-0e68" class="wash-inner"><div data-hf-id="hf-g2kt" class="cut-line"></div></div></div>
+      <div data-hf-id="hf-a8jz" id="transition-52" class="clip transition-wash" data-start="51.349" data-duration=".7" data-track-index="20"><div data-hf-id="hf-xm11" class="wash-inner"><div data-hf-id="hf-iuq0" class="cut-line"></div></div></div>
+      <div data-hf-id="hf-ns4b" id="transition-62" class="clip transition-wash" data-start="61.339" data-duration=".7" data-track-index="20"><div data-hf-id="hf-y0c2" class="wash-inner"><div data-hf-id="hf-igez" class="cut-line"></div></div></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      document.querySelectorAll(".caption").forEach((caption) => {
+        const start = Number(caption.dataset.start);
+        const inner = caption.firstElementChild;
+        tl.fromTo(inner, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .24, ease: "power3.out" }, start);
+        tl.to(inner, { opacity: 0, y: -16, duration: .2, ease: "power2.in" }, start + Number(caption.dataset.duration) - .2);
+      });
+      document.querySelectorAll(".transition-wash").forEach((wash) => {
+        const start = Number(wash.dataset.start);
+        const line = wash.querySelector(".cut-line");
+        const inner = wash.querySelector(".wash-inner");
+        tl.fromTo(inner, { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: .26, ease: "power3.in" }, start);
+        tl.to(inner, { opacity: 0, scale: 1.08, duration: .4, ease: "power4.out" }, start + .26);
+        tl.fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: .35, ease: "power3.out" }, start + .08);
+      });
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

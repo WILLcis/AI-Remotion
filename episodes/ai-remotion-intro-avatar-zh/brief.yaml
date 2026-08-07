@@ -1,0 +1,19 @@
+aspect_ratio: 16:9
+audience: 想了解 AI-Remotion 项目的开发者和团队
+duration_seconds: 30
+must_avoid:
+  - 不要把 AI 生成内容描述为已经人工核实的事实
+  - 不要说 AI-Remotion 是无代码工具或剪辑软件
+  - 不要承诺云渲染或自动发布功能
+must_include:
+  - AI-Remotion 是用 React 写代码生成视频的本地优先生产管线
+  - 核心流程：brief → script → storyboard → render → QA，全链路可版本管理
+  - 适合想做程序化视频的开发者和团队
+platform: B站
+source_notes:
+  - 仓库地址 /Users/kksthinkpad/res/code/js/AI-Remotion
+  - README.md 和 agents/START_HERE.md 是主要参考来源
+tone: 清楚、自然、有亲和力
+topic: 数字人口播介绍 AI-Remotion 仓库
+visual_style: 数字人口播 + 深色背景信息卡片
+voice: 亲切自然的中文口播

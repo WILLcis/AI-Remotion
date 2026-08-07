@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head></head>
+  <body>
+    <template>
+      <style>
+        #order-flow-07-root { position: relative; width: 1344px; height: 768px; overflow: hidden; color: #f4efe3; font-family: Georgia, serif; }
+        #order-flow-07-root * { box-sizing: border-box; }
+        .of-bg { position:absolute; inset:0; background:radial-gradient(circle at 72% 42%, rgba(33,79,91,.30), transparent 32%), #0a101c; }
+        .of-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(111,163,220,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(111,163,220,.08) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(90deg,transparent,black 14%,black 86%,transparent); }
+        .of-kicker { position:absolute; left:86px; top:64px; color:#d4b36a; font:600 14px/1 Consolas,monospace; letter-spacing:.24em; }
+        .of-title { position:absolute; left:82px; top:104px; margin:0; font-size:56px; font-weight:600; letter-spacing:.02em; }
+        .of-title em { color:#6fc2a0; font-style:normal; }
+        .of-subtitle { position:absolute; left:86px; top:181px; color:#9eb9d7; font:500 13px/1.4 Consolas,monospace; letter-spacing:.09em; }
+        .of-rail { position:absolute; left:124px; top:407px; width:1096px; height:3px; background:rgba(111,163,220,.22); }
+        .of-line { width:100%; height:3px; background:linear-gradient(90deg,#6fc2a0,#d4b36a,#6fc2a0); box-shadow:0 0 18px #6fc2a0; transform-origin:left center; }
+        .of-node { position:absolute; top:306px; width:208px; height:170px; padding:28px 20px 18px; border:1px solid rgba(111,163,220,.42); background:linear-gradient(135deg,rgba(24,44,65,.96),rgba(10,16,28,.93)); box-shadow:inset 0 0 0 1px rgba(255,255,255,.025); }
+        .of-node::before { content:""; position:absolute; left:18px; top:-10px; width:17px; height:17px; border:3px solid #6fa3dc; border-radius:50%; background:#0a101c; box-shadow:0 0 12px rgba(111,163,220,.55); }
+        .of-node strong { display:block; font-size:26px; font-weight:600; }
+        .of-node span { display:block; margin-top:13px; color:#8eadd0; font:11px/1.5 Consolas,monospace; letter-spacing:.08em; }
+        .of-stamp { position:absolute; right:14px; bottom:15px; padding:7px 9px; border:2px solid #d4b36a; color:#d4b36a; font:700 12px/1 Consolas,monospace; letter-spacing:.1em; transform:rotate(-8deg); }
+        #order-flow-07-node-risk { left:112px; } #order-flow-07-node-match { left:390px; } #order-flow-07-node-ledger { left:668px; } #order-flow-07-node-settle { left:946px; }
+        .of-order { position:absolute; left:66px; top:538px; width:136px; height:62px; padding:12px 14px; border:1px solid #d4b36a; background:#172d45; box-shadow:0 0 22px rgba(212,179,106,.3); color:#f4efe3; font:700 12px/1.4 Consolas,monospace; letter-spacing:.08em; }
+        .of-order::before { content:""; position:absolute; right:11px; top:11px; width:11px; height:11px; border:1px solid #6fc2a0; box-shadow:0 0 10px #6fc2a0; }
+        .of-order small { display:block; color:#d4b36a; font-size:10px; }
+        .of-pulse { position:absolute; left:112px; top:392px; width:90px; height:32px; border-radius:50%; background:radial-gradient(ellipse,rgba(255,255,255,.96),rgba(111,194,160,.55) 26%,transparent 70%); filter:blur(2px); }
+        .of-cta { position:absolute; left:0; right:0; bottom:78px; text-align:center; font-size:53px; font-weight:600; letter-spacing:.035em; text-shadow:0 0 28px rgba(255,255,255,.16); }
+        .of-corner { position:absolute; left:86px; bottom:40px; color:#6fa3dc; font:11px/1 Consolas,monospace; letter-spacing:.16em; }
+        .of-flash { position:absolute; inset:0; background:#eaf7ff; mix-blend-mode:screen; pointer-events:none; }
+      </style>
+      <div data-hf-id="hf-zyoa" id="order-flow-07-root" data-composition-id="order-flow-07" data-start="0" data-duration="15" data-width="1344" data-height="768">
+        <div data-hf-id="hf-bg07" class="of-bg"></div><div data-hf-id="hf-0fwk" class="of-grid"></div><div data-hf-id="hf-fl07" id="order-flow-07-flash" class="of-flash"></div>
+        <div data-hf-id="hf-xoht" id="order-flow-07-kicker" class="of-kicker">YESONO 3.0 / EXECUTION RAIL</div>
+        <h1 data-hf-id="hf-ja4p" id="order-flow-07-title" class="of-title">一笔订单，<em data-hf-id="hf-dd6o">全程替你跑完</em></h1>
+        <div data-hf-id="hf-6az8" id="order-flow-07-subtitle" class="of-subtitle">RISK GATE → FAIR MATCH → LEDGER TRACE → FINAL SETTLEMENT</div>
+        <div data-hf-id="hf-023g" id="order-flow-07-rail" class="of-rail"><div data-hf-id="hf-ksko" id="order-flow-07-line" class="of-line"></div></div>
+        <div data-hf-id="hf-mtyk" id="order-flow-07-node-risk" class="of-node"><strong data-hf-id="hf-0x3k">风控准入</strong><span data-hf-id="hf-xq85">BAD ORDER / BLOCKED</span><b data-hf-id="hf-3bbq" class="of-stamp">通过</b></div>
+        <div data-hf-id="hf-li78" id="order-flow-07-node-match" class="of-node"><strong data-hf-id="hf-xjow">撮合成交</strong><span data-hf-id="hf-blnz">FAIR &amp; REVIEWABLE</span><b data-hf-id="hf-u77e" class="of-stamp">通过</b></div>
+        <div data-hf-id="hf-efk6" id="order-flow-07-node-ledger" class="of-node"><strong data-hf-id="hf-zotx">逐笔入账</strong><span data-hf-id="hf-fu63">CAPITAL / TRACEABLE</span><b data-hf-id="hf-ulif" class="of-stamp">通过</b></div>
+        <div data-hf-id="hf-exvo" id="order-flow-07-node-settle" class="of-node"><strong data-hf-id="hf-mjro">清算交割</strong><span data-hf-id="hf-bx45">AUTO / FINALIZED</span><b data-hf-id="hf-uztg" class="of-stamp">通过</b></div>
+        <div data-hf-id="hf-jfqd" id="order-flow-07-order" class="of-order">ORDER #A-2048<small data-hf-id="hf-gji1">ROUTED / LIVE</small></div><div data-hf-id="hf-pu07" id="order-flow-07-pulse" class="of-pulse"></div>
+        <div data-hf-id="hf-cta07" id="order-flow-07-cta" class="of-cta">这支团队，你不用自己养</div><div data-hf-id="hf-xcsk" id="order-flow-07-corner" class="of-corner">07 / PLATFORM OPERATIONS</div>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const nodes = ["#order-flow-07-node-risk", "#order-flow-07-node-match", "#order-flow-07-node-ledger", "#order-flow-07-node-settle"];
+        const stamps = ["#order-flow-07-node-risk .of-stamp", "#order-flow-07-node-match .of-stamp", "#order-flow-07-node-ledger .of-stamp", "#order-flow-07-node-settle .of-stamp"];
+        tl.fromTo("#order-flow-07-kicker", { opacity:0, y:14 }, { opacity:1, y:0, duration:.35, ease:"power3.out" }, 0)
+          .fromTo("#order-flow-07-title, #order-flow-07-subtitle", { opacity:0, y:22 }, { opacity:1, y:0, duration:.5, stagger:.08, ease:"power3.out" }, .12)
+          .fromTo(nodes, { opacity:.42, y:18 }, { opacity:1, y:0, duration:.45, stagger:.12, ease:"power2.out" }, .55)
+          .fromTo("#order-flow-07-order", { opacity:0, x:-120 }, { opacity:1, x:0, duration:.45, ease:"power4.out" }, 1.05)
+          .to("#order-flow-07-order", { x:1040, duration:2.45, ease:"none" }, 1.35)
+          .fromTo(stamps, { opacity:0, scale:1.65 }, { opacity:1, scale:1, duration:.16, stagger:.53, ease:"back.out(3)" }, 4)
+          .to(nodes, { borderColor:"#d4b36a", boxShadow:"0 0 25px rgba(212,179,106,.32)", duration:.12, stagger:.53 }, 4)
+          .to("#order-flow-07-flash", { opacity:.72, duration:.05 }, 4).to("#order-flow-07-flash", { opacity:0, duration:.17 }, 4.05)
+          .fromTo("#order-flow-07-line", { scaleX:0 }, { scaleX:1, duration:.65, ease:"power2.inOut" }, 8)
+          .to("#order-flow-07-pulse", { x:1018, opacity:0, duration:.7, ease:"none" }, 8)
+          .to("#order-flow-07-flash", { opacity:.64, duration:.05 }, 8).to("#order-flow-07-flash", { opacity:0, duration:.16 }, 8.05)
+          .fromTo("#order-flow-07-cta", { opacity:0, y:26, scale:.96 }, { opacity:1, y:0, scale:1, duration:.55, ease:"power3.out" }, 12)
+          .fromTo("#order-flow-07-corner", { opacity:0 }, { opacity:1, duration:.25 }, 12.25)
+          .to("#order-flow-07-flash", { opacity:.55, duration:.05 }, 12).to("#order-flow-07-flash", { opacity:0, duration:.2 }, 12.05);
+        window.__timelines["order-flow-07"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

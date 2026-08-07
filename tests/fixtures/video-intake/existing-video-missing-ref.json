@@ -1,0 +1,9 @@
+{
+  "request_id": "existing-video-missing-ref",
+  "description": "把已有长视频剪成 30 秒短视频",
+  "defaults": {
+    "duration_seconds": 30,
+    "aspect_ratio": "9:16",
+    "language": "zh"
+  }
+}

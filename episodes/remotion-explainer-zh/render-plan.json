@@ -1,0 +1,192 @@
+{
+  "episode_id": "remotion-explainer-zh",
+  "metadata": {
+    "title": "普通人怎么理解 Remotion",
+    "subtitle": "想了解 Remotion 是什么的普通人和初学者",
+    "platform": "B站",
+    "language": "zh",
+    "duration_seconds": 30,
+    "aspect_ratio": "16:9"
+  },
+  "theme": {
+    "id": "dark-explainer-v1",
+    "background": "#0c1117",
+    "surface": "#151d26",
+    "surfaceMuted": "#202a34",
+    "text": "#f4f7fb",
+    "textMuted": "#a9b6c7",
+    "accent": "#44d7b6",
+    "accentStrong": "#f4b44b",
+    "border": "rgba(255, 255, 255, 0.14)"
+  },
+  "video": {
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "duration_frames": 900,
+    "safe_area": {
+      "top": 72,
+      "right": 96,
+      "bottom": 96,
+      "left": 96
+    }
+  },
+  "audio": {
+    "duration_seconds": 30,
+    "provider": "silent",
+    "voiceover_path": "audio/voiceover.wav"
+  },
+  "captions": {
+    "enabled": true,
+    "items": [
+      {
+        "start_frame": 0,
+        "end_frame": 150,
+        "text": "做视频，能像写代码一样灵活吗？这就是 Remotion。"
+      },
+      {
+        "start_frame": 150,
+        "end_frame": 300,
+        "text": "Remotion 用 React 写代码生成视频，不是剪辑软件。"
+      },
+      {
+        "start_frame": 300,
+        "end_frame": 450,
+        "text": "核心思路一：组件即画面。每个画面都是可拼装的积木。"
+      },
+      {
+        "start_frame": 450,
+        "end_frame": 600,
+        "text": "核心思路二：帧由时间驱动。想改哪一帧，改代码就行。"
+      },
+      {
+        "start_frame": 600,
+        "end_frame": 750,
+        "text": "核心思路三：可程序化批量产出。换参数，就能生成一批视频。"
+      },
+      {
+        "start_frame": 750,
+        "end_frame": 900,
+        "text": "对普通人来说，做视频变成改参数、写代码，可复用、可版本管理。"
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "title": "深色背景",
+      "narration": "做视频，能像写代码一样灵活吗？这就是 Remotion。",
+      "caption": "做视频，能像写代码一样灵活吗？这就是 Remotion。",
+      "duration_seconds": 5,
+      "start_frame": 0,
+      "duration_frames": 150,
+      "visual": {
+        "eyebrow": "AI-Remotion Draft",
+        "primary": "普通人怎么理解 Remotion",
+        "secondary": "深色背景，标题「Remotion是什么？」渐显，左侧代码图标与右侧视频图标慢慢合在一起。"
+      }
+    },
+    {
+      "id": "scene-02",
+      "type": "key_point",
+      "title": "信息卡片「用 React 写代码 → 生成视频」",
+      "narration": "Remotion 用 React 写代码生成视频，不是剪辑软件。",
+      "caption": "Remotion 用 React 写代码生成视频，不是剪辑软件。",
+      "duration_seconds": 5,
+      "start_frame": 150,
+      "duration_frames": 150,
+      "visual": {
+        "primary": "Remotion 是用 React 写代码来生成视频的框架，不是剪辑软件",
+        "secondary": "信息卡片「用 React 写代码 → 生成视频」，旁边出现一个带红叉的「剪辑软件」图标。"
+      }
+    },
+    {
+      "id": "scene-03",
+      "type": "image_card",
+      "title": "深色背景上出现「组件 = 画面」卡片",
+      "narration": "核心思路一：组件即画面。每个画面都是可拼装的积木。",
+      "caption": "核心思路一：组件即画面。每个画面都是可拼装的积木。",
+      "duration_seconds": 5,
+      "start_frame": 300,
+      "duration_frames": 150,
+      "visual": {
+        "eyebrow": "Visual Evidence",
+        "primary": "图文证据",
+        "secondary": "深色背景上出现「组件 = 画面」卡片，三块积木拼成一个视频窗口，积木微微浮动。",
+        "assets": [
+          "截图",
+          "概念卡",
+          "流程图"
+        ]
+      }
+    },
+    {
+      "id": "scene-04",
+      "type": "list",
+      "title": "时间轴从左向右移动",
+      "narration": "核心思路二：帧由时间驱动。想改哪一帧，改代码就行。",
+      "caption": "核心思路二：帧由时间驱动。想改哪一帧，改代码就行。",
+      "duration_seconds": 5,
+      "start_frame": 450,
+      "duration_frames": 150,
+      "visual": {
+        "bullets": [
+          "Remotion 是用 React 写代码来生成视频的框架，不是剪辑软件",
+          "核心思路：组件即画面、帧由时间驱动、可程序化批量产出",
+          "对普通人意味着什么：把做视频变成写代码或改参数，可复用、可版本管理"
+        ]
+      }
+    },
+    {
+      "id": "scene-05",
+      "type": "comparison",
+      "title": "展示三张参数卡片",
+      "narration": "核心思路三：可程序化批量产出。换参数，就能生成一批视频。",
+      "caption": "核心思路三：可程序化批量产出。换参数，就能生成一批视频。",
+      "duration_seconds": 5,
+      "start_frame": 600,
+      "duration_frames": 150,
+      "visual": {
+        "left_label": "手动制作",
+        "left_points": [
+          "重复摆放",
+          "难以复用",
+          "修改成本高"
+        ],
+        "right_label": "结构化生产",
+        "right_points": [
+          "文件驱动",
+          "模板复用",
+          "可检查"
+        ]
+      }
+    },
+    {
+      "id": "scene-06",
+      "type": "timeline",
+      "title": "画面上方显示「改参数」滑块",
+      "narration": "对普通人来说，做视频变成改参数、写代码，可复用、可版本管理。",
+      "caption": "对普通人来说，做视频变成改参数、写代码，可复用、可版本管理。",
+      "duration_seconds": 5,
+      "start_frame": 750,
+      "duration_frames": 150,
+      "visual": {
+        "timeline_items": [
+          {
+            "label": "1",
+            "text": "Brief"
+          },
+          {
+            "label": "2",
+            "text": "Script"
+          },
+          {
+            "label": "3",
+            "text": "Render"
+          }
+        ]
+      }
+    }
+  ]
+}

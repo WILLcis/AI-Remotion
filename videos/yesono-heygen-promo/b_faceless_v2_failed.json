@@ -1,0 +1,22 @@
+{
+  "created_at": 1785998929,
+  "messages": [
+    {
+      "content": "I'm starting on your premium product concept film for YesONO 3.0. I'll design a cinematic \"Data Drift\" visual style with iridescent purple and cyan tones, paired with a calm, authoritative Mandarin Chinese narration. Preparing the blueprint now.",
+      "created_at": 1785998952,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Create a ~45 second Mandarin Chinese product concept film for YesONO 3.0, landscape 16:9.\n\nFormat: Voice-over narration only. NO on-camera presenter. No talking head. Pure cinematic motion design + AI-generated futurescape + motion graphics.\n\nAudience: crypto/fintech founders and operators evaluating infrastructure partners for prediction markets and event finance.\n\nStory arc in Chinese VO:\n1) Open on a chaotic fragmented market: many frontends, no shared rails.\n2) Reveal the missing layer: a market operating system that connects creation, trading, risk, matching, ledger, custody, settlement, and market making.\n3) Dive into YesONO 3.0 architecture as luminous modular systems: API gateway and identity gates; Rust matching engine with price-time priority CLOB; off-chain double-entry ledger synchronized with on-chain custody; Outcome markets and CFD risk domains; shared books with tenant isolation; maker management and audit trails.\n4) Close on partners launching markets quickly on trusted rails. End card: YesONO 3.0 — 预测市场与事件金融的交易基础设施.\n\nTone: cinematic, ambitious, technical poetry — premium infrastructure launch film, Mandarin VO, calm authority.\n\nThis script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.\n\nCRITICAL ON-SCREEN TEXT (exact):\n- YesONO 3.0\n- Market Operating System\n- Match · Ledger · Custody · Risk\n- Outcome + CFD\n- Build Markets. Not Infrastructure.\n\nMedia guidance:\n- Voice-over narration only.\n- Prefer AI-generated cinematic visuals for abstract infrastructure metaphors.\n- Prefer Motion Graphics for system diagrams, order-flow particles, vault seals, and chapter titles.\n- Minimal stock footage. No presenter face. No selfie-style shots.\n\nSTYLE — DATA DRIFT:\nIridescent purple #7c3aed, cyan #06b6d4, deep black.\nFluid morphing compositions, thin futuristic type, liquid dissolves.\nParticles coalesce into architecture labels and numbers.\nPremium launch-film energy, never cartoonish.\n\n\nLANGUAGE / VOICE (CRITICAL):\nNarration language is Mandarin Chinese only (普通话).\nUse a native mainland Chinese speaking voice — clear, natural Chinese, no foreign accent, no Chinglish pronunciation, no English-accented Mandarin.\nAll spoken lines must be Chinese. On-screen English labels may remain as brand keywords.",
+      "created_at": 1785998930,
+      "role": "user",
+      "type": "text"
+    }
+  ],
+  "progress": 0,
+  "session_id": "c22f945f2b514cc88a6e8e60a0096c73",
+  "status": "failed",
+  "title": "YesONO 3.0 产品概念片",
+  "video_id": "f58493097cd74517a1c630a88479b479"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "deepdog_promo_A_angles_5x7",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": false,
+  "segments": [
+    {
+      "seconds": 7,
+      "seed": 410101,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/agents.png",
+      "prompt": "Premium dark-tech landscape commercial for deepdog / BIOS. Photoreal UI from first frame. A human avatar centered, dozens of AI agent avatars rapidly assemble into a clean grid around them. Sharp cyan accents on charcoal, no cartoon, no watermark. Brand lowercase deepdog only if text appears.\nAudio Chinese female VO: AI 同事的数量，可能是人类的十倍。"
+    },
+    {
+      "seconds": 7,
+      "seed": 410102,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/issues-board.png",
+      "prompt": "deepdog BIOS workbench from first frame. Human and agent avatars share the same issue board; task cards flow side by side seamlessly. Ultra sharp UI, subtle camera push.\nAudio Chinese female VO: BIOS——人和 agent 共享同一套工作台，一屏看清全公司谁在干什么、卡在哪。"
+    },
+    {
+      "seconds": 7,
+      "seed": 410103,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/agents.png",
+      "prompt": "Dark tech motion graphic: an agent node forks into multiple child agents (delegation tree), lines multiply then all converge into one highlighted human avatar. Sharp neon lines on deep charcoal. deepdog accountability theme.\nAudio Chinese female VO: AI 越派越多，谁负责？BIOS 里，每一层委派都问责于一个具体的人——权限不会失控上升。"
+    },
+    {
+      "seconds": 7,
+      "seed": 410104,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/verification.png",
+      "prompt": "From first frame verification UI: many AI task cards stream toward a verification gate; pass turns green, fail turns red and stops. Ultra sharp product UI, deepdog brand restraint.\nAudio Chinese female VO: AI 产出再多，也得过验证。BIOS——无验证，不完成。规模扩张，不等于失控扩张。"
+    },
+    {
+      "seconds": 8,
+      "seed": 410105,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/deepdog/control-tower.png",
+      "prompt": "From first frame control tower: chaotic terminals collapse into a calm dashboard; risks auto-highlight. End card: lowercase deepdog and slogan Your next 10 hires won't be human. Sharp 1344x768.\nAudio Chinese female VO: BIOS 是一座控制塔——分工、监听、协调，一屏看清全局。BIOS，让人和 AI 在同一套操作系统里安全协同。"
+    }
+  ]
+}

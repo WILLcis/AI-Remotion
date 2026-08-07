@@ -1,0 +1,31 @@
+
+> check
+> npx --yes hyperframes@0.7.94 check
+
+◆  Checking yesono-3-hf-v2
+[INFO] [Compiler] Fetched 60 font face(s) for "JetBrains Mono" from Google Fonts (cached to /Users/kksthinkpad/.cache/hyperframes/fonts/jetbrains-mono)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[hyperframes] browserGpuMode probe → hardware (WebGL renderer vendor="Google Inc. (Apple)" renderer="ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Pro, Unspecified Version)")
+
+Lint
+  ℹ pointer_events_none: `#captions-root` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v2/compositions/captions.html #captions-root t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  0 error(s), 0 warning(s), 1 info(s)
+
+Runtime
+  ◇ 0 errors, 0 warnings
+
+Layout
+  ◇ 0 issues across 9 sample(s)
+
+Motion
+  ◇ 0 errors, 0 warnings
+
+Contrast
+  ◇ 96/96 text checks pass WCAG AA
+
+Snapshots
+  ◇ disabled
+
+◇  Check passed

@@ -1,0 +1,17 @@
+deepdog
+
+Your next 10 hires won't be human.
+
+deepdog turns coding agents into real teammates.
+Assign tasks. Track progress. One control plane.
+
+一个人，带起一队编码智能体。
+统一派单，追踪进度。
+让每个智能体都成为真正队友。
+
+Verified content constraints:
+- deepdog is always lowercase.
+- Issues can be assigned to people or agents.
+- deepdog tracks task lifecycle and progress.
+- One dashboard provides a unified view of human and agent work.
+- No BIOS wording, old internal names, unsupported scale claims, customer metrics, or fabricated UI.

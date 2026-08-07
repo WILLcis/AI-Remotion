@@ -1,0 +1,4 @@
+{
+  "status": "error",
+  "raw": "{\"error\":{\"code\":\"network_error\",\"hint\":\"This is usually a temporary network issue. If it persists, check your connection\",\"message\":\"request failed: Get \\\"https://api.heygen.com/v3/video-agents/1332e27782064e2a872ee8576834efb8\\\": EOF\"}}\n"
+}

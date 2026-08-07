@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head></head>
+  <body>
+    <template>
+      <style>
+        #frame-10-revenue-root { position: relative; width: 1344px; height: 768px; overflow: hidden; background: #0a101c; color: #edf4fa; font-family: Georgia, "Songti SC", serif; }
+        .revenue-scene, .revenue-grid, .revenue-vignette, .revenue-beam, .revenue-stage, .revenue-products { position: absolute; inset: 0; overflow: hidden; }
+        .revenue-grid { background-image: linear-gradient(rgba(111,163,220,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(111,163,220,.15) 1px, transparent 1px); background-size: 48px 48px; opacity: .82; }
+        .revenue-vignette { background: radial-gradient(ellipse at 31% 65%, rgba(111,194,160,.22), transparent 31%), radial-gradient(ellipse at 84% 26%, rgba(212,179,106,.19), transparent 30%); }
+        .revenue-beam { left: -8%; width: 40%; background: linear-gradient(90deg, transparent, rgba(111,163,220,.08), transparent); transform: skewX(-22deg); }
+        .revenue-ghost { position: absolute; right: -22px; top: 14px; color: rgba(212,179,106,.08); font: 700 168px/1 ui-monospace, monospace; letter-spacing: -12px; }
+        .revenue-kicker { position: absolute; left: 78px; top: 59px; color: #6fc2a0; font: 700 17px/1 ui-monospace, monospace; letter-spacing: 3px; }
+        .revenue-title { position: absolute; left: 76px; top: 91px; margin: 0; color: #f2ead7; font-size: 64px; line-height: 1.05; letter-spacing: 2px; }
+        .revenue-title span { color: #d4b36a; }
+        .revenue-subtitle { position: absolute; left: 79px; top: 168px; color: #a9bdd1; font: 600 20px/1.3 ui-monospace, monospace; letter-spacing: 1px; }
+        .revenue-stage { left: 74px; top: 252px; width: 839px; height: 385px; border-left: 2px solid rgba(111,163,220,.6); border-bottom: 2px solid rgba(111,163,220,.6); }
+        .revenue-stage::before, .revenue-stage::after { content: ""; position: absolute; left: 0; width: 100%; height: 1px; background: rgba(111,163,220,.2); }
+        .revenue-stage::before { top: 33%; } .revenue-stage::after { top: 66%; }
+        .revenue-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+        .revenue-curve { transform-box: fill-box; transform-origin: left center; filter: drop-shadow(0 0 9px currentColor); }
+        .revenue-tag { position: absolute; z-index: 3; padding: 8px 12px; border: 1px solid currentColor; background: rgba(10,16,28,.93); box-shadow: 0 0 19px rgba(212,179,106,.12); font: 700 15px/1 ui-monospace, monospace; letter-spacing: 1px; white-space: nowrap; }
+        .revenue-tag-1 { left: 157px; top: 303px; color: #f0daa0; } .revenue-tag-2 { left: 312px; top: 385px; color: #b9d6f1; } .revenue-tag-3 { left: 455px; top: 336px; color: #8de0bb; } .revenue-tag-4 { left: 584px; top: 422px; color: #d3b5eb; } .revenue-tag-5 { left: 676px; top: 285px; color: #f3f5f2; }
+        .revenue-total { position: absolute; right: 81px; top: 105px; width: 325px; height: 535px; border: 1px solid rgba(111,163,220,.54); background: rgba(11,25,42,.83); box-shadow: inset 0 0 42px rgba(111,163,220,.08), 0 0 38px rgba(111,163,220,.12); }
+        .revenue-total-header { position: absolute; left: 28px; top: 28px; color: #a9bdd1; font: 700 15px/1 ui-monospace, monospace; letter-spacing: 2px; }
+        .revenue-total-value { position: absolute; left: 27px; top: 56px; color: #d4b36a; font: 700 48px/1 ui-monospace, monospace; letter-spacing: -3px; }
+        .revenue-total-rule { position: absolute; left: 28px; top: 126px; width: 266px; height: 2px; background: #6fc2a0; transform-origin: left center; }
+        .revenue-bar-bed { position: absolute; left: 72px; bottom: 45px; width: 178px; height: 305px; border: 1px solid rgba(111,163,220,.4); background: rgba(5,11,21,.66); }
+        .revenue-bar { position: absolute; inset: 0 0 0 0; background: linear-gradient(180deg, #f0daa0, #d4b36a 32%, #6fc2a0 73%, #315d77); transform-origin: center bottom; box-shadow: 0 0 28px rgba(212,179,106,.48); }
+        .revenue-bar::after { content: ""; position: absolute; left: -14px; top: -8px; width: 204px; height: 16px; background: #f0daa0; box-shadow: 0 0 20px #d4b36a; }
+        .revenue-signal { position: absolute; left: 62px; bottom: 14px; color: #6fc2a0; font: 700 13px/1 ui-monospace, monospace; letter-spacing: 2px; }
+        .revenue-particle { position: absolute; left: 48%; top: 42%; width: 7px; height: 7px; border-radius: 50%; background: #f0daa0; box-shadow: 0 0 14px #d4b36a; }
+        .particle-1 { margin: -55px 0 0 -28px; } .particle-2 { margin: -84px 0 0 22px; } .particle-3 { margin: -42px 0 0 56px; } .particle-4 { margin: -13px 0 0 83px; } .particle-5 { margin: 22px 0 0 41px; } .particle-6 { margin: 52px 0 0 -11px; } .particle-7 { margin: 32px 0 0 -63px; } .particle-8 { margin: -8px 0 0 -82px; }
+        .revenue-products { top: 657px; left: 76px; right: 81px; height: 86px; }
+        .revenue-product { position: absolute; top: 0; width: 285px; height: 70px; display: flex; align-items: center; justify-content: center; border: 2px solid; background: rgba(10,16,28,.82); font: 700 28px/1 ui-monospace, monospace; letter-spacing: 2px; }
+        .revenue-outcome { left: 348px; border-color: #d4b36a; color: #f0daa0; box-shadow: 0 0 24px rgba(212,179,106,.18); } .revenue-cfd { right: 44px; border-color: #6fa3dc; color: #b9d6f1; box-shadow: 0 0 24px rgba(111,163,220,.18); }
+        .revenue-impact { position: absolute; left: 643px; top: 5px; width: 62px; height: 62px; border-radius: 50%; background: radial-gradient(circle, #fff8dd 0 11%, #d4b36a 22%, rgba(212,179,106,.35) 42%, transparent 71%); }
+        .revenue-double { position: absolute; left: 743px; top: 14px; color: #f2ead7; font-size: 38px; font-weight: 700; letter-spacing: 3px; white-space: nowrap; text-shadow: 0 0 20px rgba(255,248,221,.22); }
+      </style>
+      <div data-hf-id="hf-ijl4" id="frame-10-revenue-root" data-composition-id="frame-10-revenue" data-start="0" data-duration="15" data-width="1344" data-height="768">
+        <div data-hf-id="hf-ych8" id="frame-10-revenue-scene" class="clip revenue-scene" data-start="0" data-duration="15" data-track-index="0">
+          <div class="revenue-grid"></div><div id="frame-10-revenue-vignette" class="revenue-vignette"></div><div id="frame-10-revenue-beam" class="revenue-beam"></div><div id="frame-10-revenue-ghost" class="revenue-ghost">REVENUE</div>
+          <div id="frame-10-revenue-kicker" class="revenue-kicker">OPERATING SURFACE / 05</div><h1 id="frame-10-revenue-title" class="revenue-title">一套底座，<span>五条收入曲线</span></h1><div id="frame-10-revenue-subtitle" class="revenue-subtitle">五条独立路径 · 同时拉升 · 不靠单一收入吊命</div>
+          <div class="revenue-stage"><svg viewBox="0 0 839 385" aria-hidden="true"><path id="frame-10-revenue-curve-1" class="revenue-curve" d="M0 339 C112 335 145 270 263 278 S442 199 554 202 S700 112 839 28" fill="none" stroke="#d4b36a" stroke-width="5"/><path id="frame-10-revenue-curve-2" class="revenue-curve" d="M0 349 C128 346 182 312 274 236 S451 219 552 160 S690 135 839 52" fill="none" stroke="#6fa3dc" stroke-width="5"/><path id="frame-10-revenue-curve-3" class="revenue-curve" d="M0 363 C89 344 165 294 260 304 S449 267 545 173 S710 142 839 35" fill="none" stroke="#6fc2a0" stroke-width="5"/><path id="frame-10-revenue-curve-4" class="revenue-curve" d="M0 374 C108 366 171 340 269 274 S442 253 568 188 S715 131 839 44" fill="none" stroke="#b685d3" stroke-width="4"/><path id="frame-10-revenue-curve-5" class="revenue-curve" d="M0 357 C118 366 172 259 272 264 S420 211 537 184 S681 68 839 16" fill="none" stroke="#f3f5f2" stroke-width="4"/></svg></div>
+          <div id="frame-10-revenue-tag-1" class="revenue-tag revenue-tag-1">交易手续费</div><div id="frame-10-revenue-tag-2" class="revenue-tag revenue-tag-2">专有市场溢价</div><div id="frame-10-revenue-tag-3" class="revenue-tag revenue-tag-3">做市点差协同</div><div id="frame-10-revenue-tag-4" class="revenue-tag revenue-tag-4">数据产品</div><div id="frame-10-revenue-tag-5" class="revenue-tag revenue-tag-5">客户资产服务</div>
+          <div id="frame-10-revenue-total" class="revenue-total"><div class="revenue-total-header">TOTAL OPERATING SURFACE</div><div class="revenue-total-value">05 / 05</div><div id="frame-10-revenue-total-rule" class="revenue-total-rule"></div><div class="revenue-bar-bed"><div id="frame-10-revenue-bar" class="revenue-bar"></div></div><div class="revenue-signal">ALL LINES / LIVE</div><i id="frame-10-revenue-particle-1" class="revenue-particle particle-1"></i><i id="frame-10-revenue-particle-2" class="revenue-particle particle-2"></i><i id="frame-10-revenue-particle-3" class="revenue-particle particle-3"></i><i id="frame-10-revenue-particle-4" class="revenue-particle particle-4"></i><i id="frame-10-revenue-particle-5" class="revenue-particle particle-5"></i><i id="frame-10-revenue-particle-6" class="revenue-particle particle-6"></i><i id="frame-10-revenue-particle-7" class="revenue-particle particle-7"></i><i id="frame-10-revenue-particle-8" class="revenue-particle particle-8"></i></div>
+          <div class="revenue-products"><div id="frame-10-revenue-outcome" class="revenue-product revenue-outcome">OUTCOME</div><div id="frame-10-revenue-impact" class="revenue-impact"></div><div id="frame-10-revenue-cfd" class="revenue-product revenue-cfd">CFD</div><div id="frame-10-revenue-double" class="revenue-double">两倍经营面</div></div>
+        </div>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const timeline = gsap.timeline({ paused: true });
+        timeline.fromTo("#frame-10-revenue-vignette", { opacity: .2, scale: .86 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" }, 0)
+          .fromTo("#frame-10-revenue-beam", { x: -210, opacity: 0 }, { x: 1210, opacity: .9, duration: 2.6, ease: "power1.inOut" }, .15)
+          .fromTo("#frame-10-revenue-ghost", { x: 86, opacity: 0 }, { x: 0, opacity: 1, duration: .8, ease: "power3.out" }, .1)
+          .fromTo("#frame-10-revenue-kicker", { y: -18, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: "power2.out" }, .18)
+          .fromTo("#frame-10-revenue-title", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: .58, ease: "power4.out" }, .3)
+          .fromTo("#frame-10-revenue-subtitle", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: .42, ease: "power2.out" }, .62);
+        [1,2,3,4,5].forEach((n, index) => timeline.fromTo(`#frame-10-revenue-curve-${n}`, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 1.45, ease: "power3.out" }, .72 + index * .13));
+        [1,2,3,4,5].forEach((n, index) => timeline.fromTo(`#frame-10-revenue-tag-${n}`, { y: 24, opacity: 0, scale: .84 }, { y: 0, opacity: 1, scale: 1, duration: .3, ease: "back.out(2)" }, 4.08 + index * .62));
+        timeline.fromTo("#frame-10-revenue-total", { x: 78, opacity: 0, scale: .92 }, { x: 0, opacity: 1, scale: 1, duration: .54, ease: "power4.out" }, 8.02)
+          .fromTo("#frame-10-revenue-total-rule", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: .35, ease: "power2.out" }, 8.3)
+          .fromTo("#frame-10-revenue-bar", { scaleY: 0, opacity: .2 }, { scaleY: 1, opacity: 1, duration: 1.22, ease: "power4.out" }, 8.45);
+        [1,2,3,4,5,6,7,8].forEach((n, index) => timeline.fromTo(`#frame-10-revenue-particle-${n}`, { x: 0, y: 0, scale: 0, opacity: 0 }, { x: (index - 3.5) * 19, y: (index % 3 - 1) * 31 - 32, scale: 1, opacity: 1, duration: .28, ease: "power3.out" }, 9.22 + index * .035));
+        timeline.fromTo("#frame-10-revenue-outcome", { x: -290, opacity: 0, scale: .78 }, { x: 0, opacity: 1, scale: 1, duration: .42, ease: "power4.in" }, 11.08)
+          .fromTo("#frame-10-revenue-cfd", { x: 290, opacity: 0, scale: .78 }, { x: 0, opacity: 1, scale: 1, duration: .42, ease: "power4.in" }, 11.08)
+          .fromTo("#frame-10-revenue-impact", { scale: .05, opacity: 0 }, { scale: 2.7, opacity: 1, duration: .18, ease: "power4.out" }, 11.43)
+          .fromTo("#frame-10-revenue-impact", { scale: 2.7, opacity: 1 }, { scale: 4.5, opacity: 0, duration: .48, ease: "power2.out" }, 11.61)
+          .fromTo("#frame-10-revenue-double", { x: 32, opacity: 0, scale: .9 }, { x: 0, opacity: 1, scale: 1, duration: .45, ease: "back.out(1.5)" }, 11.65);
+        window.__timelines["frame-10-revenue"] = timeline;
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<template>
+  <style>
+    *{box-sizing:border-box}#f2{width:1920px;height:1080px;overflow:hidden;color:#f4f6fb;font-family:Inter,-apple-system,sans-serif}.scene{position:absolute;inset:0;background:#05070b;overflow:hidden}.glow{position:absolute;width:900px;height:900px;left:520px;top:-240px;background:radial-gradient(circle,#8b7cf62f,transparent 66%)}
+    .meta{position:absolute;top:66px;font:500 20px 'JetBrains Mono',monospace;letter-spacing:.13em;color:#9aa3b2}.m1{left:104px}.m2{right:104px}.title{position:absolute;left:104px;top:142px;font:400 88px/1 Georgia,serif}.title em{font-style:normal;color:#8b7cf6}
+    .lane{position:absolute;top:310px;width:360px;height:390px;border:2px solid #2a3140;border-radius:22px;background:#0d1119;padding:34px}.human-lane{left:104px}.agent-lane{right:104px;border-color:#8b7cf677}.lane h3{font:600 20px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9aa3b2}.avatar{margin-top:66px;width:104px;height:104px;border-radius:50%;border:3px solid #f4f6fb;display:grid;place-items:center;font:600 18px 'JetBrains Mono',monospace}.agent-lane .avatar{border-color:#8b7cf6;color:#c0b8ff}
+    .issue{position:absolute;left:615px;top:306px;width:690px;height:330px;border:2px solid #8b7cf6;border-radius:22px;background:#151a24;padding:38px 42px;box-shadow:0 28px 90px #000a;z-index:4}.key{font:600 22px 'JetBrains Mono',monospace;color:#c0b8ff}.issue h2{margin-top:24px;font:400 52px/1.12 Georgia,serif}.chips{display:flex;gap:12px;margin-top:34px}.chip{padding:12px 18px;border:1px solid #2a3140;border-radius:999px;font:600 18px 'JetBrains Mono',monospace;color:#9aa3b2}.chip.active{border-color:#8b7cf6;color:#c0b8ff;background:#8b7cf61d}
+    .comment{position:absolute;left:700px;top:660px;width:530px;padding:20px 26px;border:2px solid #2a3140;border-radius:16px;background:#0d1119;font:500 22px/1.4 Inter,sans-serif}.comment b{color:#8b7cf6}
+    .timeline{position:absolute;left:270px;right:270px;top:750px;height:100px}.line{position:absolute;left:0;right:0;top:24px;height:3px;background:#2a3140}.fill{position:absolute;left:0;top:24px;width:100%;height:3px;background:#8b7cf6;transform-origin:left}.step{position:absolute;top:0;transform:translateX(-50%);text-align:center}.s1{left:4%}.s2{left:50%}.s3{left:96%}.dot{width:48px;height:48px;border:3px solid #8b7cf6;border-radius:50%;background:#05070b;margin:auto}.step span{display:block;margin-top:14px;font:600 17px 'JetBrains Mono',monospace;color:#c0b8ff}
+    .cursor{position:absolute;left:1260px;top:540px;width:0;height:0;border-left:22px solid #f4f6fb;border-top:14px solid transparent;border-bottom:14px solid transparent;filter:drop-shadow(0 5px 10px #000)}
+  </style>
+  <div data-hf-id="hf-16c8" id="f2" data-composition-id="f2" data-start="0" data-duration="10" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-p2o5" id="f2-scene" class="clip scene" data-start="0" data-duration="10" data-track-index="1">
+      <div data-hf-id="hf-5mei" class="glow" data-layout-allow-overflow=""></div><div data-hf-id="hf-5v99" class="meta m1">02 / SHARED WORK OBJECT</div><div data-hf-id="hf-s95r" class="meta m2">CONCEPTUAL VIEW</div><div data-hf-id="hf-mgos" class="title">同一个 <em data-hf-id="hf-wgiu">issue</em></div>
+      <div data-hf-id="hf-il4k" class="lane human-lane"><h3 data-hf-id="hf-lvt9">HUMAN</h3><div data-hf-id="hf-ikmt" class="avatar">ME</div></div><div data-hf-id="hf-m7jk" class="lane agent-lane"><h3 data-hf-id="hf-7n4t">AGENT</h3><div data-hf-id="hf-qeyd" class="avatar">AI</div></div>
+      <div data-hf-id="hf-5u35" class="issue" id="f2-issue"><div data-hf-id="hf-7gfg" class="key">ACME-42</div><h2 data-hf-id="hf-pt2n">修复结账流程中的边界错误</h2><div data-hf-id="hf-exrd" class="chips"><div data-hf-id="hf-2tnz" class="chip">HUMAN</div><div data-hf-id="hf-4zwz" class="chip active" id="f2-agent-chip">AGENT 03</div><div data-hf-id="hf-jlny" class="chip">HIGH</div></div></div>
+      <div data-hf-id="hf-ldur" class="cursor" id="f2-cursor"></div><div data-hf-id="hf-qmw4" class="comment" id="f2-comment"><b data-hf-id="hf-ip5b">AGENT 03</b> · 已定位失败用例，开始修复。</div>
+      <div data-hf-id="hf-jvx5" class="timeline"><div data-hf-id="hf-np12" class="line"></div><div data-hf-id="hf-o6tp" class="fill" id="f2-fill"></div><div data-hf-id="hf-cgom" class="step s1"><div data-hf-id="hf-lu65" class="dot"></div><span data-hf-id="hf-qlg9">ASSIGNED</span></div><div data-hf-id="hf-6ayt" class="step s2"><div data-hf-id="hf-ww7l" class="dot"></div><span data-hf-id="hf-nfir">COMMENTED</span></div><div data-hf-id="hf-5jb0" class="step s3"><div data-hf-id="hf-y34o" class="dot"></div><span data-hf-id="hf-a4h5">IN PROGRESS</span></div></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+    tl.fromTo("#f2 .title",{opacity:0,x:-80},{opacity:1,x:0,duration:.8,ease:"power3.out"},.2);
+    tl.fromTo("#f2 .lane",{opacity:0,y:70},{opacity:1,y:0,duration:.75,stagger:.2,ease:"power4.out"},1.1);
+    tl.fromTo("#f2-issue",{opacity:0,scale:.78},{opacity:1,scale:1,duration:.85,ease:"power3.out"},2.0);
+    tl.fromTo("#f2-cursor",{opacity:0,x:180,y:130},{opacity:1,x:0,y:0,duration:.75,ease:"power3.out"},3.7);
+    tl.to("#f2-agent-chip",{scale:.92,backgroundColor:"#8b7cf64a",duration:.18,ease:"power2.in"},4.45).to("#f2-agent-chip",{scale:1,duration:.35,ease:"power3.out"});
+    tl.to("#f2-issue",{x:320,duration:.85,ease:"power3.inOut"},4.75);
+    tl.fromTo("#f2-comment",{opacity:0,y:45},{opacity:1,y:0,duration:.65,ease:"power3.out"},5.55);
+    tl.fromTo("#f2-fill",{scaleX:0},{scaleX:1,duration:2.5,ease:"power2.inOut"},6.2);
+    tl.fromTo("#f2 .step",{opacity:0,scale:.6},{opacity:1,scale:1,duration:.45,stagger:.72,ease:"power3.out"},6.2);
+    window.__timelines.f2=tl;
+  </script>
+</template>

@@ -1,0 +1,39 @@
+{
+  "id": "yesono_promo_cool_v2_6x6",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": true,
+  "segments": [
+    {
+      "seconds": 6,
+      "seed": 880101,
+      "prompt": "Hyper-stylish cinematic trailer for YesONO 3.0, landscape 16:9. Pitch-black void, anamorphic lens flares, electric yellow and neon green streaks. Giant holographic YES and NO glyphs collide and fuse into a glowing binary market sun. Particles explode into ticker tapes and probability sparks. Ultra sharp, premium crypto-fintech commercial, no UI screenshots, no watermark, no cartoon.\nAudio Chinese female VO intense and cool: 预测市场，正在变成新一代金融基础设施。"
+    },
+    {
+      "seconds": 6,
+      "seed": 880102,
+      "prompt": "Continue YesONO cinematic trailer, match previous energy. A modular market operating system assembles in mid-air: floating glass modules labeled matching, risk, ledger, settlement, custody, interlocking with light beams. Dark chrome, yellow accents, volumetric fog, dramatic orbiting camera. Photoreal sci-fi product film, no flat website screenshots.\nAudio Chinese female VO: YesONO 3.0——不是单一交易应用，而是完整的市场操作系统。"
+    },
+    {
+      "seconds": 6,
+      "seed": 880103,
+      "prompt": "Continue trailer. Extreme close cinematic of a Rust-forged matching engine: translucent order-book layers racing as light tunnels, price-time priority visualized as golden beams locking into deterministic sequence. High-speed macro photography look, shallow DOF, sparks of throughput. Dark premium fintech aesthetic.\nAudio Chinese female VO: 自研 Rust 撮合，链下高性能 CLOB，价格时间优先，毫秒级确定性。"
+    },
+    {
+      "seconds": 6,
+      "seed": 880104,
+      "prompt": "Continue trailer. A glowing order capsule flies through layered holographic gates: Auth, Risk, Funding. Each gate scans, flashes cyan then opens; rejected orders shatter into red shards. Tension, precision, fortress-like security vibe. No ordinary UI mockups.\nAudio Chinese female VO: 没有风控通过，没有资金保护——订单进不了撮合引擎。"
+    },
+    {
+      "seconds": 6,
+      "seed": 880105,
+      "prompt": "Continue trailer. Dual worlds split-screen morph: left = blazing fast off-chain ledger light trails; right = crystalline on-chain vault with blockchain lattice and finality pulses. They braid into one luminous cable. Epic scale, IMAX feel, dark with gold and electric blue.\nAudio Chinese female VO: 链下给你速度，链上给你最终信任。"
+    },
+    {
+      "seconds": 6,
+      "seed": 880106,
+      "prompt": "Final YesONO trailer hero. White-label portals bloom like stadium gates; partner brands as anonymous glowing sigils stream in; markets spawn as constellations. End card: bold wordmark YesONO 3.0, short English line Prediction Market Infrastructure, yellow rim light, hold. Ultra sharp, no watermarks.\nAudio Chinese female VO: 帮合作伙伴快速构建可信、高性能、可扩展的交易市场。YesONO 3.0。"
+    }
+  ]
+}

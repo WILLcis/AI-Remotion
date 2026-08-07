@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #f4f3ee;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-kbh8" id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-835p" id="el-01-agent-constellation" class="scene" data-composition-id="01-agent-constellation" data-composition-src="compositions/frames/01-agent-constellation.html" data-start="0" data-duration="5.55" data-track-index="0"></div>
+      <audio data-hf-id="hf-7ngy" id="el-01-agent-constellation-voice" src="audio/cosyvoice/seg_00.wav" data-start="0" data-duration="2.159333" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-iqtu" id="el-02-unified-board" class="scene" data-composition-id="02-unified-board" data-composition-src="compositions/frames/02-unified-board.html" data-start="5" data-duration="6.45" data-track-index="1"></div>
+      <audio data-hf-id="hf-50e6" id="el-02-unified-board-voice" src="audio/cosyvoice/seg_01.wav" data-start="5" data-duration="3.303" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-wyfp" id="el-03-brand-lockup" class="scene" data-composition-id="03-brand-lockup" data-composition-src="compositions/frames/03-brand-lockup.html" data-start="11" data-duration="4" data-track-index="0"></div>
+      <audio data-hf-id="hf-a47e" id="el-03-brand-lockup-voice" src="audio/cosyvoice/seg_02.wav" data-start="11" data-duration="2.8435" data-track-index="10" data-volume="1"></audio>
+
+      <!-- captions -->
+      <div data-hf-id="hf-1arl" id="el-captions" class="scene" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="15" data-track-index="2"></div>
+
+      <!-- SFX -->
+      <audio data-hf-id="hf-5k3u" id="el-sfx-0" src="assets/sfx/click-soft.mp3" data-start="0" data-duration="0.37" data-track-index="20" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-wwu0" id="el-sfx-1" src="assets/sfx/whoosh-short.mp3" data-start="0" data-duration="0.57" data-track-index="21" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-oh94" id="el-sfx-2" src="assets/sfx/click.mp3" data-start="5" data-duration="0.37" data-track-index="22" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-h613" id="el-sfx-3" src="assets/sfx/whoosh-short.mp3" data-start="5" data-duration="0.57" data-track-index="23" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-tk6v" id="el-sfx-4" src="assets/sfx/ping.mp3" data-start="11" data-duration="1.32" data-track-index="24" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-8vds" id="el-sfx-5" src="assets/sfx/chime.mp3" data-start="11" data-duration="2.5" data-track-index="25" data-volume="0.35"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-agent-constellation", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.55, ease: "power3.in" }, 5);
+        tl.fromTo("#el-02-unified-board", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 5);
+        tl.to("#el-02-unified-board", { scaleX: 0, transformOrigin: "left center", duration: 0.45, ease: "power3.inOut" }, 11);
+        tl.fromTo("#el-03-brand-lockup", { scaleX: 0, transformOrigin: "right center", opacity: 1 }, { scaleX: 1, transformOrigin: "right center", duration: 0.45, ease: "power3.inOut" }, 11);
+        tl.to({}, { duration: 15 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "id": "deepdog_promo_B_v3_hq",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": true,
+  "segments": [
+    {
+      "seconds": 7,
+      "seed": 520201,
+      "caption": "当 AI 同事的数量，是人类同事的十倍、二十倍——协同要怎么跑？",
+      "prompt": "Ultra sharp cinematic deepdog BIOS trailer, landscape 1344x768. Human avatar surrounded by rapidly multiplying agent avatars until the frame feels crowded 10x-20x. Dark premium tech, cyan accents, anamorphic, NO soft screenshot look.\nAudio Chinese female VO: 当 AI 同事的数量，是人类同事的十倍、二十倍——协同要怎么跑？"
+    },
+    {
+      "seconds": 8,
+      "seed": 520202,
+      "caption": "人和 AI 不是两套系统。agent 和人类共享同一套工作对象。",
+      "prompt": "Continue trailer. One glowing task card morphs between human and agent hands identically—assign, comment, advance status. First-class teammates metaphor as light sculpture, ultra sharp.\nAudio Chinese female VO: 人和 AI 不是两套系统。在 BIOS 里，agent 和人类共享同一套工作对象——能被指派、能建单、能评论、能推进状态。AI 是正式成员，不是外挂的机器人。"
+    },
+    {
+      "seconds": 8,
+      "seed": 520203,
+      "caption": "委派可以级联，但每一层都问责于一个具体的人。",
+      "prompt": "Continue trailer. Cascading agent delegation tree in glass neon; every branch snaps back to one accountable human node that locks bright. High clarity motion graphics.\nAudio Chinese female VO: 数量越多，问责越不能丢。委派可以一层层级联，但每一层都归属并问责于一个具体的人，权限不会失控上升。"
+    },
+    {
+      "seconds": 8,
+      "seed": 520204,
+      "caption": "BIOS 是一座控制塔——一屏看清全公司谁在干什么、卡在哪。",
+      "prompt": "Continue trailer. God-view control tower: dense task rivers compress into a clean holographic dashboard; red blockers surface automatically. IMAX scale, tack-sharp.\nAudio Chinese female VO: 人不该去逐个盯几百个 agent。BIOS 是一座控制塔——一屏看清全公司谁在干什么、卡在哪，该升级的自动冒泡，该消化的留在部门内。"
+    },
+    {
+      "seconds": 6,
+      "seed": 520205,
+      "caption": "产出再多，也绕不过验证。无验证，不完成。",
+      "prompt": "Continue trailer. Single AI deliverable pushed into a verification gate; only green pass can close. Hard cut energy, ultra sharp.\nAudio Chinese female VO: 产出再多，也绕不过验证。无验证，不完成。"
+    },
+    {
+      "seconds": 7,
+      "seed": 520206,
+      "caption": "规模翻十倍，边界不会松一寸——每个 agent 只能碰被批准的资源。",
+      "prompt": "Continue trailer. Each agent avatar ringed by crisp dashed security boundary with vault/key/quota glyphs; rings stay razor-sharp as scale multiplies.\nAudio Chinese female VO: 规模翻十倍，边界不会松一寸——每个 agent 只能碰它被批准的资源。"
+    },
+    {
+      "seconds": 7,
+      "seed": 520207,
+      "caption": "BIOS——让十倍以上的 AI 同事，和人类同事，在同一套规则里安全协同。",
+      "prompt": "Final hero. Humans and agents ordered in one OS constellation; lowercase deepdog centers; slogan Your next 10 hires won't be human. Hold, premium finish, ultra sharp.\nAudio Chinese female VO: BIOS——让十倍以上的 AI 同事，和人类同事，在同一套规则里安全协同。"
+    }
+  ]
+}

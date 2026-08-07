@@ -1,0 +1,51 @@
+{
+  "id": "yesono_promo_7x5_1344",
+  "width": 1344,
+  "height": 768,
+  "steps": 24,
+  "continuity_first_frame": false,
+  "segments": [
+    {
+      "seconds": 5,
+      "seed": 305001,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170050.png",
+      "prompt": "Premium landscape product commercial for YesONO 3.0 prediction-market infrastructure. Photoreal UI motion from the given first frame. Keep YesONo logo, Chinese UI text, market cards, yellow Connect button razor-sharp. Subtle slow push-in over the market grid, micro parallax, clean hard cuts feel within one shot, no cartoon, no watermark, no invented logos.\nAudio Chinese female VO: YesONO 3.0，是面向预测市场和事件金融的模块化交易基础设施。"
+    },
+    {
+      "seconds": 5,
+      "seed": 305002,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170205.png",
+      "prompt": "Continue YesONO commercial from first frame. Keep chart lines, probabilities, Buy Yes/No panel sharp. Gentle camera drift across the probability chart and trade panel. Ultra sharp 1344x768 UI.\nAudio Chinese female VO: 它不是单一交易应用，而是一套完整的市场操作系统。"
+    },
+    {
+      "seconds": 5,
+      "seed": 305003,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170210.png",
+      "prompt": "YesONO commercial from first frame. Emphasize order book depth, bid/ask rows, Yes/No pricing. Soft vertical scroll of order book with locked camera. Crisp fintech UI, preserve Chinese labels.\nAudio Chinese female VO: 自研 Rust 撮合引擎，链下高性能 CLOB 订单簿，价格时间优先。"
+    },
+    {
+      "seconds": 5,
+      "seed": 305004,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170213.png",
+      "prompt": "YesONO commercial from first frame. Sports/chess markets sidebar and match list stay sharp. Slow pan from left category list to right trade panel. Clean white UI, yellow accents.\nAudio Chinese female VO: 支持 Outcome 与 CFD 双产品域，共享市场与租户专有市场并存。"
+    },
+    {
+      "seconds": 5,
+      "seed": 305005,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170217.png",
+      "prompt": "YesONO commercial from first frame. Bitcoin Up or Down live chart and countdown stay crisp. Subtle zoom on live timer and Rise/Fall buttons. High-frequency trading energy, photoreal UI.\nAudio Chinese female VO: 订单进入撮合前，完成身份、权限、风控与资金可用性校验。"
+    },
+    {
+      "seconds": 5,
+      "seed": 305006,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170220.png",
+      "prompt": "YesONO commercial from first frame. Create Market modal for crypto stays sharp and centered. Soft focus pulse on yellow 创建市场 button, slight camera push. Preserve Chinese form labels exactly.\nAudio Chinese female VO: 合作伙伴可通过 API、白标前端或嵌入式组件，快速创建和运营自己的交易市场。"
+    },
+    {
+      "seconds": 5,
+      "seed": 305007,
+      "first_frame": "/home/cornerstone/ComfyUI-H3/input/yesono/20260805-170222.png",
+      "prompt": "YesONO commercial from first frame. Configure Market modal with 独赢/大小球/让分 options stays sharp. Slow push to market preview, hold on yellow 下一步. End with confident product close.\nAudio Chinese female VO: 链下高性能交易，链上可信结算。YesONO 3.0，帮助伙伴快速构建可信、高性能、可扩展的交易市场。"
+    }
+  ]
+}

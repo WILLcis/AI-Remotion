@@ -1,0 +1,15 @@
+{
+  "bgm": null,
+  "bgm_pending": false,
+  "voices": [
+    {
+      "provider": "cosyvoice",
+      "speaker": "中文男",
+      "speed": 1.15,
+      "path": "audio/cosyvoice/voiceover.wav",
+      "duration_s": 66.853499,
+      "timings": "audio/cosyvoice/timings.json"
+    }
+  ],
+  "sfx": []
+}

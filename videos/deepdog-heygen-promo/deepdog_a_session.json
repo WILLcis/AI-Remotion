@@ -1,0 +1,49 @@
+{
+  "created_at": 1786001907,
+  "messages": [
+    {
+      "content": "Your BIOS / DeepDog product promo is ready! I've combined the sharp Mandarin narration with gritty tech-noir graphics and your custom studio presenter. Take a look at the final launch video below.",
+      "created_at": 1786002739,
+      "resource_ids": [
+        "video_5w5gr3"
+      ],
+      "role": "model",
+      "type": "resource"
+    },
+    {
+      "content": "I've submitted your BIOS / DeepDog promo for generation! It'll take a few moments to render the full video with your Mandarin speaker and the tech-noir graphics. I'll let you know as soon as it's ready for you to watch.",
+      "created_at": 1786002623,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "I've assembled all the scenes! Now I'm putting them in order on the timeline and starting the final video generation.",
+      "created_at": 1786002600,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Now I'm generating the motion graphics, background music, and typography to bring your BIOS promo to life!",
+      "created_at": 1786002114,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "I'm starting on your BIOS / DeepDog promo! First, I'll generate the landscape studio look for your presenter and prepare the tech-focused brand kit.",
+      "created_at": 1786001941,
+      "role": "model",
+      "type": "text"
+    },
+    {
+      "content": "Create a ~40 second Mandarin Chinese product promo for BIOS / DeepDog (AI workforce OS), landscape 16:9.\n\nFormat: Presenter-led punchy launch promo. The selected presenter speaks to camera between kinetic motion-graphics beats.\n\nPRESENTER IDENTITY (CRITICAL): Keep the selected presenter's mainland Chinese / East Asian appearance. Do NOT replace with a Western presenter.\n\nProduct truth from brief:\n- AI coworkers may outnumber humans 10x.\n- BIOS: humans and agents share one workbench — one screen shows who is doing what and where work is stuck.\n- Every delegation layer is accountable to a concrete human — permission does not escalate out of control.\n- AI output must pass verification gates: 无验证，不完成.\n- BIOS is a control tower: divide work, listen, coordinate, surface risks.\n- Slogan: 当 AI 同事是人类的十倍——BIOS，让人和 AI 在同一套操作系统里安全协同。\n\nStructure (Chinese VO):\n1) Hook on 10x AI coworkers flooding in.\n2) Shared workbench with humans + agents.\n3) Accountability tree collapsing back to one human owner.\n4) Verification gate: green pass / red block.\n5) Control tower dashboard.\n6) End card: BIOS / DeepDog — 人和 AI 安全协同.\n\nTone: sharp, confident Mandarin product launch — not soft lifestyle ad.\n\nThis script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.\n\nSUBTITLES (CRITICAL): Burn in large Simplified Chinese subtitles for every spoken line. White text + dark outline, bottom-safe, synced to speech.\n\nCRITICAL ON-SCREEN TEXT:\n- BIOS\n- 10x AI Coworkers\n- 无验证，不完成\n- Control Tower\n- DeepDog\n\nMedia: selected presenter A-roll + Motion Graphics for agent grids, delegation trees, verification gates, dashboards. Dark product UI aesthetic.\n\nLANGUAGE / VOICE: Mandarin Chinese only, native mainland pronunciation.\n\nSTYLE — DECONSTRUCTED: Dark grey #1a1a1a, rust orange #D4501E, angled type, gritty tech energy, smash cuts.\n\nFRAMING NOTE: Frame the presenter from the chest up, centered in landscape 16:9. Generative-fill horizontally into a modern dark product studio. No black bars.",
+      "created_at": 1786001907,
+      "role": "user",
+      "type": "text"
+    }
+  ],
+  "progress": 100,
+  "session_id": "3666ebc278234bc3afa42988ca85dfb5",
+  "status": "completed",
+  "title": "BIOS/DeepDog Promo",
+  "video_id": "7a7e30779c254068802df4f26bfcad01"
+}

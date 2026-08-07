@@ -1,0 +1,34 @@
+Create a ~40 second Mandarin Chinese product promo for YesONO 3.0, landscape 16:9.
+
+Format: Presenter-led B2B pitch. The selected presenter speaks to camera in a modern fintech studio, with motion-graphics overlays and AI-generated trading infrastructure B-roll between talking beats.
+
+PRESENTER IDENTITY (CRITICAL): The selected presenter is a mainland Chinese professional. Keep the selected presenter's East Asian / Chinese appearance. Do NOT replace with a Western / Caucasian / foreign presenter. Do NOT describe a different face.
+
+Audience: partners, institutions, market makers, and platform operators.
+
+Core message in Chinese narration:
+- Hook: 预测市场和事件金融正在成为新一代交易入口，但真正难的不是做一个页面，而是整套交易基础设施。
+- Problem: 市场创建、准入风控、撮合、账本、链上资金托管、清算和做市，缺一不可。
+- Solution: YesONO 3.0 是面向预测市场与事件金融的模块化交易操作系统。
+- Proof: 自研 Rust 撮合引擎；链下高性能 CLOB；链下账本 + 链上资金托管；多层风控；Outcome 与 CFD；多租户与白标。
+- CTA: YesONO 3.0，为预测市场打造可信、高性能、可扩展的交易基础设施。
+
+Tone: confident institutional Mandarin.
+
+This script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.
+
+SUBTITLES (CRITICAL): Burn in large, readable Simplified Chinese subtitles for every spoken line. White text with dark outline/shadow, bottom-safe area, never covering the presenter's face. Sync tightly to speech. No English-only captions for spoken Chinese.
+
+CRITICAL ON-SCREEN TEXT (exact, separate from captions):
+- YesONO 3.0
+- Prediction Markets OS
+- Rust Matching Engine
+- Off-chain Ledger + On-chain Custody
+
+Media: selected presenter for A-roll; Motion Graphics for architecture; AI visuals for abstract rails. Dark fintech aesthetic.
+
+LANGUAGE / VOICE (CRITICAL): Mandarin Chinese only (普通话). Native mainland Chinese pronunciation. No foreign accent.
+
+STYLE — DIGITAL GRID: Dark #0a0a0a, cyan #00E5FF, amber #FFB300. Clean wipe transitions. Premium restrained.
+
+FRAMING NOTE: The selected avatar image may not perfectly match landscape 16:9. Frame the presenter from the chest up, centered in the landscape canvas. Use AI Image tool to generative fill to extend the scene horizontally with a complementary modern fintech studio background. Do NOT add black bars or pillarboxing. The avatar should feel natural in the 16:9 frame.

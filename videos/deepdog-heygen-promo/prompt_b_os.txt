@@ -1,0 +1,33 @@
+Create a ~70 second Mandarin Chinese product concept film for BIOS / DeepDog, landscape 16:9.
+
+Format: Voice-over narration only. NO on-camera presenter. Pure cinematic motion graphics + AI-generated OS metaphors.
+
+Storyboard to convey (Chinese VO, follow beat order):
+1) One human avatar, then dozens of agent avatars crowd in — AI coworkers 10x–20x humans. How does collaboration run?
+2) Humans and AI are not two systems. In BIOS they share the same work objects — assignable, ticketable, commentable, stateful. AI is a formal teammate, not a bolted-on bot.
+3) Delegation trees can cascade, but every layer remains accountable to a concrete human — permissions do not rise out of control.
+4) People should not babysit hundreds of agents. BIOS is a control tower — one screen shows company-wide activity and blockers; escalate what must escalate, keep the rest local.
+5) Output must pass a verification gate before close — 无验证，不完成.
+6) Scale 10x without loosening boundaries — each agent only touches approved resources.
+7) End card: BIOS——让十倍以上的 AI 同事，和人类同事，在同一套规则里安全协同。
+
+Tone: cinematic, precise, ambitious Mandarin infrastructure film.
+
+This script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.
+
+SUBTITLES (CRITICAL): Burn in large Simplified Chinese subtitles for every spoken line. White text + dark outline, bottom-safe, synced to speech. No English-only captions for Chinese speech.
+
+CRITICAL ON-SCREEN TEXT:
+- BIOS
+- DeepDog
+- Shared Workbench
+- Accountability
+- Verification Gate
+- Control Tower
+- 无验证，不完成
+
+Media: VO only. Motion Graphics for grids/trees/gates/dashboards. AI visuals for OS metaphors. Minimal stock. No talking head.
+
+LANGUAGE / VOICE: Mandarin Chinese only, native mainland pronunciation.
+
+STYLE — DATA DRIFT: purple #7c3aed, cyan #06b6d4, deep black, liquid dissolves, futuristic thin type.

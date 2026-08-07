@@ -1,38 +1,56 @@
 # AI-Remotion Video Producer
 
-This is the repository-local entry contract for **any AI agent** that can read files and run local shell commands. It does not require a particular agent host, global skill directory, cloud provider, or automatic profile discovery.
+Host-neutral entry for **any AI agent** (Codex, Claude, Cursor, Devin, …) that can read files and run local shell commands. The **human talks; you run the CLI**. Do not ask the user to type `npm run video:intake`, `video:route`, or flag env vars.
 
 ## Purpose
 
-Route one structured Video Job to exactly one AI-Remotion video-production specialist, preserve review gates, and return a structured result. The executable source of truth is:
+Turn a plain-language request (or an existing Job file) into exactly one primary specialist run, stop at review gates, and return a structured result.
+
+Executable source of truth:
 
 - Schema: `src/schemas/videoJob.ts`
-- Route command: `npm run video:route -- --job <job.yaml|job.json>`
+- Intake (optional internal check): `npm run video:intake -- --request <request.json>`
+- Route: `npm run video:route -- --job <job.yaml|job.json>`
 - Kill switch: `FLAGS.VIDEO_AGENT_PLATFORM`
 
-Read `AGENTS.md` before changing repository files.
+Read `AGENTS.md` before changing repository files. Paste-ready human prompt: `agents/START_HERE.md`.
 
-## Required input
+## Plain-language entry (default)
 
-Provide a Video Job YAML or JSON file. The complete field contract, supported workflow/source values, and routing precedence live in `src/schemas/videoJob.ts`; `npm run video:route` is the authoritative validation and routing operation.
+When the user did **not** hand you a Job file:
 
-Do not invent source files, asset rights, provider credentials, approvals, product facts, or factual claims. If required input is missing, return `blocked` or ask the parent/user before production.
+1. Read this file and `SPECIALISTS.md`. For ambiguous intake rules, also read `agents/video-job-intake/AGENT.md`.
+2. Extract only facts the user supplied. **Do not invent** duration, aspect ratio, language, local media paths, provider names, rights, or approvals.
+3. If anything required is missing, ask the user short questions and stop. Do not invent defaults.
+4. You may run intake yourself as a check:
 
-## Required procedure
+   ```bash
+   npm run video:intake -- --request path/to/request.json
+   ```
 
-1. Start in the repository root and ensure the platform is explicitly enabled for this invocation:
+   Present a brief draft summary. After the user confirms the draft (one sentence is enough), write the Job to `state/jobs/<job-id>.yaml` (create the directory if needed). All `review_gates` stay `pending`.
+5. Enable the platform **yourself** and route:
 
    ```bash
    FLAG_video_agent_platform='{"enabled":true}' \
-     npm run video:route -- --job path/to/job.yaml
+     npm run video:route -- --job state/jobs/<job-id>.yaml
    ```
 
-2. Treat the route JSON as authoritative. It provides `primary_agent`, `renderer`, `provider_requirements`, delegated capabilities, and pending gates.
-3. Read `SPECIALISTS.md`, then read only the profile mapped to `primary_agent`. That profile is repository Markdown, so any host may read and follow it directly.
-4. A Job has exactly one primary. Only that primary may modify shared script, storyboard, render plan, root timeline, or QA state. Delegated work returns bounded artifacts only.
-5. If any `requires_approval` gate is present, stop at the appropriate phase and return `needs_approval`. Never infer approval from a passing check, a fixture, a previous render, or an earlier conversation.
-6. Do not call a paid provider, cloud service, media search/scrape operation, preview, or final render without the user's current explicit approval. `final_render` requires separate explicit approval.
-7. When no gate blocks the approved scope, follow the mapped specialist profile, preserve user-owned artifacts, and run its required local verification.
+6. Treat the route JSON as authoritative. Read only the mapped specialist profile (`.devin/agents/<primary>.md` or the path in `SPECIALISTS.md`).
+7. Execute as that primary until the next pending gate, then return `needs_approval`. Never approve gates yourself. Never call paid/cloud services or `final_render` without the user's current explicit approval.
+8. **Never** hand CLI steps back to the user. Stop only for: missing info, review gates, paid-provider approval, or a real blocker.
+
+## Job-file entry
+
+If the user already provided a Job YAML/JSON path, skip draft writing: enable the flag, run `video:route`, then follow the same specialist + gate rules above.
+
+## Hard rules
+
+- One Job = one `primary_agent`. Do not open a second primary.
+- Do not route around the flag by selecting a specialist directly.
+- Do not invent source files, asset rights, credentials, product facts, or factual claims.
+- Preserve source-video immutability for recut / captions / translation.
+- Do not commit generated video, audio, previews, snapshots, local outputs, or secrets.
 
 ## Result contract
 
@@ -50,18 +68,11 @@ Return exactly one result object:
 ```
 
 - `needs_approval`: name the exact pending gate and the next approval required.
-- `blocked`: name the missing/invalid input, rights constraint, missing local asset, or environment failure.
-- `failed`: include only real command/validation evidence; do not fabricate completion.
-
-## Safety and rollback
-
-- Keep `FLAGS.VIDEO_AGENT_PLATFORM` as the entry-point kill switch; do not route around it by selecting a profile directly.
-- Preserve source-video immutability for recut, captions, and translation workflows.
-- Do not commit generated video, audio, previews, snapshots, local outputs, or secrets.
-- Keep changes scoped to the selected Job. If a request requires a new workflow, source type, provider, or renderer, stop and create a separately scoped plan first.
+- `blocked`: name the missing input, rights constraint, missing asset, or environment failure.
+- `failed`: include only real command/validation evidence.
 
 ## Minimal handoff prompt
 
 ```text
-Read agents/video-producer/AGENT.md. Validate and route <job-file> with the Video Agent Platform flag enabled. Read only the mapped specialist profile. Do not approve pending gates, call paid/cloud services, or render without my explicit approval. Return the required result JSON.
+Read agents/START_HERE.md and agents/video-producer/AGENT.md. Do the video work I describe next yourself (intake/Job/route/specialist). Ask me only when something required is missing, or when storyboard / final_render / paid providers need approval. Do not ask me to run CLI commands.
 ```

@@ -1,0 +1,33 @@
+Create a ~150-165 second landscape 16:9 Mandarin product promo for YesONO 3.0 (spoken continuously as "Yes or No 3.0"). Crisp, decisive Chinese male VO, brisk energy, natural pauses at punctuation. Prefer premium fintech motion graphics; optional brief professional presenter only if helpful.
+
+CONTENT (Mandarin narration; speak YesONO 3.0 as Yes or No 3.0):
+
+Scene 1 Hook: 想开一家交易所？别自己造轮子。Yes or No 3.0，一套现成的交易所操作系统——治理、市场、交易、资金、做市，五层能力全部打包好。你只做一件事：把它变成你的生意，今天签约，明天就能开市交易。
+
+Scene 2 Pain: 自建交易场门槛看不见：撮合引擎、预交易风控、资金账本、链上清算、KYC合规、冷启动流动性——每一项都要专业团队打磨数年。第一笔手续费到账前，先烧光的是时间、团队和客户的信任。
+
+Scene 3 OS: Yes or No 把能力下沉为平台层：治理、市场定价、交易账本、资金链上、做市生态由平台扛住。你只留经营层——品牌、客户、玩法、增长。
+
+Scene 4 Tenant: 每个租户都是独立经营域，账户、结算、数据边界清晰，风险互不牵连。客户、账、牌子是你的，平台不越界。
+
+Scene 5 Markets: 开市场像上架商品。共享订单簿第一天就有深度；专有市场定义独家玩法与定价。从签约到开市，以天计，不以年计。
+
+Scene 6 Dual: Outcome 预测市场与 CFD 差价合约都能开。客户想交易的，你都开得出来。
+
+Scene 7 Pipeline: 每笔订单平台跑全程：风控、撮合、入账、清算，全程留痕可审计。这支团队你不用自己养。
+
+Scene 8 Trust: 资金账本逐笔入账并在链上取得最终性，用户可验证——不是一句空话。
+
+Scene 9 Liquidity: 做市商工作台自带流动性；哪怕预算一万美元，也能用上投行级做市策略。
+
+Scene 10 Revenue: 手续费、专有市场溢价、做市协同、数据、资产服务五条收入曲线；Outcome 加 CFD，两倍经营面。
+
+Scene 11 CTA: 权威安全清算审计平台扛；客户玩法品牌增长归你。你负责生意，交易所交给我们——这就是 Yes or No 3.0。
+
+STYLE:
+Dark navy fintech commercial (#0A101C), gold accents (#D4B36A), cool blue (#6FA3DC), emerald for trust (#6FC2A0). Hard cuts / quick white flashes, no slow dissolves. Clean negative space, razor-sharp motion graphics, premium product-launch energy. Ultra sharp, maximum clarity.
+
+CRITICAL ON-SCREEN TEXT:
+Only show exact allowlisted short titles when needed. Never invent slogans, never garble Chinese, never add unrelated marketing copy. If text cannot be perfect, use graphics-only.
+Allowed examples only: "YesONO 3.0", "想开一家交易所？", "别自己造轮子", "先烧光的是信任", "你只留经营层", "这是你的地盘", "以天计，不以年计", "你都开得出来", "可验证", "两倍经营面", "平台扛", "你专注", "你负责生意，交易所交给我们".
+Brand on screen: YesONO. Spoken: Yes or No 3.0.

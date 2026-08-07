@@ -1,0 +1,52 @@
+{
+  "total_duration_s": 15,
+  "width": 1920,
+  "height": 1080,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 1,
+      "start": 0,
+      "end": 2.279,
+      "text": "一个人带起一队编码智能体。",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "一个人带起一队编码智能体。",
+          "start": 0,
+          "end": 2.159
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 2,
+      "start": 5,
+      "end": 8.423,
+      "text": "deepdog从一个控制台统一派单、追踪进度。",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "deepdog从一个控制台统一派单、追踪进度。",
+          "start": 5,
+          "end": 8.303
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 3,
+      "start": 11,
+      "end": 13.964,
+      "text": "让每个编码智能体都成为真正队友。",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "让每个编码智能体都成为真正队友。",
+          "start": 11,
+          "end": 13.844
+        }
+      ]
+    }
+  ]
+}

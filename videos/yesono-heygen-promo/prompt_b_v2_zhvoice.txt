@@ -1,0 +1,40 @@
+Create a ~45 second Mandarin Chinese product concept film for YesONO 3.0, landscape 16:9.
+
+Format: Voice-over narration only. NO on-camera presenter. No talking head. Pure cinematic motion design + AI-generated futurescape + motion graphics.
+
+Audience: crypto/fintech founders and operators evaluating infrastructure partners for prediction markets and event finance.
+
+Story arc in Chinese VO:
+1) Open on a chaotic fragmented market: many frontends, no shared rails.
+2) Reveal the missing layer: a market operating system that connects creation, trading, risk, matching, ledger, custody, settlement, and market making.
+3) Dive into YesONO 3.0 architecture as luminous modular systems: API gateway and identity gates; Rust matching engine with price-time priority CLOB; off-chain double-entry ledger synchronized with on-chain custody; Outcome markets and CFD risk domains; shared books with tenant isolation; maker management and audit trails.
+4) Close on partners launching markets quickly on trusted rails. End card: YesONO 3.0 — 预测市场与事件金融的交易基础设施.
+
+Tone: cinematic, ambitious, technical poetry — premium infrastructure launch film, Mandarin VO, calm authority.
+
+This script is a concept and theme to convey — not a verbatim transcript. You have full creative freedom to expand, elaborate, add examples, and fill the duration naturally. Do not pad with silence or pauses.
+
+CRITICAL ON-SCREEN TEXT (exact):
+- YesONO 3.0
+- Market Operating System
+- Match · Ledger · Custody · Risk
+- Outcome + CFD
+- Build Markets. Not Infrastructure.
+
+Media guidance:
+- Voice-over narration only.
+- Prefer AI-generated cinematic visuals for abstract infrastructure metaphors.
+- Prefer Motion Graphics for system diagrams, order-flow particles, vault seals, and chapter titles.
+- Minimal stock footage. No presenter face. No selfie-style shots.
+
+STYLE — DATA DRIFT:
+Iridescent purple #7c3aed, cyan #06b6d4, deep black.
+Fluid morphing compositions, thin futuristic type, liquid dissolves.
+Particles coalesce into architecture labels and numbers.
+Premium launch-film energy, never cartoonish.
+
+
+LANGUAGE / VOICE (CRITICAL):
+Narration language is Mandarin Chinese only (普通话).
+Use a native mainland Chinese speaking voice — clear, natural Chinese, no foreign accent, no Chinglish pronunciation, no English-accented Mandarin.
+All spoken lines must be Chinese. On-screen English labels may remain as brand keywords.

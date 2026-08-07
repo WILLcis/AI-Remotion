@@ -1,0 +1,24 @@
+{
+  "id": "deepdog_promo_hq_3x10_1216",
+  "width": 1216,
+  "height": 672,
+  "steps": 20,
+  "continuity_first_frame": true,
+  "segments": [
+    {
+      "seconds": 10,
+      "seed": 190901,
+      "prompt": "Premium dark-tech product commercial for deepdog, open-source AI agent workforce platform. Native cinematic 16:9 1344x768, sharp detail, clean glass UI, cyan accent on charcoal, shallow DOF, subtle grain, photoreal, not cartoon.\n\nSegment 1 of 3 — problem setup only (do not show final slogan card yet).\n[0s-4s] Night loft: exhausted founder at laptop, cascading terminal code reflected in glasses, lonely tension.\n[4s-8s] Split-screen metaphor: multiple coding agents thrashing without management — messy terminals, red alerts, no shared board.\n[8s-12s] Hard cut to a dark empty glass wall where a faint wireframe of an issue board begins to assemble, cyan lines drawing in.\n\nCamera: premium commercial, hard cuts, razor sharp UI edges, no watermarks, no misspellings if any UI labels appear.\nAudio/VO Chinese female product voice:\n[0-6] 编码智能体已经很聪明了。可是，没人管它们。\n[6-12] soft unresolved tech drone under rain-of-keystrokes SFX. No end sting."
+    },
+    {
+      "seconds": 10,
+      "seed": 190902,
+      "prompt": "Continue the same deepdog premium dark-tech commercial. Match previous last frame continuity: luminous cyan glass issue board in a dark command loft. Sharp 1344x768, photoreal UI.\n\nSegment 2 of 3 — product reveal.\n[0s-4s] Issue board fully lit: agent avatars claim tickets like teammates, progress bars advance, live comments.\n[4s-8s] Control tower wide: curved glass dashboard of agent runtimes, CPU/GPU meters, verification queue flipping to green checks.\n[8s-12s] Hands assign a task card to agent \"coder\"; work starts immediately; skill cards cascade: Deploy, Tests, Code Review.\n\nHard cuts, sharp text if any, no slogan end card yet.\nAudio/VO Chinese female:\n[0-6] deepdog，把编码智能体变成真正的队友。\n[6-12] 在同一个议题看板里派单，就像派给同事。完整任务生命周期，没有静默失败。 Modern tech pulse bed."
+    },
+    {
+      "seconds": 10,
+      "seed": 190903,
+      "prompt": "Continue the same deepdog premium dark-tech commercial from previous control-tower / skill-card moment. Sharp 1344x768 photoreal.\n\nSegment 3 of 3 — payoff and CTA.\n[0s-4s] Hybrid team montage: human + agents collaborating around one glowing board, calm confidence.\n[4s-8s] Open-source trust beat: local machine and private cloud icons, lock motif, code stays on your infra — no third-party exfil vibe.\n[8s-12s] Final hero end card: lowercase wordmark \"deepdog\" perfectly spelled, English slogan exactly \"Your next 10 hires won't be human.\", cyan rim light, hold.\n\nHard cuts, no watermarks, no Chinese characters on the final English slogan card.\nAudio/VO Chinese female:\n[0-6] 每个解法都能沉淀为团队技能。\n[6-12] deepdog 完全开源。现在，雇佣你的第一位 AI 员工。 Score resolves cleanly."
+    }
+  ]
+}
