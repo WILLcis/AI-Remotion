@@ -16,9 +16,10 @@ const project = fileURLToPath(new URL("..", import.meta.url));
 const cv3 = requireCosyVoice3Config();
 const clips = JSON.parse(readFileSync(path.join(project, "clips.json"), "utf8"));
 const outDir = path.join(project, "audio", "cosyvoice");
-const targetSpeed = Number(clips.voice.speed || 1.1);
-const gapMs = Number(clips.voice.sentence_gap_ms || 160);
-const maxSeconds = Number(clips.seconds_per_clip || 15);
+const targetSpeed = Number(clips.voice.speed || 1.05);
+const gapMs = Number(clips.voice.sentence_gap_ms || 120);
+const maxSeconds = Number(clips.seconds_per_clip || 22);
+const maxAtempo = Number(clips.voice.max_atempo || 1.2);
 
 rmSync(outDir, {force: true, recursive: true});
 mkdirSync(outDir, {recursive: true});
@@ -49,13 +50,30 @@ function atempoChain(factor) {
 }
 
 function splitSentences(text) {
-  // Pause only on sentence enders — fewer TTS calls, still natural breaths.
+  // Pause on sentence enders; also break very long clauses on commas.
   const parts = text
-    .split(/(?<=[。！？])/)
+    .split(/(?<=[。！？；])/)
     .map((s) => s.trim())
     .filter(Boolean);
   const merged = [];
   for (const p of parts) {
+    if (p.length > 42) {
+      const chunks = p
+        .split(/(?<=[，、：])/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      let buf = "";
+      for (const c of chunks) {
+        if ((buf + c).length > 42 && buf) {
+          merged.push(buf);
+          buf = c;
+        } else {
+          buf += c;
+        }
+      }
+      if (buf) merged.push(buf);
+      continue;
+    }
     if (merged.length && (merged[merged.length - 1].length < 8 || p.length < 4)) {
       merged[merged.length - 1] += p;
     } else {
@@ -65,10 +83,20 @@ function splitSentences(text) {
   return merged.length ? merged : [text];
 }
 
-async function ttsToWav(text, wavPath, speed) {
+async function ttsToWav(text, wavPath, speed, attempt = 1) {
   const pcmPath = wavPath.replace(/\.wav$/, ".pcm");
-  const buf = await cosyVoice3ZeroShotPcm(text, cv3);
-  writeFileSync(pcmPath, buf);
+  try {
+    const buf = await cosyVoice3ZeroShotPcm(text, cv3);
+    writeFileSync(pcmPath, buf);
+  } catch (error) {
+    if (attempt < 4) {
+      const wait = attempt * 2500;
+      console.warn(`retry ${attempt}/3 after ${(error && error.message) || error} …`);
+      await new Promise((r) => setTimeout(r, wait));
+      return ttsToWav(text, wavPath, speed, attempt + 1);
+    }
+    throw error;
+  }
   execFileSync("ffmpeg", [
     "-y",
     "-v",
@@ -145,21 +173,27 @@ for (const [index, clip] of clips.clips.entries()) {
   let duration = probeDuration(rawWav);
   let appliedSpeed = targetSpeed;
   if (duration > maxSeconds - 0.12) {
-    const extra = duration / (maxSeconds - 0.18);
-    appliedSpeed = targetSpeed * extra;
-    execFileSync("ffmpeg", [
-      "-y",
-      "-v",
-      "error",
-      "-i",
-      rawWav,
-      "-filter:a",
-      atempoChain(extra),
-      "-ar",
-      "48000",
-      wavPath,
-    ]);
-    duration = probeDuration(wavPath);
+    // Soft cap: never chipmunk past maxAtempo total relative to already-applied targetSpeed.
+    const needed = duration / (maxSeconds - 0.18);
+    const extra = Math.min(needed, maxAtempo / Math.max(targetSpeed, 0.01));
+    if (extra > 1.01) {
+      appliedSpeed = targetSpeed * extra;
+      execFileSync("ffmpeg", [
+        "-y",
+        "-v",
+        "error",
+        "-i",
+        rawWav,
+        "-filter:a",
+        atempoChain(extra),
+        "-ar",
+        "48000",
+        wavPath,
+      ]);
+      duration = probeDuration(wavPath);
+    } else {
+      execFileSync("ffmpeg", ["-y", "-v", "error", "-i", rawWav, "-c", "copy", wavPath]);
+    }
   } else {
     execFileSync("ffmpeg", ["-y", "-v", "error", "-i", rawWav, "-c", "copy", wavPath]);
   }

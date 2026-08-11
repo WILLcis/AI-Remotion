@@ -1,0 +1,29 @@
+{
+  "provider": "cosyvoice-clone",
+  "model": "Fun-CosyVoice3-0.5B-2512",
+  "clip": "01-hook",
+  "reference": "episodes/res/audio/cosyvoice_male.mp3",
+  "reference_text": "你凝视深渊太久，终将成为深渊。你若想征服世界，先得征服你自己。",
+  "spoken": "想开一家交易所？别自己造轮子。Yes or No 三点零，一套现成的交易所操作系统——治理、市场、交易、资金、做市，五层能力全部打包好。你只做一件事：把它变成你的生意。今天签约，明天就能开市交易。",
+  "caption": "想开一家交易所？别自己造轮子。Yes or No 3.0，一套现成的交易所操作系统——治理、市场、交易、资金、做市，五层能力全部打包好。你只做一件事：把它变成你的生意。今天签约，明天就能开市交易。",
+  "phrases": [
+    "想开一家交易所？",
+    "别自己造轮子。",
+    "Yes or No 三点零，",
+    "一套现成的交易所操作系统——",
+    "治理、",
+    "市场、",
+    "交易、",
+    "资金、",
+    "做市，",
+    "五层能力全部打包好。",
+    "你只做一件事：",
+    "把它变成你的生意。",
+    "今天签约，",
+    "明天就能开市交易。"
+  ],
+  "duration": 24.426,
+  "speed": 1,
+  "path": "audio/clip01_voiceover.wav",
+  "note": "Opening discard-prefix trim avoids 试想/设想; comma breaths retained"
+}

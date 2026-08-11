@@ -1,0 +1,8 @@
+[0:v]setpts=PTS*1.045948,fps=30[base];
+[base]drawtext=fontfile=/System/Library/Fonts/STHeiti Light.ttc:text='想开一家交易所？':fontsize=48:fontcolor=white:borderw=3:bordercolor=black@0.75:x=(w-text_w)/2:y=h-120:enable='between(t\,0.080\,1.543)'[dt0];
+[dt0]drawtext=fontfile=/System/Library/Fonts/STHeiti Light.ttc:text='别自己造轮子。':fontsize=48:fontcolor=white:borderw=3:bordercolor=black@0.75:x=(w-text_w)/2:y=h-120:enable='between(t\,1.543\,2.823)'[dt1];
+[dt1]drawtext=fontfile=/System/Library/Fonts/STHeiti Light.ttc:text='Yes or No 3.0，一套现成的交易所操作系统——':fontsize=48:fontcolor=white:borderw=3:bordercolor=black@0.75:x=(w-text_w)/2:y=h-120:enable='between(t\,2.823\,7.943)'[dt2];
+[dt2]drawtext=fontfile=/System/Library/Fonts/STHeiti Light.ttc:text='治理、市场、交易、资金、做市，五层能力全部打包好。':fontsize=48:fontcolor=white:borderw=3:bordercolor=black@0.75:x=(w-text_w)/2:y=h-120:enable='between(t\,7.943\,12.514)'[dt3];
+[dt3]drawtext=fontfile=/System/Library/Fonts/STHeiti Light.ttc:text='你只做一件事：把它变成你的生意。':fontsize=48:fontcolor=white:borderw=3:bordercolor=black@0.75:x=(w-text_w)/2:y=h-120:enable='between(t\,12.514\,15.440)'[dt4];
+[dt4]drawtext=fontfile=/System/Library/Fonts/STHeiti Light.ttc:text='今天签约，明天就能开市交易。':fontsize=48:fontcolor=white:borderw=3:bordercolor=black@0.75:x=(w-text_w)/2:y=h-120:enable='between(t\,15.440\,18.000)'[dt5];
+[dt5]null[v]

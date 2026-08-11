@@ -1,0 +1,15 @@
+[0:v]setpts=PTS*1.409952,fps=30[base];
+[base][2:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,0.000\,1.476)'[o0];
+[o0][3:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,1.676\,3.316)'[o1];
+[o1][4:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,3.516\,5.876)'[o2];
+[o2][5:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,6.026\,8.586)'[o3];
+[o3][6:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,8.736\,9.776)'[o4];
+[o4][7:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,9.866\,10.786)'[o5];
+[o5][8:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,10.876\,11.556)'[o6];
+[o6][9:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,11.646\,12.766)'[o7];
+[o7][10:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,12.856\,13.696)'[o8];
+[o8][11:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,13.846\,16.086)'[o9];
+[o9][12:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,16.286\,18.366)'[o10];
+[o10][13:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,18.516\,19.996)'[o11];
+[o11][14:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,20.196\,21.516)'[o12];
+[o12][15:v]overlay=x=(W-w)/2:y=H-h-24:enable='between(t\,21.666\,24.426)'[o13]

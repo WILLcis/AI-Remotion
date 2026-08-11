@@ -1,0 +1,5 @@
+file '/Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-heygen-cv3-15s/audio/s0.wav'
+file '/Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-heygen-cv3-15s/audio/sg0.wav'
+file '/Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-heygen-cv3-15s/audio/s1.wav'
+file '/Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-heygen-cv3-15s/audio/sg1.wav'
+file '/Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-heygen-cv3-15s/audio/s2.wav'

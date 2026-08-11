@@ -1,0 +1,27 @@
+Create ONE Mandarin fintech product promo clip for YesONO 3.0. Landscape 16:9.
+
+TARGET DURATION: approximately 21 seconds (about 20–22s). Keep it tight. Do not pad with silence.
+
+FORMAT: Voice-over only. NO on-camera presenter. NO talking head. Pure premium motion graphics + AI-generated fintech visuals.
+
+NARRATION LANGUAGE: Mandarin Chinese. Keep VO concise and energetic so total runtime stays near 21s.
+Use this exact meaning (you may generate temporary VO; final mix will be replaced with our CosyVoice track of the same lines):
+想开一家交易所？别自己造轮子。Yes or No 3.0，一套现成的交易所操作系统——治理、市场、交易、资金、做市，五层能力全部打包好。
+
+VISUAL BEATS (Clip 01 钩子 — hard cuts / quick white flashes, 4 shots):
+1) Dark navy (#0A101C) grid lights inward from edges; gold serif title 想开一家交易所？
+2) Hard cut to 别自己造轮子; five glowing capability orbs assemble labeled 治理 / 市场 / 交易 / 资金 / 做市
+3) Orbs merge into a luminous 3D exchange-OS module: YesONO 3.0 + 交易所操作系统 — show blockchain/trading metaphors (candlesticks, order flow, chain links, coin glyphs)
+4) Pull back to gold seal lockup; end title 把它变成你的生意
+
+STYLE:
+Dark navy fintech commercial (#0A101C), brass/gold (#D4B36A), harbor blue (#6FA3DC), emerald (#6FC2A0).
+Hard cuts / flash-white transitions. Dense animated motion — NOT PowerPoint, NOT static text cards.
+Ultra sharp. No cartoons. No real people. No non-YesONO brands.
+
+CRITICAL ON-SCREEN TEXT (exact only):
+- YesONO 3.0
+- 想开一家交易所？
+- 别自己造轮子
+- 交易所操作系统
+- 把它变成你的生意

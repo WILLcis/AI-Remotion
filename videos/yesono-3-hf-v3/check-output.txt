@@ -1,0 +1,311 @@
+
+> check
+> npx --yes hyperframes@0.7.97 check
+
+◆  Checking yesono-3-hf-v3
+[hyperframes] browserGpuMode probe → hardware (WebGL renderer vendor="Google Inc. (Apple)" renderer="ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Pro, Unspecified Version)")
+
+Lint
+  ℹ pointer_events_none: `#root` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/captions.html #root t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="01-hook-shot-1" starts with a digit, so the common selector `#01-hook-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html #01-hook-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="01-hook-shot-2" starts with a digit, so the common selector `#01-hook-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html #01-hook-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="01-hook-shot-3" starts with a digit, so the common selector `#01-hook-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html #01-hook-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="01-hook-shot-4" starts with a digit, so the common selector `#01-hook-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html #01-hook-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="01-hook-flash" starts with a digit, so the common selector `#01-hook-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html #01-hook-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/01-hook.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="02-build-pain-shot-1" starts with a digit, so the common selector `#02-build-pain-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html #02-build-pain-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-build-pain-shot-2" starts with a digit, so the common selector `#02-build-pain-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html #02-build-pain-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-build-pain-shot-3" starts with a digit, so the common selector `#02-build-pain-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html #02-build-pain-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-build-pain-shot-4" starts with a digit, so the common selector `#02-build-pain-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html #02-build-pain-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-build-pain-flash" starts with a digit, so the common selector `#02-build-pain-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html #02-build-pain-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/02-build-pain.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="03-exchange-os-shot-1" starts with a digit, so the common selector `#03-exchange-os-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html #03-exchange-os-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="03-exchange-os-shot-2" starts with a digit, so the common selector `#03-exchange-os-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html #03-exchange-os-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="03-exchange-os-shot-3" starts with a digit, so the common selector `#03-exchange-os-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html #03-exchange-os-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="03-exchange-os-shot-4" starts with a digit, so the common selector `#03-exchange-os-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html #03-exchange-os-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="03-exchange-os-flash" starts with a digit, so the common selector `#03-exchange-os-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html #03-exchange-os-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/03-exchange-os.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="04-tenant-shot-1" starts with a digit, so the common selector `#04-tenant-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html #04-tenant-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="04-tenant-shot-2" starts with a digit, so the common selector `#04-tenant-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html #04-tenant-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="04-tenant-shot-3" starts with a digit, so the common selector `#04-tenant-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html #04-tenant-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="04-tenant-shot-4" starts with a digit, so the common selector `#04-tenant-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html #04-tenant-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="04-tenant-flash" starts with a digit, so the common selector `#04-tenant-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html #04-tenant-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/04-tenant.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="05-list-market-shot-1" starts with a digit, so the common selector `#05-list-market-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html #05-list-market-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-list-market-shot-2" starts with a digit, so the common selector `#05-list-market-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html #05-list-market-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-list-market-shot-3" starts with a digit, so the common selector `#05-list-market-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html #05-list-market-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-list-market-shot-4" starts with a digit, so the common selector `#05-list-market-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html #05-list-market-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-list-market-flash" starts with a digit, so the common selector `#05-list-market-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html #05-list-market-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/05-list-market.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="06-outcome-cfd-shot-1" starts with a digit, so the common selector `#06-outcome-cfd-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html #06-outcome-cfd-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="06-outcome-cfd-shot-2" starts with a digit, so the common selector `#06-outcome-cfd-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html #06-outcome-cfd-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="06-outcome-cfd-shot-3" starts with a digit, so the common selector `#06-outcome-cfd-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html #06-outcome-cfd-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="06-outcome-cfd-shot-4" starts with a digit, so the common selector `#06-outcome-cfd-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html #06-outcome-cfd-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="06-outcome-cfd-flash" starts with a digit, so the common selector `#06-outcome-cfd-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html #06-outcome-cfd-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/06-outcome-cfd.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="07-order-flow-shot-1" starts with a digit, so the common selector `#07-order-flow-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html #07-order-flow-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="07-order-flow-shot-2" starts with a digit, so the common selector `#07-order-flow-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html #07-order-flow-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="07-order-flow-shot-3" starts with a digit, so the common selector `#07-order-flow-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html #07-order-flow-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="07-order-flow-shot-4" starts with a digit, so the common selector `#07-order-flow-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html #07-order-flow-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="07-order-flow-flash" starts with a digit, so the common selector `#07-order-flow-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html #07-order-flow-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/07-order-flow.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="08-onchain-shot-1" starts with a digit, so the common selector `#08-onchain-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html #08-onchain-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="08-onchain-shot-2" starts with a digit, so the common selector `#08-onchain-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html #08-onchain-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="08-onchain-shot-3" starts with a digit, so the common selector `#08-onchain-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html #08-onchain-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="08-onchain-shot-4" starts with a digit, so the common selector `#08-onchain-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html #08-onchain-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="08-onchain-flash" starts with a digit, so the common selector `#08-onchain-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html #08-onchain-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/08-onchain.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="09-liquidity-shot-1" starts with a digit, so the common selector `#09-liquidity-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html #09-liquidity-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="09-liquidity-shot-2" starts with a digit, so the common selector `#09-liquidity-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html #09-liquidity-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="09-liquidity-shot-3" starts with a digit, so the common selector `#09-liquidity-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html #09-liquidity-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="09-liquidity-shot-4" starts with a digit, so the common selector `#09-liquidity-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html #09-liquidity-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="09-liquidity-flash" starts with a digit, so the common selector `#09-liquidity-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html #09-liquidity-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/09-liquidity.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="10-revenue-shot-1" starts with a digit, so the common selector `#10-revenue-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html #10-revenue-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="10-revenue-shot-2" starts with a digit, so the common selector `#10-revenue-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html #10-revenue-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="10-revenue-shot-3" starts with a digit, so the common selector `#10-revenue-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html #10-revenue-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="10-revenue-shot-4" starts with a digit, so the common selector `#10-revenue-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html #10-revenue-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="10-revenue-flash" starts with a digit, so the common selector `#10-revenue-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html #10-revenue-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/10-revenue.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ⚠ id_requires_css_escape: id="11-close-shot-1" starts with a digit, so the common selector `#11-close-shot-1` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html #11-close-shot-1 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="11-close-shot-2" starts with a digit, so the common selector `#11-close-shot-2` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html #11-close-shot-2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="11-close-shot-3" starts with a digit, so the common selector `#11-close-shot-3` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html #11-close-shot-3 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="11-close-shot-4" starts with a digit, so the common selector `#11-close-shot-4` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html #11-close-shot-4 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="11-close-flash" starts with a digit, so the common selector `#11-close-flash` throws a SyntaxError in querySelector().
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html #11-close-flash t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ℹ pointer_events_none: `.flash` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html .flash t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.bg-wrap` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html .bg-wrap t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  ℹ pointer_events_none: `.particles-up` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.
+    /Users/kksthinkpad/res/code/js/AI-Remotion/videos/yesono-3-hf-v3/compositions/frames/11-close.html .particles-up t=0s
+    Fix: If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content.
+  0 error(s), 55 warning(s), 34 info(s)
+
+Runtime
+  ◇ 0 errors, 0 warnings
+
+Layout
+  ℹ t=11s container_overflow #\30 1-hook-shot-3 inside #ground-01-hook overflowed left 22.08px, right 22.08px, top 12.42px, bottom 12.42px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=33s container_overflow #\30 2-build-pain-shot-4 inside #ground-02-build-pain overflowed left 13.63px, right 13.63px, top 7.67px, bottom 7.67px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=55.01s container_overflow #\30 4-tenant-shot-1 inside #ground-04-tenant overflowed left 15.46px, right 15.46px, top 8.69px, bottom 8.69px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=77.01s container_overflow #\30 5-list-market-shot-2 inside #ground-05-list-market overflowed left 20.93px, right 20.93px, top 11.77px, bottom 11.77px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=99.01s container_overflow #\30 6-outcome-cfd-shot-3 inside #ground-06-outcome-cfd overflowed left 8.74px, right 8.74px, top 4.91px, bottom 4.91px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=121.02s container_overflow #\30 7-order-flow-shot-3 inside #ground-07-order-flow overflowed left 23.81px, right 23.81px, top 13.39px, bottom 13.39px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=143.02s container_overflow #\30 9-liquidity-shot-1 inside #ground-09-liquidity overflowed left 4.8px, right 4.8px, top 2.7px, bottom 2.7px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=165.02s container_overflow #\31 0-revenue-shot-1 inside #ground-10-revenue overflowed left 23.62px, right 23.62px, top 13.28px, bottom 13.28px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=187.03s container_overflow #\31 1-close-shot-2 inside #ground-11-close overflowed left 15.07px, right 15.07px, top 8.48px, bottom 8.48px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  0 error(s), 0 warning(s), 9 info(s)
+
+Motion
+  ◇ 0 errors, 0 warnings
+
+Contrast
+  ◇ 31/31 text checks pass WCAG AA
+
+Snapshots
+  ◇ disabled
+
+◇  Check passed

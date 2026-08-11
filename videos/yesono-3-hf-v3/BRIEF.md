@@ -7,9 +7,9 @@ destination: website-and-youtube
 aspect: 1920x1080
 language: zh-CN
 audience: B2B market creators, brokers, traffic/data platforms, market makers
-length: "~165s CosyVoice-driven (≤15s/clip)"
+length: "~VO-driven (~4 min; natural CosyVoice 3 pace, not hard-capped at 15s/clip)"
 angle: operator-business
-narration: "yes — CosyVoice 3 zero-shot on cornerstone (Mandarin male ref), sentence pauses, speed ~1.10"
+narration: "yes — CosyVoice 3 zero-shot on cornerstone (Mandarin male ref), natural pace ≤1.2 atempo, sentence pauses"
 vo_mode: verbatim
 ---
 
