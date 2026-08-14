@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { aspectRatioSchema, languageSchema } from "./artifacts";
+import { videoGenerationServiceSchema } from "./videoGenerationServices";
 
 const nonEmptyString = z.string().trim().min(1);
 const workflowIdSchema = z.enum([
@@ -117,11 +118,18 @@ export const videoJobSchema = z
       })
       .strict()
       .default({ engine: "auto" }),
+    generation: z
+      .object({
+        service: videoGenerationServiceSchema,
+      })
+      .strict()
+      .optional(),
     review_gates: z
       .object({
         script: reviewGateStatusSchema.default("pending"),
         storyboard: reviewGateStatusSchema.default("pending"),
         final_render: reviewGateStatusSchema.default("pending"),
+        publish: reviewGateStatusSchema.optional(),
       })
       .strict()
       .default({
@@ -242,6 +250,30 @@ export const videoJobSchema = z
     }
 
     if (
+      job.generation?.service === "remotion" &&
+      job.render.engine === "hyperframes"
+    ) {
+      context.addIssue({
+        code: "custom",
+        message:
+          "generation.service=remotion conflicts with render.engine=hyperframes",
+        path: ["generation", "service"],
+      });
+    }
+
+    if (
+      job.generation?.service === "hyperframes" &&
+      job.render.engine === "remotion"
+    ) {
+      context.addIssue({
+        code: "custom",
+        message:
+          "generation.service=hyperframes conflicts with render.engine=remotion",
+        path: ["generation", "service"],
+      });
+    }
+
+    if (
       job.source.type === "existing-video" &&
       job.presenter.mode === "digital-human"
     ) {
@@ -323,6 +355,7 @@ export const videoApprovalGateSchema = z.enum([
   "script",
   "storyboard",
   "final_render",
+  "publish",
 ]);
 export const delegatedVideoCapabilitySchema = z.enum([
   "digital-human-presenter",
@@ -333,11 +366,17 @@ export const videoRouteSchema = z
     job_id: nonEmptyString,
     workflow: workflowIdSchema,
     primary_agent: videoAgentSchema,
-    renderer: z.enum(["remotion", "hyperframes"]),
+    /** Exclusive final composition engine. When Job.generation.service is set, equals that service. */
+    renderer: videoGenerationServiceSchema,
     provider_requirements: z.array(nonEmptyString),
     delegated_capabilities: z.array(delegatedVideoCapabilitySchema),
     requires_approval: z.array(videoApprovalGateSchema),
     reason: nonEmptyString,
+    tts_policy: z.enum([
+      "project-tts",
+      "heygen-native",
+      "dreamina-native",
+    ]),
   })
   .strict();
 

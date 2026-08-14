@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Fixture Feed</title>
+    <item>
+      <title>Bitcoin ETF income fund draws $2.25 billion</title>
+      <link>https://example.com/btc-etf</link>
+      <description><![CDATA[Goldman and NEOS launched a bitcoin income ETF after strong inflows.]]></description>
+      <pubDate>Wed, 12 Aug 2026 08:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Hotel chain blamed guests for bed bugs</title>
+      <link>https://example.com/hotel</link>
+      <description>A consumer story unrelated to digital assets.</description>
+      <pubDate>Wed, 12 Aug 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Old bitcoin story</title>
+      <link>https://example.com/old</link>
+      <description>This should be filtered by age.</description>
+      <pubDate>Mon, 01 Jan 2024 08:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

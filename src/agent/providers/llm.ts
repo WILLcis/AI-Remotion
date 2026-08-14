@@ -36,6 +36,13 @@ export type FetchLike = (
   status: number;
 }>;
 
+export type GenerateTextWithProviderOptions = {
+  config: LlmRuntimeConfig;
+  deterministicText: () => string;
+  messages: LlmTextMessage[];
+  request?: FetchLike;
+};
+
 export type GenerateScriptWithProviderOptions = {
   config: LlmRuntimeConfig;
   deterministicScript: () => string;
@@ -78,18 +85,18 @@ export const resolveScriptGenerationMode = (
   );
 };
 
-export const generateScriptWithProvider = async ({
+export const generateTextWithProvider = async ({
   config,
-  deterministicScript,
+  deterministicText,
   messages,
   request = fetch,
-}: GenerateScriptWithProviderOptions): Promise<GeneratedScript> => {
+}: GenerateTextWithProviderOptions): Promise<GeneratedScript> => {
   const mode = resolveScriptGenerationMode(config);
 
   if (mode.provider === "deterministic") {
     return {
       ...mode,
-      text: deterministicScript(),
+      text: deterministicText(),
     };
   }
 
@@ -99,11 +106,43 @@ export const generateScriptWithProvider = async ({
       temperature: config.temperature,
     });
 
-    assertReviewableScript(result.text);
     return {
       ...mode,
       text: result.text,
     };
+  } catch (error) {
+    if (!config.fallbackToDeterministic) {
+      throw error;
+    }
+
+    return {
+      provider: "deterministic",
+      reason: "fallback",
+      text: deterministicText(),
+    };
+  }
+};
+
+export const generateScriptWithProvider = async ({
+  config,
+  deterministicScript,
+  messages,
+  request = fetch,
+}: GenerateScriptWithProviderOptions): Promise<GeneratedScript> => {
+  const result = await generateTextWithProvider({
+    config,
+    deterministicText: deterministicScript,
+    messages,
+    request,
+  });
+
+  if (result.provider !== "openai-compatible") {
+    return result;
+  }
+
+  try {
+    assertReviewableScript(result.text);
+    return result;
   } catch (error) {
     if (!config.fallbackToDeterministic) {
       throw error;

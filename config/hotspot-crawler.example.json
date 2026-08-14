@@ -1,0 +1,22 @@
+{
+  "feeds": [
+    {
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "source": "CoinDesk"
+    },
+    {
+      "url": "https://cointelegraph.com/rss",
+      "source": "Cointelegraph"
+    },
+    {
+      "url": "https://36kr.com/feed",
+      "source": "36氪"
+    }
+  ],
+  "max_age_hours": 36,
+  "topic_keywords": {
+    "数字货币": ["bitcoin", "crypto", "btc", "比特币", "加密", "稳定币", "sec", "etf"],
+    "商业消费": ["涨价", "消费", "酒店", "平台", "罚款", "零售"],
+    "科技": ["ai", "芯片", "苹果", "华为", "大模型"]
+  }
+}

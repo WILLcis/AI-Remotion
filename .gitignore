@@ -47,6 +47,9 @@ videos/heygen_batch_done.json
 state/tasks/*.tmp.*
 state/_local/
 state/*.jsonl
+state/publish/
+state/hotspot/
+config/hotspot-crawler.local.json
 claude-review-*.md
 __pycache__/
 .worktrees/

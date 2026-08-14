@@ -7,15 +7,15 @@ Humans should start at `agents/START_HERE.md`. The Video Producer Agent owns wri
 ## Required procedure (Agent-internal)
 
 1. Read `AGENTS.md` and this file when intake rules are unclear; otherwise follow `agents/video-producer/AGENT.md` plain-language entry.
-2. Extract only facts the caller explicitly supplied: intent, known local refs, output defaults, and an approved digital-human provider when requested.
-3. If duration, aspect ratio, language, local refs for media-backed requests, or provider are missing, return `needs_clarification`. Do not invent them.
+2. Extract only facts the caller explicitly supplied: intent, known local refs, output defaults, **generation_service** (`remotion` | `hyperframes` | `heygen` | `dreamina`), and an approved digital-human provider when requested.
+3. If duration, aspect ratio, language, local refs for media-backed requests, **generation_service**, or provider are missing, return `needs_clarification`. Do not invent them. For `generation_service`, surface the Chinese choice list from intake (四选一。heygen 须另批付费；dreamina 选定即生成并发布，不再另批)。
 4. Optionally construct an Intake Request JSON and run:
 
    ```bash
    npm run video:intake -- --request path/to/request.json
    ```
 
-5. If the decision is `draft_ready`, summarize the draft for the user. All review gates remain `pending`.
+5. If the decision is `draft_ready`, summarize the draft for the user. Review gates remain `pending` unless `generation_service` is `dreamina` (then auto-approved, including publish).
 6. After the user confirms the draft in the same conversation (one sentence is enough), the **Video Producer** path may write the Job and call `video:route` with the platform flag enabled. Intake itself still does not route or render.
 
 ## Safety rules
@@ -23,8 +23,9 @@ Humans should start at `agents/START_HERE.md`. The Video Producer Agent owns wri
 - A URL, product name, person, video, audio file, or provider name in a request is not proof of local availability, rights, credentials, or approval.
 - Do not infer source refs, asset rights, provider credentials, product facts, factual claims, or final-render approval.
 - Existing-video, music, deck, GitHub PR, and Remotion-project requests require caller-provided local/approved refs.
+- **Always require an explicit `generation_service`** before drafting; never default to Remotion, HyperFrames, HeyGen, or Dreamina.
 - Digital-human requests require an explicit provider; do not default to HeyGen or another provider.
-- Do not call `video:route` with the platform flag disabled. Do not set review gates to approved.
+- Do not call `video:route` with the platform flag disabled. Do not set review gates to approved except when `generation_service` is `dreamina`.
 
 ## Result contract
 
@@ -39,4 +40,4 @@ Humans should start at `agents/START_HERE.md`. The Video Producer Agent owns wri
 }
 ```
 
-`draft_ready` is not production approval. The draft must retain pending `script`, `storyboard`, and `final_render` gates.
+`draft_ready` is not production approval except `generation_service=dreamina` (selecting it is paid-generation and publish consent). Other drafts must retain pending `script`, `storyboard`, and `final_render` gates.

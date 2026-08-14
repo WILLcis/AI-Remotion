@@ -63,4 +63,42 @@ describe("digital human feature flags", () => {
       provider.isEnabled(FLAGS.HEYGEN_AVATAR, {}, true),
     ).resolves.toBe(false);
   });
+
+  it("keeps Dreamina / 即梦 media behind its own kill switch", async () => {
+    const provider = new LocalProvider({
+      [FLAGS.DREAMINA_MEDIA]: { enabled: false },
+    });
+
+    await expect(
+      provider.isEnabled(FLAGS.DREAMINA_MEDIA, {}, true),
+    ).resolves.toBe(false);
+  });
+
+  it("keeps multi-platform publish behind its kill switch", async () => {
+    const provider = new LocalProvider({
+      [FLAGS.VIDEO_PUBLISH]: { enabled: false },
+    });
+
+    await expect(provider.isEnabled(FLAGS.VIDEO_PUBLISH, {}, true)).resolves.toBe(
+      false,
+    );
+  });
+
+  it("keeps hotspot digest behind its kill switch", async () => {
+    const provider = new LocalProvider({
+      [FLAGS.VIDEO_HOTSPOT]: { enabled: false },
+    });
+    await expect(provider.isEnabled(FLAGS.VIDEO_HOTSPOT, {}, true)).resolves.toBe(
+      false,
+    );
+  });
+
+  it("keeps the hotspot crawler behind its own kill switch", async () => {
+    const provider = new LocalProvider({
+      [FLAGS.VIDEO_HOTSPOT_CRAWLER]: { enabled: false },
+    });
+    await expect(
+      provider.isEnabled(FLAGS.VIDEO_HOTSPOT_CRAWLER, {}, true),
+    ).resolves.toBe(false);
+  });
 });

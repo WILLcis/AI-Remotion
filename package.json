@@ -37,6 +37,10 @@
     "verify:harness": "bash tools/verify.sh",
     "video:route": "tsx src/cli/routeVideoJob.ts",
     "video:intake": "tsx src/cli/intakeVideoJob.ts",
+    "media:dreamina": "tsx src/cli/runDreamina.ts",
+    "video:publish": "tsx src/cli/publishVideo.ts",
+    "video:hotspot": "tsx src/cli/runHotspot.ts",
+    "hotspot:watch": "tsx src/cli/runHotspot.ts --watch",
     "render:sample": "remotion render src/remotion/index.ts ExplainerVideo episodes/sample/out/final.mp4 --props=episodes/sample/render-plan.json"
   },
   "sideEffects": [

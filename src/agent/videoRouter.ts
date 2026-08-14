@@ -4,6 +4,11 @@ import {
   videoJobSchema,
   videoRouteSchema,
 } from "../schemas/videoJob";
+import {
+  getVideoGenerationServiceInfo,
+  skipsHumanApprovalGates,
+  type VideoGenerationService,
+} from "../schemas/videoGenerationServices";
 
 export type RouteVideoJobOptions = {
   enabled: boolean;
@@ -58,7 +63,10 @@ const routeConfig = {
     agent: "remotion-port-producer",
     renderer: "hyperframes",
   },
-} as const;
+} as const satisfies Record<
+  string,
+  { agent: string; renderer: "remotion" | "hyperframes" }
+>;
 
 export const routeVideoJob = (
   input: unknown,
@@ -73,10 +81,28 @@ export const routeVideoJob = (
   const job = videoJobSchema.parse(input);
   const workflow = resolveWorkflow(job);
   const config = routeConfig[workflow];
+  const renderer = resolveExclusiveCompositionEngine(job, config.renderer);
 
-  if (job.render.engine !== "auto" && job.render.engine !== config.renderer) {
+  // Local engine lock only applies when the user did not pick an exclusive cloud/local service.
+  if (
+    !job.generation?.service &&
+    job.render.engine !== "auto" &&
+    job.render.engine !== config.renderer
+  ) {
     throw new Error(
       `${workflow} requires renderer ${config.renderer}; received ${job.render.engine}`,
+    );
+  }
+
+  if (
+    job.generation?.service &&
+    (job.generation.service === "remotion" ||
+      job.generation.service === "hyperframes") &&
+    job.render.engine !== "auto" &&
+    job.render.engine !== job.generation.service
+  ) {
+    throw new Error(
+      `generation.service=${job.generation.service} conflicts with render.engine=${job.render.engine}`,
     );
   }
 
@@ -84,26 +110,58 @@ export const routeVideoJob = (
     workflow === "product-promo" && job.presenter.mode === "digital-human"
       ? (["digital-human-presenter"] as const)
       : [];
-  const providerRequirements =
-    workflow === "video-translation"
+  const providerRequirements = [
+    ...(workflow === "video-translation" ||
+    job.presenter.mode === "digital-human"
       ? [job.presenter.provider!]
-      : job.presenter.mode === "digital-human"
-        ? [job.presenter.provider!]
-        : [];
-  const requiresApproval = (
-    ["script", "storyboard", "final_render"] as const
-  ).filter((gate) => job.review_gates[gate] === "pending");
+      : []),
+    ...(renderer === "heygen" || renderer === "dreamina" ? [renderer] : []),
+  ];
+  const requiresApproval: Array<"script" | "storyboard" | "final_render" | "publish"> =
+    skipsHumanApprovalGates(job.generation?.service)
+      ? []
+      : (["script", "storyboard", "final_render"] as const).filter(
+          (gate) => job.review_gates[gate] === "pending",
+        );
+  if (
+    !skipsHumanApprovalGates(job.generation?.service) &&
+    job.review_gates.publish === "pending"
+  ) {
+    requiresApproval.push("publish");
+  }
+
+  const ttsPolicy =
+    renderer === "heygen" || renderer === "dreamina"
+      ? getVideoGenerationServiceInfo(renderer).tts
+      : getVideoGenerationServiceInfo(
+          renderer === "hyperframes" ? "hyperframes" : "remotion",
+        ).tts;
 
   return videoRouteSchema.parse({
     job_id: job.job_id,
     workflow,
     primary_agent: config.agent,
-    renderer: config.renderer,
-    provider_requirements: providerRequirements,
+    renderer,
+    provider_requirements: [...new Set(providerRequirements)],
     delegated_capabilities: delegatedCapabilities,
     requires_approval: requiresApproval,
-    reason: getRouteReason(job, workflow),
+    reason: getRouteReason(job, workflow, renderer),
+    tts_policy: ttsPolicy,
   });
+};
+
+/**
+ * User-selected generation.service owns the final composition exclusively.
+ * Without it, fall back to the workflow's historical local renderer.
+ */
+const resolveExclusiveCompositionEngine = (
+  job: VideoJob,
+  workflowRenderer: "remotion" | "hyperframes",
+): VideoGenerationService => {
+  if (job.generation?.service) {
+    return job.generation.service;
+  }
+  return workflowRenderer;
 };
 
 const resolveWorkflow = (
@@ -151,9 +209,14 @@ const resolveWorkflow = (
 const getRouteReason = (
   job: VideoJob,
   workflow: Exclude<VideoJob["workflow"], "auto">,
+  renderer: VideoGenerationService,
 ): string => {
+  const exclusive = job.generation?.service
+    ? ` Exclusive composition engine: ${renderer} (user-selected generation.service; do not mix other final renderers). TTS: ${getVideoGenerationServiceInfo(renderer).tts}.`
+    : ` Composition engine from workflow default: ${renderer}. TTS: ${getVideoGenerationServiceInfo(renderer).tts}.`;
+
   if (job.workflow !== "auto") {
-    return `Explicit workflow selected: ${workflow}`;
+    return `Explicit workflow selected: ${workflow}.${exclusive}`;
   }
 
   const reasons: Record<Exclude<VideoJob["workflow"], "auto">, string> = {
@@ -178,5 +241,5 @@ const getRouteReason = (
       "Source type remotion-project uses the Remotion-to-HyperFrames port pipeline",
   };
 
-  return reasons[workflow];
+  return `${reasons[workflow]}.${exclusive}`;
 };

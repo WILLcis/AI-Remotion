@@ -1,6 +1,7 @@
 {
   "request_id": "topic-intake",
   "description": "讲解 Remotion 的基础概念",
+  "generation_service": "remotion",
   "defaults": {
     "duration_seconds": 60,
     "aspect_ratio": "16:9",

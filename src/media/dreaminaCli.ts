@@ -1,0 +1,196 @@
+import { spawn } from "node:child_process";
+import { existsSync, mkdirSync } from "node:fs";
+import path from "node:path";
+
+export type DreaminaSpawnResult = {
+  code: number | null;
+  stderr: string;
+  stdout: string;
+};
+
+export type DreaminaRunner = (
+  bin: string,
+  args: string[],
+  options?: { cwd?: string; env?: NodeJS.ProcessEnv },
+) => Promise<DreaminaSpawnResult>;
+
+export type DreaminaCliOptions = {
+  bin?: string;
+  cwd?: string;
+  env?: NodeJS.ProcessEnv;
+  run?: DreaminaRunner;
+};
+
+/** Default video model. Fast (`seedance2.0fast`) sits in a crowded public queue. */
+export const DEFAULT_DREAMINA_VIDEO_MODEL = "seedance2.0_vip";
+
+const defaultRunner: DreaminaRunner = (bin, args, options = {}) =>
+  new Promise((resolve, reject) => {
+    const child = spawn(bin, args, {
+      cwd: options.cwd,
+      env: options.env ?? process.env,
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (chunk: Buffer) => {
+      stdout += chunk.toString("utf8");
+    });
+    child.stderr.on("data", (chunk: Buffer) => {
+      stderr += chunk.toString("utf8");
+    });
+    child.on("error", reject);
+    child.on("close", (code) => {
+      resolve({ code, stderr, stdout });
+    });
+  });
+
+export const resolveDreaminaBin = (
+  env: NodeJS.ProcessEnv = process.env,
+): string => env.AI_REMOTION_DREAMINA_BIN?.trim() || "dreamina";
+
+export const runDreamina = async (
+  args: string[],
+  options: DreaminaCliOptions = {},
+): Promise<DreaminaSpawnResult> => {
+  const bin = options.bin ?? resolveDreaminaBin(options.env ?? process.env);
+  const run = options.run ?? defaultRunner;
+  return run(bin, args, { cwd: options.cwd, env: options.env });
+};
+
+export const assertDreaminaAvailable = async (
+  options: DreaminaCliOptions = {},
+): Promise<void> => {
+  const result = await runDreamina(["-h"], options);
+  if (result.code !== 0) {
+    throw new Error(
+      [
+        "dreamina CLI is unavailable or failed `dreamina -h`.",
+        "Install with: curl -fsSL https://jimeng.jianying.com/cli | bash",
+        "Then run: dreamina login",
+        result.stderr.trim() || result.stdout.trim(),
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    );
+  }
+};
+
+export const dreaminaUserCredit = async (
+  options: DreaminaCliOptions = {},
+): Promise<DreaminaSpawnResult> => runDreamina(["user_credit"], options);
+
+export const dreaminaText2Image = async (input: {
+  downloadDir: string;
+  pollSeconds?: number;
+  prompt: string;
+  ratio?: string;
+  resolutionType?: string;
+  approvePaid: boolean;
+  options?: DreaminaCliOptions;
+}): Promise<DreaminaSpawnResult> => {
+  if (!input.approvePaid) {
+    throw new Error(
+      "Dreamina text2image is a paid cloud call. Pass approvePaid=true only after explicit user approval.",
+    );
+  }
+  mkdirSync(input.downloadDir, { recursive: true });
+  return runDreamina(
+    [
+      "text2image",
+      `--prompt=${input.prompt}`,
+      `--ratio=${input.ratio ?? "16:9"}`,
+      `--resolution_type=${input.resolutionType ?? "2k"}`,
+      `--poll=${String(input.pollSeconds ?? 60)}`,
+    ],
+    input.options,
+  );
+};
+
+export const dreaminaImage2Video = async (input: {
+  approvePaid: boolean;
+  downloadDir: string;
+  imagePath: string;
+  pollSeconds?: number;
+  prompt?: string;
+  durationSeconds?: number;
+  videoResolution?: string;
+  modelVersion?: string;
+  options?: DreaminaCliOptions;
+}): Promise<DreaminaSpawnResult> => {
+  if (!input.approvePaid) {
+    throw new Error(
+      "Dreamina image2video is a paid cloud call. Pass approvePaid=true only after explicit user approval.",
+    );
+  }
+  if (!existsSync(input.imagePath)) {
+    throw new Error(`Dreamina image2video missing image: ${input.imagePath}`);
+  }
+  mkdirSync(input.downloadDir, { recursive: true });
+  const args = [
+    "image2video",
+    `--image=${path.resolve(input.imagePath)}`,
+    `--duration=${String(input.durationSeconds ?? 5)}`,
+    `--video_resolution=${input.videoResolution ?? "720p"}`,
+    `--model_version=${input.modelVersion ?? DEFAULT_DREAMINA_VIDEO_MODEL}`,
+    `--poll=${String(input.pollSeconds ?? 120)}`,
+  ];
+  if (input.prompt?.trim()) {
+    args.push(`--prompt=${input.prompt.trim()}`);
+  }
+  return runDreamina(args, input.options);
+};
+
+export const dreaminaText2Video = async (input: {
+  approvePaid: boolean;
+  prompt: string;
+  durationSeconds?: number;
+  pollSeconds?: number;
+  ratio?: string;
+  videoResolution?: string;
+  modelVersion?: string;
+  options?: DreaminaCliOptions;
+}): Promise<DreaminaSpawnResult> => {
+  if (!input.approvePaid) {
+    throw new Error(
+      "Dreamina text2video is a paid cloud call. Pass approvePaid=true only after explicit user approval.",
+    );
+  }
+  return runDreamina(
+    [
+      "text2video",
+      `--prompt=${input.prompt}`,
+      `--duration=${String(input.durationSeconds ?? 5)}`,
+      `--ratio=${input.ratio ?? "9:16"}`,
+      `--video_resolution=${input.videoResolution ?? "720p"}`,
+      `--model_version=${input.modelVersion ?? DEFAULT_DREAMINA_VIDEO_MODEL}`,
+      `--poll=${String(input.pollSeconds ?? 180)}`,
+    ],
+    input.options,
+  );
+};
+
+export const parseDreaminaSubmitId = (stdout: string): string | undefined => {
+  const jsonMatch = stdout.match(/"submit_id"\s*:\s*"([^"]+)"/);
+  if (jsonMatch?.[1]) {
+    return jsonMatch[1];
+  }
+  const plain = stdout.match(/submit_id[=:\s]+([A-Za-z0-9-]+)/);
+  return plain?.[1];
+};
+
+export const dreaminaQueryResult = async (input: {
+  submitId: string;
+  downloadDir: string;
+  options?: DreaminaCliOptions;
+}): Promise<DreaminaSpawnResult> => {
+  mkdirSync(input.downloadDir, { recursive: true });
+  return runDreamina(
+    [
+      "query_result",
+      `--submit_id=${input.submitId}`,
+      `--download_dir=${input.downloadDir}`,
+    ],
+    input.options,
+  );
+};

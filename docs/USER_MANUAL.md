@@ -232,7 +232,8 @@ npm run config:check
 复制示例 env：
 
 ```bash
-cp config/.env.dev.example .env.local
+cp config/.env.local.example .env.local
+# 或：cp config/.env.dev.example .env.local
 AI_REMOTION_ENV_FILE=.env.local npm run config:check
 ```
 
@@ -242,7 +243,8 @@ AI_REMOTION_ENV_FILE=.env.local npm run config:check
 - CosyVoice 3 部署在 cornerstone（Tailscale），推荐 `AI_REMOTION_TTS_PROVIDER=cosyvoice-clone` + `AI_REMOTION_TTS_BASE_URL=http://100.125.33.44:8000`；默认参考音色在 `assets/tts/cosyvoice3-zh-male-ref.*`。服务失败时会明确报错，不会偷偷改成静音。本地 300M-SFT `/inference_sft` 仅作 legacy。
 - FunASR 是“语音转文字”工具，本期不用于生成旁白；以后再单独用于转写和字幕时间轴对齐。
 - `edge-tts`、`doubao`、`azure`、`elevenlabs` 会被识别为 pending provider，不会悄悄运行。
-- 不要把真实 key 提交到 git。
+- 不要把真实 key 提交到 git。密钥只放仓库根目录 `.env.local`（已 gitignore）。
+- 可提交的是占位模板：`config/.env.dev.example`、`config/.env.prod.example`、`config/.env.local.example`。
 
 ## 9. 怎么和 Agent 协作
 
@@ -287,10 +289,12 @@ Agent 应该遵守：
 
 - 浏览器产品 UI。
 - 云渲染、队列、对象存储。
-- 自动发布到平台。
+- 无人值守群发；视频号 / 小红书 RPA；抖音小程序发片。
 - 抓取未授权素材。
 - 克隆真人声音。
 - 把 AI 生成的事实性内容当作已验证事实。
+
+发布是可选能力，默认关。见第 14 节。
 
 Seedance 等视频生成模型未来可以作为局部素材 provider，例如生成 B-roll、背景动效、插画片段；当前不作为主渲染层。主渲染层仍然是 Remotion，因为它更适合结构化字幕、排版、安全区、复现和 QA。
 
@@ -334,3 +338,108 @@ npm run check
 ```bash
 npm run demo:canonical
 ```
+
+## 12. 即梦数字人（交付）
+
+安装 CLI 并登录（本机一次）：
+
+```bash
+curl -fsSL https://jimeng.jianying.com/cli | bash
+dreamina login
+dreamina user_credit
+```
+
+默认视频模型是 `seedance2.0_vip`，不要用 Fast。选定即梦即视为同意扣积分并随后发布。详情：`docs/DREAMINA.md`。
+
+```bash
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- check
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- credit
+```
+
+数字人封面走即梦 `text2image`（9:16），不抽视频帧、不用 ffmpeg 叠字。
+
+## 13. 热点口播（交付）
+
+先问三件事：热点类型、`human-vo` 还是 `digital-human`、现在跑还是定时。不要编造新闻。详情：`docs/VIDEO_HOTSPOT.md`。
+
+真人口播（只要文案）：
+
+```bash
+FLAG_video_hotspot='{"enabled":true}' \
+  npm run video:hotspot -- \
+    --format human-vo \
+    --topic 数字货币 \
+    --items tests/fixtures/hotspot/items.json \
+    --out videos/hotspot-YYYYMMDD
+```
+
+数字人（扣即梦积分；出片 + 封面 + 发布 Pack）：
+
+```bash
+FLAG_video_hotspot='{"enabled":true}' \
+FLAG_dreamina_media='{"enabled":true}' \
+FLAG_video_publish='{"enabled":true}' \
+FLAG_video_publish_douyin='{"enabled":false}' \
+FLAG_video_publish_weixin_channels='{"enabled":true}' \
+FLAG_video_publish_xiaohongshu='{"enabled":true}' \
+  npm run video:hotspot -- \
+    --format digital-human \
+    --topic 数字货币 \
+    --items path/to/items.json \
+    --out videos/hotspot-YYYYMMDD
+```
+
+常驻 RSS 爬虫：`npm run hotspot:watch`（`FLAG_video_hotspot_crawler`）。macOS 开机示例见 `scripts/launchd/ai-remotion-hotspot-crawler.plist.example`。
+
+即梦审核（TNS）失败会扣积分且无成片。当前不会自动改写后重试；换一条口播或改掉敏感词后再生成。
+
+## 14. 多平台发布（交付）
+
+详情：`docs/VIDEO_PUBLISH.md`。总开关和分平台开关默认关。
+
+| 平台 | 实际做什么 |
+| --- | --- |
+| 抖音 | 官方 OpenAPI：`upload_video` → `create_video`（需 `video.create.bind`） |
+| 视频号 | 写 Pack JSON，你在助手里手动上传 |
+| 小红书 | 写 Pack JSON，你在创作者后台手动上传 |
+
+即梦成片后：
+
+```bash
+FLAG_video_publish='{"enabled":true}' \
+FLAG_video_publish_douyin='{"enabled":false}' \
+FLAG_video_publish_weixin_channels='{"enabled":true}' \
+FLAG_video_publish_xiaohongshu='{"enabled":true}' \
+  npm run video:publish -- \
+    --generation-service dreamina \
+    --platform all \
+    --video path/to/final.mp4 \
+    --cover path/to/cover.png \
+    --title "标题"
+```
+
+`--platform all` 在抖音 flag 关闭时会跳过抖音。Pack 落在 `--pack-dir`（热点默认 `videos/<proj>/publish-pack`）。
+
+### 抖音 live 前提
+
+不是小程序。官方能力只给 **正式网站应用**：
+
+- 文档：[代替用户发布内容到抖音](https://developer.open-douyin.com/docs/resource/zh-CN/dop/ability/content-management/video.create.bind)
+- 上传：[upload_video](https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/video-management/douyin/create-video/upload-video)
+- 创建：[create_video](https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/video-management/douyin/create-video/video-create)
+
+现网准入写的是党政机关/事业单位主体。个人开放平台申请目前跑不通。凭证只放 `.env.local`：`AI_REMOTION_DOUYIN_ACCESS_TOKEN`、`AI_REMOTION_DOUYIN_OPEN_ID`。
+
+抖音封面字段是 `cover_tsp`（视频第几秒），不是即梦那张封面图。即梦封面给视频号/小红书 Pack 用。
+
+尚未实现：OAuth 换票 CLI、>128MB 分片上传、`cover_tsp`、作品审核状态查询、发前时长/体积校验。定时发布是本地队列 + `--due`。
+
+## 15. 交付检查清单
+
+1. `cp config/.env.local.example .env.local`，填密钥，不要提交 `.env.local`。
+2. `npm install` 后 `npm run config:check`（不应打印密钥）。
+3. `npm run check`。
+4. 即梦：`dreamina login` + `FLAG_dreamina_media` + `npm run media:dreamina -- credit`。
+5. 热点/发布：只在当次任务打开对应 `FLAG_video_*`。
+6. 生成的 MP4 / 封面 PNG / `state/publish/` 不入库。
+

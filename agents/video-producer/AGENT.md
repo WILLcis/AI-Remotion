@@ -20,25 +20,33 @@ Read `AGENTS.md` before changing repository files. Paste-ready human prompt: `ag
 When the user did **not** hand you a Job file:
 
 1. Read this file and `SPECIALISTS.md`. For ambiguous intake rules, also read `agents/video-job-intake/AGENT.md`.
-2. Extract only facts the user supplied. **Do not invent** duration, aspect ratio, language, local media paths, provider names, rights, or approvals.
-3. If anything required is missing, ask the user short questions and stop. Do not invent defaults.
-4. You may run intake yourself as a check:
+2. Extract only facts the user supplied. **Do not invent** duration, aspect ratio, language, local media paths, provider names, **generation.service**, rights, or approvals.
+3. Before any synthesize / render path: if `generation.service` is missing, ask the user to choose one of `remotion` | `hyperframes` | `heygen` | `dreamina` (list labels from `src/schemas/videoGenerationServices.ts` / `docs/DREAMINA.md`). Never default.
+4. If anything required is missing, ask the user short questions and stop. Do not invent defaults.
+5. You may run intake yourself as a check:
 
    ```bash
    npm run video:intake -- --request path/to/request.json
    ```
 
-   Present a brief draft summary. After the user confirms the draft (one sentence is enough), write the Job to `state/jobs/<job-id>.yaml` (create the directory if needed). All `review_gates` stay `pending`.
-5. Enable the platform **yourself** and route:
+   Present a brief draft summary. After the user confirms the draft (one sentence is enough), write the Job to `state/jobs/<job-id>.yaml` (create the directory if needed). Review gates stay `pending` unless `generation.service` is `dreamina` (then auto-approved, including publish).
+6. Enable the platform **yourself** and route:
 
    ```bash
    FLAG_video_agent_platform='{"enabled":true}' \
      npm run video:route -- --job state/jobs/<job-id>.yaml
    ```
 
-6. Treat the route JSON as authoritative. Read only the mapped specialist profile (`.devin/agents/<primary>.md` or the path in `SPECIALISTS.md`).
-7. Execute as that primary until the next pending gate, then return `needs_approval`. Never approve gates yourself. Never call paid/cloud services or `final_render` without the user's current explicit approval.
-8. **Never** hand CLI steps back to the user. Stop only for: missing info, review gates, paid-provider approval, or a real blocker.
+7. Treat the route JSON as authoritative. Read only the mapped specialist profile (`.devin/agents/<primary>.md` or the path in `SPECIALISTS.md`).
+8. Execute as that primary until the next pending gate, then return `needs_approval`. Never approve gates yourself. Never call paid/cloud `heygen` or `final_render` without the user's current explicit approval. **Dreamina exception:** selecting `generation.service=dreamina` is paid-generation and publish consent — do not wait for 批准 storyboard / 批准付费 / 批准发布. Use `docs/DREAMINA.md` + `npm run media:dreamina -- ... --generation-service dreamina` (flag `FLAG_dreamina_media`), then `video:publish --platform all --generation-service dreamina`.
+9. **Exclusive composition:** honor `route.renderer` / `Job.generation.service` for the **final** MP4 only:
+   - `dreamina` → final from Dreamina CLI only; TTS = dreamina-native (no project CosyVoice unless user asks).
+   - `hyperframes` → final from HyperFrames only; TTS = project `AI_REMOTION_TTS_*` (usually CosyVoice 3).
+   - `remotion` → final from Remotion only; same project TTS.
+   - `heygen` → final from HeyGen only; TTS = HeyGen-native unless user asks CosyVoice replace.
+10. Never publish without current-session `批准发布` plus `--i-approve-publish`, except `generation.service=dreamina` (use `--generation-service dreamina` instead). Follow `docs/VIDEO_PUBLISH.md`. Douyin is official API; Weixin Channels / Xiaohongshu are publish packs only (no RPA).
+11. **Hotspot digest** (`docs/VIDEO_HOTSPOT.md`): if the user wants 全网热点 / 口播文案, ask for (a) topic type, (b) `human-vo` vs `digital-human`, (c) now vs schedule. Prefer the in-repo RSS crawler (`video:hotspot --watch` / `--crawl`) when `FLAG_video_hotspot_crawler` is on; otherwise search the public web yourself and write items JSON. Both formats get LLM polish via `AI_REMOTION_LLM_*`. `human-vo` → deliver `hotspot-copy.md` only, user records, no Dreamina. `digital-human` → Dreamina text2video (`seedance2.0_vip`) + text2image 9:16 cover, then `video:publish --platform all --generation-service dreamina --cover`. Skip Douyin when `FLAG_video_publish_douyin` is off. Do not invent news.
+12. **Never** hand CLI steps back to the user. Stop only for: missing info, review gates (not dreamina), paid-provider approval (HeyGen), publish approval (not dreamina), or a real blocker.
 
 ## Job-file entry
 
@@ -74,5 +82,5 @@ Return exactly one result object:
 ## Minimal handoff prompt
 
 ```text
-Read agents/START_HERE.md and agents/video-producer/AGENT.md. Do the video work I describe next yourself (intake/Job/route/specialist). Ask me only when something required is missing, or when storyboard / final_render / paid providers need approval. Do not ask me to run CLI commands.
+Read agents/START_HERE.md and agents/video-producer/AGENT.md. Do the video work I describe next yourself (intake/Job/route/specialist). Ask me only when something required is missing, or when storyboard / final_render / paid HeyGen need approval. If I chose dreamina, generate then publish without extra gates. Do not ask me to run CLI commands.
 ```

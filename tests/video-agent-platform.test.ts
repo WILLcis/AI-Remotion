@@ -233,6 +233,48 @@ describe("video agent platform", () => {
     });
   });
 
+  it("routes dreamina generation.service into provider_requirements", () => {
+    const route = routeVideoJob(
+      makeJob({
+        generation: { service: "dreamina" },
+      }),
+      { enabled: true },
+    );
+
+    expect(route.provider_requirements).toEqual(["dreamina"]);
+  });
+
+  it("makes generation.service=dreamina the exclusive renderer with dreamina-native TTS", () => {
+    const route = routeVideoJob(
+      makeJob({
+        generation: { service: "dreamina" },
+      }),
+      { enabled: true },
+    );
+
+    expect(route).toMatchObject({
+      renderer: "dreamina",
+      tts_policy: "dreamina-native",
+      requires_approval: [],
+    });
+    expect(route.reason).toMatch(/Exclusive composition engine: dreamina/);
+  });
+
+  it("makes generation.service=hyperframes the exclusive renderer with project TTS", () => {
+    const route = routeVideoJob(
+      makeJob({
+        generation: { service: "hyperframes" },
+        render: { engine: "hyperframes" },
+      }),
+      { enabled: true },
+    );
+
+    expect(route).toMatchObject({
+      renderer: "hyperframes",
+      tts_policy: "project-tts",
+    });
+  });
+
   it("routes a topic without a presenter to the faceless explainer", () => {
     const route = routeVideoJob(makeJob(), { enabled: true });
 
@@ -240,6 +282,7 @@ describe("video agent platform", () => {
       workflow: "faceless-explainer",
       primary_agent: "faceless-explainer-producer",
       renderer: "remotion",
+      tts_policy: "project-tts",
     });
   });
 
@@ -268,8 +311,8 @@ describe("video agent platform", () => {
       primary_agent: "existing-video-recut-producer",
       renderer: "hyperframes",
     });
-    expect(explicitRoute.reason).toBe(
-      "Explicit workflow selected: existing-video-recut",
+    expect(explicitRoute.reason).toMatch(
+      /^Explicit workflow selected: existing-video-recut/,
     );
 
     const shortsRoute = routeVideoJob(
@@ -523,5 +566,9 @@ describe("video agent platform", () => {
 
     expect(dev).toContain('FLAG_video_agent_platform={"enabled":false}');
     expect(prod).toContain('FLAG_video_agent_platform={"enabled":false}');
+    expect(dev).toContain('FLAG_video_hotspot={"enabled":false}');
+    expect(prod).toContain('FLAG_video_hotspot={"enabled":false}');
+    expect(dev).toContain('FLAG_video_hotspot_crawler={"enabled":false}');
+    expect(prod).toContain('FLAG_video_hotspot_crawler={"enabled":false}');
   });
 });

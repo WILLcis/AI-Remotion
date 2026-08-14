@@ -1,6 +1,12 @@
 import { z } from "zod";
 import { aspectRatioSchema, languageSchema } from "./artifacts";
 import { type VideoJob, videoJobSchema } from "./videoJob";
+import {
+  resolveRenderEngineForGenerationService,
+  skipsHumanApprovalGates,
+  videoGenerationServiceChoiceQuestionZh,
+  videoGenerationServiceSchema,
+} from "./videoGenerationServices";
 
 const nonEmptyString = z.string().trim().min(1);
 
@@ -21,6 +27,8 @@ export const videoIntakeRequestSchema = z
     known_refs: z.array(nonEmptyString).default([]),
     defaults: videoIntakeDefaultsSchema.optional(),
     presenter_provider: nonEmptyString.optional(),
+    /** Required before draft: remotion | hyperframes | heygen | dreamina */
+    generation_service: videoGenerationServiceSchema.optional(),
   })
   .strict();
 
@@ -81,14 +89,19 @@ export const createVideoIntakeDecision = (
     });
   }
 
+  const dreaminaAutopilot = skipsHumanApprovalGates(
+    request.generation_service,
+  );
+
   return videoIntakeDecisionSchema.parse({
     status: "draft_ready",
     draft_job: parsedDraft.data,
     missing_fields: [],
     questions: [],
     assumptions: getAssumptions(request),
-    next_action:
-      "Ask the user to review the draft Job. After confirmation, enable VIDEO_AGENT_PLATFORM and run video:route.",
+    next_action: dreaminaAutopilot
+      ? "Do not wait for review gates. Run Dreamina generation immediately, then video:publish (douyin + weixin-channels + xiaohongshu packs). Selecting dreamina is paid-generation and publish consent."
+      : "Ask the user to review the draft Job. After confirmation, enable VIDEO_AGENT_PLATFORM and run video:route.",
   });
 };
 
@@ -113,6 +126,9 @@ const getMissingFields = (
   ) {
     missingFields.push("known_refs");
   }
+  if (!request.generation_service) {
+    missingFields.push("generation_service");
+  }
   if (requestsDigitalHuman(request.description) && !request.presenter_provider) {
     missingFields.push("presenter_provider");
   }
@@ -126,6 +142,9 @@ const buildDraftJob = (
 ): VideoJob => {
   const defaults = request.defaults!;
   const digitalHuman = requestsDigitalHuman(request.description);
+  const generationService = request.generation_service!;
+  const auto = skipsHumanApprovalGates(generationService);
+  const gate = auto ? "approved" : "pending";
 
   return {
     job_id: request.request_id ?? "video-job-draft",
@@ -141,11 +160,15 @@ const buildDraftJob = (
     presenter: digitalHuman
       ? { mode: "digital-human", provider: request.presenter_provider! }
       : { mode: "none" },
-    render: { engine: "auto" },
+    render: {
+      engine: resolveRenderEngineForGenerationService(generationService),
+    },
+    generation: { service: generationService },
     review_gates: {
-      script: "pending",
-      storyboard: "pending",
-      final_render: "pending",
+      script: gate,
+      storyboard: gate,
+      final_render: gate,
+      ...(auto ? { publish: "approved" as const } : {}),
     },
   };
 };
@@ -220,15 +243,26 @@ const getQuestion = (field: string): string => {
     known_refs:
       "Which approved local source file paths should the Job reference?",
     presenter_provider:
-      "Which explicitly approved digital-human provider should the Job use?",
+      "Which explicitly approved digital-human provider should the Job use? (heygen / musetalk / latentsync / infinitetalk / longcat / dreamina — never invent one)",
+    generation_service: videoGenerationServiceChoiceQuestionZh(),
   };
 
   return questions[field] ?? `Provide ${field}.`;
 };
 
 const getAssumptions = (request: VideoIntakeRequest): string[] => [
-  "All review gates remain pending.",
-  "No source rights, provider approval, or final-render approval is implied by this draft.",
+  skipsHumanApprovalGates(request.generation_service)
+    ? "generation.service=dreamina auto-approves script, storyboard, final_render, and publish. Selecting dreamina is consent to paid generation and immediate publish."
+    : "All review gates remain pending.",
+  skipsHumanApprovalGates(request.generation_service)
+    ? "Agent must generate with Dreamina then publish without asking 批准 storyboard / 批准付费 / 批准发布."
+    : "No source rights, provider approval, or final-render approval is implied by this draft.",
+  `generation.service=${request.generation_service} was supplied by the caller and was not invented.`,
+  ...(request.generation_service === "heygen"
+    ? [
+        "Paid cloud generation still requires an explicit user approval before any provider call.",
+      ]
+    : []),
   ...(request.known_refs.length > 0
     ? [
         "Known refs were provided by the caller and were not verified or modified.",

@@ -14,6 +14,8 @@ Then load any task-specific skill that applies (including installed `heygen-vide
 
 **HeyGen production rule:** for any new HeyGen video, follow `docs/HeyGen_skills.md` + `docs/HeyGen.md` and the official `heygen-video` skill. Prefer CLI/skills over raw `curl` to `api.heygen.com`. Do not invent v1/v2 endpoints.
 
+**Dreamina / 即梦:** for Jimeng CLI media generation, follow `docs/DREAMINA.md`. Prefer `npm run media:dreamina` over calling the deprecated Volcengine Seedance API path. Default video model is `seedance2.0_vip` (not Fast). Video Jobs must set an explicit `generation.service` (`remotion` | `hyperframes` | `heygen` | `dreamina`); agents must ask the user and must not invent a default. Selecting `dreamina` is consent to paid generation and immediate publish: generate, then `video:publish --platform all --generation-service dreamina`. Do not ask for storyboard / paid / publish approvals. Kill-switch flags still apply.
+
 ## Project Goal
 
 AI-Remotion is a local-first AI + Remotion production line for image-and-text explainer videos.
@@ -76,11 +78,14 @@ episodes/             Episode briefs, scripts, plans, captions, assets, outputs
 flags/                Harness feature-flag facade
 prompts/              AI review and architect-task prompts
 scripts/              Harness automation and local review scripts
+src/hotspot/          Hotspot digest: crawl, LLM polish, Dreamina cover
+src/publish/          Multi-platform publish (Douyin API + Weixin/XHS packs)
 src/remotion/         Remotion root, templates, scene components, themes
 src/render/           Render-plan and timing helpers
 state/                Append-only agent/harness memory and orchestration state
 tests/                Unit and integration tests
 tools/                Harness installation and verification helpers
+videos/               Non-episode video jobs (generated MP4s are gitignored)
 ```
 
 Episode artifacts live in `episodes/<episode-id>/`:
@@ -98,7 +103,7 @@ out/final.mp4
 qa-report.md
 ```
 
-Do not commit generated videos, generated audio, local outputs, or `.env` files.
+Do not commit generated videos, generated audio, local outputs, or `.env` / `.env.local` files. Commit `config/.env.*.example` placeholders only.
 
 ## Commands
 
@@ -145,6 +150,9 @@ npm run episode:route -- "第 4 段不要卡片，改成时间轴"
 npm run episode:voice -- --episode sample --provider silent
 npm run video:intake -- --request tests/fixtures/video-intake/product-promo.json
 npm run video:route -- --job tests/fixtures/video-jobs/product-promo.yaml
+npm run video:publish -- --help
+npm run video:hotspot -- --help
+npm run hotspot:watch -- --help
 npm run validate:sample
 npm test
 npm run render:sample
@@ -188,7 +196,9 @@ Do not regenerate unrelated episode files during revisions.
 - Prefer `AI_REMOTION_*` runtime env keys for video pipeline providers.
 - Do not scrape or embed unlicensed media.
 - Do not clone a real person's voice without explicit rights.
-- Do not auto-publish videos.
+- Do not auto-publish videos without an explicit current-session approval and an enabled publish feature flag. Exception: selecting `generation.service=dreamina` is that consent; still require publish flags. Remotion / HyperFrames / HeyGen still need `批准发布` + `--i-approve-publish`. Design: `docs/MULTI_PLATFORM_PUBLISH_DESIGN.md` (BIOS `YES-2498`); P0 implementation `YES-2520`.
+- Hotspot digest (`docs/VIDEO_HOTSPOT.md`): topic + `human-vo` / `digital-human` + now or schedule. Copy is LLM-polished. `human-vo` is copy only. `digital-human` uses Dreamina `seedance2.0_vip` video + `text2image` 9:16 cover, then publish. Resident RSS crawler: `npm run hotspot:watch` behind `FLAG_video_hotspot_crawler`. Do not invent headlines.
+- Douyin live API (`docs/VIDEO_PUBLISH.md`) needs a **正式网站应用** + scope `video.create.bind` (not a mini-program, not a personal Open Platform signup). Keep `FLAG_video_publish_douyin` off until that exists; `--platform all` then skips Douyin and writes Weixin/XHS packs only.
 - Do not present AI-generated factual claims as verified facts.
 - Mark uncertain claims for manual review.
 - Ask before adding paid APIs, cloud rendering, online asset scraping, a database, or auto-publishing.

@@ -27,12 +27,19 @@ export const FLAGS = {
   AVATAR_MOTION: 'avatar_motion',
   GENERATIVE_BROLL: 'generative_broll',
   SEEDANCE_PRESENTER: 'seedance_presenter',
+  DREAMINA_MEDIA: 'dreamina_media',
   LATENTSYNC_LIPSYNC: 'latentsync_lipsync',
   INFINITETALK_AVATAR: 'infinitetalk_avatar',
   LONGCAT_AVATAR: 'longcat_avatar',
   HEYGEN_AVATAR: 'heygen_avatar',
   HEYGEN_HYPERFRAMES: 'heygen_hyperframes',
   VIDEO_AGENT_PLATFORM: 'video_agent_platform',
+  VIDEO_PUBLISH: 'video_publish',
+  VIDEO_PUBLISH_DOUYIN: 'video_publish_douyin',
+  VIDEO_PUBLISH_WEIXIN_CHANNELS: 'video_publish_weixin_channels',
+  VIDEO_PUBLISH_XIAOHONGSHU: 'video_publish_xiaohongshu',
+  VIDEO_HOTSPOT: 'video_hotspot',
+  VIDEO_HOTSPOT_CRAWLER: 'video_hotspot_crawler',
 } as const;
 
 export type FlagKey = (typeof FLAGS)[keyof typeof FLAGS];
@@ -47,12 +54,19 @@ const FLAG_DEFAULTS: Record<FlagKey, boolean> = {
   [FLAGS.AVATAR_MOTION]: false,
   [FLAGS.GENERATIVE_BROLL]: false,
   [FLAGS.SEEDANCE_PRESENTER]: false,
+  [FLAGS.DREAMINA_MEDIA]: false,
   [FLAGS.LATENTSYNC_LIPSYNC]: false,
   [FLAGS.INFINITETALK_AVATAR]: false,
   [FLAGS.LONGCAT_AVATAR]: false,
   [FLAGS.HEYGEN_AVATAR]: false,
   [FLAGS.HEYGEN_HYPERFRAMES]: false,
   [FLAGS.VIDEO_AGENT_PLATFORM]: false,
+  [FLAGS.VIDEO_PUBLISH]: false,
+  [FLAGS.VIDEO_PUBLISH_DOUYIN]: false,
+  [FLAGS.VIDEO_PUBLISH_WEIXIN_CHANNELS]: false,
+  [FLAGS.VIDEO_PUBLISH_XIAOHONGSHU]: false,
+  [FLAGS.VIDEO_HOTSPOT]: false,
+  [FLAGS.VIDEO_HOTSPOT_CRAWLER]: false,
 };
 
 // ============================================================================

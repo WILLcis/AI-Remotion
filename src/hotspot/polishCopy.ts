@@ -1,0 +1,156 @@
+import { z } from "zod";
+import {
+  generateTextWithProvider,
+  type FetchLike,
+} from "../agent/providers/llm";
+import type { LlmRuntimeConfig } from "../config/runtimeConfig";
+import { hotspotPackSchema, type HotspotPack } from "../schemas/hotspot";
+
+const polishedClipSchema = z.object({
+  index: z.number().int().min(1).optional(),
+  headline: z.string().trim().min(1),
+  hook_title: z.string().trim().min(1),
+  cover: z.string().trim().min(1),
+  tags: z.string().trim().min(1),
+  spoken: z.string().trim().min(1),
+});
+
+const polishedPayloadSchema = z.object({
+  clips: z.array(polishedClipSchema).min(1),
+});
+
+export type PolishHotspotPack = (pack: HotspotPack) => Promise<HotspotPack>;
+
+export type PolishHotspotResult = {
+  pack: HotspotPack;
+  provider: string;
+  reason: string;
+};
+
+const SYSTEM_PROMPT = `你是短视频口播文案编辑。把给定新闻素材改写成口播稿，口吻对齐下列样例：
+
+爆款标题：3样东西偷偷涨价，打工人被迫给AI交税了
+封面文案：工资没涨，谋生工具先贵了
+话题标签：#打工人三件套 #手机涨价 #AI税 #商业思维
+口播文本：3样东西偷偷涨价，手机涨三百，电脑涨一千，电动车都贵了两百。不是品牌黑心，是AI把芯片产能全抢走了。巨头吃肉，打工人买单，你说谁最亏？
+
+规则：
+- 只改写 headline / hook_title / cover / tags / spoken。
+- 禁止编造素材里没有的数字、机构、金额、日期或结论。不确定就写得更保守。
+- 口播像人在说话：短句、有态度、结尾抛问。
+- 真人口播不要写即梦提示词。
+- 只输出 JSON：{"clips":[{"index":1,"headline":"...","hook_title":"...","cover":"...","tags":"#a #b","spoken":"..."}]}`;
+
+export const parsePolishedClipsJson = (text: string) => {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  const raw = (fenced?.[1] ?? text).trim();
+  const start = raw.indexOf("{");
+  const end = raw.lastIndexOf("}");
+  if (start < 0 || end <= start) {
+    throw new Error("LLM hotspot polish did not return JSON.");
+  }
+  return polishedPayloadSchema.parse(JSON.parse(raw.slice(start, end + 1)));
+};
+
+export const mergePolishedPack = (
+  pack: HotspotPack,
+  polished: z.infer<typeof polishedPayloadSchema>,
+): HotspotPack => {
+  if (polished.clips.length !== pack.clips.length) {
+    throw new Error(
+      `LLM hotspot polish returned ${polished.clips.length} clips, expected ${pack.clips.length}.`,
+    );
+  }
+  return hotspotPackSchema.parse({
+    ...pack,
+    clips: pack.clips.map((clip, index) => {
+      const next = polished.clips[index];
+      if (!next) {
+        throw new Error(`LLM hotspot polish missing clip ${clip.index}.`);
+      }
+      return {
+        ...clip,
+        headline: next.headline,
+        hook_title: next.hook_title,
+        cover: next.cover,
+        tags: next.tags,
+        spoken: next.spoken,
+      };
+    }),
+  });
+};
+
+export const polishHotspotPack = async (
+  pack: HotspotPack,
+  options: {
+    config: LlmRuntimeConfig;
+    request?: FetchLike;
+  },
+): Promise<PolishHotspotResult> => {
+  const generated = await generateTextWithProvider({
+    config: options.config,
+    deterministicText: () => JSON.stringify({ clips: pack.clips }),
+    request: options.request,
+    messages: [
+      { role: "system", content: SYSTEM_PROMPT },
+      {
+        role: "user",
+        content: JSON.stringify(
+          {
+            format: pack.format,
+            topic: pack.topic,
+            date_label: pack.date_label,
+            clips: pack.clips.map((clip) => ({
+              index: clip.index,
+              sources: clip.sources,
+              draft: {
+                headline: clip.headline,
+                hook_title: clip.hook_title,
+                cover: clip.cover,
+                tags: clip.tags,
+                spoken: clip.spoken,
+              },
+            })),
+          },
+          null,
+          2,
+        ),
+      },
+    ],
+  });
+
+  if (generated.provider === "deterministic") {
+    return {
+      pack,
+      provider: generated.provider,
+      reason: generated.reason,
+    };
+  }
+
+  try {
+    return {
+      pack: mergePolishedPack(pack, parsePolishedClipsJson(generated.text)),
+      provider: generated.provider,
+      reason: generated.reason,
+    };
+  } catch (error) {
+    if (!options.config.fallbackToDeterministic) {
+      throw error;
+    }
+    return {
+      pack,
+      provider: "deterministic",
+      reason: "fallback",
+    };
+  }
+};
+
+export const createLlmPolishPack = (options: {
+  config: LlmRuntimeConfig;
+  request?: FetchLike;
+}): PolishHotspotPack => {
+  return async (pack) => {
+    const polished = await polishHotspotPack(pack, options);
+    return polished.pack;
+  };
+};
