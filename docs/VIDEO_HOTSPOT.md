@@ -9,7 +9,7 @@
 | `format` | 给用户什么 | 是否生成视频 |
 | --- | --- | --- |
 | `human-vo` | 热门口播文案（爆款标题 / 封面文案 / 话题标签 / **口播文本**） | **否**。用户自己录 |
-| `digital-human` | 同上 + **即梦提示词** | **是**。整理完立刻 `dreamina text2video`（默认 `seedance2.0_vip`）+ `text2image` 9:16 封面，再 `video:publish --platform all --generation-service dreamina --cover` |
+| `digital-human` | 同上 + **即梦提示词** | **是**。`text2image` 9:16 封面 → `image2video`（封面作第一帧；提示词要求口型 + 底部中文字幕，`seedance2.0_vip`）→ `video:publish --platform all --generation-service dreamina --cover` |
 
 真人口播 **不要** 写即梦提示词，也 **不要** 调即梦或发布。两种格式都要 LLM 精修标题/封面/标签/口播。
 
@@ -101,6 +101,7 @@ launchctl load ~/Library/LaunchAgents/com.ai-remotion.hotspot-crawler.plist
 ## 安全
 
 - 文案末尾带素材来源；公开报道整理，待核，不当已核实事实。
-- LLM 精修不得发明数字；失败时回退模板口播。
+- LLM 精修不得发明数字；失败时回退模板口播。标题/口播会去掉诈骗、判刑等即梦 TNS 高危词。
 - 即梦 CLI 仍需高级会员；默认 `seedance2.0_vip`。会员等级不够会失败，文案包仍会留下。
-- 数字人封面走即梦 `text2image` 9:16，不抽帧、不用 ffmpeg。
+- 数字人封面仍走即梦 `text2image` 9:16。成片走 `image2video`，CLI 把该图当作视频第一帧；字幕和口型写在提示词里，由即梦生成，不在本地 ffmpeg 烧录或换轨。
+- 单条即梦 TNS / 生成失败不阻断其余 clip；失败原因写入结果 `questions`（例如 `口播1 即梦失败：…`）。同一提示词不要重提。

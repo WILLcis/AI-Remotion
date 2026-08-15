@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   assertDreaminaAvailable,
   DEFAULT_DREAMINA_VIDEO_MODEL,
+  dreaminaMultimodal2Video,
   dreaminaText2Image,
   dreaminaText2Video,
 } from "../src/media/dreaminaCli";
@@ -85,5 +86,43 @@ describe("dreamina CLI adapter", () => {
       expect.arrayContaining(["--model_version=seedance2.0_vip"]),
     );
     expect(calls[0]?.join(" ")).not.toMatch(/seedance2\.0fast/);
+  });
+
+  it("refuses paid multimodal2video without explicit approval", async () => {
+    await expect(
+      dreaminaMultimodal2Video({
+        approvePaid: false,
+        imagePaths: ["/tmp/cover.png"],
+        audioPaths: ["/tmp/spoken.wav"],
+      }),
+    ).rejects.toThrow(/approvePaid/);
+  });
+
+  it("passes cover image and driving audio to multimodal2video", async () => {
+    const calls: string[][] = [];
+    await dreaminaMultimodal2Video({
+      approvePaid: true,
+      imagePaths: ["/tmp/cover.png"],
+      audioPaths: ["/tmp/spoken.wav"],
+      prompt: "口型跟随音频",
+      durationSeconds: 8,
+      ratio: "9:16",
+      options: {
+        run: async (_bin, args) => {
+          calls.push(args);
+          return { code: 0, stdout: '{"submit_id":"m"}', stderr: "" };
+        },
+      },
+    });
+    expect(calls[0]).toEqual(
+      expect.arrayContaining([
+        "multimodal2video",
+        "--prompt=口型跟随音频",
+        "--ratio=9:16",
+        "--model_version=seedance2.0_vip",
+        expect.stringMatching(/--image=.*cover\.png/),
+        expect.stringMatching(/--audio=.*spoken\.wav/),
+      ]),
+    );
   });
 });

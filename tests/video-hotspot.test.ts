@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { FLAGS, LocalProvider } from "../flags/feature-flags";
-import { composeHotspotPack } from "../src/hotspot/composeCopy";
+import { composeHotspotPack, buildDreaminaVideoPrompt } from "../src/hotspot/composeCopy";
 import { formatHotspotMarkdown } from "../src/hotspot/formatPack";
 import { missingHotspotFields, runHotspot } from "../src/hotspot/runHotspot";
 import { listDueScheduledHotspot, listScheduledHotspot } from "../src/hotspot/schedule";
@@ -129,7 +129,7 @@ describe("video hotspot digest", () => {
     );
     expect(result.status).toBe("done");
     expect(called).toBe(false);
-    expect(result.next_action).toMatch(/text2video/);
+    expect(result.next_action).toMatch(/image2video/);
   });
 
   it("queues a daily job without searching yet", async () => {
@@ -182,6 +182,25 @@ describe("video hotspot digest", () => {
     expect(markdown.indexOf("即梦提示词")).toBeLessThan(markdown.indexOf("口播文本"));
   });
 
+  it("asks Dreamina to speak, lip-sync, and draw Chinese captions in the prompt", () => {
+    const pack = composeHotspotPack(
+      hotspotRequestSchema.parse({
+        format: "digital-human",
+        topic: "商业消费",
+        items: items.slice(0, 1),
+        count: 1,
+      }),
+    );
+    const clip = pack.clips[0]!;
+    const prompt = buildDreaminaVideoPrompt(clip);
+    expect(prompt).toContain(clip.spoken);
+    expect(prompt).toMatch(/嘴唇开合|口型/);
+    expect(prompt).toMatch(/字幕/);
+    expect(prompt).toMatch(/第一帧/);
+    expect(prompt).not.toMatch(/不要字幕|不要烧录字幕/);
+    expect(clip.dreamina_prompt).not.toMatch(/不要修改内容/);
+  });
+
   it("parses Dreamina submit_id from CLI JSON", () => {
     expect(parseDreaminaSubmitId('{"submit_id":"abc-123","gen_status":"querying"}')).toBe(
       "abc-123",
@@ -231,5 +250,78 @@ describe("video hotspot digest", () => {
     );
     expect(result.status).toBe("done");
     expect(result.markdown).toMatch(/工资没涨，谋生工具先贵了/);
+  });
+
+  it("keeps generating later clips when one Dreamina TNS failure throws", async () => {
+    const generated: number[] = [];
+    const result = await runHotspot(
+      {
+        format: "digital-human",
+        topic: "数字货币",
+        items,
+        date: "8月14日",
+        count: 2,
+      },
+      {
+        isEnabled: enabled,
+        outDir: tempDir(),
+        generateVideo: async ({ clip }) => {
+          if (clip.index === 1) {
+            throw new Error("即梦 TNS 审核失败：未审核通过");
+          }
+          generated.push(clip.index);
+          return { video_path: `/tmp/clip-${clip.index}.mp4` };
+        },
+      },
+    );
+    expect(result.status).toBe("done");
+    expect(generated).toEqual([2]);
+    expect(result.generated_videos).toEqual(["/tmp/clip-2.mp4"]);
+    expect(result.questions.join("\n")).toMatch(/口播1 即梦失败：.*TNS/);
+    expect(result.next_action).toMatch(/口播1/);
+  });
+
+  it("marks digital-human failed when every clip throws", async () => {
+    const result = await runHotspot(
+      {
+        format: "digital-human",
+        topic: "数字货币",
+        items: items.slice(0, 2),
+        count: 2,
+      },
+      {
+        isEnabled: enabled,
+        outDir: tempDir(),
+        generateVideo: async ({ clip }) => {
+          throw new Error(`TNS clip ${clip.index}`);
+        },
+      },
+    );
+    expect(result.status).toBe("failed");
+    expect(result.generated_videos).toEqual([]);
+    expect(result.questions).toHaveLength(2);
+    expect(result.questions[0]).toMatch(/口播1 即梦失败/);
+    expect(result.questions[1]).toMatch(/口播2 即梦失败/);
+  });
+
+  it("softens TNS-sensitive words in titles and spoken copy", async () => {
+    const result = await runHotspot(
+      {
+        format: "human-vo",
+        topic: "数字货币",
+        items: [
+          {
+            title: "韩国币圈又爆雷，CEO诈骗判15年",
+            summary: "交易所欺诈，CEO成了阶下囚，最高法院也吃官司。",
+          },
+        ],
+        count: 1,
+        date: "8月14日",
+      },
+      { isEnabled: enabled, outDir: tempDir() },
+    );
+    const copy = result.markdown!.split("素材来源")[0] ?? "";
+    expect(copy).not.toMatch(/诈骗|欺诈|判15年|阶下囚|爆雷|最高法院|吃官司/);
+    expect(copy).toMatch(/违规|被处罚|当事人|出事/);
   });
 });

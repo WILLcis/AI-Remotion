@@ -5,6 +5,7 @@ import {
 } from "../agent/providers/llm";
 import type { LlmRuntimeConfig } from "../config/runtimeConfig";
 import { hotspotPackSchema, type HotspotPack } from "../schemas/hotspot";
+import { sanitizeHotspotPack } from "./safeCopy";
 
 const polishedClipSchema = z.object({
   index: z.number().int().min(1).optional(),
@@ -37,7 +38,9 @@ const SYSTEM_PROMPT = `你是短视频口播文案编辑。把给定新闻素材
 规则：
 - 只改写 headline / hook_title / cover / tags / spoken。
 - 禁止编造素材里没有的数字、机构、金额、日期或结论。不确定就写得更保守。
-- 口播像人在说话：短句、有态度、结尾抛问。
+- 口播像人在说话：短句、有态度、结尾抛问。数字人口播 spoken 不超过 90 字。
+- 即梦会审核标题和口播：禁止写诈骗、欺诈、判刑、囚犯、死刑、血腥、色情、吸毒、政治对抗、点名辱骂。改成监管、处罚、调查、行业事件等中性说法。不要写具体刑期。
+- 标题短、少感叹号、不恐吓。
 - 真人口播不要写即梦提示词。
 - 只输出 JSON：{"clips":[{"index":1,"headline":"...","hook_title":"...","cover":"...","tags":"#a #b","spoken":"..."}]}`;
 
@@ -61,23 +64,25 @@ export const mergePolishedPack = (
       `LLM hotspot polish returned ${polished.clips.length} clips, expected ${pack.clips.length}.`,
     );
   }
-  return hotspotPackSchema.parse({
-    ...pack,
-    clips: pack.clips.map((clip, index) => {
-      const next = polished.clips[index];
-      if (!next) {
-        throw new Error(`LLM hotspot polish missing clip ${clip.index}.`);
-      }
-      return {
-        ...clip,
-        headline: next.headline,
-        hook_title: next.hook_title,
-        cover: next.cover,
-        tags: next.tags,
-        spoken: next.spoken,
-      };
+  return sanitizeHotspotPack(
+    hotspotPackSchema.parse({
+      ...pack,
+      clips: pack.clips.map((clip, index) => {
+        const next = polished.clips[index];
+        if (!next) {
+          throw new Error(`LLM hotspot polish missing clip ${clip.index}.`);
+        }
+        return {
+          ...clip,
+          headline: next.headline,
+          hook_title: next.hook_title,
+          cover: next.cover,
+          tags: next.tags,
+          spoken: next.spoken,
+        };
+      }),
     }),
-  });
+  );
 };
 
 export const polishHotspotPack = async (
@@ -151,6 +156,6 @@ export const createLlmPolishPack = (options: {
 }): PolishHotspotPack => {
   return async (pack) => {
     const polished = await polishHotspotPack(pack, options);
-    return polished.pack;
+    return sanitizeHotspotPack(polished.pack);
   };
 };

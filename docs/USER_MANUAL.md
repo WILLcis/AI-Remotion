@@ -248,6 +248,13 @@ AI_REMOTION_ENV_FILE=.env.local npm run config:check
 
 ## 9. 怎么和 Agent 协作
 
+把仓库交给**另一个新开的 Agent**时，不要靠口头复述。打开仓库根目录，把 `agents/START_HERE.md` 里对应粘贴块整段贴进去，再写这一次的需求。
+
+- 图文讲解 / Remotion / HyperFrames / HeyGen：用 START_HERE 的「讲解视频」粘贴块。
+- 热点口播 / 即梦数字人 / 发布：用 START_HERE 的「热点 / 即梦 / 发布」粘贴块。
+- Agent 自己读 `AGENTS.md` + `agents/video-producer/AGENT.md` + 第 12–15 节，自己跑 CLI 和 FLAG_。不要让人代敲命令。
+- 密钥在本机 `.env.local`；Agent 不得把该文件或 MP4/封面提交进 git。
+
 推荐给 Agent 的请求方式：
 
 ```text
@@ -356,7 +363,7 @@ FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- check
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- credit
 ```
 
-数字人封面走即梦 `text2image`（9:16），不抽视频帧、不用 ffmpeg 叠字。
+数字人封面走即梦 `text2image`（9:16）。成片用 `image2video`，把封面图当作第一帧；口型和底部中文字幕写在即梦提示词里，不要本地烧录字幕。
 
 ## 13. 热点口播（交付）
 
@@ -391,7 +398,7 @@ FLAG_video_publish_xiaohongshu='{"enabled":true}' \
 
 常驻 RSS 爬虫：`npm run hotspot:watch`（`FLAG_video_hotspot_crawler`）。macOS 开机示例见 `scripts/launchd/ai-remotion-hotspot-crawler.plist.example`。
 
-即梦审核（TNS）失败会扣积分且无成片。当前不会自动改写后重试；换一条口播或改掉敏感词后再生成。
+即梦审核（TNS）失败会扣积分且无成片。不要用同一提示词重试。热点数字人会跳过失败的那一条，继续做后面的 clip，并在结果 `questions` 里写明「口播N 即梦失败：…」。标题和口播会先去掉诈骗/判刑等敏感词。
 
 ## 14. 多平台发布（交付）
 

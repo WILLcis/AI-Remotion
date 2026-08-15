@@ -12,6 +12,7 @@ import {
 import { composeHotspotPack } from "./composeCopy";
 import { formatHotspotMarkdown } from "./formatPack";
 import type { PolishHotspotPack } from "./polishCopy";
+import { sanitizeHotspotPack } from "./safeCopy";
 import {
   enqueueScheduledHotspot,
   listDueScheduledHotspot,
@@ -77,6 +78,16 @@ export const missingHotspotFields = (
     missing.push("topic");
   }
   return missing;
+};
+
+export const clipFailureQuestion = (
+  index: number,
+  stage: "即梦" | "发布",
+  error: unknown,
+): string => {
+  const raw = error instanceof Error ? error.message : String(error);
+  const oneLine = raw.replace(/\s+/g, " ").trim().slice(0, 240);
+  return `口播${index} ${stage}失败：${oneLine}`;
 };
 
 export const runHotspot = async (
@@ -163,9 +174,10 @@ export const runHotspot = async (
   }
 
   const composed = composeHotspotPack(request, now);
-  const pack = options.polishPack
+  const polished = options.polishPack
     ? await options.polishPack(composed)
     : composed;
+  const pack = sanitizeHotspotPack(polished);
   const markdown = formatHotspotMarkdown(pack);
   mkdirSync(options.outDir, { recursive: true });
   const packPath = path.join(options.outDir, "hotspot-copy.md");
@@ -204,7 +216,7 @@ export const runHotspot = async (
       generated_videos: [],
       publish_results: [],
       next_action:
-        "Digital-human pack is ready. Next: Dreamina text2video then video:publish --platform all --generation-service dreamina.",
+        "Digital-human pack is ready. Next: Dreamina text2image cover then image2video (lip-sync + captions in the prompt), then video:publish --platform all --generation-service dreamina.",
     });
   }
 
@@ -240,19 +252,44 @@ export const runHotspot = async (
 
   const generatedVideos: string[] = [];
   const publishResults: unknown[] = [];
+  const questions: string[] = [];
   const downloadDir = path.join(options.outDir, "renders");
   for (const clip of pack.clips) {
-    const generated = await options.generateVideo({ clip, downloadDir });
-    generatedVideos.push(generated.video_path);
-    if (options.publishVideo) {
-      publishResults.push(
-        await options.publishVideo({
-          clip,
-          video_path: generated.video_path,
-          cover_path: generated.cover_path,
-        }),
-      );
+    try {
+      const generated = await options.generateVideo({ clip, downloadDir });
+      generatedVideos.push(generated.video_path);
+      if (options.publishVideo) {
+        try {
+          publishResults.push(
+            await options.publishVideo({
+              clip,
+              video_path: generated.video_path,
+              cover_path: generated.cover_path,
+            }),
+          );
+        } catch (error) {
+          questions.push(clipFailureQuestion(clip.index, "发布", error));
+        }
+      }
+    } catch (error) {
+      questions.push(clipFailureQuestion(clip.index, "即梦", error));
     }
+  }
+
+  if (generatedVideos.length === 0) {
+    return hotspotResultSchema.parse({
+      status: "failed",
+      format: "digital-human",
+      pack_path: packPath,
+      markdown,
+      missing_fields: [],
+      questions,
+      generated_videos: generatedVideos,
+      publish_results: publishResults,
+      next_action:
+        questions.join(" ") ||
+        "Dreamina generated no clips. See questions for per-clip failures.",
+    });
   }
 
   return hotspotResultSchema.parse({
@@ -261,11 +298,12 @@ export const runHotspot = async (
     pack_path: packPath,
     markdown,
     missing_fields: [],
-    questions: [],
+    questions,
     generated_videos: generatedVideos,
     publish_results: publishResults,
-    next_action:
-      "Dreamina videos generated and publish attempted (Douyin API + Weixin/XHS packs). Kill-switch flags still apply.",
+    next_action: questions.length
+      ? `部分成功。失败：${questions.join(" ")} 成功成片已尝试发布。`
+      : "Dreamina videos generated (image2video from cover; captions and lip-sync in the prompt) and publish attempted. Kill-switch flags still apply.",
   });
 };
 
@@ -293,7 +331,7 @@ export const runDueScheduledHotspot = async (
       results.push(result);
       continue;
     }
-    if (result.status === "done" || result.status === "blocked") {
+    if (result.status === "done" || result.status === "blocked" || result.status === "failed") {
       markScheduledHotspotDone(options.scheduleDir, job, now);
     }
     results.push(result);

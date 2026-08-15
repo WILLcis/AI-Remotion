@@ -98,6 +98,6 @@ export const hotspotResultSchema = z
 
 export type HotspotResult = z.infer<typeof hotspotResultSchema>;
 
-/** Default digital-human look from docs/example.md. */
+/** Default digital-human look from docs/example.md. Captions and lip-sync are in the video prompt. */
 export const DEFAULT_DREAMINA_PRESENTER_PROMPT =
-  "35岁左右职业男性，干练黑色短发向后梳起，戴无边框眼镜，坐在办公椅上微微侧身，一手转钢笔，表情不屑中带嘲讽，背后是书架和装饰画，左暖右冷分层布光，半身镜头，面部清晰，人体结构正常，动作流畅，画面稳定，无畸变，4K高清，电影感，不要字幕，不要修改内容。";
+  "35岁左右职业男性，干练黑色短发向后梳起，戴无边框眼镜，坐在办公椅上微微侧身，一手转钢笔，表情自然有态度，背后是书架和装饰画，左暖右冷分层布光，半身镜头，面部清晰，人体结构正常，动作流畅，正在对镜头用中文说话，嘴唇明显开合，口型跟随对白，下颌活动，不要闭嘴静止，不要画面完全静止，无畸变，4K高清，电影感。";

@@ -6,6 +6,7 @@ import {
   type HotspotRequest,
 } from "../schemas/hotspot";
 import { formatZhDateLabel } from "./formatPack";
+import { sanitizeHotspotPack } from "./safeCopy";
 
 const limitChars = (text: string, max: number): string => {
   const trimmed = text.trim();
@@ -58,16 +59,26 @@ export const composeHotspotPack = (
     sources: [item],
   }));
 
-  return {
+  return sanitizeHotspotPack({
     format: request.format,
     topic: request.topic,
     date_label: request.date ?? formatZhDateLabel(now),
     clips,
-  };
+  });
 };
 
+const presenterLook = (clip: HotspotClip): string =>
+  clip.dreamina_prompt?.trim() || DEFAULT_DREAMINA_PRESENTER_PROMPT;
+
+/** Seedance prompt: first-frame cover + spoken lip-sync + on-screen Chinese captions. */
 export const buildDreaminaVideoPrompt = (clip: HotspotClip): string =>
-  `${clip.dreamina_prompt ?? DEFAULT_DREAMINA_PRESENTER_PROMPT}\n他用中文口播：${clip.spoken}`;
+  [
+    presenterLook(clip),
+    "以这张图作为视频第一帧，人物从封面姿态开口说话。",
+    "人物对镜头用中文口播，嘴唇明显开合，口型跟随对白，下颌活动，不要闭嘴静止，不要只眨眼。",
+    "画面底部叠加清晰可读、无错别字的中文字幕，字幕必须与口播逐句一致，白字深色半透明底，不要挡住脸和嘴。",
+    `口播与字幕：${clip.spoken}`,
+  ].join("");
 
 export const estimateSpokenDurationSeconds = (spoken: string): number => {
   const chars = spoken.replace(/\s/g, "").length;

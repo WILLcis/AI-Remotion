@@ -22,7 +22,7 @@ BIOS：`YES-549` · 平台：`YES-1909` · Intake：`YES-2031`
 
 人只说话；**Agent 自己跑 CLI**（`video:intake` / `video:route` / `video:hotspot` / flag）。不要把命令甩回给用户。
 
-热点口播：用户定类型与定时 → RSS 爬虫或 Agent 检索 → **LLM 精修**口播 → `human-vo` 只交文案（用户自己录）/ `digital-human` 即梦 `seedance2.0_vip` 出片并发布。常驻：`npm run hotspot:watch`。见 [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md)。
+热点口播：用户定类型与定时 → RSS 爬虫或 Agent 检索 → **LLM 精修**口播（并去掉即梦 TNS 高危词）→ `human-vo` 只交文案（用户自己录）/ `digital-human` 即梦封面 + `image2video`（封面作第一帧；提示词要求口型与字幕，`seedance2.0_vip`），然后发布。单条 TNS 失败写入 `questions`，不阻断其他 clip。常驻：`npm run hotspot:watch`。见 [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md)。
 
 ---
 

@@ -170,6 +170,47 @@ export const dreaminaText2Video = async (input: {
   );
 };
 
+export const dreaminaMultimodal2Video = async (input: {
+  approvePaid: boolean;
+  imagePaths?: string[];
+  audioPaths?: string[];
+  videoPaths?: string[];
+  prompt?: string;
+  durationSeconds?: number;
+  pollSeconds?: number;
+  ratio?: string;
+  videoResolution?: string;
+  modelVersion?: string;
+  options?: DreaminaCliOptions;
+}): Promise<DreaminaSpawnResult> => {
+  if (!input.approvePaid) {
+    throw new Error(
+      "Dreamina multimodal2video is a paid cloud call. Pass approvePaid=true only after explicit user approval.",
+    );
+  }
+  const args = [
+    "multimodal2video",
+    `--duration=${String(input.durationSeconds ?? 5)}`,
+    `--ratio=${input.ratio ?? "9:16"}`,
+    `--video_resolution=${input.videoResolution ?? "720p"}`,
+    `--model_version=${input.modelVersion ?? DEFAULT_DREAMINA_VIDEO_MODEL}`,
+    `--poll=${String(input.pollSeconds ?? 180)}`,
+  ];
+  for (const imagePath of input.imagePaths ?? []) {
+    args.push(`--image=${path.resolve(imagePath)}`);
+  }
+  for (const audioPath of input.audioPaths ?? []) {
+    args.push(`--audio=${path.resolve(audioPath)}`);
+  }
+  for (const videoPath of input.videoPaths ?? []) {
+    args.push(`--video=${path.resolve(videoPath)}`);
+  }
+  if (input.prompt?.trim()) {
+    args.push(`--prompt=${input.prompt.trim()}`);
+  }
+  return runDreamina(args, input.options);
+};
+
 export const parseDreaminaSubmitId = (stdout: string): string | undefined => {
   const jsonMatch = stdout.match(/"submit_id"\s*:\s*"([^"]+)"/);
   if (jsonMatch?.[1]) {

@@ -41,9 +41,11 @@ Job 已选 `generation.service: dreamina` 时，生成命令带 `--generation-se
 
 ## 默认视频模型
 
-`text2video` / `image2video` 默认 **`seedance2.0_vip`**。不要默认 `seedance2.0fast`：Fast 走公排队，容易卡在 Queueing。需要 Fast 时显式传 `--model_version seedance2.0fast`。
+`text2video` / `image2video` / `multimodal2video` 默认 **`seedance2.0_vip`**。不要默认 `seedance2.0fast`：Fast 走公排队，容易卡在 Queueing。需要 Fast 时显式传 `--model_version seedance2.0fast`。
 
-数字人封面用 `text2image`、`ratio=9:16`，不要 ffmpeg 抽帧叠字。
+数字人封面用 `text2image`、`ratio=9:16`，不要 ffmpeg 抽帧叠字做封面。
+
+热点 `digital-human`：先 `text2image` 出封面，再 `image2video --image <封面>`。即梦把该图当作第一帧。口型、口播和底部中文字幕全部写在 `--prompt` 里，由 Seedance 生成；不要本地 TTS 驱动，也不要 ffmpeg 烧录字幕。
 
 出片后立即发布（不必 `--i-approve-publish`）：
 

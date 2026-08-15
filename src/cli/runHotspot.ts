@@ -1,18 +1,14 @@
-import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { flags, FLAGS, type FlagKey } from "../../flags/feature-flags";
 import { loadRuntimeConfig } from "../config/runtimeConfig";
-import {
-  buildDreaminaVideoPrompt,
-  estimateSpokenDurationSeconds,
-} from "../hotspot/composeCopy";
-import { generateDreaminaCover } from "../hotspot/cover";
 import {
   crawlHotspotItems,
   DEFAULT_HOTSPOT_CRAWLER_CONFIG,
   hotspotCrawlerConfigSchema,
   type HotspotCrawlerConfig,
 } from "../hotspot/crawl";
+import { generateDigitalHumanClip } from "../hotspot/generateClip";
 import { createLlmPolishPack } from "../hotspot/polishCopy";
 import {
   describeDueHotspotJobs,
@@ -21,12 +17,6 @@ import {
 } from "../hotspot/runHotspot";
 import { listDueScheduledHotspot, listScheduledHotspot, markScheduledHotspotDone } from "../hotspot/schedule";
 import { watchHotspot } from "../hotspot/watch";
-import {
-  DEFAULT_DREAMINA_VIDEO_MODEL,
-  dreaminaQueryResult,
-  dreaminaText2Video,
-  parseDreaminaSubmitId,
-} from "../media/dreaminaCli";
 import { runPublish } from "../publish/runPublish";
 import { resolvePublishPlatforms } from "../publish/schema";
 import {
@@ -44,7 +34,7 @@ const usage = `Usage:
   npm run video:hotspot -- --run-id <id> --items <json> --out <dir>
 
 human-vo: 真人口播，只写文案，不生成视频。LLM 精修爆款标题/封面/标签/口播。
-digital-human: 同上 + 即梦提示词，然后 Dreamina text2video（默认 seedance2.0_vip）+ text2image 封面，并发布 Pack。抖音 live API 暂停时 --platform all 会跳过抖音。
+digital-human: 同上 + 即梦提示词，然后 text2image 封面 → image2video（封面作第一帧；提示词要求口型+底部中文字幕），并发布 Pack。抖音 live API 暂停时 --platform all 会跳过抖音。
 --watch 常驻：到期任务走仓库 RSS 爬虫，再 LLM 精修。不要编造热点。
 --pack-only 只出文案，不调用即梦。
 `;
@@ -76,14 +66,6 @@ const loadCrawlerConfig = (cwd: string, configPath?: string): HotspotCrawlerConf
   );
 };
 
-const latestMp4 = (dir: string): string | undefined => {
-  mkdirSync(dir, { recursive: true });
-  const files = readdirSync(dir)
-    .filter((name) => name.toLowerCase().endsWith(".mp4"))
-    .map((name) => path.join(dir, name));
-  return files.at(-1);
-};
-
 const createDreaminaGenerator = () => {
   return async ({
     clip,
@@ -94,37 +76,11 @@ const createDreaminaGenerator = () => {
   }) => {
     const clipDir = path.join(downloadDir, `clip-${String(clip.index).padStart(2, "0")}`);
     mkdirSync(clipDir, { recursive: true });
-    const result = await dreaminaText2Video({
+    return generateDigitalHumanClip({
+      clip,
+      downloadDir: clipDir,
       approvePaid: true,
-      prompt: buildDreaminaVideoPrompt(clip),
-      durationSeconds: estimateSpokenDurationSeconds(clip.spoken),
-      pollSeconds: 600,
-      ratio: "9:16",
-      videoResolution: "720p",
-      modelVersion: DEFAULT_DREAMINA_VIDEO_MODEL,
     });
-    const submitId = parseDreaminaSubmitId(result.stdout);
-    if (!submitId) {
-      throw new Error(
-        `Dreamina text2video produced no submit_id for clip ${clip.index}. ${result.stdout} ${result.stderr}`,
-      );
-    }
-    for (let attempt = 0; attempt < 30; attempt += 1) {
-      await dreaminaQueryResult({ submitId, downloadDir: clipDir });
-      const videoPath = latestMp4(clipDir);
-      if (videoPath) {
-        const coverPath = await generateDreaminaCover({
-          clip,
-          downloadDir: path.join(clipDir, "cover"),
-          approvePaid: true,
-        });
-        return { video_path: videoPath, cover_path: coverPath };
-      }
-      await new Promise((resolve) => setTimeout(resolve, 20_000));
-    }
-    throw new Error(
-      `Dreamina text2video produced no mp4 for clip ${clip.index} after waiting. ${result.stdout} ${result.stderr}`,
-    );
   };
 };
 
