@@ -9,6 +9,7 @@ import {
   type HotspotCrawlerConfig,
 } from "../hotspot/crawl";
 import { generateDigitalHumanClip } from "../hotspot/generateClip";
+import { resolveHotspotIdentity } from "../hotspot/identity";
 import { createLlmPolishPack } from "../hotspot/polishCopy";
 import {
   describeDueHotspotJobs,
@@ -32,9 +33,12 @@ const usage = `Usage:
   npm run video:hotspot -- --watch [--format <...> --topic <...> --repeat daily --daily-time HH:mm]
   npm run video:hotspot -- --crawl --topic <热点类型>
   npm run video:hotspot -- --run-id <id> --items <json> --out <dir>
+  npm run video:hotspot -- --format digital-human --topic <...> --items <json> --out <dir>
 
-human-vo: 真人口播，只写文案，不生成视频。LLM 精修爆款标题/封面/标签/口播。
-digital-human: 同上 + 即梦提示词，然后 text2image 封面 → image2video（封面作第一帧；提示词要求口型+底部中文字幕），并发布 Pack。抖音 live API 暂停时 --platform all 会跳过抖音。
+human-vo: 真人口播，只写文案，不生成视频。LLM 精修爆款标题/封面关键词/两行封面文案/标签/口播。
+digital-human: 同上 + 即梦提示词。默认使用 config/hotspot-identity.json 的形象和声音（dh1.jpg + dg1.wav，只复制人脸，音色来自参考音频）。可用 --photo 与 --audio 成对覆盖。封面作 @Image 1 第一帧；口播写在提示词 {对白} 里并对口型。可选 --audio-transcript 或同名 .txt。参考音频须大于 5 秒，成片最长 15 秒。视频默认 seedance2.0fast；公网排队过长时用 --model_version seedance2.0_vip。
+抖音 live API 暂停时 --platform all 会跳过抖音。
+视频号/小红书默认写 Publish Pack。浏览器 RPA 须 FLAG_video_publish_rpa 且当次 --i-accept-rpa-risk（人说「批准RPA」）；即梦出片同意不等于批准 RPA。
 --watch 常驻：到期任务走仓库 RSS 爬虫，再 LLM 精修。不要编造热点。
 --pack-only 只出文案，不调用即梦。
 `;
@@ -49,6 +53,17 @@ const loadItems = (filePath: string) => {
   const list = Array.isArray(raw) ? raw : (raw as { items?: unknown }).items;
   return hotspotItemSchema.array().parse(list);
 };
+
+const identityFromArgs = (
+  args: string[],
+  applyDefault = false,
+): ReturnType<typeof resolveHotspotIdentity> =>
+  resolveHotspotIdentity({
+    photoPath: getFlagValue(args, "--photo"),
+    audioPath: getFlagValue(args, "--audio"),
+    audioTranscript: getFlagValue(args, "--audio-transcript"),
+    applyDefault,
+  });
 
 const loadCrawlerConfig = (cwd: string, configPath?: string): HotspotCrawlerConfig => {
   const resolved =
@@ -66,13 +81,19 @@ const loadCrawlerConfig = (cwd: string, configPath?: string): HotspotCrawlerConf
   );
 };
 
-const createDreaminaGenerator = () => {
+const createDreaminaGenerator = (modelVersion?: string) => {
   return async ({
     clip,
     downloadDir,
+    photo_path,
+    audio_path,
+    audio_transcript,
   }: {
     clip: HotspotClip;
     downloadDir: string;
+    photo_path?: string;
+    audio_path?: string;
+    audio_transcript?: string;
   }) => {
     const clipDir = path.join(downloadDir, `clip-${String(clip.index).padStart(2, "0")}`);
     mkdirSync(clipDir, { recursive: true });
@@ -80,11 +101,19 @@ const createDreaminaGenerator = () => {
       clip,
       downloadDir: clipDir,
       approvePaid: true,
+      photoPath: photo_path,
+      audioPath: audio_path,
+      audioTranscript: audio_transcript,
+      modelVersion,
     });
   };
 };
 
-const createPublisher = (auditPath: string, packDir: string) => {
+const createPublisher = (
+  auditPath: string,
+  packDir: string,
+  acceptRpaRisk = false,
+) => {
   const isEnabled = (key: FlagKey) =>
     flags.isEnabled(key, { isTeamMember: true });
   return async ({
@@ -119,6 +148,7 @@ const createPublisher = (auditPath: string, packDir: string) => {
             isEnabled,
             packDir,
             scheduleDir: path.join(path.dirname(auditPath), "scheduled"),
+            acceptRpaRisk,
           },
         ),
       );
@@ -155,12 +185,15 @@ const main = async (): Promise<void> => {
       count,
       config: crawlerConfig,
     });
-  const generateVideo = packOnly ? undefined : createDreaminaGenerator();
+  const generateVideo = packOnly
+    ? undefined
+    : createDreaminaGenerator(getFlagValue(args, "--model_version"));
   const publishVideo = packOnly
     ? undefined
     : createPublisher(
         path.join(cwd, "state/publish/audit.jsonl"),
         path.join(outDir, "publish-pack"),
+        args.includes("--i-accept-rpa-risk"),
       );
 
   if (args.includes("--crawl")) {
@@ -201,6 +234,7 @@ const main = async (): Promise<void> => {
             repeat: getFlagValue(args, "--repeat") ?? "daily",
             ...(dailyTime ? { daily_time: dailyTime } : { daily_time: "08:00" }),
             pack_only: packOnly,
+            ...identityFromArgs(args, formatRaw === "digital-human"),
           },
           {
             isEnabled,
@@ -294,6 +328,7 @@ const main = async (): Promise<void> => {
     count: Number(getFlagValue(args, "--count") ?? "3"),
     ...(presenterPrompt ? { presenter_prompt: presenterPrompt } : {}),
     ...(dateLabel ? { date: dateLabel } : {}),
+    ...identityFromArgs(args, formatRaw === "digital-human"),
     schedule_at: getFlagValue(args, "--schedule-at") ?? null,
     repeat: getFlagValue(args, "--repeat") ?? "none",
     ...(dailyTime ? { daily_time: dailyTime } : {}),

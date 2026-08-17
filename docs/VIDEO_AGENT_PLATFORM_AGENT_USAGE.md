@@ -1,22 +1,22 @@
 # Video Agent Platform — Agent 使用手册
 
-面向：任何接手 AI-Remotion 视频生产的 coding / specialist agent。
-目标：用户白话说需求；**你**写 Job、开 flag、路由、dispatch 唯一专家；在审核门处停住，不越权、不付费、不毁源片。CLI 是你的工具，不是用户作业。
+面向：任何接手 AI-Remotion 视频生产的 coding / specialist agent。  
+**统一入口是仓库根 `AGENTS.md`。** 本文件不在必读清单里（出片以 `docs/VIDEO_AGENT_WORKFLOW.md` 为准），不要把它当总入口。
 
 BIOS 父线：`YES-549` · 平台工单：`YES-1909` · Recut：`YES-1920` · P6：`YES-1923`
 开关：`FLAGS.VIDEO_AGENT_PLATFORM`（默认 **关闭**；由 Agent 在命令里打开）
 
-权威单文档：`docs/VIDEO_AGENT_WORKFLOW.md`  
-人用入口：`agents/START_HERE.md` · 快速开始：`docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md`  
+出片工作流：`docs/VIDEO_AGENT_WORKFLOW.md`  
+人用粘贴：`agents/START_HERE.md` · 快速开始：`docs/VIDEO_AGENT_PLATFORM_QUICKSTART.md`  
 P6 计划 / 相邻 backlog：`docs/VIDEO_AGENT_PLATFORM_P6_DEVELOPMENT_PLAN.md` · `docs/VIDEO_AGENT_PLATFORM_BACKLOG.md`
 
 ---
 
 ## 0. 开场必读（60 秒）
 
-1. 读仓库根 `AGENTS.md`。
-2. 读 `agents/video-producer/AGENT.md`（白话入口是默认路径）。
-3. 读本文件需要的章节；Devin 适配可读 `.devin/skills/video-producer/SKILL.md`。
+1. 读仓库根 `AGENTS.md` 全文，再按「必读清单」把列出的文档一次读完。
+2. 清单里已包含 `agents/video-producer/AGENT.md` 与 `docs/VIDEO_AGENT_WORKFLOW.md`。
+3. 本文件只在需要更细的平台背景时再读；Devin 适配可读 `.devin/skills/video-producer/SKILL.md`。
 4. 路由后只读那一个 `.devin/agents/<primary>.md`。
 5. **不要**把 CLI 甩给用户；**不要**跳过 flag 直接当万能视频 Agent 干活。
 
@@ -376,10 +376,10 @@ review_gates:
 
 #### 方式 A — Host-neutral Prompt 调用（推荐）
 
-在目标 Agent 会话开头粘贴或引用 `agents/START_HERE.md`：
+在目标 Agent 会话开头粘贴或引用 `agents/START_HERE.md`（Agent 从 `AGENTS.md` 进，并读完必读清单）：
 
 ```text
-Read agents/START_HERE.md and agents/video-producer/AGENT.md.
+Read AGENTS.md in full, then every document in its required reading list in order, then npm run setup. Do not skip the list.
 You run intake, Job file, route, and the specialist yourself.
 Ask me only if required fields are missing, or for 批准 storyboard / 批准 final_render / paid providers.
 Do not ask me to run npm or FLAG_ commands.

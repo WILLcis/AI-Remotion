@@ -14,6 +14,8 @@ The project is aimed at knowledge explainers, product explainers, software tutor
 
 AI-Remotion is CLI/Agent-first for the near term. The browser UI comes later, after the artifact workflow and revision loop are stable.
 
+**Hand this folder to an agent (no UI):** install Cursor, open this repository, paste [docs/GIVE_TO_AGENT.md](docs/GIVE_TO_AGENT.md) (or [agents/START_HERE.md](agents/START_HERE.md)). The agent starts at [AGENTS.md](AGENTS.md) and reads every document on that required list before working. You only log in to Dreamina and provide API keys when asked. To auto-post Weixin Channels / Xiaohongshu, say `批准RPA` and scan QR in the opened Chrome.
+
 Rendering is local Remotion rendering for the MVP. Cloud rendering, hosted queues, and object storage are intentionally out of scope until the local pipeline is reliable.
 
 The canonical public demo lives in `episodes/sample`:
@@ -35,8 +37,13 @@ For a Chinese step-by-step operator guide, see `docs/USER_MANUAL.md`.
 
 ## Getting Started
 
+Non-technical: [docs/GIVE_TO_AGENT.md](docs/GIVE_TO_AGENT.md) — do not start with `npm run dev`.
+
+Operators:
+
 ```bash
 npm install
+npm run setup
 npm run dev
 ```
 

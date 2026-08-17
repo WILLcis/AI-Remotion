@@ -31,6 +31,7 @@ export const sanitizeHotspotClip = (clip: HotspotClip): HotspotClip => ({
   ...clip,
   headline: sanitizeHotspotText(clip.headline) || clip.headline,
   hook_title: sanitizeHotspotText(clip.hook_title) || clip.hook_title,
+  cover_keyword: sanitizeHotspotText(clip.cover_keyword) || clip.cover_keyword,
   cover: sanitizeHotspotText(clip.cover) || clip.cover,
   tags: sanitizeHotspotText(clip.tags) || clip.tags,
   spoken: sanitizeHotspotText(clip.spoken) || clip.spoken,

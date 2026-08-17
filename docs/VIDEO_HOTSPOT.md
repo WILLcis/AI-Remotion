@@ -1,5 +1,7 @@
 # 热点口播（真人口播文案 / 数字人即梦成片）
 
+> 你应来自根目录 [`AGENTS.md`](../AGENTS.md) 的必读清单。本文件不是 Agent 总入口。
+
 父工单：`YES-549`。样例字段见 [`example.md`](./example.md)。
 
 用户指定 **热点类型** 和 **是否定时**。检索来源可以是 Agent 手搜，或仓库常驻 RSS 爬虫。整理后的口播会走 **LLM 精修**（`AI_REMOTION_LLM_*`；失败则回退模板）。不要编造新闻。
@@ -8,10 +10,10 @@
 
 | `format` | 给用户什么 | 是否生成视频 |
 | --- | --- | --- |
-| `human-vo` | 热门口播文案（爆款标题 / 封面文案 / 话题标签 / **口播文本**） | **否**。用户自己录 |
-| `digital-human` | 同上 + **即梦提示词** | **是**。`text2image` 9:16 封面 → `image2video`（封面作第一帧；提示词要求口型 + 底部中文字幕，`seedance2.0_vip`）→ `video:publish --platform all --generation-service dreamina --cover` |
+| `human-vo` | 热门口播文案（爆款标题 / 封面关键词 / 封面文案 / 话题标签 / **口播文本**） | **否**。用户自己录 |
+| `digital-human` | 同上 + **即梦提示词** | **是**。默认用 `config/hotspot-identity.json` 的形象和声音：封面 `image2image`（只复制人脸）→ `seedance2.0fast` `multimodal2video`（`@Image 1` 封面第一帧，`@Image 2` 只复制人脸，音频只当音色，口播写在 `{对白}` 并对口型）。`--photo` + `--audio` 可成对覆盖。然后 `video:publish --platform all --generation-service dreamina --cover` |
 
-真人口播 **不要** 写即梦提示词，也 **不要** 调即梦或发布。两种格式都要 LLM 精修标题/封面/标签/口播。
+真人口播 **不要** 写即梦提示词，也 **不要** 调即梦或发布。两种格式都要 LLM 精修标题 / 封面关键词 / 封面两行短句 / 标签 / 口播。封面关键词必须是文案重点（2–4 字），禁止硬拼如「涨税」；封面文案恰好两句、每句不超过约 12 字。
 
 ## 开关（默认关）
 
@@ -41,7 +43,7 @@ FLAG_video_hotspot='{"enabled":true}' \
     --out videos/hotspot-YYYYMMDD
 ```
 
-数字人（会扣即梦积分；抖音 live 暂停时只写视频号/小红书 Pack）：
+数字人（会扣即梦积分；抖音 live 暂停时默认只写视频号/小红书 Pack。浏览器自动发见 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)：须 `FLAG_video_publish_rpa` 且当次 `--i-accept-rpa-risk`，即梦出片不等于批准 RPA）：
 
 ```bash
 FLAG_video_hotspot='{"enabled":true}' \
@@ -56,6 +58,26 @@ FLAG_video_publish_xiaohongshu='{"enabled":true}' \
     --items path/to/items.json \
     --out videos/hotspot-YYYYMMDD
 ```
+
+人已当次说「批准RPA」时，Agent 自己加 RPA 闸（不要让人敲）。`FLAG_video_publish_douyin` 无正式网站应用时保持关：
+
+```bash
+FLAG_video_hotspot='{"enabled":true}' \
+FLAG_dreamina_media='{"enabled":true}' \
+FLAG_video_publish='{"enabled":true}' \
+FLAG_video_publish_douyin='{"enabled":false}' \
+FLAG_video_publish_weixin_channels='{"enabled":true}' \
+FLAG_video_publish_xiaohongshu='{"enabled":true}' \
+FLAG_video_publish_rpa='{"enabled":true}' \
+  npm run video:hotspot -- \
+    --format digital-human \
+    --topic 商业消费 \
+    --items path/to/items.json \
+    --out videos/hotspot-YYYYMMDD \
+    --i-accept-rpa-risk
+```
+
+数字人默认身份见 [`config/hotspot-identity.json`](../config/hotspot-identity.json)：脸来自 `episodes/res/img/dh1.jpg`，音色来自 `episodes/res/audio/dg1.wav`，造型走 `DEFAULT_DREAMINA_PRESENTER_PROMPT`。已确认样片：`videos/hotspot-20260816-identity-v4`。不必每次再传 `--photo` / `--audio`；要换人时两者成对覆盖。
 
 只出文案、先不调用即梦：加 `--pack-only`。
 
@@ -102,6 +124,6 @@ launchctl load ~/Library/LaunchAgents/com.ai-remotion.hotspot-crawler.plist
 
 - 文案末尾带素材来源；公开报道整理，待核，不当已核实事实。
 - LLM 精修不得发明数字；失败时回退模板口播。标题/口播会去掉诈骗、判刑等即梦 TNS 高危词。
-- 即梦 CLI 仍需高级会员；默认 `seedance2.0_vip`。会员等级不够会失败，文案包仍会留下。
-- 数字人封面仍走即梦 `text2image` 9:16。成片走 `image2video`，CLI 把该图当作视频第一帧；字幕和口型写在提示词里，由即梦生成，不在本地 ffmpeg 烧录或换轨。
-- 单条即梦 TNS / 生成失败不阻断其余 clip；失败原因写入结果 `questions`（例如 `口播1 即梦失败：…`）。同一提示词不要重提。
+- 即梦 CLI 仍需高级会员；默认 `seedance2.0fast`（约 75 积分 / 15 秒）。排队或质量不够时改 `--model_version seedance2.0_vip`。会员等级不够会失败，文案包仍会留下。
+- 数字人默认走创作者授权身份（`config/hotspot-identity.json`）：封面 `image2image` 只复制人脸，成片 `seedance2.0fast` `multimodal2video --image <封面> --image <照片> --audio <音色>`——`@Image 1` 是封面第一帧，`@Image 2` 只复制人脸，音频是 `@Audio 1` 音色（不继承原句），口播写在 `{对白}` 里并对口型。`--photo` + `--audio` 可成对覆盖。参考音频须大于 5 秒，成片最长 15 秒。发给即梦的封面/视频提示词都必须含 **口型匹配** 和字幕要求；视频字幕在画面正下方居中，中文超大号加粗衬线、关键词金色（参考 `episodes/res/img/image-subtitle1.png` 的字体，不要胸口错落、不要底部黑条），不在本地 ffmpeg 烧录。
+- 发布默认只写 Pack。自动点视频号「发表」/ 小红书「发布」须当次「批准RPA」，契约见 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)。即梦出片不等于批准 RPA。不要提交 `state/publish/`。

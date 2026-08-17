@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -48,6 +49,15 @@ const requestBase = (dir: string) => ({
 });
 
 describe("video publish", () => {
+  it("keeps the RPA kill switch off by default", async () => {
+    const provider = new LocalProvider({
+      [FLAGS.VIDEO_PUBLISH_RPA]: { enabled: false },
+    });
+    await expect(
+      provider.isEnabled(FLAGS.VIDEO_PUBLISH_RPA, {}, true),
+    ).resolves.toBe(false);
+  });
+
   it("keeps publish flags killed by default", async () => {
     const provider = new LocalProvider({
       [FLAGS.VIDEO_PUBLISH]: { enabled: false },
@@ -201,6 +211,203 @@ describe("video publish", () => {
     };
     expect(pack.cover_path).toBe(coverPath);
     expect(pack.checklist.join("\n")).toMatch(/封面/);
+  });
+
+  it("does not run RPA when the flag is on without --i-accept-rpa-risk", async () => {
+    const dir = tempDir();
+    let rpaCalls = 0;
+    const result = await runPublish(
+      {
+        ...requestBase(dir),
+        platform: "weixin-channels",
+        title: "视频号标题至少六字",
+      },
+      {
+        acceptRpaRisk: false,
+        auditPath: path.join(dir, "audit.jsonl"),
+        isEnabled: async () => true,
+        packDir: path.join(dir, "pack"),
+        rpaPublish: async () => {
+          rpaCalls += 1;
+          return { platform_post_id: "nope", message: "should not run" };
+        },
+        scheduleDir: path.join(dir, "scheduled"),
+      },
+    );
+    expect(result.status).toBe("packed");
+    expect(rpaCalls).toBe(0);
+    expect(result.message).toMatch(/i-accept-rpa-risk/);
+  });
+
+  it("does not run RPA when session approval is present but the kill switch is off", async () => {
+    const dir = tempDir();
+    let rpaCalls = 0;
+    const result = await runPublish(
+      {
+        ...requestBase(dir),
+        platform: "xiaohongshu",
+        title: "加密货币要迎来大监管？",
+      },
+      {
+        acceptRpaRisk: true,
+        auditPath: path.join(dir, "audit.jsonl"),
+        isEnabled: async (key) => key !== FLAGS.VIDEO_PUBLISH_RPA,
+        packDir: path.join(dir, "pack"),
+        rpaPublish: async () => {
+          rpaCalls += 1;
+          return { platform_post_id: null, message: "should not run" };
+        },
+        scheduleDir: path.join(dir, "scheduled"),
+      },
+    );
+    expect(result.status).toBe("packed");
+    expect(rpaCalls).toBe(0);
+    expect(result.message).toMatch(/FLAG_video_publish_rpa/);
+  });
+
+  it("runs gated RPA after flag plus session approval and still writes the pack", async () => {
+    const dir = tempDir();
+    const noon = new Date();
+    noon.setHours(12, 0, 0, 0);
+    const result = await runPublish(
+      {
+        ...requestBase(dir),
+        platform: "xiaohongshu",
+        title: "加密货币要迎来大监管？",
+      },
+      {
+        acceptRpaRisk: true,
+        auditPath: path.join(dir, "audit.jsonl"),
+        isEnabled: async () => true,
+        now: noon,
+        packDir: path.join(dir, "pack"),
+        rpaPacePath: path.join(dir, "rpa-pace.json"),
+        rpaPublish: async (input) => {
+          expect(input.request.platform).toBe("xiaohongshu");
+          expect(input.request.video_path).toMatch(/final\.mp4$/);
+          return {
+            platform_post_id: null,
+            message: "RPA submitted in the official xiaohongshu creator console.",
+          };
+        },
+        scheduleDir: path.join(dir, "scheduled"),
+      },
+    );
+    expect(result.status).toBe("submitted");
+    expect(result.pack_path).toMatch(/xiaohongshu\.json$/);
+    const pack = JSON.parse(readFileSync(result.pack_path!, "utf8")) as {
+      rpa: boolean;
+    };
+    expect(pack.rpa).toBe(true);
+    const pace = JSON.parse(
+      readFileSync(path.join(dir, "rpa-pace.json"), "utf8"),
+    ) as { entries: Array<{ platform: string }> };
+    expect(pace.entries).toHaveLength(1);
+    expect(pace.entries[0]?.platform).toBe("xiaohongshu");
+  });
+
+  it("records RPA failure without dropping the pack", async () => {
+    const dir = tempDir();
+    const noon = new Date();
+    noon.setHours(12, 0, 0, 0);
+    const result = await runPublish(
+      {
+        ...requestBase(dir),
+        platform: "weixin-channels",
+        title: "视频号标题至少六字",
+      },
+      {
+        acceptRpaRisk: true,
+        auditPath: path.join(dir, "audit.jsonl"),
+        isEnabled: async () => true,
+        now: noon,
+        packDir: path.join(dir, "pack"),
+        rpaPacePath: path.join(dir, "rpa-pace.json"),
+        rpaPublish: async () => {
+          throw new Error("creator page changed");
+        },
+        scheduleDir: path.join(dir, "scheduled"),
+      },
+    );
+    expect(result.status).toBe("failed");
+    expect(result.error_code).toBe("rpa");
+    expect(result.pack_path).toMatch(/weixin-channels\.json$/);
+  });
+
+  it("blocks RPA overnight and keeps the pack", async () => {
+    const dir = tempDir();
+    const night = new Date();
+    night.setHours(23, 30, 0, 0);
+    let rpaCalls = 0;
+    const result = await runPublish(
+      {
+        ...requestBase(dir),
+        platform: "weixin-channels",
+        title: "视频号标题至少六字",
+      },
+      {
+        acceptRpaRisk: true,
+        auditPath: path.join(dir, "audit.jsonl"),
+        isEnabled: async () => true,
+        now: night,
+        packDir: path.join(dir, "pack"),
+        rpaPacePath: path.join(dir, "rpa-pace.json"),
+        rpaPublish: async () => {
+          rpaCalls += 1;
+          return { platform_post_id: null, message: "should not run" };
+        },
+        scheduleDir: path.join(dir, "scheduled"),
+      },
+    );
+    expect(result.status).toBe("blocked");
+    expect(result.error_code).toBe("rpa_night");
+    expect(result.pack_path).toMatch(/weixin-channels\.json$/);
+    expect(rpaCalls).toBe(0);
+  });
+
+  it("waits then posts the other platform for the same clip", async () => {
+    const dir = tempDir();
+    const videoPath = writeVideo(dir);
+    const sha = createHash("sha256").update(readFileSync(videoPath)).digest("hex");
+    let current = new Date();
+    current.setHours(12, 0, 0, 0);
+    const slept: number[] = [];
+    const result = await runPublish(
+      {
+        ...requestBase(dir),
+        video_path: videoPath,
+        platform: "xiaohongshu",
+        title: "加密货币要迎来大监管？",
+      },
+      {
+        acceptRpaRisk: true,
+        auditPath: path.join(dir, "audit.jsonl"),
+        isEnabled: async () => true,
+        now: () => current,
+        packDir: path.join(dir, "pack"),
+        rpaPaceEntries: [
+          {
+            at: current.toISOString(),
+            platform: "weixin-channels",
+            video_sha256: sha,
+            account_alias: "default",
+          },
+        ],
+        rpaPacePath: path.join(dir, "rpa-pace.json"),
+        rpaPublish: async () => ({
+          platform_post_id: null,
+          message: "RPA confirmed publish in the official xiaohongshu creator console.",
+        }),
+        rpaSleep: async (ms) => {
+          slept.push(ms);
+          current = new Date(current.getTime() + ms);
+        },
+        scheduleDir: path.join(dir, "scheduled"),
+      },
+    );
+    expect(slept[0]).toBeGreaterThan(0);
+    expect(result.status).toBe("submitted");
+    expect(result.platform).toBe("xiaohongshu");
   });
 
   it("adds publish to requires_approval only when the Job sets that gate pending", () => {

@@ -11,6 +11,13 @@ import {
   type DouyinClient,
 } from "./douyin";
 import { writePublishPack } from "./publishPack";
+import { evaluateRpaPace, randomInt, RPA_SAME_CLIP_MAX_GAP_MS, RPA_SAME_CLIP_MIN_GAP_MS, type RpaPaceEntry } from "./rpaPace";
+import {
+  appendRpaPaceEntry,
+  defaultRpaPacePath,
+  loadRpaPaceEntries,
+} from "./rpaPaceStore";
+import { playwrightRpaPublish, type RpaPublishInput, type RpaPublishOutcome } from "./rpaPublish";
 import {
   publishRequestSchema,
   type PublishPlatform,
@@ -26,14 +33,28 @@ import {
 export type PublishFlagCheck = (key: FlagKey) => Promise<boolean>;
 
 export type RunPublishOptions = {
+  acceptRpaRisk?: boolean;
   auditPath: string;
   douyin?: DouyinClient;
   env?: NodeJS.ProcessEnv;
   isEnabled: PublishFlagCheck;
-  now?: Date;
+  now?: Date | (() => Date);
   packDir?: string;
+  rpaPaceEntries?: RpaPaceEntry[];
+  rpaPacePath?: string;
+  rpaProfileDir?: string;
+  rpaPublish?: (input: RpaPublishInput) => Promise<RpaPublishOutcome>;
+  rpaSleep?: (ms: number) => Promise<void>;
   scheduleDir: string;
 };
+
+const resolveNow = (options: RunPublishOptions): Date =>
+  typeof options.now === "function" ? options.now() : (options.now ?? new Date());
+
+const defaultSleep = (ms: number): Promise<void> =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 
 const platformFlag = (platform: PublishPlatform): FlagKey => {
   if (platform === "douyin") {
@@ -103,30 +124,141 @@ export const runPublish = async (
   if (request.platform === "weixin-channels" || request.platform === "xiaohongshu") {
     const packDir =
       options.packDir ?? path.join(path.dirname(videoPath), "publish-pack");
+    const rpaFlag = await options.isEnabled(FLAGS.VIDEO_PUBLISH_RPA);
+    const useRpa = rpaFlag && Boolean(options.acceptRpaRisk);
     const packPath = writePublishPack(
       { ...request, video_path: videoPath },
       packDir,
+      { rpa: useRpa },
     );
-    const result: PublishResult = {
-      status: "packed",
+    if (rpaFlag && !options.acceptRpaRisk) {
+      const result: PublishResult = {
+        status: "packed",
+        platform: request.platform,
+        video_path: videoPath,
+        video_sha256: videoSha256,
+        account_alias: request.account_alias,
+        title: request.title,
+        schedule_at: request.schedule_at ?? null,
+        platform_post_id: null,
+        pack_path: packPath,
+        error_code: null,
+        message:
+          "Assisted publish pack written. RPA flag is on but this session did not pass --i-accept-rpa-risk. Dreamina publish consent does not enable RPA.",
+      };
+      writePublishAudit(result, options.auditPath);
+      return result;
+    }
+    if (!useRpa) {
+      const result: PublishResult = {
+        status: "packed",
+        platform: request.platform,
+        video_path: videoPath,
+        video_sha256: videoSha256,
+        account_alias: request.account_alias,
+        title: request.title,
+        schedule_at: request.schedule_at ?? null,
+        platform_post_id: null,
+        pack_path: packPath,
+        error_code: null,
+        message:
+          "Assisted publish pack written. Upload and post manually in the official creator console. RPA stays off unless FLAG_video_publish_rpa and --i-accept-rpa-risk are both set.",
+      };
+      writePublishAudit(result, options.auditPath);
+      return result;
+    }
+    const pacePath = options.rpaPacePath ?? defaultRpaPacePath();
+    const paceEntries = options.rpaPaceEntries ?? loadRpaPaceEntries(pacePath);
+    let pace = evaluateRpaPace({
+      entries: paceEntries,
+      now: resolveNow(options),
       platform: request.platform,
-      video_path: videoPath,
-      video_sha256: videoSha256,
-      account_alias: request.account_alias,
-      title: request.title,
-      schedule_at: request.schedule_at ?? null,
-      platform_post_id: null,
-      pack_path: packPath,
-      error_code: null,
-      message:
-        "Assisted publish pack written. Upload and post manually in the official creator console. RPA is not used.",
-    };
-    writePublishAudit(result, options.auditPath);
-    return result;
+      videoSha256,
+    });
+    if (
+      !pace.ok &&
+      pace.code === "rpa_too_soon" &&
+      pace.sameClipOtherPlatform &&
+      typeof pace.waitMs === "number"
+    ) {
+      await (options.rpaSleep ?? defaultSleep)(
+        pace.waitMs +
+          randomInt(0, RPA_SAME_CLIP_MAX_GAP_MS - RPA_SAME_CLIP_MIN_GAP_MS),
+      );
+      pace = evaluateRpaPace({
+        entries: paceEntries,
+        now: resolveNow(options),
+        platform: request.platform,
+        videoSha256,
+      });
+    }
+    if (!pace.ok) {
+      const result: PublishResult = {
+        status: "blocked",
+        platform: request.platform,
+        video_path: videoPath,
+        video_sha256: videoSha256,
+        account_alias: request.account_alias,
+        title: request.title,
+        schedule_at: request.schedule_at ?? null,
+        platform_post_id: null,
+        pack_path: packPath,
+        error_code: pace.code,
+        message: pace.message,
+      };
+      writePublishAudit(result, options.auditPath);
+      return result;
+    }
+    try {
+      const posted = await (options.rpaPublish ?? playwrightRpaPublish)({
+        request: { ...request, video_path: videoPath },
+        profileDir:
+          options.rpaProfileDir ??
+          path.join(process.cwd(), "state/publish/rpa-profile", request.account_alias),
+        screenshotDir: packDir,
+      });
+      appendRpaPaceEntry(pacePath, {
+        at: resolveNow(options).toISOString(),
+        platform: request.platform,
+        video_sha256: videoSha256,
+        account_alias: request.account_alias,
+      });
+      const result: PublishResult = {
+        status: "submitted",
+        platform: request.platform,
+        video_path: videoPath,
+        video_sha256: videoSha256,
+        account_alias: request.account_alias,
+        title: request.title,
+        schedule_at: request.schedule_at ?? null,
+        platform_post_id: posted.platform_post_id,
+        pack_path: packPath,
+        error_code: null,
+        message: posted.message,
+      };
+      writePublishAudit(result, options.auditPath);
+      return result;
+    } catch (error) {
+      const result: PublishResult = {
+        status: "failed",
+        platform: request.platform,
+        video_path: videoPath,
+        video_sha256: videoSha256,
+        account_alias: request.account_alias,
+        title: request.title,
+        schedule_at: request.schedule_at ?? null,
+        platform_post_id: null,
+        pack_path: packPath,
+        error_code: "rpa",
+        message: error instanceof Error ? error.message : String(error),
+      };
+      writePublishAudit(result, options.auditPath);
+      return result;
+    }
   }
 
   const scheduleAt = request.schedule_at ? Date.parse(request.schedule_at) : NaN;
-  const now = options.now ?? new Date();
+  const now = resolveNow(options);
   if (request.schedule_at && Number.isNaN(scheduleAt)) {
     throw new Error("schedule_at must be a valid ISO-8601 timestamp.");
   }
@@ -202,7 +334,7 @@ export const runPublish = async (
 export const runDueScheduledPublish = async (
   options: RunPublishOptions,
 ): Promise<PublishResult[]> => {
-  const due = listDueScheduledPublish(options.scheduleDir, options.now);
+  const due = listDueScheduledPublish(options.scheduleDir, resolveNow(options));
   const results: PublishResult[] = [];
   for (const job of due) {
     const result = await runPublish(

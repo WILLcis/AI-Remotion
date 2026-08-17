@@ -51,6 +51,7 @@ describe("hotspot LLM polish", () => {
                         index: 1,
                         headline: "打工人三件套涨价",
                         hook_title: "3样东西偷偷涨价，打工人被迫给AI交税了",
+                        cover_keyword: "AI税",
                         cover: "工资没涨，谋生工具先贵了",
                         tags: "#打工人三件套 #手机涨价 #AI税 #商业思维",
                         spoken:
@@ -66,6 +67,7 @@ describe("hotspot LLM polish", () => {
     });
     expect(polished.provider).toBe("openai-compatible");
     expect(polished.pack.clips[0]?.cover).toBe("工资没涨，谋生工具先贵了");
+    expect(polished.pack.clips[0]?.cover_keyword).toBe("AI税");
     expect(polished.pack.clips[0]?.sources[0]?.url).toBe("https://example.com/ai-tax");
     expect(polished.pack.clips[0]?.dreamina_prompt).toMatch(/无边框眼镜/);
   });

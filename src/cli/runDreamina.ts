@@ -4,6 +4,7 @@ import {
   assertDreaminaAvailable,
   DEFAULT_DREAMINA_VIDEO_MODEL,
   dreaminaImage2Video,
+  dreaminaMultimodal2Video,
   dreaminaQueryResult,
   dreaminaText2Image,
   dreaminaText2Video,
@@ -17,7 +18,8 @@ const usage = `Usage:
   npm run media:dreamina -- credit
   npm run media:dreamina -- text2image --prompt <text> --out <dir> --i-approve-paid
   npm run media:dreamina -- image2video --image <path> --out <dir> --i-approve-paid [--prompt <text>]
-  npm run media:dreamina -- text2video --prompt <text> --out <dir> --i-approve-paid [--duration 5] [--ratio 9:16] [--model_version seedance2.0_vip]
+  npm run media:dreamina -- multimodal2video --image <path> --audio <path> --out <dir> --i-approve-paid [--prompt <text>]
+  npm run media:dreamina -- text2video --prompt <text> --out <dir> --i-approve-paid [--duration 5] [--ratio 9:16] [--model_version seedance2.0fast]
 
 Job path: --generation-service dreamina skips --i-approve-paid (selecting dreamina is paid-generation consent).
 `;
@@ -134,6 +136,48 @@ const main = async (): Promise<void> => {
       imagePath: path.resolve(image),
       pollSeconds: Number(getFlagValue(args, "--poll") ?? "120"),
       prompt: getFlagValue(args, "--prompt"),
+      modelVersion: getFlagValue(args, "--model_version") ?? DEFAULT_DREAMINA_VIDEO_MODEL,
+    });
+    process.stdout.write(result.stdout);
+    if (result.stderr.trim()) {
+      process.stderr.write(result.stderr);
+    }
+    const submitId = parseDreaminaSubmitId(result.stdout);
+    if (submitId) {
+      const downloaded = await dreaminaQueryResult({
+        submitId,
+        downloadDir,
+      });
+      process.stdout.write(downloaded.stdout);
+      if (downloaded.stderr.trim()) {
+        process.stderr.write(downloaded.stderr);
+      }
+      if (downloaded.code !== 0) {
+        process.exitCode = downloaded.code ?? 1;
+        return;
+      }
+    }
+    if (result.code !== 0) {
+      process.exitCode = result.code ?? 1;
+    }
+    return;
+  }
+
+  if (command === "multimodal2video") {
+    const image = getFlagValue(args, "--image");
+    const audio = getFlagValue(args, "--audio");
+    if (!image || !audio) {
+      throw new Error(usage);
+    }
+    const result = await dreaminaMultimodal2Video({
+      approvePaid,
+      imagePaths: [path.resolve(image)],
+      audioPaths: [path.resolve(audio)],
+      pollSeconds: Number(getFlagValue(args, "--poll") ?? "180"),
+      prompt: getFlagValue(args, "--prompt"),
+      durationSeconds: Number(getFlagValue(args, "--duration") ?? "5"),
+      ratio: getFlagValue(args, "--ratio") ?? "9:16",
+      videoResolution: getFlagValue(args, "--video_resolution") ?? "720p",
       modelVersion: getFlagValue(args, "--model_version") ?? DEFAULT_DREAMINA_VIDEO_MODEL,
     });
     process.stdout.write(result.stdout);

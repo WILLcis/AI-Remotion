@@ -38,6 +38,7 @@ export const FLAGS = {
   VIDEO_PUBLISH_DOUYIN: 'video_publish_douyin',
   VIDEO_PUBLISH_WEIXIN_CHANNELS: 'video_publish_weixin_channels',
   VIDEO_PUBLISH_XIAOHONGSHU: 'video_publish_xiaohongshu',
+  VIDEO_PUBLISH_RPA: 'video_publish_rpa',
   VIDEO_HOTSPOT: 'video_hotspot',
   VIDEO_HOTSPOT_CRAWLER: 'video_hotspot_crawler',
 } as const;
@@ -65,6 +66,7 @@ const FLAG_DEFAULTS: Record<FlagKey, boolean> = {
   [FLAGS.VIDEO_PUBLISH_DOUYIN]: false,
   [FLAGS.VIDEO_PUBLISH_WEIXIN_CHANNELS]: false,
   [FLAGS.VIDEO_PUBLISH_XIAOHONGSHU]: false,
+  [FLAGS.VIDEO_PUBLISH_RPA]: false,
   [FLAGS.VIDEO_HOTSPOT]: false,
   [FLAGS.VIDEO_HOTSPOT_CRAWLER]: false,
 };

@@ -1,10 +1,16 @@
-import { mkdtempSync, readFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { FLAGS, LocalProvider } from "../flags/feature-flags";
+import { resolveAudioTranscript } from "../src/hotspot/cloneVoice";
 import { composeHotspotPack, buildDreaminaVideoPrompt } from "../src/hotspot/composeCopy";
 import { formatHotspotMarkdown } from "../src/hotspot/formatPack";
+import {
+  DEFAULT_HOTSPOT_AUDIO_REL,
+  DEFAULT_HOTSPOT_PHOTO_REL,
+  resolveHotspotIdentity,
+} from "../src/hotspot/identity";
 import { missingHotspotFields, runHotspot } from "../src/hotspot/runHotspot";
 import { listDueScheduledHotspot, listScheduledHotspot } from "../src/hotspot/schedule";
 import { parseDreaminaSubmitId } from "../src/media/dreaminaCli";
@@ -176,8 +182,13 @@ describe("video hotspot digest", () => {
       }),
     );
     const markdown = formatHotspotMarkdown(pack);
-    expect(markdown.indexOf("爆款标题")).toBeLessThan(markdown.indexOf("封面文案"));
+    expect(markdown.indexOf("爆款标题")).toBeLessThan(markdown.indexOf("封面关键词"));
+    expect(markdown.indexOf("封面关键词")).toBeLessThan(markdown.indexOf("封面文案"));
     expect(markdown.indexOf("封面文案")).toBeLessThan(markdown.indexOf("话题标签"));
+    expect([...pack.clips[0]!.cover_keyword].length).toBeGreaterThanOrEqual(2);
+    expect([...pack.clips[0]!.cover_keyword].length).toBeLessThanOrEqual(4);
+    expect(pack.clips[0]!.cover.split(/[，,]/).length).toBe(2);
+    expect([...pack.clips[0]!.cover.split(/[，,]/)[0]!].length).toBeLessThanOrEqual(12);
     expect(markdown.indexOf("话题标签")).toBeLessThan(markdown.indexOf("即梦提示词"));
     expect(markdown.indexOf("即梦提示词")).toBeLessThan(markdown.indexOf("口播文本"));
   });
@@ -194,11 +205,92 @@ describe("video hotspot digest", () => {
     const clip = pack.clips[0]!;
     const prompt = buildDreaminaVideoPrompt(clip);
     expect(prompt).toContain(clip.spoken);
-    expect(prompt).toMatch(/嘴唇开合|口型/);
-    expect(prompt).toMatch(/字幕/);
+    expect(prompt).toMatch(/口型匹配/);
+    expect(prompt).toMatch(/中英双语字幕/);
+    expect(prompt).toMatch(/正下方/);
     expect(prompt).toMatch(/第一帧/);
     expect(prompt).not.toMatch(/不要字幕|不要烧录字幕/);
+    expect(clip.dreamina_prompt).toMatch(/口型匹配/);
+    expect(clip.dreamina_prompt).toMatch(/字幕/);
     expect(clip.dreamina_prompt).not.toMatch(/不要修改内容/);
+  });
+
+  it("keeps the user face and the presenter look in the identity prompt", () => {
+    const pack = composeHotspotPack(
+      hotspotRequestSchema.parse({
+        format: "digital-human",
+        topic: "商业消费",
+        items: items.slice(0, 1),
+        count: 1,
+      }),
+    );
+    const prompt = buildDreaminaVideoPrompt(pack.clips[0]!, {
+      identityFromPhoto: true,
+      audioTranscript: "参考录音原文。",
+    });
+    expect(prompt).toMatch(/@Image 1/);
+    expect(prompt).toMatch(/@Image 2/);
+    expect(prompt).toMatch(/第一帧/);
+    expect(prompt).toMatch(/@Audio 1/);
+    expect(prompt).toMatch(/口型匹配/);
+    expect(prompt).toContain(`{${pack.clips[0]!.spoken}}`);
+    expect(prompt).toMatch(/禁止复述/);
+    expect(prompt).toContain("参考录音原文。");
+    expect(prompt).toMatch(/无边框眼镜/);
+    expect(prompt).toMatch(/人脸/);
+    expect(prompt).toMatch(/正装|西装/);
+    expect(prompt).toMatch(/年轻|禁止沧桑|美颜/);
+  });
+
+  it("rejects photo without audio", () => {
+    expect(() =>
+      hotspotRequestSchema.parse({
+        format: "digital-human",
+        topic: "商业消费",
+        items: items.slice(0, 1),
+        photo_path: "episodes/res/img/dh1.jpg",
+      }),
+    ).toThrow(/together/);
+  });
+
+  it("allows photo and audio without a reference transcript", () => {
+    expect(
+      hotspotRequestSchema.parse({
+        format: "digital-human",
+        topic: "商业消费",
+        items: items.slice(0, 1),
+        photo_path: "episodes/res/img/dh1.jpg",
+        audio_path: "episodes/res/audio/dg1.wav",
+      }).audio_path,
+    ).toBe("episodes/res/audio/dg1.wav");
+  });
+
+  it("reads a .txt sidecar as the clone reference transcript", () => {
+    const dir = tempDir();
+    const audioPath = path.join(dir, "dg1.wav");
+    writeFileSync(audioPath, "wav");
+    writeFileSync(path.join(dir, "dg1.txt"), "参考录音原文。\n");
+    expect(resolveAudioTranscript(audioPath)).toBe("参考录音原文。");
+    expect(resolveAudioTranscript(audioPath, "命令行覆盖")).toBe("命令行覆盖");
+  });
+
+  it("applies the recorded default identity when no photo or audio is passed", () => {
+    const dir = tempDir();
+    mkdirSync(path.join(dir, "episodes/res/img"), { recursive: true });
+    mkdirSync(path.join(dir, "episodes/res/audio"), { recursive: true });
+    const photo = path.join(dir, DEFAULT_HOTSPOT_PHOTO_REL);
+    const audio = path.join(dir, DEFAULT_HOTSPOT_AUDIO_REL);
+    writeFileSync(photo, "jpg");
+    writeFileSync(audio, "wav");
+    writeFileSync(path.join(dir, "episodes/res/audio/dg1.txt"), "默认音色样本。\n");
+    const identity = resolveHotspotIdentity({ cwd: dir, applyDefault: true });
+    expect(identity.photo_path).toBe(photo);
+    expect(identity.audio_path).toBe(audio);
+    expect(identity.audio_transcript).toBe("默认音色样本。");
+  });
+
+  it("does not invent a default identity when the local files are missing", () => {
+    expect(resolveHotspotIdentity({ cwd: tempDir(), applyDefault: true })).toEqual({});
   });
 
   it("parses Dreamina submit_id from CLI JSON", () => {

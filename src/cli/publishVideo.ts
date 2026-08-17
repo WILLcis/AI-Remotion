@@ -4,12 +4,12 @@ import { runDueScheduledPublish, runPublish } from "../publish/runPublish";
 import { resolvePublishPlatforms } from "../publish/schema";
 
 const usage = `Usage:
-  npm run video:publish -- --platform <douyin|weixin-channels|xiaohongshu|all> --video <mp4> --title <text> --i-approve-publish [--cover <image>] [--schedule-at <ISO-8601>] [--caption <text>] [--topic <tag>] [--audit <jsonl>] [--schedule-dir <dir>] [--pack-dir <dir>]
+  npm run video:publish -- --platform <douyin|weixin-channels|xiaohongshu|all> --video <mp4> --title <text> --i-approve-publish [--cover <image>] [--schedule-at <ISO-8601>] [--caption <text>] [--topic <tag>] [--audit <jsonl>] [--schedule-dir <dir>] [--pack-dir <dir>] [--i-accept-rpa-risk]
   npm run video:publish -- --due --i-approve-publish [--schedule-dir <dir>] [--audit <jsonl>]
 
-Dreamina autopilot: --generation-service dreamina skips --i-approve-publish (selecting dreamina is publish consent).
+Dreamina autopilot: --generation-service dreamina skips --i-approve-publish (selecting dreamina is publish consent). It does not enable RPA.
 Douyin official create_video has no native schedule field. --schedule-at queues locally; --due submits jobs whose time has passed.
-Weixin Channels / Xiaohongshu write an assisted publish pack only (no RPA).
+Weixin Channels / Xiaohongshu default to an assisted publish pack. Browser RPA needs FLAG_video_publish_rpa plus current-session --i-accept-rpa-risk (say 批准RPA). Kill: FLAG_video_publish_rpa={"enabled":false}.
 Douyin live API is paused unless FLAG_video_publish_douyin is on; --platform all then skips Douyin.
 `;
 
@@ -100,6 +100,7 @@ const main = async (): Promise<void> => {
           isEnabled,
           packDir: packDir ? path.resolve(packDir) : undefined,
           scheduleDir,
+          acceptRpaRisk: args.includes("--i-accept-rpa-risk"),
         },
       ),
     );

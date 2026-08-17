@@ -5,6 +5,16 @@ import {
   type HotspotPack,
   type HotspotRequest,
 } from "../schemas/hotspot";
+import {
+  DREAMINA_IDENTITY_LIPSYNC_REQUIREMENT,
+  DREAMINA_IDENTITY_REQUIREMENT,
+  DREAMINA_LIPSYNC_REQUIREMENT,
+  DREAMINA_VIDEO_CAPTION_REQUIREMENT,
+  clipCoverKeyword,
+  coverKeywordFromTags,
+  shortenCoverCopy,
+  stripPresenterLook,
+} from "./dreaminaStyle";
 import { formatZhDateLabel } from "./formatPack";
 import { sanitizeHotspotPack } from "./safeCopy";
 
@@ -24,6 +34,20 @@ const spokenFromItem = (item: HotspotItem): string => {
     ? summary
     : `${summary}你怎么看？`;
   return limitChars(spoken, 180);
+};
+
+const coverKeywordFrom = (topic: string, item: HotspotItem, tags: string): string => {
+  const fromTags = coverKeywordFromTags(topic, tags);
+  if (fromTags) {
+    return clipCoverKeyword(fromTags);
+  }
+  const fromTitle = [...item.title.replace(/[0-9a-zA-Z.,，。！？、\s]/g, "")]
+    .slice(0, 4)
+    .join("");
+  if (fromTitle.length >= 2) {
+    return fromTitle;
+  }
+  return clipCoverKeyword(topic);
 };
 
 const tagsFrom = (topic: string, item: HotspotItem): string => {
@@ -47,17 +71,21 @@ export const composeHotspotPack = (
   }
   const presenter =
     request.presenter_prompt?.trim() || DEFAULT_DREAMINA_PRESENTER_PROMPT;
-  const clips: HotspotClip[] = selected.map((item, index) => ({
-    index: index + 1,
-    headline: limitChars(item.title, 40),
-    hook_title: limitChars(item.title, 48),
-    cover: firstSentence(item.summary),
-    tags: tagsFrom(request.topic, item),
-    spoken: spokenFromItem(item),
-    dreamina_prompt:
-      request.format === "digital-human" ? presenter : undefined,
-    sources: [item],
-  }));
+  const clips: HotspotClip[] = selected.map((item, index) => {
+    const tags = tagsFrom(request.topic, item);
+    return {
+      index: index + 1,
+      headline: limitChars(item.title, 40),
+      hook_title: limitChars(item.title, 48),
+      cover_keyword: coverKeywordFrom(request.topic, item, tags),
+      cover: shortenCoverCopy(firstSentence(item.summary)),
+      tags,
+      spoken: spokenFromItem(item),
+      dreamina_prompt:
+        request.format === "digital-human" ? presenter : undefined,
+      sources: [item],
+    };
+  });
 
   return sanitizeHotspotPack({
     format: request.format,
@@ -70,17 +98,33 @@ export const composeHotspotPack = (
 const presenterLook = (clip: HotspotClip): string =>
   clip.dreamina_prompt?.trim() || DEFAULT_DREAMINA_PRESENTER_PROMPT;
 
-/** Seedance prompt: first-frame cover + spoken lip-sync + on-screen Chinese captions. */
-export const buildDreaminaVideoPrompt = (clip: HotspotClip): string =>
-  [
-    presenterLook(clip),
-    "以这张图作为视频第一帧，人物从封面姿态开口说话。",
-    "人物对镜头用中文口播，嘴唇明显开合，口型跟随对白，下颌活动，不要闭嘴静止，不要只眨眼。",
-    "画面底部叠加清晰可读、无错别字的中文字幕，字幕必须与口播逐句一致，白字深色半透明底，不要挡住脸和嘴。",
+/** Seedance prompt: cover first frame, or face+timbre references. */
+export const buildDreaminaVideoPrompt = (
+  clip: HotspotClip,
+  options: { identityFromPhoto?: boolean; audioTranscript?: string } = {},
+): string => {
+  if (options.identityFromPhoto) {
+    const transcript = options.audioTranscript?.trim();
+    return [
+      DREAMINA_IDENTITY_REQUIREMENT,
+      `其余形象：${stripPresenterLook(presenterLook(clip))}。`,
+      DREAMINA_IDENTITY_LIPSYNC_REQUIREMENT,
+      DREAMINA_VIDEO_CAPTION_REQUIREMENT,
+      transcript
+        ? `参考音频原句是「${transcript}」，禁止复述这些原句。`
+        : "参考音频只提供音色，禁止复述样本中的原句。",
+      `人物用中文说：{${clip.spoken}}`,
+    ].join("");
+  }
+  return [
+    `${presenterLook(clip)}以这张图作为视频第一帧，人物从封面姿态开口说话。`,
+    DREAMINA_LIPSYNC_REQUIREMENT,
+    DREAMINA_VIDEO_CAPTION_REQUIREMENT,
     `口播与字幕：${clip.spoken}`,
   ].join("");
+};
 
-export const estimateSpokenDurationSeconds = (spoken: string): number => {
+export const estimateSpokenDurationSeconds = (spoken: string, maxSeconds = 15): number => {
   const chars = spoken.replace(/\s/g, "").length;
-  return Math.min(15, Math.max(5, Math.ceil(chars / 4)));
+  return Math.min(maxSeconds, Math.max(5, Math.ceil(chars / 4)));
 };

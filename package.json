@@ -14,6 +14,7 @@
     "build": "remotion bundle src/remotion/index.ts",
     "check": "npm run typecheck && npm run lint && npm run validate:sample && npm test && npm audit --audit-level=low",
     "config:check": "tsx src/cli/checkConfig.ts",
+    "setup": "tsx src/cli/setupMachine.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
@@ -64,5 +65,8 @@
     "tsx": "4.23.0",
     "typescript": "5.9.3",
     "vitest": "4.1.10"
+  },
+  "optionalDependencies": {
+    "playwright": "^1.62.1"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "photo": "episodes/res/img/dh1.jpg",
+  "audio": "episodes/res/audio/dg1.wav",
+  "approved_clip": "videos/hotspot-20260816-identity-v4/renders/clip-01/c1b2f30b-807e-461b-ba70-c3e1411f6ccf_video_1.mp4",
+  "approved_cover": "videos/hotspot-20260816-identity-v4/renders/clip-01/cover/7dbc894d-19b8-49c5-b1b2-0aad03258b9f_image_1.png",
+  "look": "DEFAULT_DREAMINA_PRESENTER_PROMPT",
+  "notes": "Creator-authorized default digital-human identity. Copy face only from the photo; look from the presenter prompt; audio is timbre only. Override with --photo and --audio as a pair."
+}

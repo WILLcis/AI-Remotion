@@ -41,6 +41,8 @@ const formatClip = (format: HotspotFormat, clip: HotspotClip): string => {
     `口播${clipIndexLabel(clip.index)}：${clip.headline}`,
     "爆款标题",
     clip.hook_title,
+    "封面关键词",
+    clip.cover_keyword,
     "封面文案",
     clip.cover,
     "话题标签",

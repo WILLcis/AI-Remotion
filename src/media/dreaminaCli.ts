@@ -21,8 +21,8 @@ export type DreaminaCliOptions = {
   run?: DreaminaRunner;
 };
 
-/** Default video model. Fast (`seedance2.0fast`) sits in a crowded public queue. */
-export const DEFAULT_DREAMINA_VIDEO_MODEL = "seedance2.0_vip";
+/** Default video model. Fast is cheaper (~75 credits / 15s vs VIP ~210). Queueing is the tradeoff. */
+export const DEFAULT_DREAMINA_VIDEO_MODEL = "seedance2.0fast";
 
 const defaultRunner: DreaminaRunner = (bin, args, options = {}) =>
   new Promise((resolve, reject) => {
@@ -79,6 +79,45 @@ export const assertDreaminaAvailable = async (
 export const dreaminaUserCredit = async (
   options: DreaminaCliOptions = {},
 ): Promise<DreaminaSpawnResult> => runDreamina(["user_credit"], options);
+
+export const dreaminaImage2Image = async (input: {
+  approvePaid: boolean;
+  downloadDir: string;
+  imagePaths: string[];
+  prompt: string;
+  ratio?: string;
+  resolutionType?: string;
+  modelVersion?: string;
+  pollSeconds?: number;
+  options?: DreaminaCliOptions;
+}): Promise<DreaminaSpawnResult> => {
+  if (!input.approvePaid) {
+    throw new Error(
+      "Dreamina image2image is a paid cloud call. Pass approvePaid=true only after explicit user approval.",
+    );
+  }
+  if (input.imagePaths.length === 0) {
+    throw new Error("Dreamina image2image requires at least one image.");
+  }
+  mkdirSync(input.downloadDir, { recursive: true });
+  const args = [
+    "image2image",
+    `--prompt=${input.prompt}`,
+    `--ratio=${input.ratio ?? "9:16"}`,
+    `--resolution_type=${input.resolutionType ?? "2k"}`,
+    `--poll=${String(input.pollSeconds ?? 60)}`,
+  ];
+  if (input.modelVersion?.trim()) {
+    args.push(`--model_version=${input.modelVersion.trim()}`);
+  }
+  for (const imagePath of input.imagePaths) {
+    if (!existsSync(imagePath)) {
+      throw new Error(`Dreamina image2image missing image: ${imagePath}`);
+    }
+    args.push(`--images=${path.resolve(imagePath)}`);
+  }
+  return runDreamina(args, input.options);
+};
 
 export const dreaminaText2Image = async (input: {
   downloadDir: string;
@@ -197,9 +236,15 @@ export const dreaminaMultimodal2Video = async (input: {
     `--poll=${String(input.pollSeconds ?? 180)}`,
   ];
   for (const imagePath of input.imagePaths ?? []) {
+    if (!existsSync(imagePath)) {
+      throw new Error(`Dreamina multimodal2video missing image: ${imagePath}`);
+    }
     args.push(`--image=${path.resolve(imagePath)}`);
   }
   for (const audioPath of input.audioPaths ?? []) {
+    if (!existsSync(audioPath)) {
+      throw new Error(`Dreamina multimodal2video missing audio: ${audioPath}`);
+    }
     args.push(`--audio=${path.resolve(audioPath)}`);
   }
   for (const videoPath of input.videoPaths ?? []) {

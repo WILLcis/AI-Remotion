@@ -4,7 +4,7 @@ Hand AI-Remotion video work to any Agent framework. **Humans talk; the Agent run
 
 ## Default: plain-language request
 
-1. Point the Agent at `agents/START_HERE.md` and `AGENT.md`.
+1. Point the Agent at root `AGENTS.md`. Humans paste `agents/START_HERE.md`. The agent reads `AGENTS.md` and every document on its required list, then runs `npm run setup`.
 2. The Agent asks only for missing required fields, drafts a Job, waits for a one-line confirm, writes `state/jobs/<id>.yaml`, routes with the platform flag, and runs the mapped specialist.
 3. It stops at pending review gates and returns the result JSON.
 

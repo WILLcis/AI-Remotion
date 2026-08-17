@@ -25,6 +25,9 @@ export type HotspotFlagCheck = (key: FlagKey) => Promise<boolean>;
 export type HotspotGenerateVideo = (input: {
   clip: HotspotClip;
   downloadDir: string;
+  photo_path?: string;
+  audio_path?: string;
+  audio_transcript?: string;
 }) => Promise<{ video_path: string; cover_path?: string }>;
 
 export type HotspotPublishVideo = (input: {
@@ -256,7 +259,13 @@ export const runHotspot = async (
   const downloadDir = path.join(options.outDir, "renders");
   for (const clip of pack.clips) {
     try {
-      const generated = await options.generateVideo({ clip, downloadDir });
+      const generated = await options.generateVideo({
+        clip,
+        downloadDir,
+        photo_path: request.photo_path,
+        audio_path: request.audio_path,
+        audio_transcript: request.audio_transcript,
+      });
       generatedVideos.push(generated.video_path);
       if (options.publishVideo) {
         try {
@@ -303,7 +312,7 @@ export const runHotspot = async (
     publish_results: publishResults,
     next_action: questions.length
       ? `部分成功。失败：${questions.join(" ")} 成功成片已尝试发布。`
-      : "Dreamina videos generated (image2video from cover; captions and lip-sync in the prompt) and publish attempted. Kill-switch flags still apply.",
+      : "Dreamina videos generated (identity multimodal2video or cover image2video; captions and lip-sync in the prompt) and publish attempted. Kill-switch flags still apply.",
   });
 };
 

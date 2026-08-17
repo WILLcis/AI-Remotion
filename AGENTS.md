@@ -1,20 +1,42 @@
-# AGENTS.md — AI-Remotion Agent Map
+# AGENTS.md — Agent 统一入口
+
+**新会话只从本文件进。** 读完本文件全文后，按下面「必读清单」把其余文档**一次读完**，再开始干活。不要跳过清单，也不要从其它文件当入口。
 
 This repository follows the AI-First Coding Loop harness from:
 
 https://github.com/WILLcis/AI--First-Coding-Loop-Codex
 
-Any coding agent entering this repo must read this file first, then read:
+## 必读清单（按顺序一次读完）
 
-1. `.agents/skills/agent-coding-discipline/SKILL.md`
-2. `docs/HeyGen_skills.md` — mandatory HeyGen agent install / transport / skills contract
-3. `docs/HeyGen.md` — mandatory HeyGen developer surface index (auth ladder, Video Agent, CLI)
+1. **本文件全文**（目标、目录、命令、Safety、flags）。写码时「Harness Discipline」也算在内。
+2. [`.agents/skills/agent-coding-discipline/SKILL.md`](.agents/skills/agent-coding-discipline/SKILL.md)（读懂即可；**未授权改代码时不要动手改仓库**）
+3. [`agents/video-producer/AGENT.md`](agents/video-producer/AGENT.md)
+4. [`agents/video-producer/SPECIALISTS.md`](agents/video-producer/SPECIALISTS.md)
+5. [`docs/VIDEO_AGENT_WORKFLOW.md`](docs/VIDEO_AGENT_WORKFLOW.md)
+6. [`docs/VIDEO_HOTSPOT.md`](docs/VIDEO_HOTSPOT.md)
+7. [`docs/DREAMINA.md`](docs/DREAMINA.md)
+8. [`docs/VIDEO_PUBLISH.md`](docs/VIDEO_PUBLISH.md)（含视频号 / 小红书 RPA「给 Agent」）
+9. [`docs/HeyGen_skills.md`](docs/HeyGen_skills.md)
+10. [`docs/HeyGen.md`](docs/HeyGen.md)
 
-Then load any task-specific skill that applies (including installed `heygen-video` / `heygen-avatar` / `heygen-translate` when the work involves HeyGen).
+读完后再 `npm run setup`。JSON：`ready` 继续；`needs_human` 只问 `ask` 原文；`failed` 停。不要让人敲 `brew` / `npm` / `FLAG_`。setup **不能代替** `make check`。
 
-**HeyGen production rule:** for any new HeyGen video, follow `docs/HeyGen_skills.md` + `docs/HeyGen.md` and the official `heygen-video` skill. Prefer CLI/skills over raw `curl` to `api.heygen.com`. Do not invent v1/v2 endpoints.
+可并行的写码任务，清单读完后再读 [task-decomposer](.agents/skills/task-decomposer/SKILL.md) / [parallel-orchestrator](.agents/skills/parallel-orchestrator/SKILL.md)。
 
-**Dreamina / 即梦:** for Jimeng CLI media generation, follow `docs/DREAMINA.md`. Prefer `npm run media:dreamina` over calling the deprecated Volcengine Seedance API path. Default video model is `seedance2.0_vip` (not Fast). Video Jobs must set an explicit `generation.service` (`remotion` | `hyperframes` | `heygen` | `dreamina`); agents must ask the user and must not invent a default. Selecting `dreamina` is consent to paid generation and immediate publish: generate, then `video:publish --platform all --generation-service dreamina`. Do not ask for storyboard / paid / publish approvals. Kill-switch flags still apply.
+给人粘贴：[`agents/START_HERE.md`](agents/START_HERE.md)。给人看的一页纸：[`docs/GIVE_TO_AGENT.md`](docs/GIVE_TO_AGENT.md)。这两份**不是**给你当入口，也不替代上面的清单。
+
+读清单时记住：
+
+- **默认不许改仓库代码。** 出片 / 热点 / 发布 Agent 只跑 CLI、写 Job 与产物（`state/jobs/`、`videos/`、`episodes/` 产物、`state/publish/` 运行态）。不要改 `src/`、`tests/`、`flags/`、`package.json`、文档或本文件。只有人**当次明确说**「改代码 / 修 bug / 实现某某」才允许动源码。读写码纪律不等于授权改代码。
+- 不要把命令甩回给人。
+- `generation.service` 必须问人，禁止默认。
+- 选定 `dreamina`：不要再要 storyboard / 付费 / 发布批准；仍要开 kill-switch flags。这只写 Pack（和可选的抖音 API），**不等于**批准 RPA。
+- 自动点「发表/发布」：当次「批准RPA」+ `docs/VIDEO_PUBLISH.md`。`packed` 不是已发布。
+- 抖音 live 默认关；不要申请小程序。
+- 不要编造新闻。不要提交 `.env.local`、MP4、封面、`state/publish/`。
+- HeyGen：走 skills / CLI，禁止 raw `curl` 编造 v1/v2。
+
+---
 
 ## Project Goal
 
@@ -29,6 +51,8 @@ brief -> script -> storyboard -> render-plan -> voiceover -> captions -> Remotio
 This project is for knowledge explainers, product explainers, software tutorials, light news analysis, listicles, and educational short videos. It is not a CapCut/Jianying draft generator, copyrighted media scraper, or auto-publishing system.
 
 ## Harness Discipline
+
+**Do not follow this section to edit the repo** unless the user explicitly asked for a code change this session. Video / hotspot / publish work stays CLI-only.
 
 Before writing code:
 
@@ -74,12 +98,14 @@ Four failure modes are BLOCK-level:
 .github/workflows/    CI, AI review, optional security/perf/self-healing workflows
 config/               Environment template files for parity checks
 docs/                 Product requirements, decisions, harness notes
+agents/               Human paste (`START_HERE.md`) + video-producer package
 episodes/             Episode briefs, scripts, plans, captions, assets, outputs
 flags/                Harness feature-flag facade
 prompts/              AI review and architect-task prompts
 scripts/              Harness automation and local review scripts
 src/hotspot/          Hotspot digest: crawl, LLM polish, Dreamina cover
-src/publish/          Multi-platform publish (Douyin API + Weixin/XHS packs)
+src/publish/          Multi-platform publish (Douyin API + Weixin/XHS packs + optional Chrome RPA)
+src/setup/            First-run doctor for agents (`npm run setup`)
 src/remotion/         Remotion root, templates, scene components, themes
 src/render/           Render-plan and timing helpers
 state/                Append-only agent/harness memory and orchestration state
@@ -111,6 +137,7 @@ Use npm unless the user explicitly changes package managers.
 
 ```bash
 make bootstrap          # npm install
+make setup              # first-run doctor for agents (does not replace make check)
 make canonical-demo     # validate, render, and QA the canonical local demo
 make batch-sample       # preview sample validate + QA batch workflow
 make check              # typecheck + lint + unit tests + npm audit
@@ -133,6 +160,7 @@ Direct npm commands:
 
 ```bash
 npm install
+npm run setup
 npm run dev
 npm run config:check
 npm run demo:canonical
@@ -196,12 +224,13 @@ Do not regenerate unrelated episode files during revisions.
 - Prefer `AI_REMOTION_*` runtime env keys for video pipeline providers.
 - Do not scrape or embed unlicensed media.
 - Do not clone a real person's voice without explicit rights.
-- Do not auto-publish videos without an explicit current-session approval and an enabled publish feature flag. Exception: selecting `generation.service=dreamina` is that consent; still require publish flags. Remotion / HyperFrames / HeyGen still need `批准发布` + `--i-approve-publish`. Design: `docs/MULTI_PLATFORM_PUBLISH_DESIGN.md` (BIOS `YES-2498`); P0 implementation `YES-2520`.
-- Hotspot digest (`docs/VIDEO_HOTSPOT.md`): topic + `human-vo` / `digital-human` + now or schedule. Copy is LLM-polished and TNS-softened. `human-vo` is copy only. `digital-human` uses Dreamina `text2image` cover then `image2video` (cover is the first frame; lip-sync and captions are in the prompt, `seedance2.0_vip`), then publish. One clip TNS failure must not stop the rest; report which clip failed. Resident RSS crawler: `npm run hotspot:watch` behind `FLAG_video_hotspot_crawler`. Do not invent headlines.
+- Do not auto-publish videos without an explicit current-session approval and an enabled publish feature flag. Exception: selecting `generation.service=dreamina` is that consent; still require publish flags. Remotion / HyperFrames / HeyGen still need `批准发布` + `--i-approve-publish`. Weixin/XHS **browser RPA** is a separate dual gate: `FLAG_video_publish_rpa` (default off) **and** current-session `批准RPA` / `--i-accept-rpa-risk`. Dreamina does not imply RPA. Kill: `FLAG_video_publish_rpa={"enabled":false}`. RPA uses installed Google Chrome + a persistent profile (`state/publish/rpa-profile/`, not Incognito); wait for 发表成功/发布成功 before closing; daytime 10:00–20:00, max 30 posts/day, 90 min spacing (2–5 min for the same clip on the other platform). Design: `docs/MULTI_PLATFORM_PUBLISH_DESIGN.md` (BIOS `YES-2498`); P0 implementation `YES-2520`.
+- Hotspot digest (`docs/VIDEO_HOTSPOT.md`): topic + `human-vo` / `digital-human` + now or schedule. Copy is LLM-polished and TNS-softened (including a 2–4 character cover keyword and two short cover lines). `human-vo` is copy only. `digital-human` defaults to the creator-authorized identity in `config/hotspot-identity.json` (face from `episodes/res/img/dh1.jpg`, timbre from `episodes/res/audio/dg1.wav`, look from `DEFAULT_DREAMINA_PRESENTER_PROMPT`; approved clip `videos/hotspot-20260816-identity-v4`). Cover via `image2image` (face only), then `seedance2.0fast` `multimodal2video` with `@Image 1` = cover first frame, `@Image 2` = face only, `@Audio 1` = timbre only; the spoken script goes in `{dialogue}` for lip-sync. `--photo` + `--audio` override as a pair. One clip TNS failure must not stop the rest; report which clip failed. Resident RSS crawler: `npm run hotspot:watch` behind `FLAG_video_hotspot_crawler`. Do not invent headlines.
 - Douyin live API (`docs/VIDEO_PUBLISH.md`) needs a **正式网站应用** + scope `video.create.bind` (not a mini-program, not a personal Open Platform signup). Keep `FLAG_video_publish_douyin` off until that exists; `--platform all` then skips Douyin and writes Weixin/XHS packs only.
 - Do not present AI-generated factual claims as verified facts.
 - Mark uncertain claims for manual review.
 - Ask before adding paid APIs, cloud rendering, online asset scraping, a database, or auto-publishing.
+- Operator agents (video, hotspot, publish, RPA) must not rewrite application code, tests, flags, or docs. Allowed writes: Job YAML under `state/jobs/`, episode/video artifacts, publish packs, setup-created `.env.local`. Source edits require an explicit current-session ask to change the repository.
 
 ## Feature Flags
 
@@ -233,5 +262,5 @@ This project may be pushed directly to `main` only when the user explicitly allo
 ## Handoff Notes
 
 - Read `docs/RPD.md` before roadmap-level changes.
-- Keep `AGENTS.md` current as the architecture evolves.
+- Keep `AGENTS.md` current as the architecture evolves — especially the required reading list at the top.
 - Preserve user-edited `brief`, `script`, `storyboard`, and `render-plan` files unless the requested change requires editing them.

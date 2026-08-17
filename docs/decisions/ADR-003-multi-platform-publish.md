@@ -29,7 +29,7 @@ AI-Remotion 原产品合同禁止自动发布。用户已批准新增「发布�
 5. 适配器模式：`PublishAdapter` 每平台一个；不可用官方 API 的平台在设计中标注为 **assisted / blocked**，不得用灰产协议假装「已接通」。
 6. 凭证仅存本机（`.env.local` / OS keychain），永不入库、不进工单正文。
 7. 抖音开放平台用 **正式网站应用** 申请 `video.create.bind`（**不是小程序**）。现网文档写主体为党政机关或事业单位；个人入驻目前拿不到该能力。
-8. 视频号 / 小红书长期为 **Publish Pack（清单 + 人工发）**，不强上 RPA；官方 API 开放后再升级。
+8. 视频号 / 小红书 **默认** Publish Pack（清单 + 人工发）。浏览器 RPA 仅在用户书面接受风险后，经 `FLAG_video_publish_rpa`（默认关）**和**当次 `--i-accept-rpa-risk` 双闸开启；即梦出片同意不含 RPA。官方 API 开放后可再升级为 official adapter。
 9. 抖音 P0 必须支持 **定时发布** 与立即发布。
 
 ## Alternatives Considered
@@ -40,7 +40,7 @@ Rejected：用户已明确批准需求；保留「默认关 + 人审」即可控
 
 ### 浏览器 RPA 统一三平台
 
-Rejected as default：脆弱、易违反 ToS、高封号风险。仅当官方 API 不可用且用户书面接受 residual risk 时，才可另开 **assisted publish** 设计子单，且不得作为 P0。
+Rejected as **default**：脆弱、易违反 ToS、高封号风险。用户于 2026-08-17 书面接受 residual risk 后，视频号/小红书 RPA 可作为 **可选** 路径，必须同时满足 kill switch `FLAG_video_publish_rpa=false` 默认关，以及当次 `--i-accept-rpa-risk`。RPA 必须用本机 Chrome 持久 profile（非无痕），并遵守白天窗口与日限额。不得用 cookie 私有 API 冒充官方接口。抖音仍走官方 OpenAPI，不走 RPA。
 
 ### 第三方聚合发片 SaaS
 

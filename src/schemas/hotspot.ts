@@ -27,6 +27,9 @@ export const hotspotRequestSchema = z
     count: z.number().int().min(1).max(10).default(3),
     date: z.string().trim().min(1).optional(),
     presenter_prompt: z.string().trim().min(1).optional(),
+    photo_path: z.string().trim().min(1).optional(),
+    audio_path: z.string().trim().min(1).optional(),
+    audio_transcript: z.string().trim().min(1).optional(),
     schedule_at: z.union([z.string().min(1), z.null()]).optional(),
     repeat: hotspotRepeatSchema.default("none"),
     daily_time: z
@@ -45,6 +48,22 @@ export const hotspotRequestSchema = z
         path: ["daily_time"],
       });
     }
+    const hasPhoto = Boolean(request.photo_path);
+    const hasAudio = Boolean(request.audio_path);
+    if (hasPhoto !== hasAudio) {
+      context.addIssue({
+        code: "custom",
+        message: "photo_path and audio_path must be provided together",
+        path: hasPhoto ? ["audio_path"] : ["photo_path"],
+      });
+    }
+    if ((hasPhoto || hasAudio) && request.format !== "digital-human") {
+      context.addIssue({
+        code: "custom",
+        message: "photo_path and audio_path are only valid for digital-human",
+        path: ["photo_path"],
+      });
+    }
   });
 
 export type HotspotRequest = z.infer<typeof hotspotRequestSchema>;
@@ -54,6 +73,7 @@ export const hotspotClipSchema = z
     index: z.number().int().min(1),
     headline: nonEmptyString,
     hook_title: nonEmptyString,
+    cover_keyword: nonEmptyString,
     cover: nonEmptyString,
     tags: nonEmptyString,
     spoken: nonEmptyString,
@@ -98,6 +118,6 @@ export const hotspotResultSchema = z
 
 export type HotspotResult = z.infer<typeof hotspotResultSchema>;
 
-/** Default digital-human look from docs/example.md. Captions and lip-sync are in the video prompt. */
+/** Default digital-human look. Lip-sync and captions are required on every Dreamina call. */
 export const DEFAULT_DREAMINA_PRESENTER_PROMPT =
-  "35岁左右职业男性，干练黑色短发向后梳起，戴无边框眼镜，坐在办公椅上微微侧身，一手转钢笔，表情自然有态度，背后是书架和装饰画，左暖右冷分层布光，半身镜头，面部清晰，人体结构正常，动作流畅，正在对镜头用中文说话，嘴唇明显开合，口型跟随对白，下颌活动，不要闭嘴静止，不要画面完全静止，无畸变，4K高清，电影感。";
+  "28到32岁职业男性，面相年轻且明显美颜，皮肤光滑透亮，干练黑色短发向后梳起，戴无边框眼镜，坐在办公椅上微微侧身，一手转钢笔，表情不屑中带嘲讽，背后是书架和装饰画，左暖右冷分层布光，半身镜头，面部清晰，禁止沧桑显老，人体结构正常，动作流畅，画面稳定，正在对镜头用中文说话，口型匹配，嘴唇明显开合，口型跟随对白，下颌活动，不要闭嘴静止，必须叠加中英双语字幕，无畸变，4K高清，电影感。";

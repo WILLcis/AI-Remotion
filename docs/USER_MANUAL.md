@@ -1,5 +1,7 @@
 # AI-Remotion Agent 使用说明书
 
+非技术用户请先看 [`GIVE_TO_AGENT.md`](./GIVE_TO_AGENT.md)，把文件夹交给 Cursor 即可，不必从本节的 `npm install` 开始。
+
 ## 1. 这个 Agent 是做什么的
 
 AI-Remotion 是一个 CLI/Agent-first 的图文讲解视频生产线。
@@ -46,11 +48,14 @@ brew install ffmpeg
 
 ## 3. 第一次启动
 
-进入项目：
+非技术用户：打开 [`GIVE_TO_AGENT.md`](./GIVE_TO_AGENT.md)，把文件夹交给 Agent。Agent 会跑 `npm run setup`（不代替 `make check`）。
+
+操作员自己跑：
 
 ```bash
 cd <ai-remotion-checkout>
 npm install
+npm run setup
 ```
 
 打开 Remotion Studio：
@@ -296,7 +301,7 @@ Agent 应该遵守：
 
 - 浏览器产品 UI。
 - 云渲染、队列、对象存储。
-- 无人值守群发；视频号 / 小红书 RPA；抖音小程序发片。
+- 无人值守群发；未授权的视频号 / 小红书 RPA（须 `FLAG_video_publish_rpa` + 当次「批准RPA」）；抖音小程序发片。
 - 抓取未授权素材。
 - 克隆真人声音。
 - 把 AI 生成的事实性内容当作已验证事实。
@@ -356,14 +361,14 @@ dreamina login
 dreamina user_credit
 ```
 
-默认视频模型是 `seedance2.0_vip`，不要用 Fast。选定即梦即视为同意扣积分并随后发布。详情：`docs/DREAMINA.md`。
+默认视频模型是 `seedance2.0fast`。排队或质量不够时用 `--model_version seedance2.0_vip`。选定即梦即视为同意扣积分并随后发布。详情：`docs/DREAMINA.md`。
 
 ```bash
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- check
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- credit
 ```
 
-数字人封面走即梦 `text2image`（9:16）。成片用 `image2video`，把封面图当作第一帧；口型和底部中文字幕写在即梦提示词里，不要本地烧录字幕。
+数字人封面走即梦（9:16，顶部金色书法关键词 + 下方两行黄字黑边）。默认身份见 `config/hotspot-identity.json`：只复制人脸，其余形象按脚本；成片 `seedance2.0fast` 全能参考，`@Image 1` 封面第一帧、`@Image 2` 只锁脸、音频只当音色，口播写在 `{对白}` 里并对口型。`--photo` + `--audio` 可成对覆盖。提示词必须含口型匹配和画面正下方的中英字幕，不要本地烧录字幕。
 
 ## 13. 热点口播（交付）
 
@@ -380,7 +385,7 @@ FLAG_video_hotspot='{"enabled":true}' \
     --out videos/hotspot-YYYYMMDD
 ```
 
-数字人（扣即梦积分；出片 + 封面 + 发布 Pack）：
+数字人（扣即梦积分；出片 + 封面 + 发布 Pack）。默认用 `config/hotspot-identity.json` 的形象和声音，不必再传 `--photo` / `--audio`：
 
 ```bash
 FLAG_video_hotspot='{"enabled":true}' \
@@ -396,6 +401,26 @@ FLAG_video_publish_xiaohongshu='{"enabled":true}' \
     --out videos/hotspot-YYYYMMDD
 ```
 
+用另一组照片 + 声音覆盖默认身份（需成对；照片只复制人脸，音频只当音色。参考音频须大于 5 秒）：
+
+```bash
+FLAG_video_hotspot='{"enabled":true}' \
+FLAG_dreamina_media='{"enabled":true}' \
+FLAG_video_publish='{"enabled":true}' \
+FLAG_video_publish_douyin='{"enabled":false}' \
+FLAG_video_publish_weixin_channels='{"enabled":true}' \
+FLAG_video_publish_xiaohongshu='{"enabled":true}' \
+AI_REMOTION_ENV_FILE=.env.local \
+  npm run video:hotspot -- \
+    --format digital-human \
+    --topic 数字货币 \
+    --items path/to/items.json \
+    --count 1 \
+    --photo episodes/res/img/dh1.jpg \
+    --audio episodes/res/audio/dg1.wav \
+    --out videos/hotspot-YYYYMMDD
+```
+
 常驻 RSS 爬虫：`npm run hotspot:watch`（`FLAG_video_hotspot_crawler`）。macOS 开机示例见 `scripts/launchd/ai-remotion-hotspot-crawler.plist.example`。
 
 即梦审核（TNS）失败会扣积分且无成片。不要用同一提示词重试。热点数字人会跳过失败的那一条，继续做后面的 clip，并在结果 `questions` 里写明「口播N 即梦失败：…」。标题和口播会先去掉诈骗/判刑等敏感词。
@@ -407,8 +432,8 @@ FLAG_video_publish_xiaohongshu='{"enabled":true}' \
 | 平台 | 实际做什么 |
 | --- | --- |
 | 抖音 | 官方 OpenAPI：`upload_video` → `create_video`（需 `video.create.bind`） |
-| 视频号 | 写 Pack JSON，你在助手里手动上传 |
-| 小红书 | 写 Pack JSON，你在创作者后台手动上传 |
+| 视频号 | 默认写 Pack。可选 RPA（本机 Chrome 持久登录，白天限流）：`FLAG_video_publish_rpa` + 当次「批准RPA」 |
+| 小红书 | 同上 |
 
 即梦成片后：
 
@@ -426,6 +451,8 @@ FLAG_video_publish_xiaohongshu='{"enabled":true}' \
 ```
 
 `--platform all` 在抖音 flag 关闭时会跳过抖音。Pack 落在 `--pack-dir`（热点默认 `videos/<proj>/publish-pack`）。
+
+要 Agent 自动点视频号「发表」和小红书「发布」：对人说「批准RPA」，Agent 按 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md) 打开 `FLAG_video_publish_rpa` 并加 `--i-accept-rpa-risk`。选即梦不会自动开 RPA。第一次在弹出的 Chrome 里扫码。白天 10:00–20:00，每天最多 30 条。
 
 ### 抖音 live 前提
 

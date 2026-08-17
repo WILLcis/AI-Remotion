@@ -1,6 +1,6 @@
 # Video Agent 工作流（当前最佳版）
 
-> **权威入口文档。** 人读本节 + [`agents/START_HERE.md`](../agents/START_HERE.md)；Agent 再读 [`agents/video-producer/AGENT.md`](../agents/video-producer/AGENT.md)。  
+> **Agent 统一入口是 [`AGENTS.md`](../AGENTS.md)。** 本文件在它的「必读清单」里，应已按顺序读完。给人粘贴：[`agents/START_HERE.md`](../agents/START_HERE.md)；执行细则：[`agents/video-producer/AGENT.md`](../agents/video-producer/AGENT.md)。  
 > 契约冲突时以 `src/schemas/videoJob.ts`、`src/agent/videoRouter.ts` 为准。
 
 BIOS：`YES-549` · 平台：`YES-1909` · Intake：`YES-2031`  
@@ -20,28 +20,28 @@ BIOS：`YES-549` · 平台：`YES-1909` · Intake：`YES-2031`
 **发布**：默认不自动发布。人审后见 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)（实现 `YES-2520`）与 [`MULTI_PLATFORM_PUBLISH_DESIGN.md`](./MULTI_PLATFORM_PUBLISH_DESIGN.md)（设计 `YES-2498`）。flag 默认关。  
 例外：用户选定 `generation.service=dreamina` 即视为同意生成并发布，不再停审稿/付费/发布门。
 
-人只说话；**Agent 自己跑 CLI**（`video:intake` / `video:route` / `video:hotspot` / flag）。不要把命令甩回给用户。
+人只说话；**Agent 自己跑 CLI**（先 `npm run setup`，再 `video:intake` / `video:route` / `video:hotspot` / flag）。不要把命令甩回给用户。非技术用户把文件夹交给 Agent：见 [`GIVE_TO_AGENT.md`](./GIVE_TO_AGENT.md)。
 
-热点口播：用户定类型与定时 → RSS 爬虫或 Agent 检索 → **LLM 精修**口播（并去掉即梦 TNS 高危词）→ `human-vo` 只交文案（用户自己录）/ `digital-human` 即梦封面 + `image2video`（封面作第一帧；提示词要求口型与字幕，`seedance2.0_vip`），然后发布。单条 TNS 失败写入 `questions`，不阻断其他 clip。常驻：`npm run hotspot:watch`。见 [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md)。
+热点口播：用户定类型与定时 → RSS 爬虫或 Agent 检索 → **LLM 精修**口播（并去掉即梦 TNS 高危词）→ `human-vo` 只交文案（用户自己录）/ `digital-human` 即梦封面 + `image2video`（封面作第一帧；提示词要求口型与字幕，`seedance2.0fast`），然后发布。单条 TNS 失败写入 `questions`，不阻断其他 clip。常驻：`npm run hotspot:watch`。见 [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md)。
 
 ---
 
 ## 2. 给人用的最短路径
 
-1. 用 AI 打开本仓库根目录（需 Node / ffmpeg）。
-2. 粘贴下面提示词，用白话说要做什么，并给出本地素材路径（若有）。
-3. 缺字段时回答追问；确认 Job 草案。
+1. 用 Cursor（或同类 Agent）打开本仓库根目录。非技术用户见 [`GIVE_TO_AGENT.md`](./GIVE_TO_AGENT.md)。
+2. 粘贴下面提示词，用白话说要做什么，并给出本地素材路径（若有）。Agent 先跑 `npm run setup`。
+3. 缺字段、未登录即梦、或缺 API 密钥时，用一句话回答即可。
 4. Agent 停在审核门时，回复 `批准 storyboard` 或 `批准 final_render`（HeyGen 等付费服务再单独批）。选了即梦则无需这些批准，Agent 直接生成并发布。
 5. 成品一般在 `videos/<项目>/` 或 `episodes/<id>/out/`。源片不会被改写。
 
 ### 粘贴即用提示词
 
 ```text
-Read agents/START_HERE.md and agents/video-producer/AGENT.md.
+先读 AGENTS.md 全文，再按里面的「必读清单」把列出的文档按顺序一次读完，然后 npm run setup。不要跳过清单。
+Do not ask me to run npm, brew, curl, or FLAG_ commands.
 You run intake, Job file, route, and the specialist yourself.
 Before synthesizing, ask me to choose generation.service: remotion | hyperframes | heygen | dreamina.
-Ask me only if required fields are missing, or for 批准 storyboard / 批准 final_render / paid providers (not needed if I chose dreamina).
-Do not ask me to run npm or FLAG_ commands.
+Ask me only if required fields are missing, or for 批准 storyboard / 批准 final_render / paid providers (not needed if I chose dreamina). Auto-post Weixin/XHS needs 批准RPA this session.
 
 My request: <一句话说明要做什么；有本地素材就写出路径>
 ```
@@ -199,10 +199,11 @@ brief → script → storyboard → render-plan → voice → captions → Remot
 
 - 不硬编码密钥；不提交 `.env`、生成视频、生成音频  
 - 不刮未授权素材；无 rights 不克隆真人声音/形象  
-- 不静默发布；须 `批准发布` + `--i-approve-publish`（**dreamina 除外**：选定即梦即发布同意）
+- 不静默发布；须 `批准发布` + `--i-approve-publish`（**dreamina 除外**：选定即梦即发布同意）。视频号/小红书 **RPA 另须** `批准RPA` + `FLAG_video_publish_rpa` + `--i-accept-rpa-risk`。契约：[`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)。即梦出片 **不等于** 批准 RPA。RPA 用本机 Chrome 持久登录，等到「发表成功/发布成功」才算已提交；夜间不发。
 - 不静默付费（**dreamina 除外**：选定即梦即付费同意）  
 - existing-video / captions / translation：**源片 immutability**（SHA 前后一致）  
 - 不降低 `npm audit` 门禁
+- **不改仓库源码**（`src/`、`tests/`、`flags/`、文档）。出片/发布只跑 CLI。除非人当次明确说改代码。
 
 ---
 
@@ -210,8 +211,9 @@ brief → script → storyboard → render-plan → voice → captions → Remot
 
 | 层 | 路径 |
 | --- | --- |
-| 人用入口 | `agents/START_HERE.md` |
-| 入口 Agent | `agents/video-producer/AGENT.md` |
+| Agent 统一入口 | 根目录 `AGENTS.md`（必读清单，一次读完） |
+| 人用粘贴 | `agents/START_HERE.md` |
+| 出片执行 | `agents/video-producer/AGENT.md` |
 | Specialist 映射 | `agents/video-producer/SPECIALISTS.md` |
 | Intake 规则 | `agents/video-job-intake/AGENT.md` |
 | Job schema | `src/schemas/videoJob.ts` |
@@ -226,10 +228,11 @@ brief → script → storyboard → render-plan → voice → captions → Remot
 | 文档 | 用途 |
 | --- | --- |
 | [`VIDEO_AGENT_PLATFORM_QUICKSTART.md`](./VIDEO_AGENT_PLATFORM_QUICKSTART.md) | 人用三分钟版 |
-| [`VIDEO_AGENT_PLATFORM_AGENT_USAGE.md`](./VIDEO_AGENT_PLATFORM_AGENT_USAGE.md) | Agent 完整手册 |
+| [`VIDEO_AGENT_PLATFORM_AGENT_USAGE.md`](./VIDEO_AGENT_PLATFORM_AGENT_USAGE.md) | 出片细节展开（入口仍是 `AGENTS.md`） |
 | [`VIDEO_AGENT_PLATFORM_PROJECT_BRIEF.md`](./VIDEO_AGENT_PLATFORM_PROJECT_BRIEF.md) | 平台边界与阶段 |
 | [`VIDEO_JOB_INTAKE_P8_DEVELOPMENT_PLAN.md`](./VIDEO_JOB_INTAKE_P8_DEVELOPMENT_PLAN.md) | Intake 开发计划 |
 | [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md) | 全网热点 → LLM 精修口播 / 数字人即梦成片 / 常驻 RSS 爬虫 |
+| [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md) | 多平台发布；视频号/小红书 RPA 给 Agent 的操作契约 |
 
 ---
 
@@ -237,7 +240,8 @@ brief → script → storyboard → render-plan → voice → captions → Remot
 
 开始前：
 
-- [ ] 已读本文件 + `agents/video-producer/AGENT.md`
+- [ ] 已从 `AGENTS.md` 进来，并按「必读清单」把列出的文档一次读完
+- [ ] 若要自动发视频号/小红书：已读 `docs/VIDEO_PUBLISH.md`；人已当次说「批准RPA」才加 `--i-accept-rpa-risk`
 - [ ] flag 将由 Agent 显式启用
 - [ ] Job 经 `video:route` 得到唯一 `primary_agent`
 - [ ] 清楚当前 pending gates；无静默付费计划
