@@ -11,6 +11,8 @@ episodes/*/out/
 episodes/*/qa-report.md
 episodes/*/audio/*.mp3
 episodes/*/audio/*.wav
+# Authorized default digital-human identity (face + timbre).
+!episodes/res/audio/dg1.wav
 episodes/*/audio/segments/
 episodes/*/audio/segments.json
 episodes/*/assets/avatar/
