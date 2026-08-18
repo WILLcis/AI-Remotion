@@ -1,0 +1,16 @@
+---
+description: 口播/我的形象/数字人走即梦，不要先读 HeyGen
+alwaysApply: true
+---
+
+# Talking-head is Dreamina
+
+If the user asks to generate a talking-head / 口播 / 我的形象 / 数字人 / presenter video with their likeness:
+
+- Use Dreamina identity: `docs/VIDEO_HOTSPOT.md`, `docs/DREAMINA.md`, `config/hotspot-identity.json`.
+- Do **not** open `docs/HeyGen.md` or `docs/HeyGen_skills.md`.
+- Do **not** run installed `heygen-video` / `heygen-avatar` / `heygen-translate` skills.
+- Do **not** ask `generation.service` (remotion | hyperframes | heygen | dreamina).
+- Only use HeyGen if the user named HeyGen this session.
+
+Pipeline: cover `image2image` (face only) → `seedance2.0mini` `multimodal2video` (`@Image 1` cover, `@Image 2` face, `@Audio 1` timbre, spoken script in `{dialogue}`). Then publish packs. RPA needs `批准RPA` this session.

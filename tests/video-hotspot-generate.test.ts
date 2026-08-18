@@ -91,7 +91,7 @@ describe("hotspot digital-human clip generation", () => {
         usedMultimodal = true;
         expect(input.imagePaths).toEqual([coverPath, photoPath]);
         expect(input.audioPaths?.[0]).toMatch(/voice-ref\.wav$/);
-        expect(input.modelVersion).toBe("seedance2.0fast");
+        expect(input.modelVersion).toBe("seedance2.0mini");
         expect(input.prompt).toMatch(/@Image 1/);
         expect(input.prompt).toMatch(/@Image 2/);
         expect(input.prompt).toMatch(/第一帧/);

@@ -1,5 +1,7 @@
 # AGENTS.md — Agent 统一入口
 
+**口播 / 我的形象 / 数字人 = 即梦，不是 HeyGen。** 被问「以我的形象生成口播」时，立刻走 [`docs/VIDEO_HOTSPOT.md`](docs/VIDEO_HOTSPOT.md) + [`docs/DREAMINA.md`](docs/DREAMINA.md) + [`config/hotspot-identity.json`](config/hotspot-identity.json)。不要打开 HeyGen 文档，也不要跑本机 `heygen-video` / `heygen-avatar` skill。只有人点名 HeyGen 才走 HeyGen。
+
 **新会话只从本文件进。** 读完本文件全文后，按下面「必读清单」把其余文档**一次读完**，再开始干活。不要跳过清单，也不要从其它文件当入口。
 
 This repository follows the AI-First Coding Loop harness from:
@@ -16,8 +18,8 @@ https://github.com/WILLcis/AI--First-Coding-Loop-Codex
 6. [`docs/VIDEO_HOTSPOT.md`](docs/VIDEO_HOTSPOT.md)
 7. [`docs/DREAMINA.md`](docs/DREAMINA.md)
 8. [`docs/VIDEO_PUBLISH.md`](docs/VIDEO_PUBLISH.md)（含视频号 / 小红书 RPA「给 Agent」）
-9. [`docs/HeyGen_skills.md`](docs/HeyGen_skills.md)
-10. [`docs/HeyGen.md`](docs/HeyGen.md)
+
+**不要把 HeyGen 放进必读。** [`docs/HeyGen_skills.md`](docs/HeyGen_skills.md) / [`docs/HeyGen.md`](docs/HeyGen.md) 只在人点名 HeyGen 或 Job 已是 `generation.service=heygen` 时再读。本机已装的 HeyGen skills 不能当入口。
 
 读完后再 `npm run setup`。JSON：`ready` 继续；`needs_human` 只问 `ask` 原文；`failed` 停。不要让人敲 `brew` / `npm` / `FLAG_`。setup **不能代替** `make check`。
 
@@ -25,16 +27,27 @@ https://github.com/WILLcis/AI--First-Coding-Loop-Codex
 
 给人粘贴：[`agents/START_HERE.md`](agents/START_HERE.md)。给人看的一页纸：[`docs/GIVE_TO_AGENT.md`](docs/GIVE_TO_AGENT.md)。这两份**不是**给你当入口，也不替代上面的清单。
 
+### 人话怎么落到哪条链路（先看这里）
+
+问「用我的形象做口播 / 数字人 / 出镜讲解」时：**即梦**，不是 HeyGen。
+
+1. 读 [`docs/VIDEO_HOTSPOT.md`](docs/VIDEO_HOTSPOT.md) + [`docs/DREAMINA.md`](docs/DREAMINA.md)。
+2. 默认身份 [`config/hotspot-identity.json`](config/hotspot-identity.json)（脸 `episodes/res/img/dh1.jpg`，音色 `episodes/res/audio/dg1.wav`）。不要再问要不要上 HeyGen。
+3. 封面 `image2image`（只锁脸）→ `multimodal2video`（`@Image 1` 封面，`@Image 2` 脸，`@Audio 1` 音色，口播写在 `{对白}`）。
+4. 装在本机的 `heygen-video` / `heygen-avatar` skill **不要当这类需求的入口**。只有人明确说 HeyGen 或 `generation.service=heygen` 才走 HeyGen 文档和 skills。
+
+图文讲解（非出镜口播）才问 `generation.service`：`remotion` | `hyperframes` | `heygen` | `dreamina`。禁止把「我的形象口播」理解成必须先调研 HeyGen。
+
 读清单时记住：
 
 - **默认不许改仓库代码。** 出片 / 热点 / 发布 Agent 只跑 CLI、写 Job 与产物（`state/jobs/`、`videos/`、`episodes/` 产物、`state/publish/` 运行态）。不要改 `src/`、`tests/`、`flags/`、`package.json`、文档或本文件。只有人**当次明确说**「改代码 / 修 bug / 实现某某」才允许动源码。读写码纪律不等于授权改代码。
 - 不要把命令甩回给人。
-- `generation.service` 必须问人，禁止默认。
+- 图文讲解才问 `generation.service`。口播 / 我的形象 / 数字人固定即梦（上表「人话怎么落到哪条链路」），禁止默认成 HeyGen。
 - 选定 `dreamina`：不要再要 storyboard / 付费 / 发布批准；仍要开 kill-switch flags。这只写 Pack（和可选的抖音 API），**不等于**批准 RPA。
 - 自动点「发表/发布」：当次「批准RPA」+ `docs/VIDEO_PUBLISH.md`。`packed` 不是已发布。
 - 抖音 live 默认关；不要申请小程序。
 - 不要编造新闻。不要提交 `.env.local`、MP4、封面、`state/publish/`。
-- HeyGen：走 skills / CLI，禁止 raw `curl` 编造 v1/v2。
+- HeyGen：仅当人点名 HeyGen 时走 skills / CLI，禁止 raw `curl` 编造 v1/v2。口播形象需求不要打开 HeyGen 当第一步。
 
 ---
 
@@ -225,7 +238,7 @@ Do not regenerate unrelated episode files during revisions.
 - Do not scrape or embed unlicensed media.
 - Do not clone a real person's voice without explicit rights.
 - Do not auto-publish videos without an explicit current-session approval and an enabled publish feature flag. Exception: selecting `generation.service=dreamina` is that consent; still require publish flags. Remotion / HyperFrames / HeyGen still need `批准发布` + `--i-approve-publish`. Weixin/XHS **browser RPA** is a separate dual gate: `FLAG_video_publish_rpa` (default off) **and** current-session `批准RPA` / `--i-accept-rpa-risk`. Dreamina does not imply RPA. Kill: `FLAG_video_publish_rpa={"enabled":false}`. RPA uses installed Google Chrome + a persistent profile (`state/publish/rpa-profile/`, not Incognito); wait for 发表成功/发布成功 before closing; daytime 10:00–20:00, max 30 posts/day, 90 min spacing (2–5 min for the same clip on the other platform). Design: `docs/MULTI_PLATFORM_PUBLISH_DESIGN.md` (BIOS `YES-2498`); P0 implementation `YES-2520`.
-- Hotspot digest (`docs/VIDEO_HOTSPOT.md`): topic + `human-vo` / `digital-human` + now or schedule. Copy is LLM-polished and TNS-softened (including a 2–4 character cover keyword and two short cover lines). `human-vo` is copy only. `digital-human` defaults to the creator-authorized identity in `config/hotspot-identity.json` (face from `episodes/res/img/dh1.jpg`, timbre from `episodes/res/audio/dg1.wav`, look from `DEFAULT_DREAMINA_PRESENTER_PROMPT`; approved clip `videos/hotspot-20260816-identity-v4`). Cover via `image2image` (face only), then `seedance2.0fast` `multimodal2video` with `@Image 1` = cover first frame, `@Image 2` = face only, `@Audio 1` = timbre only; the spoken script goes in `{dialogue}` for lip-sync. `--photo` + `--audio` override as a pair. One clip TNS failure must not stop the rest; report which clip failed. Resident RSS crawler: `npm run hotspot:watch` behind `FLAG_video_hotspot_crawler`. Do not invent headlines.
+- Hotspot digest (`docs/VIDEO_HOTSPOT.md`): topic + `human-vo` / `digital-human` + now or schedule. Copy is LLM-polished and TNS-softened (including a 2–4 character cover keyword and two short cover lines). `human-vo` is copy only. `digital-human` defaults to the creator-authorized identity in `config/hotspot-identity.json` (face from `episodes/res/img/dh1.jpg`, timbre from `episodes/res/audio/dg1.wav`, look from `DEFAULT_DREAMINA_PRESENTER_PROMPT`; approved clip `videos/hotspot-20260816-identity-v4`). Cover via `image2image` (face only), then `seedance2.0mini` `multimodal2video` with `@Image 1` = cover first frame, `@Image 2` = face only, `@Audio 1` = timbre only; the spoken script goes in `{dialogue}` for lip-sync. `--photo` + `--audio` override as a pair. One clip TNS failure must not stop the rest; report which clip failed. Resident RSS crawler: `npm run hotspot:watch` behind `FLAG_video_hotspot_crawler`. Do not invent headlines.
 - Douyin live API (`docs/VIDEO_PUBLISH.md`) needs a **正式网站应用** + scope `video.create.bind` (not a mini-program, not a personal Open Platform signup). Keep `FLAG_video_publish_douyin` off until that exists; `--platform all` then skips Douyin and writes Weixin/XHS packs only.
 - Do not present AI-generated factual claims as verified facts.
 - Mark uncertain claims for manual review.

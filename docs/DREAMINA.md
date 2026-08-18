@@ -1,6 +1,7 @@
 # 即梦 / Dreamina CLI
 
-> 你应来自根目录 [`AGENTS.md`](../AGENTS.md) 的必读清单。本文件不是 Agent 总入口。
+> 你应来自根目录 [`AGENTS.md`](../AGENTS.md) 的必读清单。本文件不是 Agent 总入口。  
+> **口播 / 我的形象 / 数字人默认走本文件，不是 HeyGen。**
 
 即梦（Dreamina）通过本机 `dreamina` CLI 接入。  
 当 Video Job 选择 `generation.service: dreamina` 时：**整条最终成片只走即梦**，不以 Remotion / HyperFrames / HeyGen / 火山 Seedance API 重做主片。
@@ -43,11 +44,11 @@ Job 已选 `generation.service: dreamina` 时，生成命令带 `--generation-se
 
 ## 默认视频模型
 
-`text2video` / `image2video` / `multimodal2video` 默认 **`seedance2.0fast`**（约 75 积分 / 15 秒）。VIP（`seedance2.0_vip`，约 210 积分 / 15 秒）用 `--model_version seedance2.0_vip`。Fast 走公排队，可能卡在 Queueing。
+`text2video` / `image2video` / `multimodal2video` 默认 **`seedance2.0mini`**（720p，4–15 秒）。Fast / VIP 用 `--model_version seedance2.0fast` 或 `seedance2.0_vip`。
 
 数字人封面用 `text2image`、`ratio=9:16`，不要 ffmpeg 抽帧叠字做封面。
 
-热点 `digital-human` 默认用 `config/hotspot-identity.json` 的照片和音色：先 `image2image` 出封面（只移植人脸），再 `seedance2.0fast` `multimodal2video --image <封面> --image <照片> --audio <音色样本>`。提示词里 `@Image 1` 是封面第一帧、`@Image 2` 只复制人脸、`@Audio 1` 只当音色、`{口播脚本}` 对口型（参考音频须大于 5 秒，成片最长 15 秒）。`--photo` + `--audio` 可成对覆盖。不要把样本原句当视频内容，也不要 CosyVoice。发给即梦的封面和视频 `--prompt` 都必须含 **口型匹配** 和字幕要求。不要 ffmpeg 烧录字幕。
+热点 `digital-human` 默认用 `config/hotspot-identity.json` 的照片和音色：先 `image2image` 出封面（只移植人脸），再 `seedance2.0mini` `multimodal2video --image <封面> --image <照片> --audio <音色样本>`。提示词里 `@Image 1` 是封面第一帧、`@Image 2` 只复制人脸、`@Audio 1` 只当音色、`{口播脚本}` 对口型（参考音频须大于 5 秒，成片最长 15 秒）。`--photo` + `--audio` 可成对覆盖。不要把样本原句当视频内容，也不要 CosyVoice。发给即梦的封面和视频 `--prompt` 都必须含 **口型匹配** 和字幕要求。不要 ffmpeg 烧录字幕。
 
 出片后立即发布 Pack（不必 `--i-approve-publish`）。自动发视频号/小红书还要当次「批准RPA」并加 `--i-accept-rpa-risk`，见 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)：
 

@@ -11,7 +11,7 @@
 不要改仓库源码（src、tests、flags、文档）。只跑 CLI 出片/发布。除非我当次明确说「改代码」。
 不要让我敲 brew、npm 或 FLAG_ 命令。
 setup 打印 JSON：ready 就继续；needs_human 只用人话问 ask 里的那几句；failed 就停。
-由你跑 CLI。合成前若还没选定 generation.service，问我选 remotion / hyperframes / heygen / dreamina，禁止默认。
+由你跑 CLI。我的形象 / 口播 / 数字人走即梦（hotspot-identity），不要先去看 HeyGen。图文讲解才问 generation.service：remotion / hyperframes / heygen / dreamina。
 只有缺字段、审核门、付费 HeyGen、或当次要自动发视频号/小红书（我说「批准RPA」）时再问我。
 选了即梦：直接生成并写发布 Pack，不要再要批准；自动点「发表/发布」仍须我当次说「批准RPA」。
 
@@ -24,7 +24,7 @@ English:
 Read AGENTS.md in full, then read every document in its required reading list in order, then npm run setup. Do not skip the list. Do not use another file as the entry.
 Do not edit repository source (src, tests, flags, docs). Run the CLI only, unless I explicitly ask to change code this session.
 Do not ask me to run brew, npm, or FLAG_ commands.
-You run the CLI. If generation.service is missing, ask me to choose remotion | hyperframes | heygen | dreamina. Never invent a default.
+You run the CLI. My face / talking-head / 口播 is Dreamina identity (not HeyGen) unless I named HeyGen. For non-talking-head explainers, if generation.service is missing, ask me to choose remotion | hyperframes | heygen | dreamina. Never invent a default.
 Ask me only for missing fields, review gates, paid HeyGen, or Weixin/XHS auto-post (I must say 批准RPA this session). Dreamina skips storyboard/paid/publish gates but does not enable RPA.
 
 My request: <one sentence; include local media paths if any>

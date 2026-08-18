@@ -36,7 +36,7 @@ const usage = `Usage:
   npm run video:hotspot -- --format digital-human --topic <...> --items <json> --out <dir>
 
 human-vo: 真人口播，只写文案，不生成视频。LLM 精修爆款标题/封面关键词/两行封面文案/标签/口播。
-digital-human: 同上 + 即梦提示词。默认使用 config/hotspot-identity.json 的形象和声音（dh1.jpg + dg1.wav，只复制人脸，音色来自参考音频）。可用 --photo 与 --audio 成对覆盖。封面作 @Image 1 第一帧；口播写在提示词 {对白} 里并对口型。可选 --audio-transcript 或同名 .txt。参考音频须大于 5 秒，成片最长 15 秒。视频默认 seedance2.0fast；公网排队过长时用 --model_version seedance2.0_vip。
+digital-human: 同上 + 即梦提示词。默认使用 config/hotspot-identity.json 的形象和声音（dh1.jpg + dg1.wav，只复制人脸，音色来自参考音频）。可用 --photo 与 --audio 成对覆盖。封面作 @Image 1 第一帧；口播写在提示词 {对白} 里并对口型。可选 --audio-transcript 或同名 .txt。参考音频须大于 5 秒，成片最长 15 秒。视频默认 seedance2.0mini；质量不够时用 --model_version seedance2.0fast 或 seedance2.0_vip。
 抖音 live API 暂停时 --platform all 会跳过抖音。
 视频号/小红书默认写 Publish Pack。浏览器 RPA 须 FLAG_video_publish_rpa 且当次 --i-accept-rpa-risk（人说「批准RPA」）；即梦出片同意不等于批准 RPA。
 --watch 常驻：到期任务走仓库 RSS 爬虫，再 LLM 精修。不要编造热点。

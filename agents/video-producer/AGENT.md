@@ -26,32 +26,33 @@ When the user did **not** hand you a Job file:
 0. Run `npm run setup` and follow its JSON before any other CLI.
 1. Read this file and `SPECIALISTS.md`. For ambiguous intake rules, also read `agents/video-job-intake/AGENT.md`.
 2. Extract only facts the user supplied. **Do not invent** duration, aspect ratio, language, local media paths, provider names, **generation.service**, rights, or approvals.
-3. Before any synthesize / render path: if `generation.service` is missing, ask the user to choose one of `remotion` | `hyperframes` | `heygen` | `dreamina` (list labels from `src/schemas/videoGenerationServices.ts` / `docs/DREAMINA.md`). Never default.
-4. If anything required is missing, ask the user short questions and stop. Do not invent defaults.
-5. You may run intake yourself as a check:
+3. **Talking-head / 我的形象 / 口播 / 数字人:** this is Dreamina (`docs/VIDEO_HOTSPOT.md` + `docs/DREAMINA.md` + `config/hotspot-identity.json`). Do not start with HeyGen docs or `heygen-video` / `heygen-avatar` skills. Do not ask the four-way `generation.service` menu for this request. Only use HeyGen if the user named HeyGen.
+4. Before any **non-talking-head** synthesize / render path: if `generation.service` is missing, ask the user to choose one of `remotion` | `hyperframes` | `heygen` | `dreamina`. Never default.
+5. If anything required is missing, ask the user short questions and stop. Do not invent defaults.
+6. You may run intake yourself as a check:
 
    ```bash
    npm run video:intake -- --request path/to/request.json
    ```
 
    Present a brief draft summary. After the user confirms the draft (one sentence is enough), write the Job to `state/jobs/<job-id>.yaml` (create the directory if needed). Review gates stay `pending` unless `generation.service` is `dreamina` (then auto-approved, including publish).
-6. Enable the platform **yourself** and route:
+7. Enable the platform **yourself** and route:
 
    ```bash
    FLAG_video_agent_platform='{"enabled":true}' \
      npm run video:route -- --job state/jobs/<job-id>.yaml
    ```
 
-7. Treat the route JSON as authoritative. Read only the mapped specialist profile (`.devin/agents/<primary>.md` or the path in `SPECIALISTS.md`).
-8. Execute as that primary until the next pending gate, then return `needs_approval`. Never approve gates yourself. Never call paid/cloud `heygen` or `final_render` without the user's current explicit approval. **Dreamina exception:** selecting `generation.service=dreamina` is paid-generation and publish consent — do not wait for 批准 storyboard / 批准付费 / 批准发布. Use `docs/DREAMINA.md` + `npm run media:dreamina -- ... --generation-service dreamina` (flag `FLAG_dreamina_media`), then `video:publish --platform all --generation-service dreamina`.
-9. **Exclusive composition:** honor `route.renderer` / `Job.generation.service` for the **final** MP4 only:
+8. Treat the route JSON as authoritative. Read only the mapped specialist profile (`.devin/agents/<primary>.md` or the path in `SPECIALISTS.md`).
+9. Execute as that primary until the next pending gate, then return `needs_approval`. Never approve gates yourself. Never call paid/cloud `heygen` or `final_render` without the user's current explicit approval. **Dreamina exception:** selecting `generation.service=dreamina` is paid-generation and publish consent — do not wait for 批准 storyboard / 批准付费 / 批准发布. Use `docs/DREAMINA.md` + `npm run media:dreamina -- ... --generation-service dreamina` (flag `FLAG_dreamina_media`), then `video:publish --platform all --generation-service dreamina`.
+10. **Exclusive composition:** honor `route.renderer` / `Job.generation.service` for the **final** MP4 only:
    - `dreamina` → final from Dreamina CLI only; TTS = dreamina-native (no project CosyVoice unless user asks).
    - `hyperframes` → final from HyperFrames only; TTS = project `AI_REMOTION_TTS_*` (usually CosyVoice 3).
    - `remotion` → final from Remotion only; same project TTS.
    - `heygen` → final from HeyGen only; TTS = HeyGen-native unless user asks CosyVoice replace.
-10. Never publish without current-session `批准发布` plus `--i-approve-publish`, except `generation.service=dreamina` (use `--generation-service dreamina` instead). Follow the agent playbook in `docs/VIDEO_PUBLISH.md`. Douyin is official API; Weixin Channels / Xiaohongshu default to publish packs. Browser RPA needs the user to say `批准RPA` this session **and** `FLAG_video_publish_rpa`; then pass `--i-accept-rpa-risk`. Do not treat Dreamina as RPA consent. Kill switch: `FLAG_video_publish_rpa={"enabled":false}`. RPA must use installed Chrome (persistent profile, not Incognito), click 发表/发布, wait for 发表成功/发布成功, and obey daytime 10:00–20:00 / 30 posts per day / 90 min spacing (2–5 min for the same clip on the other platform). Never overnight batch. `packed` is not posted; `failed` + screenshot is not posted.
-11. **Hotspot digest** (`docs/VIDEO_HOTSPOT.md`): if the user wants 全网热点 / 口播文案, ask for (a) topic type, (b) `human-vo` vs `digital-human`, (c) now vs schedule. Prefer the in-repo RSS crawler (`video:hotspot --watch` / `--crawl`) when `FLAG_video_hotspot_crawler` is on; otherwise search the public web yourself and write items JSON. Both formats get LLM polish via `AI_REMOTION_LLM_*` (cover keyword 2–4 chars + two short cover lines). `human-vo` → deliver `hotspot-copy.md` only, user records, no Dreamina. `digital-human` → default identity in `config/hotspot-identity.json` (do not ask for photo/audio unless the user wants a different person). Cover via `image2image` (face only), then `seedance2.0fast` `multimodal2video`: `@Image 1` = cover first frame, `@Image 2` = face only, audio = timbre only, spoken script in `{dialogue}` for lip-sync. Then `video:publish --platform all --generation-service dreamina --cover`. Skip Douyin when `FLAG_video_publish_douyin` is off. Do not invent news.
-12. **Never** hand CLI steps back to the user (`brew`, `npm install`, `FLAG_`, `curl`). **Never rewrite source code** on a production/out-video request. Stop only for: setup `needs_human`, missing info, review gates (not dreamina), paid-provider approval (HeyGen), publish approval (not dreamina), **RPA** (`批准RPA` — not implied by dreamina), or a real blocker.
+11. Never publish without current-session `批准发布` plus `--i-approve-publish`, except `generation.service=dreamina` (use `--generation-service dreamina` instead). Follow the agent playbook in `docs/VIDEO_PUBLISH.md`. Douyin is official API; Weixin Channels / Xiaohongshu default to publish packs. Browser RPA needs the user to say `批准RPA` this session **and** `FLAG_video_publish_rpa`; then pass `--i-accept-rpa-risk`. Do not treat Dreamina as RPA consent. Kill switch: `FLAG_video_publish_rpa={"enabled":false}`. RPA must use installed Chrome (persistent profile, not Incognito), click 发表/发布, wait for 发表成功/发布成功, and obey daytime 10:00–20:00 / 30 posts per day / 90 min spacing (2–5 min for the same clip on the other platform). Never overnight batch. `packed` is not posted; `failed` + screenshot is not posted.
+12. **Hotspot digest** (`docs/VIDEO_HOTSPOT.md`): if the user wants 全网热点 / 口播文案, ask for (a) topic type, (b) `human-vo` vs `digital-human`, (c) now vs schedule. Prefer the in-repo RSS crawler (`video:hotspot --watch` / `--crawl`) when `FLAG_video_hotspot_crawler` is on; otherwise search the public web yourself and write items JSON. Both formats get LLM polish via `AI_REMOTION_LLM_*` (cover keyword 2–4 chars + two short cover lines). `human-vo` → deliver `hotspot-copy.md` only, user records, no Dreamina. `digital-human` → default identity in `config/hotspot-identity.json` (do not ask for photo/audio unless the user wants a different person). Cover via `image2image` (face only), then `seedance2.0mini` `multimodal2video`: `@Image 1` = cover first frame, `@Image 2` = face only, audio = timbre only, spoken script in `{dialogue}` for lip-sync. Then `video:publish --platform all --generation-service dreamina --cover`. Skip Douyin when `FLAG_video_publish_douyin` is off. Do not invent news.
+13. **Never** hand CLI steps back to the user (`brew`, `npm install`, `FLAG_`, `curl`). **Never rewrite source code** on a production/out-video request. Stop only for: setup `needs_human`, missing info, review gates (not dreamina), paid-provider approval (HeyGen), publish approval (not dreamina), **RPA** (`批准RPA` — not implied by dreamina), or a real blocker.
 
 ## Job-file entry
 
@@ -59,7 +60,7 @@ If the user already provided a Job YAML/JSON path, run `npm run setup` first, th
 
 ## Hard rules
 
-- **Do not rewrite repository code.** Run the CLI. Do not edit `src/`, `tests/`, `flags/`, `package.json`, or docs unless the user explicitly asked to change the codebase this session. Job files under `state/jobs/` and generated artifacts are allowed.
+- **Talking-head / 我的形象 / 口播 is Dreamina identity, not HeyGen**, unless the user named HeyGen this session.
 - New session: `npm run setup` first. Do not skip because the last machine already worked.
 - One Job = one `primary_agent`. Do not open a second primary.
 - Do not route around the flag by selecting a specialist directly.

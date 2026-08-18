@@ -4,6 +4,8 @@ This map is host-neutral. The profile paths are ordinary repository Markdown fil
 
 The Video Job route JSON is authoritative. Do not choose a row from this table before running `npm run video:route` with `FLAGS.VIDEO_AGENT_PLATFORM` enabled.
 
+**「用我的形象做口播」不是本表的 `digital-human` 行。** 那条需求走即梦 hotspot identity（`docs/VIDEO_HOTSPOT.md`），不要先读 HeyGen 或打开 `digital-human-producer`。只有 Job 已选 `generation.service=heygen` 且 route 指向该行时才用它。
+
 | workflow | primary_agent | renderer | profile |
 | --- | --- | --- | --- |
 | product-promo | product-promo-producer | hyperframes | `.devin/agents/product-promo-producer.md` |

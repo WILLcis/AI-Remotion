@@ -255,8 +255,8 @@ AI_REMOTION_ENV_FILE=.env.local npm run config:check
 
 把仓库交给**另一个新开的 Agent**时，不要靠口头复述。打开仓库根目录，把 `agents/START_HERE.md` 里对应粘贴块整段贴进去，再写这一次的需求。
 
-- 图文讲解 / Remotion / HyperFrames / HeyGen：用 START_HERE 的「讲解视频」粘贴块。
-- 热点口播 / 即梦数字人 / 发布：用 START_HERE 的「热点 / 即梦 / 发布」粘贴块。
+- 把 `agents/START_HERE.md` 里**那一段**整段贴进去即可（只有一块，不要再分「讲解 / 热点」）。
+- 「用我的形象做口播」走即梦数字人，不是 HeyGen。图文讲解才会问 `generation.service`。
 - Agent 自己读 `AGENTS.md` + `agents/video-producer/AGENT.md` + 第 12–15 节，自己跑 CLI 和 FLAG_。不要让人代敲命令。
 - 密钥在本机 `.env.local`；Agent 不得把该文件或 MP4/封面提交进 git。
 
@@ -361,14 +361,14 @@ dreamina login
 dreamina user_credit
 ```
 
-默认视频模型是 `seedance2.0fast`。排队或质量不够时用 `--model_version seedance2.0_vip`。选定即梦即视为同意扣积分并随后发布。详情：`docs/DREAMINA.md`。
+默认视频模型是 `seedance2.0mini`。质量不够时用 `--model_version seedance2.0fast` 或 `seedance2.0_vip`。选定即梦即视为同意扣积分并随后发布。详情：`docs/DREAMINA.md`。
 
 ```bash
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- check
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- credit
 ```
 
-数字人封面走即梦（9:16，顶部金色书法关键词 + 下方两行黄字黑边）。默认身份见 `config/hotspot-identity.json`：只复制人脸，其余形象按脚本；成片 `seedance2.0fast` 全能参考，`@Image 1` 封面第一帧、`@Image 2` 只锁脸、音频只当音色，口播写在 `{对白}` 里并对口型。`--photo` + `--audio` 可成对覆盖。提示词必须含口型匹配和画面正下方的中英字幕，不要本地烧录字幕。
+数字人封面走即梦（9:16，顶部金色书法关键词 + 下方两行黄字黑边）。默认身份见 `config/hotspot-identity.json`：只复制人脸，其余形象按脚本；成片 `seedance2.0mini` 全能参考，`@Image 1` 封面第一帧、`@Image 2` 只锁脸、音频只当音色，口播写在 `{对白}` 里并对口型。`--photo` + `--audio` 可成对覆盖。提示词必须含口型匹配和画面正下方的中英字幕，不要本地烧录字幕。
 
 ## 13. 热点口播（交付）
 

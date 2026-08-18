@@ -21,8 +21,8 @@
 
 ## 1. 已接入清单
 
-- [x] 根目录 `AGENTS.md`：项目结构、命令、质量门禁、数据安全和发布规则；进入仓库必读 `docs/HeyGen_skills.md` 与 `docs/HeyGen.md`。
-- [x] `docs/HeyGen_skills.md` / `docs/HeyGen.md`：HeyGen agent 安装、传输、Video Agent / CLI 契约（视频相关任务强制遵循）。
+- [x] 根目录 `AGENTS.md`：项目结构、命令、质量门禁、数据安全和发布规则。口播 / 我的形象默认即梦，不把 HeyGen 列入必读。
+- [x] `docs/HeyGen_skills.md` / `docs/HeyGen.md`：仅当人点名 HeyGen 或 Job 为 `generation.service=heygen` 时遵循；不是口播默认方案。
 - [x] `.agents/skills/agent-coding-discipline/SKILL.md`：先读再写、最小改动、测试和交付证据纪律。
 - [x] `docs/ai-first-project-governance.md`：通用 AI-First 与 BIOS 协作规范。
 - [x] `docs/ai-first-project-onboarding-template.md`：新项目接入模板，保留为通用模板。

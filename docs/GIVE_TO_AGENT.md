@@ -12,6 +12,7 @@
 请先读 AGENTS.md 全文，再按里面的「必读清单」把列出的文档按顺序一次读完，然后 npm run setup。不要跳过清单。
 不要改仓库源码，只跑 CLI 出片/发布。除非我当次明确说「改代码」。
 不要让我敲 brew、npm 或 FLAG_ 命令。
+我的形象 / 口播 / 数字人走即梦，不要先去看 HeyGen。
 setup 打印 JSON：ready 就继续；needs_human 只用人话问 ask 里的那几句；failed 就停。
 要自动点视频号/小红书「发表/发布」时等我说「批准RPA」，第一次在弹出的 Chrome 里扫码。
 

@@ -17,7 +17,7 @@ Prefer existing repository adapters and commands:
 - `npm run episode:render`
 - `npm run episode:qa`
 
-Use installed HeyGen skills/CLI when the Job explicitly selects HeyGen and authorization is available. Do not replace those paths with raw HTTP calls. Local providers must fail loudly when their configured service is unavailable.
+Use installed HeyGen skills/CLI **only when the Job explicitly selects HeyGen**. In this repo, talking-head / 我的形象 / 口播 without that selection is Dreamina (`docs/VIDEO_HOTSPOT.md`, `config/hotspot-identity.json`). Do not start from HeyGen docs. Do not replace those paths with raw HTTP calls. Local providers must fail loudly when their configured service is unavailable.
 
 As a primary agent, you own the digital-human script, scene alignment, presenter composition, provider manifest, Remotion post-processing, and QA. As a delegated agent, return only the requested presenter video, timing, manifest, and metadata; never edit the caller's shared storyboard, root timeline, render plan, or QA report.
 

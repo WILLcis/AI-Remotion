@@ -73,7 +73,7 @@ describe("dreamina CLI adapter", () => {
     ).rejects.toThrow(/jimeng\.jianying\.com\/cli/);
   });
 
-  it("defaults text2video to seedance2.0fast", async () => {
+  it("defaults text2video to seedance2.0mini", async () => {
     const calls: string[][] = [];
     await dreaminaText2Video({
       approvePaid: true,
@@ -85,9 +85,9 @@ describe("dreamina CLI adapter", () => {
         },
       },
     });
-    expect(DEFAULT_DREAMINA_VIDEO_MODEL).toBe("seedance2.0fast");
+    expect(DEFAULT_DREAMINA_VIDEO_MODEL).toBe("seedance2.0mini");
     expect(calls[0]).toEqual(
-      expect.arrayContaining(["--model_version=seedance2.0fast"]),
+      expect.arrayContaining(["--model_version=seedance2.0mini"]),
     );
   });
 
@@ -167,7 +167,7 @@ describe("dreamina CLI adapter", () => {
         "multimodal2video",
         "--prompt=口型跟随音频",
         "--ratio=9:16",
-        "--model_version=seedance2.0fast",
+        "--model_version=seedance2.0mini",
         expect.stringMatching(/--image=.*cover\.png/),
         expect.stringMatching(/--audio=.*spoken\.wav/),
       ]),

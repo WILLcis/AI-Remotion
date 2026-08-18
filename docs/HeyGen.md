@@ -1,5 +1,7 @@
 # HeyGen Documentation
 
+**This repository:** talking-head / 我的形象 / 口播 defaults to Dreamina, not HeyGen. Read this file as a capability index only. Execute HeyGen only when the user named HeyGen or set `generation.service=heygen`.
+
 ## About HeyGen
 
 HeyGen is an AI video creation platform — avatars, voice cloning, lip-sync translation, and agentic video workflows. The product is used by 85,000+ companies for marketing, L&D, sales, and global communications. This file indexes the *developer* surface; for the consumer/marketing surface (use cases, pricing, blog), see:

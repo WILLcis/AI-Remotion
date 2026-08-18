@@ -21,8 +21,8 @@ export type DreaminaCliOptions = {
   run?: DreaminaRunner;
 };
 
-/** Default video model. Fast is cheaper (~75 credits / 15s vs VIP ~210). Queueing is the tradeoff. */
-export const DEFAULT_DREAMINA_VIDEO_MODEL = "seedance2.0fast";
+/** Default video model after identity A/B: mini (720p, 4–15s). Override with --model_version seedance2.0fast or seedance2.0_vip. */
+export const DEFAULT_DREAMINA_VIDEO_MODEL = "seedance2.0mini";
 
 const defaultRunner: DreaminaRunner = (bin, args, options = {}) =>
   new Promise((resolve, reject) => {

@@ -19,7 +19,7 @@ const usage = `Usage:
   npm run media:dreamina -- text2image --prompt <text> --out <dir> --i-approve-paid
   npm run media:dreamina -- image2video --image <path> --out <dir> --i-approve-paid [--prompt <text>]
   npm run media:dreamina -- multimodal2video --image <path> --audio <path> --out <dir> --i-approve-paid [--prompt <text>]
-  npm run media:dreamina -- text2video --prompt <text> --out <dir> --i-approve-paid [--duration 5] [--ratio 9:16] [--model_version seedance2.0fast]
+  npm run media:dreamina -- text2video --prompt <text> --out <dir> --i-approve-paid [--duration 5] [--ratio 9:16] [--model_version seedance2.0mini]
 
 Job path: --generation-service dreamina skips --i-approve-paid (selecting dreamina is paid-generation consent).
 `;

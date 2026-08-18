@@ -1,6 +1,7 @@
 # 热点口播（真人口播文案 / 数字人即梦成片）
 
-> 你应来自根目录 [`AGENTS.md`](../AGENTS.md) 的必读清单。本文件不是 Agent 总入口。
+> 你应来自根目录 [`AGENTS.md`](../AGENTS.md) 的必读清单。本文件不是 Agent 总入口。  
+> **「用我的形象做口播」走本文件的 `digital-human` + 即梦，不是 HeyGen。**
 
 父工单：`YES-549`。样例字段见 [`example.md`](./example.md)。
 
@@ -11,7 +12,7 @@
 | `format` | 给用户什么 | 是否生成视频 |
 | --- | --- | --- |
 | `human-vo` | 热门口播文案（爆款标题 / 封面关键词 / 封面文案 / 话题标签 / **口播文本**） | **否**。用户自己录 |
-| `digital-human` | 同上 + **即梦提示词** | **是**。默认用 `config/hotspot-identity.json` 的形象和声音：封面 `image2image`（只复制人脸）→ `seedance2.0fast` `multimodal2video`（`@Image 1` 封面第一帧，`@Image 2` 只复制人脸，音频只当音色，口播写在 `{对白}` 并对口型）。`--photo` + `--audio` 可成对覆盖。然后 `video:publish --platform all --generation-service dreamina --cover` |
+| `digital-human` | 同上 + **即梦提示词** | **是**。默认用 `config/hotspot-identity.json` 的形象和声音：封面 `image2image`（只复制人脸）→ `seedance2.0mini` `multimodal2video`（`@Image 1` 封面第一帧，`@Image 2` 只复制人脸，音频只当音色，口播写在 `{对白}` 并对口型）。`--photo` + `--audio` 可成对覆盖。然后 `video:publish --platform all --generation-service dreamina --cover` |
 
 真人口播 **不要** 写即梦提示词，也 **不要** 调即梦或发布。两种格式都要 LLM 精修标题 / 封面关键词 / 封面两行短句 / 标签 / 口播。封面关键词必须是文案重点（2–4 字），禁止硬拼如「涨税」；封面文案恰好两句、每句不超过约 12 字。
 
@@ -124,6 +125,6 @@ launchctl load ~/Library/LaunchAgents/com.ai-remotion.hotspot-crawler.plist
 
 - 文案末尾带素材来源；公开报道整理，待核，不当已核实事实。
 - LLM 精修不得发明数字；失败时回退模板口播。标题/口播会去掉诈骗、判刑等即梦 TNS 高危词。
-- 即梦 CLI 仍需高级会员；默认 `seedance2.0fast`（约 75 积分 / 15 秒）。排队或质量不够时改 `--model_version seedance2.0_vip`。会员等级不够会失败，文案包仍会留下。
-- 数字人默认走创作者授权身份（`config/hotspot-identity.json`）：封面 `image2image` 只复制人脸，成片 `seedance2.0fast` `multimodal2video --image <封面> --image <照片> --audio <音色>`——`@Image 1` 是封面第一帧，`@Image 2` 只复制人脸，音频是 `@Audio 1` 音色（不继承原句），口播写在 `{对白}` 里并对口型。`--photo` + `--audio` 可成对覆盖。参考音频须大于 5 秒，成片最长 15 秒。发给即梦的封面/视频提示词都必须含 **口型匹配** 和字幕要求；视频字幕在画面正下方居中，中文超大号加粗衬线、关键词金色（参考 `episodes/res/img/image-subtitle1.png` 的字体，不要胸口错落、不要底部黑条），不在本地 ffmpeg 烧录。
+- 即梦 CLI 仍需高级会员；默认 `seedance2.0mini`（720p，4–15 秒）。质量不够时改 `--model_version seedance2.0fast` 或 `seedance2.0_vip`。会员等级不够会失败，文案包仍会留下。
+- 数字人默认走创作者授权身份（`config/hotspot-identity.json`）：封面 `image2image` 只复制人脸，成片 `seedance2.0mini` `multimodal2video --image <封面> --image <照片> --audio <音色>`——`@Image 1` 是封面第一帧，`@Image 2` 只复制人脸，音频是 `@Audio 1` 音色（不继承原句），口播写在 `{对白}` 里并对口型。`--photo` + `--audio` 可成对覆盖。参考音频须大于 5 秒，成片最长 15 秒。发给即梦的封面/视频提示词都必须含 **口型匹配** 和字幕要求；视频字幕在画面正下方居中，中文超大号加粗衬线、关键词金色（参考 `episodes/res/img/image-subtitle1.png` 的字体，不要胸口错落、不要底部黑条），不在本地 ffmpeg 烧录。
 - 发布默认只写 Pack。自动点视频号「发表」/ 小红书「发布」须当次「批准RPA」，契约见 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)。即梦出片不等于批准 RPA。不要提交 `state/publish/`。

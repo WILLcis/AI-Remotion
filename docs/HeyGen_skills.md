@@ -1,5 +1,7 @@
 # HeyGen Skills — Installation Guide for AI Agents
 
+**This repository:** 口播 / 我的形象 / 数字人默认走即梦（`docs/VIDEO_HOTSPOT.md`、`docs/DREAMINA.md`、`config/hotspot-identity.json`）。本文件只在用户明确要 HeyGen 时执行。不要把「用我的形象做口播」理解成先安装或先读 HeyGen。
+
 Read this entire file, then follow the steps. Ask the user for API keys when needed.
 Target: ~5 minutes to a fully working HeyGen integration.
 

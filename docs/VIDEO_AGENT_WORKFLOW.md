@@ -22,7 +22,9 @@ BIOS：`YES-549` · 平台：`YES-1909` · Intake：`YES-2031`
 
 人只说话；**Agent 自己跑 CLI**（先 `npm run setup`，再 `video:intake` / `video:route` / `video:hotspot` / flag）。不要把命令甩回给用户。非技术用户把文件夹交给 Agent：见 [`GIVE_TO_AGENT.md`](./GIVE_TO_AGENT.md)。
 
-热点口播：用户定类型与定时 → RSS 爬虫或 Agent 检索 → **LLM 精修**口播（并去掉即梦 TNS 高危词）→ `human-vo` 只交文案（用户自己录）/ `digital-human` 即梦封面 + `image2video`（封面作第一帧；提示词要求口型与字幕，`seedance2.0fast`），然后发布。单条 TNS 失败写入 `questions`，不阻断其他 clip。常驻：`npm run hotspot:watch`。见 [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md)。
+热点口播：用户定类型与定时 → RSS 爬虫或 Agent 检索 → **LLM 精修**口播（并去掉即梦 TNS 高危词）→ `human-vo` 只交文案（用户自己录）/ `digital-human` 即梦封面 + `multimodal2video`（封面作第一帧、锁脸、音色、口播在 `{对白}`；默认 `seedance2.0mini`），然后发布。单条 TNS 失败写入 `questions`，不阻断其他 clip。常驻：`npm run hotspot:watch`。见 [`VIDEO_HOTSPOT.md`](./VIDEO_HOTSPOT.md)。
+
+**「用我的形象做口播」= 即梦数字人，不是 HeyGen。** 只有人点名 HeyGen 才走 HeyGen。
 
 ---
 
@@ -40,8 +42,9 @@ BIOS：`YES-549` · 平台：`YES-1909` · Intake：`YES-2031`
 先读 AGENTS.md 全文，再按里面的「必读清单」把列出的文档按顺序一次读完，然后 npm run setup。不要跳过清单。
 Do not ask me to run npm, brew, curl, or FLAG_ commands.
 You run intake, Job file, route, and the specialist yourself.
-Before synthesizing, ask me to choose generation.service: remotion | hyperframes | heygen | dreamina.
-Ask me only if required fields are missing, or for 批准 storyboard / 批准 final_render / paid providers (not needed if I chose dreamina). Auto-post Weixin/XHS needs 批准RPA this session.
+我的形象 / 口播 / 数字人走即梦，不要先看 HeyGen，也不要问四选一 generation.service。
+图文讲解（非出镜口播）才问 generation.service: remotion | hyperframes | heygen | dreamina.
+Ask me only if required fields are missing, or for 批准 storyboard / 批准 final_render / paid HeyGen (not needed if I chose dreamina). Auto-post Weixin/XHS needs 批准RPA this session.
 
 My request: <一句话说明要做什么；有本地素材就写出路径>
 ```
@@ -54,8 +57,9 @@ My request: <一句话说明要做什么；有本地素材就写出路径>
 
 ```text
 用户白话（或已有 Job）
-  → 缺字段则追问并停（不发明时长/画幅/语言/路径/provider/generation.service）
-  → generation.service 必问：remotion | hyperframes | heygen | dreamina
+  → 「我的形象 / 口播 / 数字人」→ 即梦 hotspot identity，不问 generation.service，不打开 HeyGen
+  → 图文讲解才追问 generation.service：remotion | hyperframes | heygen | dreamina
+  → 缺字段则追问并停（不发明时长/画幅/语言/路径/provider）
   → 可选自检：npm run video:intake -- --request <request.json>
   → 用户确认草案 → 写 state/jobs/<id>.yaml（gates 默认 pending；dreamina 则全部 approved）
   → FLAG_video_agent_platform='{"enabled":true}' npm run video:route -- --job <job>
