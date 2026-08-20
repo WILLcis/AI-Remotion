@@ -4,7 +4,11 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { FLAGS, LocalProvider } from "../flags/feature-flags";
 import { resolveAudioTranscript } from "../src/hotspot/cloneVoice";
-import { composeHotspotPack, buildDreaminaVideoPrompt } from "../src/hotspot/composeCopy";
+import {
+  buildTalkingHeadClip,
+  composeHotspotPack,
+  buildDreaminaVideoPrompt,
+} from "../src/hotspot/composeCopy";
 import { formatHotspotMarkdown } from "../src/hotspot/formatPack";
 import {
   DEFAULT_HOTSPOT_AUDIO_REL,
@@ -191,6 +195,22 @@ describe("video hotspot digest", () => {
     expect([...pack.clips[0]!.cover.split(/[，,]/)[0]!].length).toBeLessThanOrEqual(12);
     expect(markdown.indexOf("话题标签")).toBeLessThan(markdown.indexOf("即梦提示词"));
     expect(markdown.indexOf("即梦提示词")).toBeLessThan(markdown.indexOf("口播文本"));
+  });
+
+  it("builds cover copy for agent talking-head without a scheduled hotspot pack", () => {
+    const spoken = "央行今天开会了。市场在看利率怎么走。你怎么看？";
+    const clip = buildTalkingHeadClip({ spoken });
+    expect(clip.spoken).toBe(spoken);
+    expect([...clip.cover_keyword].length).toBeGreaterThanOrEqual(2);
+    expect([...clip.cover_keyword].length).toBeLessThanOrEqual(4);
+    expect(clip.cover.split(/[，,]/).length).toBe(2);
+    expect([...clip.cover.split(/[，,]/)[0]!].length).toBeLessThanOrEqual(12);
+    const prompt = buildDreaminaVideoPrompt(clip, { identityFromPhoto: true });
+    expect(prompt).toContain(`{${spoken}}`);
+    expect(prompt).toMatch(/@Image 1 是封面静帧/);
+    expect(prompt).toMatch(/必须作为视频第一帧/);
+    expect(prompt).toMatch(/中英双语口播字幕/);
+    expect(prompt).toMatch(/画面正下方居中/);
   });
 
   it("asks Dreamina to speak, lip-sync, and draw Chinese captions in the prompt", () => {

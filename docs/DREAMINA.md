@@ -31,6 +31,8 @@ dreamina user_credit
 ```bash
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- check
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- credit
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- talking-head \
+  --spoken "口播全文" --out videos/<proj> --generation-service dreamina
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- text2image \
   --prompt "..." --out videos/<proj>/assets/dreamina --generation-service dreamina --ratio 9:16
 FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- image2video \
@@ -39,6 +41,8 @@ FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- text2video \
   --prompt "..." --out videos/<proj>/renders --generation-service dreamina --ratio 9:16
 ```
 
+`talking-head` 是口播 / 我的形象的入口。下面的 `text2video` / 单图 `multimodal2video` 只给图文或非出镜镜头，不要拿来做数字人。
+
 Job 已选 `generation.service: dreamina` 时，生成命令带 `--generation-service dreamina`，不必 `--i-approve-paid`。  
 没有 Video Job、单独调用即梦时，仍须用户明文批准后加 `--i-approve-paid`。
 
@@ -46,9 +50,18 @@ Job 已选 `generation.service: dreamina` 时，生成命令带 `--generation-se
 
 `text2video` / `image2video` / `multimodal2video` 默认 **`seedance2.0mini`**（720p，4–15 秒）。Fast / VIP 用 `--model_version seedance2.0fast` 或 `seedance2.0_vip`。
 
-数字人封面用 `text2image`、`ratio=9:16`，不要 ffmpeg 抽帧叠字做封面。
+数字人封面用 `image2image`（只锁脸）+ `ratio=9:16`，不要 `text2image` 凭空画脸，也不要 ffmpeg 抽帧叠字做封面。
 
-热点 `digital-human` 默认用 `config/hotspot-identity.json` 的照片和音色：先 `image2image` 出封面（只移植人脸），再 `seedance2.0mini` `multimodal2video --image <封面> --image <照片> --audio <音色样本>`。提示词里 `@Image 1` 是封面第一帧、`@Image 2` 只复制人脸、`@Audio 1` 只当音色、`{口播脚本}` 对口型（参考音频须大于 5 秒，成片最长 15 秒）。`--photo` + `--audio` 可成对覆盖。不要把样本原句当视频内容，也不要 CosyVoice。发给即梦的封面和视频 `--prompt` 都必须含 **口型匹配** 和字幕要求。不要 ffmpeg 烧录字幕。
+**Agent 即时口播和定时热点是同一条流水线。** 不要因为用户没开 `hotspot:watch` 就改走 `text2video` 或单图 `multimodal2video`。即时口播用：
+
+```bash
+npm run media:dreamina -- talking-head \
+  --spoken "口播全文" \
+  --out videos/<id> \
+  --generation-service dreamina
+```
+
+这条命令内部就是：封面 `image2image`（脸只来自身份照）→ `seedance2.0mini` `multimodal2video --image <封面> --image <照片> --audio <音色样本>`。提示词里 `@Image 1` 是封面第一帧、`@Image 2` 只复制人脸、`@Audio 1` 只当音色、`{口播脚本}` 对口型（参考音频须大于 5 秒，成片最长 15 秒）。可选 `--headline` / `--cover` / `--cover-keyword` / `--tags`；`--photo` + `--audio` 可成对覆盖。不要把样本原句当视频内容，也不要 CosyVoice。发给即梦的封面和视频 `--prompt` 都必须含 **口型匹配** 和字幕要求（`DREAMINA_VIDEO_CAPTION_REQUIREMENT`）。不要 ffmpeg 烧录字幕。定时热点仍走 `video:hotspot --format digital-human`。
 
 出片后立即发布 Pack（不必 `--i-approve-publish`）。自动发视频号/小红书还要当次「批准RPA」并加 `--i-accept-rpa-risk`，见 [`VIDEO_PUBLISH.md`](./VIDEO_PUBLISH.md)：
 

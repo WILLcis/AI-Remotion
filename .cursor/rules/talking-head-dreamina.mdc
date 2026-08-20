@@ -13,4 +13,4 @@ If the user asks to generate a talking-head / 口播 / 我的形象 / 数字人 
 - Do **not** ask `generation.service` (remotion | hyperframes | heygen | dreamina).
 - Only use HeyGen if the user named HeyGen this session.
 
-Pipeline: cover `image2image` (face only) → `seedance2.0mini` `multimodal2video` (`@Image 1` cover, `@Image 2` face, `@Audio 1` timbre, spoken script in `{dialogue}`). Then publish packs. RPA needs `批准RPA` this session.
+Pipeline: cover `image2image` (face only) → `seedance2.0mini` `multimodal2video` (`@Image 1` cover, `@Image 2` face, `@Audio 1` timbre, spoken script in `{dialogue}`, captions in the prompt). One-off agent jobs use `npm run media:dreamina -- talking-head --spoken "..." --out videos/<id> --generation-service dreamina` (or `video:hotspot --format digital-human`). Never `text2video`. Never `multimodal2video` with only the face photo. Then publish packs. RPA needs `批准RPA` this session.

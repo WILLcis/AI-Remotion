@@ -35,6 +35,18 @@ Kill：`FLAG_video_hotspot={"enabled":false}` 停整条热点；`FLAG_video_hots
 
 然后检索公开网页，写成 items JSON（标题 + 摘要 + 链接），再调用 CLI。LLM 会按 `example.md` 口吻精修，不编造素材里没有的数字。
 
+**没有定时任务、Agent 当场用我的形象出片**时，不要改走 `text2video` 或只用脸照片的 `multimodal2video`。和 `digital-human` 同一条流水线：
+
+```bash
+FLAG_dreamina_media='{"enabled":true}' \
+  npm run media:dreamina -- talking-head \
+    --spoken "口播全文" \
+    --out videos/<id> \
+    --generation-service dreamina
+```
+
+这条命令会先 `image2image` 做封面，再把封面作为 `@Image 1` 第一帧，字幕规则写在即梦提示词里。
+
 ```bash
 FLAG_video_hotspot='{"enabled":true}' \
   npm run video:hotspot -- \

@@ -1,5 +1,8 @@
 import path from "node:path";
 import { flags, FLAGS } from "../../flags/feature-flags";
+import { buildTalkingHeadClip } from "../hotspot/composeCopy";
+import { generateDigitalHumanClip } from "../hotspot/generateClip";
+import { resolveHotspotIdentity } from "../hotspot/identity";
 import {
   assertDreaminaAvailable,
   DEFAULT_DREAMINA_VIDEO_MODEL,
@@ -16,10 +19,13 @@ import {
 const usage = `Usage:
   npm run media:dreamina -- check
   npm run media:dreamina -- credit
+  npm run media:dreamina -- talking-head --spoken <text> --out <dir> --generation-service dreamina
   npm run media:dreamina -- text2image --prompt <text> --out <dir> --i-approve-paid
   npm run media:dreamina -- image2video --image <path> --out <dir> --i-approve-paid [--prompt <text>]
   npm run media:dreamina -- multimodal2video --image <path> --audio <path> --out <dir> --i-approve-paid [--prompt <text>]
   npm run media:dreamina -- text2video --prompt <text> --out <dir> --i-approve-paid [--duration 5] [--ratio 9:16] [--model_version seedance2.0mini]
+
+Talking-head / 口播 always builds a Dreamina cover still, then multimodal2video with that cover as @Image 1. Do not use text2video for 我的形象.
 
 Job path: --generation-service dreamina skips --i-approve-paid (selecting dreamina is paid-generation consent).
 `;
@@ -86,6 +92,42 @@ const main = async (): Promise<void> => {
     throw new Error(usage);
   }
   const downloadDir = path.resolve(out);
+
+  if (command === "talking-head") {
+    const spoken = getFlagValue(args, "--spoken");
+    if (!spoken) {
+      throw new Error(usage);
+    }
+    const identity = resolveHotspotIdentity({
+      photoPath: getFlagValue(args, "--photo"),
+      audioPath: getFlagValue(args, "--audio"),
+      audioTranscript: getFlagValue(args, "--audio-transcript"),
+      applyDefault: true,
+    });
+    if (!identity.photo_path || !identity.audio_path) {
+      throw new Error(
+        "talking-head needs the default hotspot identity (dh1.jpg + dg1.wav) or --photo and --audio together.",
+      );
+    }
+    const clip = buildTalkingHeadClip({
+      spoken,
+      headline: getFlagValue(args, "--headline"),
+      cover: getFlagValue(args, "--cover"),
+      coverKeyword: getFlagValue(args, "--cover-keyword"),
+      tags: getFlagValue(args, "--tags"),
+    });
+    const generated = await generateDigitalHumanClip({
+      clip,
+      downloadDir,
+      approvePaid,
+      photoPath: identity.photo_path,
+      audioPath: identity.audio_path,
+      audioTranscript: identity.audio_transcript,
+      modelVersion: getFlagValue(args, "--model_version") ?? DEFAULT_DREAMINA_VIDEO_MODEL,
+    });
+    console.log(JSON.stringify({ ok: true, clip, ...generated }, null, 2));
+    return;
+  }
 
   if (command === "text2image") {
     const prompt = getFlagValue(args, "--prompt");

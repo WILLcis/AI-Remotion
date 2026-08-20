@@ -95,6 +95,37 @@ export const composeHotspotPack = (
   });
 };
 
+/** One-off talking-head (agent, not scheduled hotspot) still needs cover copy. */
+export const buildTalkingHeadClip = (input: {
+  spoken: string;
+  headline?: string;
+  cover?: string;
+  coverKeyword?: string;
+  tags?: string;
+}): HotspotClip => {
+  const spoken = limitChars(input.spoken.trim(), 180);
+  if (!spoken) {
+    throw new Error("talking-head requires non-empty spoken copy");
+  }
+  const headline = limitChars(input.headline?.trim() || spoken, 40);
+  const fromSpoken = [...spoken.replace(/[0-9a-zA-Z.,，。！？、\s]/g, "")]
+    .slice(0, 4)
+    .join("");
+  const keywordSource =
+    input.coverKeyword?.trim() || (fromSpoken.length >= 2 ? fromSpoken : "口播");
+  return {
+    index: 1,
+    headline,
+    hook_title: limitChars(input.headline?.trim() || spoken, 48),
+    cover_keyword: clipCoverKeyword(keywordSource),
+    cover: shortenCoverCopy(input.cover?.trim() || firstSentence(spoken)),
+    tags: input.tags?.trim() || "#口播",
+    spoken,
+    dreamina_prompt: DEFAULT_DREAMINA_PRESENTER_PROMPT,
+    sources: [{ title: headline, summary: spoken }],
+  };
+};
+
 const presenterLook = (clip: HotspotClip): string =>
   clip.dreamina_prompt?.trim() || DEFAULT_DREAMINA_PRESENTER_PROMPT;
 

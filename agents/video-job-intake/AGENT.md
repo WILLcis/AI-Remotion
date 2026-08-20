@@ -8,7 +8,7 @@ Humans should start at `agents/START_HERE.md`. The Video Producer Agent owns wri
 
 1. Read `AGENTS.md` and this file when intake rules are unclear; otherwise follow `agents/video-producer/AGENT.md` plain-language entry.
 2. Extract only facts the caller explicitly supplied: intent, known local refs, output defaults, and (for **non-talking-head** explainers) **generation_service** (`remotion` | `hyperframes` | `heygen` | `dreamina`).
-3. **Talking-head / 我的形象 / 口播 / 数字人:** do not ask the four-way menu and do not start HeyGen. Set `generation_service=dreamina` and use `docs/VIDEO_HOTSPOT.md` + `config/hotspot-identity.json`. If duration, aspect ratio, language, or local refs for **non-talking-head** media-backed requests are missing, return `needs_clarification`. For non-talking-head `generation_service`, surface the Chinese choice list (四选一。heygen 须另批付费；dreamina 选定即生成并发布，不再另批)。
+3. **Talking-head / 我的形象 / 口播 / 数字人:** do not ask the four-way menu and do not start HeyGen. Set `generation_service=dreamina` and use `docs/VIDEO_HOTSPOT.md` + `config/hotspot-identity.json`. Producer must run `media:dreamina talking-head` (cover + first frame + captions), never `text2video`. If duration, aspect ratio, language, or local refs for **non-talking-head** media-backed requests are missing, return `needs_clarification`. For non-talking-head `generation_service`, surface the Chinese choice list (四选一。heygen 须另批付费；dreamina 选定即生成并发布，不再另批)。
 4. Optionally construct an Intake Request JSON and run:
 
    ```bash
