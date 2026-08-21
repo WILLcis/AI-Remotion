@@ -20,9 +20,20 @@
 
 ```bash
 curl -fsSL https://jimeng.jianying.com/cli | bash
-dreamina login
-dreamina user_credit
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- login --account default
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- credit
 ```
+
+本机即梦 CLI **一次只登录一个账号**。`dreamina session` 是任务会话，不是用户账号。切号用项目命令，不要让人自己敲 `dreamina login`：
+
+```bash
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- accounts
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- whoami
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- switch --account backup
+FLAG_dreamina_media='{"enabled":true}' npm run media:dreamina -- logout
+```
+
+`login` / `switch` 走官方设备码；Agent 要把 `verification_uri` / `user_code` 原样转给人，等命令结束后明确说成功或失败。扫码账号必须是**高级或以上会员**，否则即梦会登录成功但拒绝 CLI（`没有 dreamina_cli 使用权限`）。不要用未开会员的号扫切号链接。别名记在本机 `state/dreamina/accounts.json`（不入库），只含 alias / user_id / 积分，不含 token。出片可选 `--account <alias>`：与当前登录不一致则失败，避免扣错号。
 
 可选：`AI_REMOTION_DREAMINA_BIN` 指向自定义二进制。Skill 参考 `~/.dreamina_cli/dreamina/SKILL.md`，以 `dreamina -h` 为准。
 

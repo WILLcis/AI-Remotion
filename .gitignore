@@ -51,6 +51,7 @@ state/_local/
 state/*.jsonl
 state/publish/
 state/hotspot/
+state/dreamina/
 config/hotspot-crawler.local.json
 claude-review-*.md
 __pycache__/

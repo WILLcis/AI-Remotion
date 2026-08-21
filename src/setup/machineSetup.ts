@@ -10,8 +10,11 @@ import {
 import {
   assertDreaminaAvailable,
   dreaminaUserCredit,
+  parseDreaminaCreditCount,
   type DreaminaCliOptions,
 } from "../media/dreaminaCli";
+
+export { parseDreaminaCreditCount } from "../media/dreaminaCli";
 
 const execFileAsync = promisify(execFile);
 
@@ -65,41 +68,6 @@ export const parseNodeMajor = (version: string): number | undefined => {
     return undefined;
   }
   return Number(match[1]);
-};
-
-export const parseDreaminaCreditCount = (stdout: string): number | undefined => {
-  const jsonMatch = stdout.match(/\{[\s\S]*\}/);
-  if (jsonMatch?.[0]) {
-    try {
-      const parsed = JSON.parse(jsonMatch[0]) as Record<string, unknown>;
-      const nested = parsed.commerce_info;
-      const candidates = [
-        parsed.credit,
-        parsed.credits,
-        parsed.credit_count,
-        parsed.total_credit,
-        parsed.balance,
-        nested && typeof nested === "object"
-          ? (nested as { credit_count?: unknown }).credit_count
-          : undefined,
-      ];
-      for (const value of candidates) {
-        if (typeof value === "number" && Number.isFinite(value)) {
-          return value;
-        }
-        if (typeof value === "string" && /^\d+(\.\d+)?$/.test(value.trim())) {
-          return Number(value);
-        }
-      }
-    } catch {
-      // Fall through to regex.
-    }
-  }
-  const labeled = stdout.match(/credit(?:_count|s)?["']?\s*[:=]\s*["']?(\d+)/i);
-  if (labeled?.[1]) {
-    return Number(labeled[1]);
-  }
-  return undefined;
 };
 
 export const isDreaminaLoginRequired = (

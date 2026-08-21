@@ -8,10 +8,17 @@ export type DreaminaSpawnResult = {
   stdout: string;
 };
 
+export type DreaminaRunOptions = {
+  cwd?: string;
+  env?: NodeJS.ProcessEnv;
+  /** Inherit stdin and tee stdout/stderr so device-flow login is visible. */
+  interactive?: boolean;
+};
+
 export type DreaminaRunner = (
   bin: string,
   args: string[],
-  options?: { cwd?: string; env?: NodeJS.ProcessEnv },
+  options?: DreaminaRunOptions,
 ) => Promise<DreaminaSpawnResult>;
 
 export type DreaminaCliOptions = {
@@ -19,6 +26,7 @@ export type DreaminaCliOptions = {
   cwd?: string;
   env?: NodeJS.ProcessEnv;
   run?: DreaminaRunner;
+  interactive?: boolean;
 };
 
 /** Default video model after identity A/B: mini (720p, 4–15s). Override with --model_version seedance2.0fast or seedance2.0_vip. */
@@ -26,18 +34,27 @@ export const DEFAULT_DREAMINA_VIDEO_MODEL = "seedance2.0mini";
 
 const defaultRunner: DreaminaRunner = (bin, args, options = {}) =>
   new Promise((resolve, reject) => {
+    const interactive = options.interactive === true;
     const child = spawn(bin, args, {
       cwd: options.cwd,
       env: options.env ?? process.env,
-      stdio: ["ignore", "pipe", "pipe"],
+      stdio: [interactive ? "inherit" : "ignore", "pipe", "pipe"],
     });
     let stdout = "";
     let stderr = "";
     child.stdout.on("data", (chunk: Buffer) => {
-      stdout += chunk.toString("utf8");
+      const text = chunk.toString("utf8");
+      stdout += text;
+      if (interactive) {
+        process.stdout.write(chunk);
+      }
     });
     child.stderr.on("data", (chunk: Buffer) => {
-      stderr += chunk.toString("utf8");
+      const text = chunk.toString("utf8");
+      stderr += text;
+      if (interactive) {
+        process.stderr.write(chunk);
+      }
     });
     child.on("error", reject);
     child.on("close", (code) => {
@@ -55,7 +72,11 @@ export const runDreamina = async (
 ): Promise<DreaminaSpawnResult> => {
   const bin = options.bin ?? resolveDreaminaBin(options.env ?? process.env);
   const run = options.run ?? defaultRunner;
-  return run(bin, args, { cwd: options.cwd, env: options.env });
+  return run(bin, args, {
+    cwd: options.cwd,
+    env: options.env,
+    interactive: options.interactive,
+  });
 };
 
 export const assertDreaminaAvailable = async (
@@ -67,7 +88,7 @@ export const assertDreaminaAvailable = async (
       [
         "dreamina CLI is unavailable or failed `dreamina -h`.",
         "Install with: curl -fsSL https://jimeng.jianying.com/cli | bash",
-        "Then run: dreamina login",
+        "Then run: npm run media:dreamina -- login --account default",
         result.stderr.trim() || result.stdout.trim(),
       ]
         .filter(Boolean)
@@ -79,6 +100,77 @@ export const assertDreaminaAvailable = async (
 export const dreaminaUserCredit = async (
   options: DreaminaCliOptions = {},
 ): Promise<DreaminaSpawnResult> => runDreamina(["user_credit"], options);
+
+export const dreaminaLogin = async (
+  options: DreaminaCliOptions = {},
+): Promise<DreaminaSpawnResult> =>
+  runDreamina(["login"], { ...options, interactive: options.interactive ?? true });
+
+export const dreaminaLogout = async (
+  options: DreaminaCliOptions = {},
+): Promise<DreaminaSpawnResult> => runDreamina(["logout"], options);
+
+export const dreaminaRelogin = async (
+  options: DreaminaCliOptions = {},
+): Promise<DreaminaSpawnResult> =>
+  runDreamina(["relogin"], { ...options, interactive: options.interactive ?? true });
+
+export const parseDreaminaCreditCount = (stdout: string): number | undefined => {
+  const jsonMatch = stdout.match(/\{[\s\S]*\}/);
+  if (jsonMatch?.[0]) {
+    try {
+      const parsed = JSON.parse(jsonMatch[0]) as Record<string, unknown>;
+      const nested = parsed.commerce_info;
+      const candidates = [
+        parsed.credit,
+        parsed.credits,
+        parsed.credit_count,
+        parsed.total_credit,
+        parsed.balance,
+        nested && typeof nested === "object"
+          ? (nested as { credit_count?: unknown }).credit_count
+          : undefined,
+      ];
+      for (const value of candidates) {
+        if (typeof value === "number" && Number.isFinite(value)) {
+          return value;
+        }
+        if (typeof value === "string" && /^\d+(\.\d+)?$/.test(value.trim())) {
+          return Number(value);
+        }
+      }
+    } catch {
+      // Fall through to regex.
+    }
+  }
+  const labeled = stdout.match(/credit(?:_count|s)?["']?\s*[:=]\s*["']?(\d+)/i);
+  if (labeled?.[1]) {
+    return Number(labeled[1]);
+  }
+  return undefined;
+};
+
+export const parseDreaminaUserId = (stdout: string): string | undefined => {
+  const jsonMatch = stdout.match(/\{[\s\S]*\}/);
+  if (jsonMatch?.[0]) {
+    try {
+      const parsed = JSON.parse(jsonMatch[0]) as Record<string, unknown>;
+      for (const key of ["user_id", "userId", "uid"]) {
+        const value = parsed[key];
+        if (typeof value === "number" && Number.isFinite(value)) {
+          return String(value);
+        }
+        if (typeof value === "string" && value.trim()) {
+          return value.trim();
+        }
+      }
+    } catch {
+      // Fall through to regex.
+    }
+  }
+  const labeled = stdout.match(/user[_-]?id["']?\s*[:=]\s*["']?(\d+)/i);
+  return labeled?.[1];
+};
 
 export const dreaminaImage2Image = async (input: {
   approvePaid: boolean;

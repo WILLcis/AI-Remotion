@@ -4,6 +4,14 @@ import { buildTalkingHeadClip } from "../hotspot/composeCopy";
 import { generateDigitalHumanClip } from "../hotspot/generateClip";
 import { resolveHotspotIdentity } from "../hotspot/identity";
 import {
+  assertRequestedDreaminaAccount,
+  DEFAULT_DREAMINA_ACCOUNT_ALIAS,
+  loadDreaminaAccounts,
+  loginDreaminaAccount,
+  logoutDreaminaAccount,
+  readDreaminaAccountStatus,
+} from "../media/dreaminaAccounts";
+import {
   assertDreaminaAvailable,
   DEFAULT_DREAMINA_VIDEO_MODEL,
   dreaminaImage2Video,
@@ -12,20 +20,29 @@ import {
   dreaminaText2Image,
   dreaminaText2Video,
   dreaminaUserCredit,
+  parseDreaminaCreditCount,
   parseDreaminaSubmitId,
+  parseDreaminaUserId,
   resolveDreaminaBin,
 } from "../media/dreaminaCli";
 
 const usage = `Usage:
   npm run media:dreamina -- check
+  npm run media:dreamina -- accounts
+  npm run media:dreamina -- whoami
+  npm run media:dreamina -- login --account <alias>
+  npm run media:dreamina -- logout
+  npm run media:dreamina -- switch --account <alias>
   npm run media:dreamina -- credit
-  npm run media:dreamina -- talking-head --spoken <text> --out <dir> --generation-service dreamina
+  npm run media:dreamina -- talking-head --spoken <text> --out <dir> --generation-service dreamina [--account <alias>]
   npm run media:dreamina -- text2image --prompt <text> --out <dir> --i-approve-paid
   npm run media:dreamina -- image2video --image <path> --out <dir> --i-approve-paid [--prompt <text>]
   npm run media:dreamina -- multimodal2video --image <path> --audio <path> --out <dir> --i-approve-paid [--prompt <text>]
   npm run media:dreamina -- text2video --prompt <text> --out <dir> --i-approve-paid [--duration 5] [--ratio 9:16] [--model_version seedance2.0mini]
 
 Talking-head / 口播 always builds a Dreamina cover still, then multimodal2video with that cover as @Image 1. Do not use text2video for 我的形象.
+
+Only one Dreamina login is active at a time. Switch accounts with login/logout/switch; do not use dreamina session for user accounts.
 
 Job path: --generation-service dreamina skips --i-approve-paid (selecting dreamina is paid-generation consent).
 `;
@@ -62,7 +79,7 @@ const main = async (): Promise<void> => {
         {
           ok: true,
           bin: resolveDreaminaBin(),
-          next: "dreamina login && npm run media:dreamina -- credit",
+          next: "npm run media:dreamina -- login --account default",
         },
         null,
         2,
@@ -71,13 +88,72 @@ const main = async (): Promise<void> => {
     return;
   }
 
+  if (command === "accounts") {
+    await assertDreaminaAvailable();
+    const status = await readDreaminaAccountStatus({});
+    console.log(JSON.stringify(status, null, 2));
+    return;
+  }
+
+  if (command === "whoami") {
+    await assertDreaminaAvailable();
+    const status = await readDreaminaAccountStatus({});
+    console.log(JSON.stringify(status, null, 2));
+    if (!status.logged_in) {
+      process.exitCode = 1;
+    }
+    return;
+  }
+
+  if (command === "login") {
+    await assertDreaminaAvailable();
+    const alias =
+      getFlagValue(args, "--account") ?? DEFAULT_DREAMINA_ACCOUNT_ALIAS;
+    const result = await loginDreaminaAccount({ alias });
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
+  if (command === "switch") {
+    await assertDreaminaAvailable();
+    const alias = getFlagValue(args, "--account");
+    if (!alias) {
+      throw new Error(usage);
+    }
+    const result = await loginDreaminaAccount({ alias });
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
+  if (command === "logout") {
+    await assertDreaminaAvailable();
+    const result = await logoutDreaminaAccount({});
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
   if (command === "credit") {
     await assertDreaminaAvailable();
     const result = await dreaminaUserCredit();
     process.stdout.write(result.stdout);
+    if (result.stdout && !result.stdout.endsWith("\n")) {
+      process.stdout.write("\n");
+    }
     if (result.stderr.trim()) {
       process.stderr.write(result.stderr);
     }
+    const store = loadDreaminaAccounts();
+    console.log(
+      JSON.stringify(
+        {
+          account: store.current,
+          user_id: parseDreaminaUserId(result.stdout),
+          credit: parseDreaminaCreditCount(result.stdout),
+        },
+        null,
+        2,
+      ),
+    );
     if (result.code !== 0) {
       process.exitCode = result.code ?? 1;
     }
@@ -92,6 +168,7 @@ const main = async (): Promise<void> => {
     throw new Error(usage);
   }
   const downloadDir = path.resolve(out);
+  assertRequestedDreaminaAccount(getFlagValue(args, "--account"), loadDreaminaAccounts());
 
   if (command === "talking-head") {
     const spoken = getFlagValue(args, "--spoken");

@@ -65,7 +65,7 @@ My request: <一句话说明要做什么；有本地素材就写出路径>
   → FLAG_video_agent_platform='{"enabled":true}' npm run video:route -- --job <job>
   → 以 route JSON 为唯一真相：primary_agent / renderer / requires_approval
   → 只读 agents/video-producer/SPECIALISTS.md 映射的那一个 profile
-  → dreamina 口播：requires_approval 为空，立即 media:dreamina talking-head（封面 image2image → @Image 1 第一帧 → 提示词字幕），再 video:publish --platform all --generation-service dreamina --cover。禁止 text2video / 单图 multimodal2video
+  → dreamina 口播：requires_approval 为空，立即 media:dreamina talking-head（封面 image2image → @Image 1 第一帧 → 提示词字幕），再 video:publish --platform all --generation-service dreamina --cover。禁止 text2video / 单图 multimodal2video。切号：media:dreamina switch --account <alias>（高级+会员；不要裸 dreamina login）
   → 其他服务：执行到下一 pending gate → 返回 needs_approval
   → 用户明文批准后恢复同一 Job，继续
 ```
